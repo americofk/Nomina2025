@@ -1,0 +1,71 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeePositionResponse>
+@using System.Globalization;
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+<table class="table">
+    <thead>
+        <tr class="row-header-app">
+            <td class="cell-app  cell-header-app"></td>
+            <td class="cell-app  cell-header-app">Código</td>
+            <td class="cell-app  cell-header-app">Nombre</td>
+            <td class="cell-app  cell-header-app">Desde</td>
+            <td class="cell-app  cell-header-app">Hasta</td>
+            <td class="cell-app  cell-header-app">Vigente</td>
+        </tr>
+    </thead>
+    <tbody class="tbodyTableOne" style="cursor:pointer">
+        @{int indexCheck2 = 1; }
+        @foreach (var item in Model)
+        {
+            var EmployeePositionStatus = item.EmployeePositionStatus == true ? "checked='checked'" : "";
+
+            string idCheck2 = $"check-EmployeePosition-{indexCheck2++}";
+            <tr class="row-app rowtable-EmployeePosition">
+
+                <td class="cell-app check-cell-app">
+                    <input id="@idCheck2" type="checkbox" class="check-table-app select-EmployeePosition">
+                    <label for="@idCheck2" class="label-cell"></label>
+                </td>
+                <td class="cell-app cell-principal PositionIdtbl" data-title="Código">
+                    @Html.DisplayFor(modelItem => item.PositionId)
+                </td>
+
+                <td class="cell-app cell-principal" data-title="Nombre">
+                    @Html.DisplayFor(modelItem => item.PositionName)
+                </td>
+                <td class="cell-app " data-title="Desde">
+                    @Convert.ToDateTime(item.FromDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                    @*@Html.DisplayFor(modelItem => item.FromDate)*@
+                </td>
+
+                <td class="cell-app " data-title="Hasta">
+                    @Convert.ToDateTime(item.ToDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                    @*@Html.DisplayFor(modelItem => item.ToDate)*@
+                </td>
+
+
+                <td class="cell-app " data-title="Estado">
+                    <label class="switch disabled">
+                        <input type="checkbox" disabled @EmployeePositionStatus>
+                        <span class="slider round"></span>
+                    </label>
+                </td>
+
+
+            </tr>
+        }
+    </tbody>
+
+</table>
+        }
+    }
+}

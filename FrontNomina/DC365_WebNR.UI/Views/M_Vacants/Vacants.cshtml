@@ -1,0 +1,210 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Vacants>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Vacants";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/Modals/SubModalStyles.css" rel="stylesheet" />
+<link href="~/css/Employees.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+    <input type="hidden" class="Image" />
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewVacants">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditVacants">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteVacants" class="inputTypesubmit" />
+
+                    </a>
+                </li>
+
+                <li class="li-separador">
+                    <a class="btn2 btn-app" style="border: 1px solid #fff;">
+
+                    </a>
+                </li>
+                <li class="Requirement">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-list"></i>
+                        Requisitos del puesto
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        
+    </div>
+
+    <div class="opcioneslistpageForm collapse">
+
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">
+                    <input type="submit" value="Guardar" form="createAndEditVacants" class="btn2" />
+                </a>
+            </li>
+
+        </ul>
+        <div class="ContOpciones-Pagina contOpciones">
+            <div class="opciones-Pagina OpCloseform">
+                <img src="~/images/Dashboard/Cerrar.png" class="Iconos_opciones-Pagina">
+            </div>
+        </div>
+    </div>
+
+    <!-- tabla puesto vacantes -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Puestos vacantes</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @*<input type="text" class="form-control-FiltroDepartment buscador BuscartblCargosActivos" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Quitar vacante</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="Diseblevacants" class="idCheckeditar" checked="checked">
+                    <span class="slider round" for="Diseblevacants"></span>
+
+                </label>
+
+
+            </div>
+
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app-width table-app tblCargosVcantes">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+
+                            <td class="cell-app  cell-header-app">Id puesto</td>
+                            <td class="cell-app  cell-header-app">Nombre del puesto</td>
+                            <td class="cell-app  cell-header-app">Departamento</td>
+                            <td class="cell-app  cell-header-app">Cargo</td>
+                            <td class="cell-app  cell-header-app">Notifica al puesto</td>
+                            <td class="cell-app  cell-header-app">Fecha inicial</td>
+                            <td class="cell-app  cell-header-app">Fecha final</td>
+                            <td class="cell-app  cell-header-app styleRowDescripThree">Descripción</td>
+
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Vacants">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectPosition">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+
+                                <td class="cell-app cell-principal PositionIdtblpos" data-title="Id de cargo">
+                                    @Html.DisplayFor(modelItem => item.PositionId)
+                                </td>
+                                <td class="cell-app Nametblcr" data-title="Nombre de cargo">
+                                    @Html.DisplayFor(modelItem => item.PositionName)
+                                </td>
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                    @Html.DisplayFor(modelItem => item.DepartmentId)
+                                </td>
+
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                    @Html.DisplayFor(modelItem => item.JobId)
+                                </td>
+
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                    @Html.DisplayFor(modelItem => item.NotifyPositionId)
+                                </td>
+
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                    @Convert.ToDateTime(item.StartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+
+
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                    @Convert.ToDateTime(item.EndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- nuevo puesto vacante -->
+    @{await Html.RenderPartialAsync("NewAndEditPositionVacants", new DC365_WebNR.CORE.Domain.Models.Vacants());}
+
+    <!-- nuevo requisito de puesto vacante -->
+    @{await Html.RenderPartialAsync("ModalPositionRequirent");}
+
+    <!-- eliminar-->
+    <form asp-action="delete" class="DeleteVacants collapse" id="DeleteVacants">
+    </form>
+
+    <!-- quitar vacante-->
+    <form asp-action="updateStatus" class="form-Diseblevacants collapse" id="form-Diseblevacants">
+    </form>
+
+
+</div>
+<script src="~/js/Vacants.js"></script>
+<script src="~/js/PositionRequirent.js"></script>ç
+<script src="~/js/AppInputDate.js"></script>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

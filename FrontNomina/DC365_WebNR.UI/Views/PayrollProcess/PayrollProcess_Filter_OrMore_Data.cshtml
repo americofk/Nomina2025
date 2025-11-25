@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.PayrollProcess>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectPayrollProcess">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal PayrollProcessIdTbl" data-title="Id Proceso">
+            @Html.DisplayFor(modelItem => item.PayrollProcessId)
+        </td>
+        <td class="cell-app Nametbl" data-title="Nómina">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td class="cell-app Nametbl" data-title="Nómina">
+            @Html.DisplayFor(modelItem => item.PayrollId)
+        </td>
+        <td class="cell-app QtyWorkerstbl" data-title="Fecha de pago">
+            @Html.DisplayFor(modelItem => item.PaymentDate)
+        </td>
+        <td class="cell-app StartDatetbl" data-title="Inicio periodo">
+            @*@Convert.ToDateTime(item.PeriodStartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))*@
+            @Html.DisplayFor(modelItem => item.PeriodStartDate)
+        </td>
+        <td class="cell-app EndDatetbl" data-title="Fin periodo">
+            @*@Convert.ToDateTime(item.PeriodEndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))*@
+            @Html.DisplayFor(modelItem => item.PeriodEndDate)
+        </td>
+        <td class="cell-app Descriptiontbl cell-app-number" data-title="Empleados">
+            @Html.DisplayFor(modelItem => item.EmployeeQuantity)
+        </td>
+        <td class="cell-app Descriptiontbl" data-title="Proyecto">
+            @Html.DisplayFor(modelItem => item.ProjId)
+        </td>
+        <td class="cell-app PayrollProcessStatustbl" data-title="Estado">
+            @Html.DisplayFor(modelItem => item.PayrollProcessStatus)
+        </td>
+    </tr>
+}

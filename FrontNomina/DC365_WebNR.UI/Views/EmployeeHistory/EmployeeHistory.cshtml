@@ -1,0 +1,148 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeHistoryResponse>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "EmployeeHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/Department.css" rel="stylesheet" />
+
+
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+
+                <li class="Edit-employee-history">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar fecha
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="Delete-employee-history" class="inputTypesubmit" />
+                    </a>
+                </li>
+
+
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="Close-back">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+            <div class="conteiner-update-date collapse" style="position: absolute"></div>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Historial del empleado: @ViewBag.employeData</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tbl-history-employee" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id de historial</td>
+                            <td class="cell-app  cell-header-app">Tipo de novedad</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                            <td class="cell-app  cell-header-app">Fecha del registro</td>
+                            <td class="cell-app  cell-header-app">Id del empleado</td>
+                            <td class="cell-app  cell-header-app">¿Marcar para DTG?</td>
+
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Loans">
+
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+                            var isforDGT = item.IsUseDGT == true ? "checked='checked'" : "";
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app select-employeehistory">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal EmployeeHistoryIdTbl" data-title="Id Código">
+                                    @Html.DisplayFor(modelItem => item.EmployeeHistoryId)
+                                </td>
+                                <td class="cell-app" data-title="Tipo de historial">
+                                    @Html.DisplayFor(modelItem => item.Type)
+                                </td>
+                                <td class="cell-app" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+
+                                <td class="cell-app ValidFromtbl" data-title="Fecha del registro">
+                                    @Convert.ToDateTime(item.RegisterDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+
+                                <td class="cell-app Employee-historyidtbl" data-title="Id del empleado">
+                                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                                </td>
+                                <td class="cell-app " data-title="¿Marcar para DTG<?">
+                                    <label class="switch">
+                                        <input type="checkbox" class="isforDGT" @isforDGT>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <form asp-action="delete" class="collapse" id="Delete-employee-history">
+    </form>
+
+    <form asp-action="MarkForDgt" method="post" id="FormMarkIsForDgt" hidden>
+        <input type="text" name="EmployeeHistoryId" class="EmployeeHistoryId" />
+        <input type="text" name="IsUseDGT" class="IsUseDGT" />
+        @*<input type="checkbox" name="IsForTax" class="IsForTaxTax" />*@
+    </form>
+
+
+</div>
+
+<script src="~/js/Employees/EmployeeHistories.js" type="module"></script>
+@*<script src="~/js/AppInputDate.js"></script>*@
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

@@ -1,0 +1,66 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!--modal Codigos de Deducciones para empleados-->
+<div class="modal modal-employee-DeductionCode" aria-hidden="true">
+    <div class="main-content-modal w50">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-contactsoptions">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-DeductionCode">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-deleteDeductionCode" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-DeductionCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    
+                </div>
+            </div>
+
+            <!--formulario nuevo Codigos de deducción-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-newDeductionCode collapse">
+
+                </div>
+
+                <h3 class="TituloEstandar">Códigos de descuentos</h3>
+                <div class="scrollbar-tableprimary-submodal ">
+                    <div class="container-table-app datatable-DeductionCode" id="content-scroll">
+
+                    </div>
+                </div>
+
+
+                <form asp-action="delete" class="delete-DeductionCode collapse" id="form-deleteDeductionCode">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

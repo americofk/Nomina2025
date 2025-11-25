@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewData["Title"] = "ReportDesign";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+
+@*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
+
+@*<img src="~/Images/ReportPhoto.PNG" class="image-report" />*@
+<style>
+
+    .report-body-content {
+        width: 100%;
+        font-size: .50em;
+        border-top: 1px solid #0c63a9;
+        padding-top: 10px;
+    }
+
+    .table-report {
+        line-height: 20px;
+        font-weight: 400;
+        width: 100%;
+        border-spacing: 0px;
+    }
+
+    .row-header-report {
+        height: 35px;
+        color: #0c63a9;
+    }
+
+        .row-header-report > td {
+            padding: 0.2em 0.3em;
+            /* display: table-cell; */
+            vertical-align: middle;
+            border-bottom: 1px solid #0c63a9;
+        }
+
+    .row-body-report {
+        height: 30px;
+    }
+
+        .row-body-report > td {
+            padding: 0.2em 0.3em;
+            vertical-align: middle;
+        }
+
+        .row-body-report:nth-of-type(odd) {
+            background: #7ec1f75c;
+        }
+
+    .cell-report-amount {
+        text-align: right;
+    }
+
+    /*HEADER*/
+    .report-body-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        /*align-items: center;*/
+        height: 5em;
+    }
+
+        .report-body-header > .report-logo {
+            width: 30%;
+        }
+
+            .report-body-header > .report-logo > img {
+                object-fit: fill;
+                background-repeat: no-repeat;
+                width: 12em;
+                height: 80%;
+            }
+
+        .report-body-header > .report-title {
+            width: 30%;
+            font-size: 1em;
+            align-self: end;
+            padding-bottom: 10px;
+        }
+
+            .report-body-header > .report-title > h3 {
+                margin: 0px;
+                text-align: center;
+            }
+
+        .report-body-header > .report-date {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.5em;
+            justify-content: start;
+            align-items: end;
+            width: 30%;
+            line-height: 1px;
+        }
+</style>
+
+<link href="~/css/EstyleReportsPrint.css" rel="stylesheet" media="print" />
+<div class="report-filter-section show">
+    <h3> Paramétros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+        <div class="param-fields">
+            <label class="control-label"> Id Nómina</label>
+            <input class="form-control" type="text" />
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Fecha inicial</label>
+            <input class="form-control" type="date" />
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Monto</label>
+            <input class="form-control" type="Number" />
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Ver</label>
+            <select class="form-control" type="text">
+                <option value="1"> Todo</option>
+                <option value="2"> Ninguno</option>
+            </select>
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Imprimir todo</label>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider round"> </span>
+            </label>
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Id Nómina</label>
+            <input class="form-control" type="text" />
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Id Nómina</label>
+            <input class="form-control" type="text" />
+        </div>
+    </div>
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" />
+    </div>
+</div>
+
+@*Cuerpo del reporte*@
+
+@*Header*@
+<div class="report-body-header">
+    <div class="report-logo">
+        <img src="~/Images/ImagenLogin.png" />
+    </div>
+    <div class="report-title">
+        <h3>REPORTE DE NÓMINA</h3>
+    </div>
+    <div class="report-date">
+        <p>Página 1 de 1</p>
+        <p>@DateTime.Today</p>
+    </div>
+</div>
+
+@*Content*@
+<div class="report-body-content">
+    <table class="table-report">
+        <thead>
+            <tr class="row-header-report">
+                <td> Id empleado</td>
+                <td> Nombre del empleado</td>
+                <td class="cell-report-amount"> Salario</td>
+                <td class="cell-report-amount"> Horas Extras</td>
+                <td class="cell-report-amount"> Comisión</td>
+                <td class="cell-report-amount"> Otros ingresos</td>
+                <td class="cell-report-amount"> Ingresos totales</td>
+                <td class="cell-report-amount"> ISR</td>
+                <td class="cell-report-amount"> AFP</td>
+                <td class="cell-report-amount"> SFS</td>
+                <td class="cell-report-amount"> Cooperativa</td>
+                <td class="cell-report-amount"> Préstamo</td>
+                <td class="cell-report-amount"> Otros descuentos</td>
+                <td class="cell-report-amount"> Total descuento</td>
+                <td class="cell-report-amount"> Neto a pagar</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="row-body-report">
+                <td>EMP-000000</td>
+                <td>Carolina de los santos </td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+                <td class="cell-report-amount"> $2.000</td>
+            </tr>
+            <tr class="row-body-report">
+                <td>EMP-000001</td>
+                <td>Franciscon Javier Floresi </td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $50.000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+                <td class="cell-report-amount"> $2000</td>
+            </tr>
+            @{
+                for (int i = 0; i < 30; i++)
+                {
+                    <tr class="row-body-report">
+                        <td>EMP-000002</td>
+                        <td>Pedro Perez </td>
+                        <td class="cell-report-amount">
+                            $2000
+                        </td>
+                        <td class="cell-report-amount"> $50.000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $132000</td>
+                        <td class="cell-report-amount"> $32000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                        <td class="cell-report-amount"> $2000</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@*Footer*@
+<div class="report-body-footer">
+
+</div>

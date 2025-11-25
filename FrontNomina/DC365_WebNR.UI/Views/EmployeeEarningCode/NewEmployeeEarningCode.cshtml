@@ -1,0 +1,245 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.EmployeeEarningCode
+@using DC365_WebNR.CORE.Domain.Models.Enums;
+@using System.Globalization;
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payrolls;
+    List<SelectListItem> selecEarningCode = (List<SelectListItem>)ViewBag.EarningCode;
+    List<SelectListItem> paycycle = null;
+
+    if (ViewBag.Paycyle != null)
+    {
+        paycycle = (List<SelectListItem>)ViewBag.Paycyle;
+    }
+
+}
+
+<div class="new-indicator for-employee-contactinfo">
+</div>
+
+<div class="newAddresEmp">
+    <div class="contenTitleandHistori">
+        @{
+            if (string.IsNullOrEmpty(Model.EarningCodeId))
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo código de ingreso</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar código de ingreso</h3>
+            }
+        }
+    </div>
+    <form id="new_EarningCode" asp-action="Save">
+        <input asp-for="InternalId" class="form-control" readonly hidden />
+        <div class="conten-input-modal">
+
+            <div class="cont-input-newform-col">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Código</label>
+                    <div>
+                        @{
+                            if (string.IsNullOrEmpty(Model.EarningCodeId))
+                            {
+                                @Html.DropDownList("EarningCodeId", selecEarningCode, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="EarningCodeId" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input asp-for="EarningCodeId" class="form-control" readonly />
+                            }
+                        }
+
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Nómina</label>
+                    <div>
+                        @{
+
+                            if (string.IsNullOrEmpty(Model.EarningCodeId))
+                            {
+                                @Html.DropDownList("PayrollId", payrolls, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="PayrollId" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input asp-for="PayrollId" class="form-control" readonly hidden />
+                                <input asp-for="PayrollName" class="form-control" readonly />
+                            }
+                        }
+
+
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Frecuencia de nómina</label>
+                    <div>
+                        <select asp-for="PayFrecuency" class="form-control" asp-items="Html.GetEnumSelectList<PayFrecuency>()" disabled>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cont-input-newform-col">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Frecuencia inicio</label>
+                    <div>
+                        @{
+                            if (paycycle == null)
+                            {
+                                <select asp-for="StartPeriodForPaid" class="form-control"></select>
+                            }
+                            else
+                            {
+                                @Html.DropDownList("StartPeriodForPaid", paycycle, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="StartPeriodForPaid" class="text-danger"></span>
+
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label label-three-Employee">Frecuencia de pago</label>
+                    <div>
+                        <input asp-for="QtyPeriodForPaid" class="form-control message-help" />
+                        <span asp-validation-for="QtyPeriodForPaid" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Monto mensual</label>
+                    <div>
+                        <input asp-for="IndexEarningMonthly" class="form-control plugin-number-format" />
+                        <input asp-for="IndexEarningMonthlyValidate" class="form-control plugin-number-format collapse" />
+                        <span asp-validation-for="IndexEarningMonthly" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cont-input-newform-col">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Monto base</label>
+                    <div>
+                        <input asp-for="IndexEarning" class="form-control plugin-number-format" />
+                        <span asp-validation-for="IndexEarning" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Monto diario</label>
+                    <div>
+                        <input asp-for="IndexEarningDiary" class="form-control plugin-number-format" readonly="readonly" />
+                        <span asp-validation-for="IndexEarningDiary" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Monto por hora</label>
+                    <div>
+                        <input asp-for="IndexEarningHour" class="form-control plugin-number-format" readonly="readonly" />
+                        <span asp-validation-for="IndexEarningHour" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label label-three-Employee">Comentarios</label>
+                    <div>
+                        <textarea asp-for="Comment" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="EmployeeIdEarningCode" class="form-control" />
+                            <span asp-validation-for="EmployeeIdEarningCode" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cont-input-newform-col">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Desde</label>
+                    <div>
+                        @{
+                            if (string.IsNullOrEmpty(Model.EarningCodeId))
+                            {
+                                <div class="app-input-date">
+                                    <input asp-for="FromDate" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="FromDate" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input asp-for="FromDate" class="form-control" readonly />
+
+                            }
+                        }
+
+
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq lblInfoContact">Hasta</label>
+                    <div>
+                        <div class="app-input-date">
+                            <input asp-for="ToDate" class="form-control" />
+                            <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                            <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                        </div>
+                        <span asp-validation-for="ToDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="cont-option-controlassist">
+
+                    
+
+                    <div class="contlotesmploye-slider">
+
+                        <label class="control-label label-switch">Cálculo por hora</label>
+                        <div>
+                            <label class="switch">
+                                <input asp-for="IsUseCalcHour" id="IsUseCalcHour" />
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                    @{
+                        if (Model.IsUseDGT)
+                        {
+                            <div class="contlotesmploye-slider">
+                                <label class="control-label label-switch">Usado para dgt</label>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="message_button-text">
+            <p id="alert-help" class="alert-help"></p>
+            <div class="contbtnAddres">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-danger btncancelar_new_EarningCode" id="btncancelar" value="Cancelar">
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/CustomValidation.js"></script>

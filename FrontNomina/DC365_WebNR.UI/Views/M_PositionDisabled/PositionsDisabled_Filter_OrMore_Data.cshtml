@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Position>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectPosition">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal PositionIdtblpos" data-title="Id de cargo">
+            @Html.DisplayFor(modelItem => item.PositionId)
+        </td>
+        <td class="cell-app Nametblcr" data-title="Nombre de cargo">
+            @Html.DisplayFor(modelItem => item.PositionName)
+        </td>
+        <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+            @Html.DisplayFor(modelItem => item.DepartmentId)
+        </td>
+
+        <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+            @Html.DisplayFor(modelItem => item.JobId)
+        </td>
+
+        <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+            @Html.DisplayFor(modelItem => item.NotifyPositionId)
+        </td>
+
+        <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+            @Convert.ToDateTime(item.StartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+        </td>
+        <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+            @Convert.ToDateTime(item.EndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+}

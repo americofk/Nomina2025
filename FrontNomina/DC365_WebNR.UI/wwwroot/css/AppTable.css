@@ -1,0 +1,494 @@
+.container-container-table-app {
+    /*overflow-x: hidden;
+    overflow-y: hidden;*/
+}
+.custonContainer {
+    height: 70%;
+}
+
+.styleRowDescrip {
+    width: 60%;
+}
+
+.styleRowDescripTwo {
+    width: 30%;
+}
+
+.styleRowDescripThree {
+    width: 20%;
+}
+
+.scrollbar-TablePrimaritwo {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 80%;
+    padding-right: 0px;
+    padding-left: 0px;
+    border: 1px solid #ccc;
+    margin: 12px;
+    background: white;
+    margin-left: 2%;
+    width: 96%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.5) rgba(0,0,0,0);
+}
+.scrollbar-TablePrimari {
+    /*overflow-y: auto;*/
+    /*overflow-x: auto;*/
+    height: 100%;
+    padding-right: 0px;
+    padding-left: 0px;
+    border: 1px solid #ccc;
+    margin: 12px;
+    background: white;
+    margin-left: 2%;
+    width: 96%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.5) rgba(0,0,0,0);
+}
+
+
+.container-table-app {
+    /*margin: 0 auto 10px auto;*/
+    background-color: #fff;
+    /*height: 100%;*/
+    overflow-y: auto;
+    overflow-x: auto;
+    /* max-width: 96%;*/
+    /* margin-left: 2%;*/
+    /*border: 1px solid #ccc;*/
+    height: 100%;
+    flex: 1;
+
+    transition: all 0.5s ease-in-out;
+}
+
+.container-table-app-three {
+    background-color: #fff;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    height: 70%;
+    flex: 1;
+}
+
+.container-table-app-two {
+    
+    background-color: #fff;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    
+    height: 100%;
+    width: 69%;
+}
+
+.table-app{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;    
+    width: 100%;
+    border-spacing: 0px;
+}
+
+.table-app-width{
+    width: 125%;
+}
+
+.table-app-width115{
+    width: 115%;
+}
+.container-table-app > div > span {
+    font-size: 14px;
+    margin-left: 10px;
+    font-weight: bold;
+    
+}
+.ncfb01, .ncfb13, .ncfb14, .ncfb17, .ncfb11, .ncfb04, .ncfb03, .ncfb02, .ncfgn {
+    margin-top:10px;
+}
+
+.row-header-app {
+    font-size: 14px;
+    /*font-weight: 600;*/
+    color: #fff;
+    background-color: #172c4d;
+    height: 35px;
+    /* display:table-row; */
+}
+
+.row-app{
+    height: 40px;
+    /* display:table-row; */
+    background-color: #fff;
+    color: #9c87a8;
+}
+
+.row-app:nth-of-type(odd)
+{
+    background:#f8f8ff;
+}
+
+.row-app:hover{
+    background-color: #337ab747;
+    color:#3f3f3f;
+}
+
+.cell-app{
+    padding:3px 12px;
+    /* display: table-cell; */
+    vertical-align: middle;
+    border-bottom: 1px solid #cccccc;
+}
+
+.cell-app.cell-header-app{
+    /*border-bottom: 1.5px solid #000;*/
+}
+
+/* Checkbox style */
+/***************************************/
+.check-table-app + .label-cell{
+    display: block;
+    margin: 0.2em;
+    cursor: pointer;
+}
+
+.check-table-app{
+    display: none;
+}
+
+    .check-table-app + .label-cell:before {
+        content: "\2714";
+        border: 0.5px solid rgba(0,0,0,0.3);
+        border-radius: 0.2em;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        padding-left: 3px;
+        padding-bottom: 3px;
+        margin-right: 3px;
+        vertical-align: bottom;
+        color: transparent;
+        transition: 0.2s;
+        font-size: 14px;
+    }
+
+.check-table-app + .label-cell:active:before {
+    transform: scale(0);
+}
+
+    .check-table-app:checked + .label-cell:before {
+        background-color: rgb(104, 209, 174);
+        border-color: rgb(102, 205, 170);
+        color: #fff;
+    }   
+
+/* Checkbox style */
+/***************************************/
+
+
+/* Icon style */
+/***************************************/
+.cell-app-icon {
+    font-size: 20px;
+}
+
+.cell-app-icon:hover{
+    transform:scale(1.1);
+}
+
+    .cell-app > .wait {
+        font-size: 21px;
+        color: #6868e3;
+    }
+
+    .cell-app > .ok {
+        font-size: 21px;
+        color: #099b09;
+        cursor:pointer;
+    }
+
+    .cell-app > .iserror {
+        cursor: pointer;
+        font-size: 21px;
+        color: #cb0f4c;
+    }
+
+/* Icon style */
+/***************************************/
+
+
+
+/* Number cell style */
+/***************************************/
+.cell-app-number {
+    text-align: right;
+    width: 100px;
+    padding-right: 50px;
+}
+/* Number cell style */
+/***************************************/
+
+
+
+
+/* Sección de los media query+/
+/*********************************************************************/
+@media screen and (min-width: 401px) and ( max-width: 680px) {
+    .container-container-table-app {
+        overflow-y: hidden;
+    }
+
+    .container-table-app {
+        border-spacing: 10px;
+        /* height: auto;*/
+        background-color: #EAEAEA;
+        max-width: 100%;
+        border: 0px solid #ccc;
+        margin-left: 0;
+        padding: 2%;
+    }
+
+    .table-app {
+       font-size:14px;
+    }
+
+    .row-header-app {
+        display: none;
+    }
+
+    .row-app {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.2);
+    }
+
+        .row-app:hover {
+            background-color: #fff;
+            /*color: #3f3f3f;*/
+        }
+
+    .cell-app {
+        border-bottom-width: 0;
+        color: rgb(93, 93, 93);
+        /*padding-left: 4px;
+        padding-right: 4px;*/
+        display: flex;
+        /*font-size: 12px;*/
+        flex-wrap: wrap;
+    }
+
+    .row-app .cell-app:before {
+        margin-right: 10px;
+        content: attr(data-title)":";
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        color: #969696;
+    }
+
+    .row-app .cell-app.check-cell-app {
+        display: flex;
+        flex-direction: row-reverse;
+        background-color: #699DC5;
+        border-radius: 10px 10px 0 0;
+        padding-right: 0px;
+    }
+
+    /*Ajustes del diseño de la tarjeta*/
+    /* Elementos principales */
+    .row-app .cell-app.cell-principal {
+        box-sizing: border-box;
+        background-color: #699DC5;
+        font-size: 18px;
+        /* padding-top: 20px; */
+        /* border-radius: 10px 10px 0 0; */
+        color: #fff;
+        line-height: 18px;
+        display: flex;
+        padding-bottom: 10px;
+    }
+
+        .row-app .cell-app.cell-principal:before {
+            color: #fff;
+            font-size: 16px;
+            font-weight:600;
+            
+        }
+
+    /*Check en la vista responsive*/
+    .check-table-app + .label-cell:before {
+        content: "\2714";
+        border: 0.5px solid rgba(0,0,0,0.3);
+        border-radius: 100%;
+        background-color: #fff;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        padding-left: 3px;
+        padding-bottom: 3px;
+        color: transparent;
+        transition: 0.2s;
+        font-size: 20px;
+    }  
+}
+
+@media screen and (max-width: 400px)
+{
+    .container-container-table-app {
+        overflow-y: hidden;
+    }
+
+    .container-table-app {
+        border-spacing: 10px;
+        /* height: auto;*/
+        background-color: #EAEAEA;
+        max-width: 100%;
+        border: 0px solid #ccc;
+        margin-left: 0;
+        padding: 2%;
+    }
+
+    .table-app {
+        line-height: 14px;
+        /*display:flex;
+        flex-direction:column;*/
+        
+        
+    }
+
+    .row-header-app{
+        display: none;
+    }
+
+    .row-app{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.2);
+    }
+
+        .row-app:hover {
+            background-color: #fff;
+            /*color: #3f3f3f;*/
+        }
+
+    .cell-app {
+        border-bottom-width: 0;
+        color: rgb(93, 93, 93);
+        /*padding-left: 4px;
+        padding-right: 4px;*/
+        display:flex;
+        flex-direction:column;
+        font-size:11px;
+    } 
+
+    .row-app .cell-app:before{
+        margin-right: 10px;
+        content: attr(data-title)":";
+        font-weight: 200;    
+        font-size: 11px;
+        text-transform: uppercase;
+        color: #969696;
+    }
+
+    .row-app .cell-app.check-cell-app{
+        display: flex;
+        flex-direction: row-reverse;
+        background-color: #699DC5;
+        border-radius: 10px 10px 0 0;  
+        padding-right: 0px;
+    }
+
+    /*Ajustes del diseño de la tarjeta*/
+    /* Elementos principales */
+    .row-app .cell-app.cell-principal{
+        box-sizing: border-box;
+        background-color: #699DC5;
+        font-size: 14px;
+        /* padding-top: 20px; */
+        /* border-radius: 10px 10px 0 0; */
+        color:#fff;
+        line-height: 16px;
+        display:flex;
+        flex-direction: column;
+    }
+
+    .row-app .cell-app.cell-principal:before{
+        color:#fff;
+        font-size: 14px;
+        font-weight: 200;
+    }
+
+    /*Check en la vista responsive*/
+    .check-table-app + .label-cell:before {
+        content: "\2714";
+        border: 0.5px solid rgba(0,0,0,0.3);
+        border-radius: 100%;
+        background-color: #fff;
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        padding-left: 3px;
+        padding-bottom: 3px;
+        color: transparent;
+        transition: 0.2s;
+        font-size: 20px;
+    }    
+}
+
+/*.MainTableBody::before{
+    content: "Cargando...";
+    width: 100%;
+    height: 100%;
+    font-size: 14px;
+    color: #009;
+    display:table-cell;
+    justify-content: center;
+    align-items: center;
+    padding:12px;
+}*/
+
+.tr-loader {
+    text-align: center;
+    font-size: 16px;
+    color: #006;
+    background-color: #f8f8ff;
+    height: 40px;
+    color: #006;
+}
+
+    .tr-loader > td > p {
+        margin: auto;
+        animation: tr-animate 1.5s linear infinite;
+    }
+
+    .tr-loader > td > div {
+        height: 20px;
+        background-color: #d5d4d4;
+        width: 80%;
+        margin: auto;
+        border-radius: 10px;
+        animation: tr-animate 1.5s linear infinite;
+    }
+
+    @keyframes tr-animate {
+        0% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }

@@ -1,0 +1,81 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.CompanyForUser>
+
+
+<div class="ContenModModule">
+   
+    <div class="menuoptions-flex-submodal">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="SaveNewAndEditUsers">
+                    <a class="btn2 btn-app">
+                        @*<img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">*@
+                        <i class="fa fa-save"></i>
+                        <input type="submit" value="Aceptar" form="ChangeCompanyForm" class="btn2" />
+                    </a>
+                </li>
+
+            </ul>
+
+            <ul class="menuoptions">
+                <li data-dismiss="modal">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h3 class="titleModal">Seleccione la empresa</h3>
+    <div class="contenPretabla buscadorModal">
+        <div class="BuscadorModalone">
+
+            <input type="text" class="BuscadorModal-control  BuscartblCompanies" placeholder="Filtro">
+        </div>
+    </div>
+
+    <div class="scrollbar-TableModal" style="background-color: #ffffff;">
+        <div class="container-container-table-app">
+            <div class="container-table-modal">
+                <table class="table-app tblCompanie">
+                    <thead>
+                        <tr class="row-header-app-tableModal">
+                            <td class="cell-app check-cell-app cell-header-app">
+                               
+                            </td>
+                            <td class="cell-app  cell-header-app">Código</td>
+                            <td class="cell-app  cell-header-app">Nombre</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int indexCheck = 0;}
+                        @foreach (var item in Model)
+                        {
+                            string idCheckCompanies = $"check-tableEmp-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheckCompanies" type="checkbox" class="check-table-app selectOptionCompaniesChange">
+                                    <label for="@idCheckCompanies" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal companyIdtbl" data-title="Código">
+                                    @Html.DisplayFor(modelItem => item.companyId)
+                                </td>
+                                <td class="cell-app nametbl" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="SaveChangeCompanyForm" id="ChangeCompanyForm" hidden>
+
+    </form>
+</div>
+
+

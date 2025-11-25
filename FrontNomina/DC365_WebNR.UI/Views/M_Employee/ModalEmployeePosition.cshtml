@@ -1,0 +1,104 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!-- Puestos para el modulo de empleados-->
+<div class="modal modal-employee-Position" aria-hidden="true">
+    <div class="ContenModal-contact">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-EmployeePosition">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-deleteEmployeePosition" class="btn2" />
+                                    </a>
+                                </li>
+
+                                <li class="li-separador">
+                                    <a class="btn2 btn-app">
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-ban"></i>
+                                        <input type="button" value="Caducar puesto" class="btn2" id="expire-position" />
+                                    </a>
+                                </li>
+
+                            }
+                        }
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-EmployeePosition">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="container-modal-scrolling">
+                    <!--formulario nuevo puesto de empleado-->
+                    <div class="cont-form-newandedit cont-form-EmployeePosition collapse">
+
+                    </div>
+
+                    @* Sección del formulario de caducar puesto *@
+                    <form asp-action="ExpirePosition" class="TinyModal collapse" id="Form-PositionExpire" style="left:205px">
+                        <div class="cont-input-newform-col1">
+                            <div class="contlotesmploye">
+                                <label class="control-label labelModEmployeComen">Empleado</label>
+                                <div class="">
+                                    <input name="EmployeeId" class="form-control EmployeeIdExpire" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="contlotesmploye">
+                                <label class="control-label labelModEmployeComen">Posición</label>
+                                <div class="">
+                                    <input name="PositionId" class="form-control PositionIdExpire" readonly="readonly" />
+                                </div>
+                            </div>
+                            <div class="contlotesmploye">
+                                <label class="control-label labelModEmployeComen">Vencimiento</label>
+                                <div class="">
+                                    <input type="date" name="ToDate" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contbtn-tinymodal">
+                            <input type="button" class="btn btn-danger btncancelar_expireposition" id="btncancelar" value="Cancelar">
+                            <input type="submit" value="Aceptar" class="btn btn-primary">
+                        </div>
+                    </form>
+
+                    @* Sección de la lista *@
+                    <h3 class="TituloEstandar">Puestos</h3>
+                    <div class="scrollbar-tableprimary-submodal ">
+                        <div class="container-table-app datatable-EmployeePosition" id="content-scroll">
+
+                        </div>
+                    </div>
+
+
+                    <form asp-action="delete" class="delete-EmployeePosition collapse" id="form-deleteEmployeePosition">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

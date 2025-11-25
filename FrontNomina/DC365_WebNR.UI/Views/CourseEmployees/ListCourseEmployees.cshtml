@@ -1,0 +1,45 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.CourseEmployees>
+<table class="table-app">
+    <thead>
+        <tr class="row-header-app">
+            <td class="cell-app  cell-header-app"></td>
+            <td class="cell-app  cell-header-app">Id participante</td>
+            <td class="cell-app  cell-header-app">Nombre de participante</td>
+            <td class="cell-app  cell-header-app">Departamento</td>
+            <td class="cell-app  cell-header-app">Comentario</td>
+        </tr>
+    </thead>
+    <tbody class="tbodyTableOne" style="cursor:pointer">
+        @{int indexCheck2 = 1; }
+        @foreach (var item in Model)
+        {
+
+            string idCheck2 = $"check-course-employees-{indexCheck2++}";
+            <tr class="row-app rowtable-course-employees">
+
+                <td class="cell-app check-cell-app">
+                    <input id="@idCheck2" type="checkbox" class="check-table-app select-course-employees">
+                    <label for="@idCheck2" class="label-cell"></label>
+                </td>
+
+                <td class="cell-app EmployeeIdtbl" data-title="Id participante">
+                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                </td>
+                <td class="cell-app" data-title="Nombre de participante">
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td class="cell-app " data-title="Departamento">
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                
+                <td class="cell-app " data-title="Comentarios">
+                    @Html.DisplayFor(modelItem => item.Comment)
+                </td>
+
+               
+
+            </tr>
+        }
+    </tbody>
+</table>

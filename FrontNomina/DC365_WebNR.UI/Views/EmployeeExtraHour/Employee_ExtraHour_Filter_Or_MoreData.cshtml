@@ -1,0 +1,57 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeExtraHour>
+@using System.Globalization;
+@{int indexCheck2 = 1; }
+@foreach (var item in Model)
+{
+
+    string idCheck2 = $"check-ExtraHour-{indexCheck2++}";
+    <tr class="row-app rowtable-ExtraHour">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck2" type="checkbox" class="check-table-app select-ExtraHour">
+            <label for="@idCheck2" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal WorkedDaytbl" data-title="Fecha">
+            @Html.DisplayFor(modelItem => item.WorkedDay)
+        </td>
+
+        <td class="cell-app cell-principal" data-title="Hora de entrada">
+            @Html.DisplayFor(modelItem => item.StartHour)
+        </td>
+
+        <td class="cell-app " data-title="Hora de salida">
+            @Html.DisplayFor(modelItem => item.EndHour)
+        </td>
+
+        <td class="cell-app EarningCodeIdtbl" data-title="Código hora extra">
+            @Html.DisplayFor(modelItem => item.EarningCodeId)
+        </td>
+
+        <td class="cell-app EarningCodeIdtbl" data-title="Nombre de código">
+            @Html.DisplayFor(modelItem => item.EarningCodeName)
+        </td>
+
+        <td class="cell-app " data-title="Cantidad">
+            @Html.DisplayFor(modelItem => item.Quantity)
+            @*@Convert.ToDecimal(item.IndexEarning).ToString("N", CultureInfo.CreateSpecificCulture("en-US"))*@
+        </td>
+
+        <td class="cell-app " data-title="Monto a cobrar">
+            @Convert.ToDecimal(item.Amount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+            @*@Html.DisplayFor(modelItem => item.Amount)*@
+        </td>
+
+        <td class="cell-app " data-title="Estatus">
+            @Html.DisplayFor(modelItem => item.StatusExtraHour)
+        </td>
+
+        <td class="cell-app cell-principal" data-title="Nómina">
+            @Html.DisplayFor(modelItem => item.PayrollId)
+        </td>
+
+        <td class="cell-app cell-principal" data-title="Nombre de nómina">
+            @Html.DisplayFor(modelItem => item.PayrollName)
+        </td>
+
+    </tr>
+}

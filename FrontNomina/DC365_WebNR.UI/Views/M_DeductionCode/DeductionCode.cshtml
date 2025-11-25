@@ -1,0 +1,233 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.DeductionCode>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "DeductionCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    bool isVersion = ViewBag.Version == null ? false : (bool)ViewBag.Version;
+}
+
+@*<link href="~/css/Employees.css" rel="stylesheet" />
+    <link href="~/css/Department.css" rel="stylesheet" />
+    <link href="~/css/AppInputDate.css" rel="stylesheet" />*@
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <input type="hidden" class="id-version" value="@ViewBag.IdVersion" />
+            <ul class="menuoptions">
+                @{if (!isVersion)
+                    {
+                        <li class="NewDeductionCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-plus-square-o"></i>
+                                Nuevo
+                            </a>
+                        </li>
+                        <li class="EditDeductionCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-edit "></i>
+                                Editar
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-trash"></i>
+                                <input type="submit" value="Eliminar" form="DeleteDeductionCode" class="inputTypesubmit" />
+                            </a>
+                        </li>
+                        <li class="li-separador">
+                            <a class="btn2 btn-app" style="border: 1px solid #fff;">
+                            </a>
+                        </li>
+                        <li class="Disabled-deductionCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-minus-square"></i>
+                                Descuentos deshabilitados
+                            </a>
+                        </li>
+                        <li class="dc-versions">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-list-ul"></i>
+                                Versiones
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="dc-versions-details">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-search"></i>
+                                Ver
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-trash"></i>
+                                <input type="submit" value="Eliminar" form="Delete-Deduction-CodeVersion" class="inputTypesubmit" />
+
+                            </a>
+                        </li>
+                    }
+                }
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                @{
+                    if (!isVersion)
+                    {
+                        <li class="CerrarModulo">
+                            <a class="btn2 btn-app ">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="Close-back">
+                            <a class="btn2 btn-app ">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    }
+                }
+               
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        @{if (!isVersion)
+            {<h3 class="TituloEstandar title-for-pagination">Descuentos</h3>}
+            else
+            {<h3 class="TituloEstandar title-for-pagination">Versiones de descuentos</h3>}
+        }
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+                @*<input type="text" class="form-control-filtro buscartblDeductionCode" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                @{if (!isVersion)
+                    {<span class="tituloStatusDepartment">Inhabilitar código de descuento</span>
+                        <label class="switch clickCheckeditar">
+                            <input type="checkbox" id="DisebleDeductionCode" class="idCheckeditar" checked="checked">
+                            <span class="slider round" for="DisebleDeductionCode"></span>
+
+                        </label>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app-width table-app tblDeductionCode" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Código</td>
+                            <td class="cell-app  cell-header-app">Nombre del código</td>
+                            <td class="cell-app  cell-header-app">Impacto de nómina</td>
+                            <td class="cell-app  cell-header-app">Proyecto</td>
+                            <td class="cell-app  cell-header-app">Categoría proyecto</td>
+                            <td class="cell-app  cell-header-app">Válido desde</td>
+                            <td class="cell-app  cell-header-app">Válido hasta</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-deductionCode">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectDeductionCode">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal InternalDeductionCode" data-title="Id Código" hidden>
+                                    @Html.DisplayFor(modelItem => item.InternalId)
+                                </td>
+                                <td class="cell-app cell-principal DeductionCodeId-dc" data-title="Id Código">
+                                    @Html.DisplayFor(modelItem => item.DeductionCodeId)
+                                </td>
+                                <td class="cell-app Name-dc" data-title="Nombre del código">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app PayrollAction-dc" data-title="Impacto de nómina">
+                                    @Html.DisplayFor(modelItem => item.PayrollAction)
+                                </td>
+                                <td class="cell-app ProjId" data-title="Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+
+                                <td class="cell-app ProjCategory" data-title="Categoria proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjCategory)
+                                </td>
+                                <td class="cell-app ValidFrom" data-title="Valido desde">
+                                    @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+                                <td class="cell-app ValidTo" data-title="Valido hasta">
+                                    @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+
+                                <td class="cell-app Description" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- nuevo -->
+    @{await Html.RenderPartialAsync("NewAndEditDeductionCode", new DC365_WebNR.CORE.Domain.Models.DeductionCode());}
+
+    <form asp-action="delete" class="DeleteDeductionCode collapse" id="DeleteDeductionCode">
+    </form>
+
+    <!-- eliminar version -->
+    <form asp-action="DeleteVersion" class="Delete-Deduction-CodeVersion collapse" id="Delete-Deduction-CodeVersion">
+    </form>
+
+    <form asp-action="updateStatus" class="DisabledDeductionCode collapse" id="DisabledDeductionCode">
+    </form>
+
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/CustomValidation.js"></script>
+    <script src="~/js/DeductionCode.js" type="module"></script>
+    <script src="~/js/AppInputDate.js"></script>
+}
+
+@section Styles {
+    <link href="~/css/Employees.css" rel="stylesheet" />
+    <link href="~/css/Department.css" rel="stylesheet" />
+    <link href="~/css/AppInputDate.css" rel="stylesheet" />
+}
+

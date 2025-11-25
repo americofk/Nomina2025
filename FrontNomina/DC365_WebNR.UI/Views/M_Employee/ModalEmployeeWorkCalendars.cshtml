@@ -1,0 +1,64 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!--modal de horarios para empleados-->
+<div class="modal modal-employee-workcalendars" aria-hidden="true">
+    <div class="main-content-modal w50">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-contactsoptions">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-workcalendars">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-deleteWorkcalendars" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-workcalendars">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+            <!--formulario nuevo horario-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-new-workcalendars collapse">
+                </div>
+
+                <h3 class="TituloEstandar">Horario de trabajo</h3>
+                <div class="scrollbar-tableprimary-submodal ">
+                    <div class="container-table-app datatable-workcalendars" id="content-scroll">
+                    </div>
+                </div>
+
+
+                <form asp-action="delete" class="delete-workcalendars collapse" id="form-deleteWorkcalendars">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

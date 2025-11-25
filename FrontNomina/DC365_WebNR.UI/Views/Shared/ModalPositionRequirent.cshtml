@@ -1,0 +1,63 @@
+﻿  <!-- nuevo requisito de puesto-->
+<div class="modal requisitopuestos" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="ContenModModule">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        <li class="NewRequirenTwo">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-plus-square-o"></i>
+                                Nuevo
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-trash"></i>
+                                <input type="submit" value="Eliminar" form="DeletePositionRequirement" class="inputTypesubmit" />
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="cerrarModRequirement">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    @*<div class="ContOpciones-Pagina contOpciones">
+
+                        <div class="opciones-Pagina cerrarModRequirement">
+                            <img src="~/images/Dashboard/Cerrar.png" class="Iconos_opciones-Pagina close-modal">
+                        </div>
+
+                    </div>*@
+                </div>
+            </div>
+
+
+            <div class="container-modal-scrolling">
+                <!--formulario nueva direccion-->
+                <div class="cont-form-newandedit  cont-form-newRequirent collapse">
+                </div>
+
+                <h3 class="TituloEstandar">Requisitos del puesto</h3>
+                <div class="scrollbar-tableprimary-submodal">
+                    <div class="container-table-app datatable-Requirement" id="content-scroll">
+
+                    </div>
+                </div>
+
+                <form asp-action="delete" class="DeletePositionRequirement collapse" id="DeletePositionRequirement">
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+</div>

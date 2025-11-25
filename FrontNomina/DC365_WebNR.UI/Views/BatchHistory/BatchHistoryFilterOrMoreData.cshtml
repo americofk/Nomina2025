@@ -1,0 +1,42 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.BatchHistory>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+    string progress = item.IsFinished ? "fa fa-check ok" : "fa fa-clock-o wait";
+    string status = item.IsError ? "fa fa-exclamation-triangle iserror" : "fa fa-check ok";
+    string idCheck = $"check-table-{indexCheck++}";
+    string tdId = $"batch-{item.InternalId}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectHistory">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal HistoryIdIdTbl" data-title="Id Código">
+            @Html.DisplayFor(modelItem => item.InternalId)
+        </td>
+        <td class="cell-app " data-title="Entidad">
+            @Html.DisplayFor(modelItem => item.BatchEntity)
+        </td>
+        <td class="cell-app " data-title="Fecha de inicio">
+            @Html.DisplayFor(modelItem => item.StartDate)
+        </td>
+
+        <td class="cell-app " data-title="Fecha de finalización">
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td class="cell-app" data-title="Estado">
+            <i class='@status id-batch-info' id="@tdId"></i>
+        </td>
+        <td class="cell-app" data-title="Progreso">
+            <i class='@progress'></i>
+        </td>
+        <td class="cell-app" data-title="">
+        </td>
+
+        <td class="cell-app data-info-batch" hidden>
+            @Html.DisplayFor(modelItem => item.Information)
+        </td>
+    </tr>
+}

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.CompanyForUser>
+
+<div class="ContenModModule">
+    @*<div class="HeaderModal">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h3 class="TituloModal">Listado de empresas</h3>
+
+        </div>*@
+    <div class="opcioneslistpageForm">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="SaveNewAndEditUsers">
+                    <a class="btn2 btn-app">
+                        @*<img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">*@
+                        <i class="fa fa-save"></i>
+                        <input type="submit" value="Guardar" form="SaveUserCompanyForm" class="btn2" />
+                    </a>
+                </li>
+
+            </ul>
+
+            <ul class="menuoptions">
+                <li data-dismiss="modal">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h3 class="titleModal">Lista de empresas</h3>
+    <div class="contenPretabla buscadorModal">
+        <div class="BuscadorModalone">
+
+            <input type="text" class="BuscadorModal-control  BuscartblCompanies" placeholder="Filtro">
+        </div>
+    </div>
+   
+    <div class="scrollbar-TableModal" style="background-color: #ffffff;">
+        <div class="container-container-table-app">
+            <div class="container-table-modal">
+                <table class="table-app tblCompanie">
+                    <thead>
+                        <tr class="row-header-app-tableModal">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-AsigCust" type="checkbox" class="check-table-app selectOptionCompaniesAll">
+                                <label for="check-table-AsigCust" class="label-cell"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Código</td>
+                            <td class="cell-app  cell-header-app">Nombre</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int indexCheckEmp = 0;}
+                        @foreach (var item in Model)
+                        {
+                            string idCheckCompanies = $"check-table-emp-usu-{indexCheckEmp++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheckCompanies" type="checkbox" class="check-table-app selectOptionCompanies">
+                                    <label for="@idCheckCompanies" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal companyIdtbl" data-title="Código">
+                                    @Html.DisplayFor(modelItem => item.companyId)
+                                </td>
+                                <td class="cell-app nametbl" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.name)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*<div class="modalfooter">
+        <button type="submit" class="stylebtnModal btnSeveCompanies" form="SaveUserCompanyForm">Guardar</button>
+    </div>*@
+    <form asp-action="SaveCompanies" id="SaveUserCompanyForm" hidden>
+    </form>
+</div>

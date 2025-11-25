@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Course>
+
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectCourse">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal CourseIdtblcur" data-title="Id Curso">
+            @Html.DisplayFor(modelItem => item.CourseId)
+        </td>
+        <td class="cell-app CourseTypeNametblcur" data-title="Tipo de curso">
+            @Html.DisplayFor(modelItem => item.CourseTypeName)
+        </td>
+        <td class="cell-app CourseNametblcur" data-title="Nombre de curso">
+            @Html.DisplayFor(modelItem => item.CourseName)
+        </td>
+
+        <td class="cell-app StartDateTimetblcur" data-title="Fecha y hora de inicio">
+            @Html.DisplayFor(modelItem => item.StartDateTime)
+        </td>
+
+        <td class="cell-app EndDateTimetblcur" data-title="Fecha y hora final">
+            @Html.DisplayFor(modelItem => item.EndDateTime)
+        </td>
+
+        <td class="cell-app ClassRoomNametblcur" data-title="Aula o salón">
+            @Html.DisplayFor(modelItem => item.ClassRoomName)
+        </td>
+
+        <td class="cell-app CourseStatustblcur" data-title="Estado)">
+            @Html.DisplayFor(modelItem => item.CourseStatus)
+        </td>
+
+    </tr>
+}

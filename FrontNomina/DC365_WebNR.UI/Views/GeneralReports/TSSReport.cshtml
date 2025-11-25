@@ -1,0 +1,137 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Reports.ReportTSSFileResponse
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Reporte TSS";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payroll;
+
+}
+
+<link href="~/css/HorizontalReportDesign.css" rel="stylesheet" />
+<link href="~/css/EstyleReportsPrint.css" rel="stylesheet" media="print" />
+@{
+    var show = !ViewBag.hidefilter ? "show" : "";
+}
+<div class="report-filter-section @show">
+    <h3> Paramétros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+        <div class="param-fields">
+            <label class="control-label">Nómina</label>
+            @Html.DropDownList("Payrolls", payrolls, "Seleccione...", new { @class = "form-control" })
+        </div>
+        <div class="param-fields">
+            <label class="control-label">Período</label>
+            <input class="form-control period" type="month">
+        </div>
+        <div class="param-fields">
+            <label class="control-label">Tipo autodeterminación</label>
+            <select class="form-control type-tss">
+                <option value="AM">Mensual</option>
+                <option value="AR">Retroactiva</option>
+            </select>
+        </div>
+    </div>
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" id="update-report" data-type="tss-report" />
+    </div>
+</div>
+
+
+
+@*Cuerpo del reporte*@
+
+<div class="cont-general-report">
+
+    @*Content*@
+
+
+    @{
+        if (Model.Details == null)
+        {
+            await Html.RenderPartialAsync("DefaultReportHeader", new string[] { "REPORTE TSS", "horizontal" });
+        }
+        else
+        {
+            @*Header*@
+            <div class="report-body-header">
+                <div class="report-logo">
+                    <img src="~/Images/ImagenLogin.png" />
+                </div>
+                <div class="report-title">
+                    <h3>REPORTE TSS</h3>
+                </div>
+                <div class="report-date">
+                    <p>@DateTime.Now</p>
+                </div>
+            </div>
+            @*Content*@
+            <div class="report-body-content">
+                <div class="body-content-head">
+                    <div>
+                        <div class="content-title">
+                            <label>Nómina</label>
+                            <label>Período de nómina</label>
+                            <label>Tipo autodeterminación</label>
+                            @*<label>Total empleados</label>
+                            <label>Total empleados para pago</label>*@
+                        </div>
+                        <div class="content-value">
+                            <label>@Model.PayrollName</label>
+                            <label>@Model.Period</label>
+                            <label>@Model.Process</label>
+                            @*<label>@Model.TotalEmployee</label>
+                            <label>0</label>*@
+                        </div>
+                    </div>
+                </div>
+                @{
+                        <table class="table-report">
+                            <thead>
+                                <tr class="row-header-report">
+                                    @*<td> Id empleado</td>*@
+                                    <td> Nombre</td>
+                                    <td> Apellido</td>
+                                    <td > Tipo documento</td>
+                                    <td > Número documento</td>
+                                    <td > Género</td>
+                                    <td > Fecha nacimiento</td>
+                                    <td class="cell-report-amount"> Salario</td>
+                                    <td class="cell-report-amount"> Salario ISR</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in Model.Details)
+                                    {
+                                        <tr class="row-body-report">
+                                            <td>@item.EmployeeName</td>
+                                            <td>@item.EmployeeLastName </td>
+                                            <td>@item.DocumentType </td>
+                                            <td>@item.DocumentNumber </td>
+                                            <td>@item.Gender </td>
+                                            <td>@item.BirthDate </td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.Salary).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.Salary_ISR).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                }
+            </div>
+
+            @*Footer*@
+            <div class="report-body-footer">
+            </div>
+        }
+    }
+
+</div>
+
+@section Scripts {
+<script src="~/js/Reports.js" type="module"></script>
+}
+

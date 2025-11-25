@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.CalendarHolidayResponse>
+@{
+    int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20);
+}
+
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app select-CalendarHoliday">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal CalendarDateIdtbl" data-title="Fecha">
+            @Html.DisplayFor(modelItem => item.CalendarDate)
+        </td>
+        <td class="cell-app Descriptiontbl" data-title="Descripción">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+
+    </tr>
+}

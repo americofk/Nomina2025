@@ -1,0 +1,69 @@
+﻿@using DC365_WebNR.CORE.Domain.Models.Enums;
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeBankAccount>
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table-app">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Tipo</td>
+                        <td class="cell-app  cell-header-app">Número</td>
+                        <td class="cell-app  cell-header-app">Banco</td>
+                        <td class="cell-app  cell-header-app">Moneda</td>
+                        <td class="cell-app  cell-header-app">Principal</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+                        var principal = item.IsPrincipal == true ? "checked='checked'" : "";
+                        var tipo = ((AccountType)item.AccountType).ToString();
+
+                        string idCheck2 = $"check-bankaccount-{indexCheck2++}";
+                        <tr class="row-app rowtable-bankaccount">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app select-bankaccount">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal" data-title="Tipo">
+                                @tipo
+                            </td>
+                            <td class="cell-app " data-title="Número">
+                                @Html.DisplayFor(modelItem => item.AccountNum)
+                            </td>
+                            <td class="cell-app " data-title="Banco">
+                                @Html.DisplayFor(modelItem => item.BankName)
+                            </td>
+                            <td class="cell-app " data-title="Moneda">
+                                @Html.DisplayFor(modelItem => item.Currency)
+                            </td>
+
+                            <td class="cell-app " data-title="Principal">
+                                <label class="switch disabled">
+                                    <input type="checkbox" disabled @principal>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+
+                            <td class="cell-app InternalIdtbl" style="display:none">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
+}

@@ -1,0 +1,47 @@
+﻿@using DC365_WebNR.CORE.Domain.Models.Enums
+<form asp-action="DissmisEmployee" class="TinyModal-hire-employee" id="Form-dissmis-employee">
+    <h3 class="TituloEstandar-modal-desvincular">Desvincular empleado</h3>
+    <div class="cont-input-newform-col1">
+
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Empleado</label>
+            <div class="">
+                <input name="EmployeeId" class="form-control EmployeeIddissmis" readonly="readonly" />
+
+            </div>
+        </div>
+
+
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Fecha final</label>
+            <div class="">
+                <div class="app-input-date">
+                    <input name="ToDate" class="form-control" type="date" />
+                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                    <i class="app-input-date-never fa fa-hourglass-o disabled" title="Nunca"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Motivo</label>
+            <div class="">
+                <select name="EmployeeAction" class="form-control" asp-items="Html.GetEnumSelectList<EmployeeAction>()">
+                </select>
+
+            </div>
+        </div>
+
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Comentarios</label>
+            <div class="">
+                <textarea name="Comment" class="form-control" rows="4"></textarea>
+
+            </div>
+        </div>
+    </div>
+    <div class="contbtn-tinymodal">
+        <input type="button" class="btn btn-danger btncancelar-dissmis-employee" value="Cancelar">
+        <input type="submit" value="Aceptar" class="btn btn-primary">
+    </div>
+</form>

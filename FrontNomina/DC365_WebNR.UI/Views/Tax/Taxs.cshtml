@@ -1,0 +1,168 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Tax>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Taxs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/Employees.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewTax">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditTax">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteTax" class="inputTypesubmit" />
+                    </a>
+                </li>
+                <li class="li-separador">
+                    <a class="btn2 btn-app" style="border: 1px solid #fff;">
+                    </a>
+                </li>
+
+                <li class="Tax-Disabled">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-building"></i>
+                        Impuestos Inactivos
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar title-for-pagination">Impuestos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @* <input type="text" class="form-control-FiltroDepartment buscador buscar-TblTax" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Inhabilitar impuesto</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="DisebleTax" class="idCheckeditar" checked="checked">
+                    <span class="slider round" for="DisebleTax"></span>
+
+                </label>
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app-width115 table-app TblTax" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Código</td>
+                            <td class="cell-app  cell-header-app">Nombre del código</td>
+                            <td class="cell-app  cell-header-app">Proyecto</td>
+                            <td class="cell-app  cell-header-app">Categoría de proyecto</td>
+                            <td class="cell-app  cell-header-app">Válido desde</td>
+                            <td class="cell-app  cell-header-app">Válido hasta</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Tax">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectTax">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal TaxIdTbl" data-title="Id Código">
+                                    @Html.DisplayFor(modelItem => item.TaxId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre del código">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app ProjIdtbl" data-title="Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+
+                                <td class="cell-app ProjCategoryIdtbl" data-title="Categoria de proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjCategory)
+                                </td>
+                                <td class="cell-app ValidFromtbl" data-title="Valido desde">
+                                    @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+                                <td class="cell-app ValidTotbl" data-title="Valido hastao">
+                                    @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+
+                                <td class="cell-app Descriptiontbl" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- nuevo -->
+    <div id="ContNewAndEditTax"></div>
+
+    <form asp-action="delete" class="collapse" id="DeleteTax">
+    </form>
+
+    <!-- deshabilitar -->
+    <form asp-action="updateStatus" class="updateStatusTax collapse" id="updateStatusTax">
+    </form>
+
+</div>
+
+<script src="~/js/Tax.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@*<script src="~/js/TaxDetail.js" type="module"></script>*@
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/CustomValidation.js"></script>
+}
+
+

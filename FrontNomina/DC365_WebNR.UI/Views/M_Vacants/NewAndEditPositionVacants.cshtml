@@ -1,0 +1,111 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Vacants
+
+<div class="collapse contNewEntyti">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios setiartitulo">Nueva vacante</h3>
+
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditVacants" asp-action="Save">
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes Showid collapse">
+
+                            <label class="control-label ancholabel">Código de puesto</label>
+                            <div class="anchoimput">
+                                <input asp-for="PositionId" class="form-control" />
+                                <span asp-validation-for="PositionId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="PositionName" class="control-label ancholabel">Nombre de puesto</label>
+                            <div class="anchoimput">
+                                <input asp-for="PositionName" class="form-control" />
+                                <span asp-validation-for="PositionName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label asp-for="DepartmentId" class="control-label ancholabel">Departamento</label>
+                            <div class="anchoimput">
+                                <select asp-for="DepartmentId" class="form-control">
+                                </select>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="JobId" class="control-label ancholabel">Cargo</label>
+                            <div class="anchoimput">
+                                <select asp-for="JobId" class="form-control">
+                                </select>
+                                <span asp-validation-for="JobId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label asp-for="NotifyPositionId" class="control-label ancholabel">Notifica al puesto</label>
+                            <div class="anchoimput">
+                                <select asp-for="NotifyPositionId" class="form-control">
+                                </select>
+                                <span asp-validation-for="NotifyPositionId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            @*<label asp-for="StartDate" class="control-label ancholabel">Fecha inicial</label>
+                                <div class="anchoimput">
+                                <input asp-for="StartDate" class="form-control" />
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                                </div>*@
+                            <label class="control-label ancholabel">Fecha inicial</label>
+                            <div class="anchoimput">
+                                <div class="app-input-date">
+                                    <input asp-for="StartDate" type="date" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            @*<label asp-for="EndDate" class="control-label ancholabel">Fecha final</label>
+                            <div class="anchoimput">
+                                <input asp-for="EndDate" class="form-control" />
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>*@
+
+                            <label class="control-label ancholabel">Fecha final</label>
+                            <div class="anchoimput">
+                                <div class="app-input-date">
+                                    <input asp-for="EndDate" type="date" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="Description" class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>

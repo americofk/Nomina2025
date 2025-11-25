@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nómina</title>
+    <link rel="stylesheet" href="~/css/PreLoader.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/EstilosFormularios/Formularios.css" />
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/build/css/custom.css" />
+    <link rel="stylesheet" href="~/css/Layout/Layout.css" />
+    <link rel="stylesheet" href="~/css/MenuLef.css" />
+    <link rel="stylesheet" href="~/css/AppDashboard.css" />
+    <link rel="stylesheet" href="~/css/StyleModales.css" />
+    <link href="~/css/EstiloContenedores/formularios.css" rel="stylesheet" />
+    <link href="~/css/AppAlert.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/css/Modals/SubModalStyles.css" rel="stylesheet" />
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+
+    <script src="~/js/ChangeNotification.js"></script>
+    <link href="~/css/AppTable.css" rel="stylesheet" />
+    <link href="~/css/AppMenuoptions.css" rel="stylesheet" />
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body class="nav-md principal">
+    <header class="headerlayoaut">
+
+        <div class="contTitulo">
+            <div class="Titulo1">Sistema de nómina</div>
+            <div class="TituloEmploye changeCompany">@ViewBag.nameCompany</div>
+            <div class="idcompany-active collapse">@ViewBag.empresa</div>
+            <i class="fa fa-angle-down icontitlecustomer changeCompany"></i>
+        </div>
+        @*<div class="alfnal">
+            <div class="div2usuario">
+                @{
+                    string image = string.IsNullOrEmpty(ViewBag.Avatar) ? "/Images/Layout/usuariologin.png" : ViewBag.Avatar;
+                    string imageoptions = string.IsNullOrEmpty(ViewBag.Avatar) ? "/Images/Dashboard/default_perfil.png" : ViewBag.Avatar;
+                }
+                <img src=@image class="loginusuario">
+            </div>
+        </div>*@
+
+    </header>
+
+    <div class="body">
+        <!-- modal asignacion de compañias -->
+        <div class="modal ModCompaniesAsing">
+            <!--cambio de empresa-->
+            @{await Html.RenderPartialAsync("ChangeCompani", (IEnumerable<DC365_WebNR.CORE.Domain.Models.CompanyForUser>)ViewData["ListCompanyUser"]);}
+
+        </div>
+        @* Cuerpo principal de la app *@
+        <div>
+            <main role="main" class="pb-3" style="padding: 30px;color: #001433;">
+                @RenderBody()
+            </main>
+        </div>
+
+
+    </div>
+    <!-- footer content -->
+    <footer class="footerMenu">
+        <div>
+            <i class="fa fa-registered"></i><span>@DateTime.Now.AddYears(+0).ToString("yyyy") Dynacorp 365. Todos los derechos reservados</span>
+        </div>
+    </footer>
+    <!-- /footer content -->
+    @{
+        string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    }
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/login.js?@version"></script>
+    <script src="~/js/Utilidades.js?@version"></script>
+    <script src="~/js/Navigation.js?@version"></script>
+    <script src="~/js/AppAlert.js"></script>
+    <script src="~/js/Helps.js"></script>
+
+    <script src="~/js/GeneralFilter.js"></script>
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

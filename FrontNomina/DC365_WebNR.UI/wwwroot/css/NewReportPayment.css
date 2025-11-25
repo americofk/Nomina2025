@@ -1,0 +1,82 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.receipt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px;
+    gap: 80px;
+    font-size: 0.8em !important;
+}
+
+    .receipt .tables-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        align-items: stretch;
+    }
+
+.table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+    .table thead {
+        background-color: #bfbfbf;
+    }
+
+        .table thead tr:first-child {
+            text-transform: uppercase;
+        }
+
+    .table.positive tbody tr > td, .table.negative tbody tr > td {
+        background-color: white;
+        border: none;
+    }
+
+    .table td {
+        overflow: hidden;
+        border: solid 1px;
+        padding: 10px 5px;
+        word-break: normal;
+        font-family: "Comic Sans MS", cursive, sans-serif !important;
+    }
+
+.table th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-family: Arial, sans-serif;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 10px 5px;
+    word-break: normal;
+    font-family: "Courier New", Courier, monospace !important;
+}
+
+
+.table.positive td:first-child:before {
+    content: "+";
+    margin-right: 5px;
+}
+
+.table.negative td:first-child:before {
+    content: "-";
+    margin-right: 5px;
+}
+
+.always-labeled::before {
+    content: attr(data-label);
+    font-family: "Courier New", Courier, monospace !important;
+    margin-right: 5px;
+}
+
+.mb-6 {
+    margin-bottom: 6rem
+}

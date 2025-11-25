@@ -1,0 +1,136 @@
+﻿
+@model DC365_WebNR.CORE.Domain.Models.Reports.ReportEmployeeResponse
+@using System.Globalization;
+@{
+    ViewData["Title"] = "AllEmployeeReport";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+@{
+    List<SelectListItem> deparment = (List<SelectListItem>)ViewBag.Deparment;
+
+}
+
+<link href="~/css/HorizontalReportDesign.css" rel="stylesheet" />
+<link href="~/css/EstyleReportsPrint.css" rel="stylesheet" media="print" />
+@{
+    var show = !ViewBag.hidefilter ? "show" : "";
+}
+<div class="report-filter-section @show">
+    <h3> Paramétros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+       
+         <div class="param-fields">
+            <label class="control-label">Departamento</label>
+            @Html.DropDownList("Department", deparment, "Seleccione...", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" id="update-report" data-type="report-all-employee"/>
+
+    </div>
+</div>
+
+
+
+@*Cuerpo del reporte*@
+
+<div class="cont-general-report">
+
+    @*Content*@
+
+
+    @{
+        if (Model.GroupEmployeeInfo == null)
+        {
+            await Html.RenderPartialAsync("DefaultReportHeader", new string[] { "REPORTE DE EMPLEADOS", "horizontal" });
+        }
+        else
+        {
+            @*Header*@
+            <div class="report-body-header">
+                <div class="report-logo">
+                    <img src="~/Images/ImagenLogin.png" />
+                </div>
+                <div class="report-title">
+                    <h3>REPORTE DE EMPLEADOS</h3>
+                </div>
+                <div class="report-date">
+                    <p>@DateTime.Now</p>
+                </div>
+            </div>
+            @*Content*@
+            <div class="report-body-content">
+               
+                @{
+                    foreach (var item2 in Model.GroupEmployeeInfo)
+                    {
+                        <p class="title-group">@item2.DepartmentName</p>
+                        <table class="table-report">
+                            <thead>
+                                <tr class="row-header-report">
+                                    <td class="cell-app  cell-header-app"> Código</td>
+                                    <td class="cell-app  cell-header-app"> Nombre</td>
+                                    <td class="cell-app  cell-header-app"> Fecha de nacimiento</td>
+                                    <td class="cell-app  cell-header-app"> Género</td>
+                                    <td class="cell-app  cell-header-app"> Edad</td>
+                                    <td class="cell-app  cell-header-app"> NSS</td>
+                                    <td class="cell-app  cell-header-app"> ARS</td>
+                                    <td class="cell-app  cell-header-app"> AFP</td>
+                                    <td class="cell-app  cell-header-app"> Nacionalidad</td>
+                                    <td class="cell-app  cell-header-app"> Fecha de inicio</td>
+                                    <td class="cell-app  cell-header-app"> Fecha de salida</td>
+                                    <td class="cell-app  cell-header-app"> Puesto</td>
+                                    <td class="cell-app  cell-header-app"> Cédula</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in item2.EmployeeInfo)
+                                    {
+                                        <tr class="row-body-report">
+                                            <td class="cell-app cell-principal">@item.EmployeeId</td>
+                                            <td class="cell-app cell-principal">@item.EmployeeName</td>
+                                    
+                                            <td class="cell-app cell-principal">@Convert.ToDateTime(item.BirthDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-app cell-principal">@item.Gender</td>
+                                            <td class="cell-app cell-principal">@item.Age</td>
+                                            <td class="cell-app cell-principal">@item.NSS</td>
+                                            <td class="cell-app cell-principal">@item.ARS</td>
+                                            <td class="cell-app cell-principal">@item.AFP</td>
+                                            <td class="cell-app cell-principal">@item.Country</td>
+                                            <td class="cell-app cell-principal">@Convert.ToDateTime(item.StartWorkDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-app cell-principal">@Convert.ToDateTime(item.EndWorkDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-app cell-principal">@item.PositionName</td>
+                                            <td class="cell-app cell-principal">@item.DocumentNumber</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                           
+                        </table>
+                    }
+                }
+                
+            </div>
+
+
+
+            @*Footer*@
+            <div class="report-body-footer">
+            </div>
+
+
+        }
+    }
+
+
+</div>
+
+@section Scripts {
+<script src="~/js/Reports.js" type="module"></script>
+}
+
+
+

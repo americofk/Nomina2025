@@ -1,0 +1,211 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Course
+@using DC365_WebNR.CORE.Domain.Models.Enums
+@{
+    List<SelectListItem> courseType = (List<SelectListItem>)ViewBag.CourseType;
+    List<SelectListItem> classRoomId = (List<SelectListItem>)ViewBag.ClassRoomId;
+    List<SelectListItem> courseParentId = (List<SelectListItem>)ViewBag.CourseParentId;
+}
+<div class="collapse contNewEntyti">
+    <div class="optionform">
+        <div class="optionformOne">
+            <ul>
+                <li class="open-course-position">
+                    <a class="btn2 btn-app">Puestos</a>
+                </li>
+                <li class="open-course-employees">
+                    <a class="btn2 btn-app">Participantes</a>
+                </li>
+
+                <li class="open-course_instructors">
+                    <a class="btn2 btn-app">Instructores</a>
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios setiartitulo">Nuevo cursos</h3>
+                <form role="tabpanel" data-example-id="togglable-tabs" id="createAndEditCourse" asp-action="Save">
+                    <div class="ContenForm">
+                        <div class="contenInputForm">
+                            <div class="contlotes Showid collapse">
+
+                                <label class="control-label ancholabel">Código del curso</label>
+                                <div class="anchoimput">
+                                    <input asp-for="CourseId" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="CourseId" class="text-danger"></span>
+
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Nombre del curso</label>
+                                <div class="anchoimput">
+                                    <input asp-for="CourseName" class="form-control" />
+                                    <span asp-validation-for="CourseName" class="text-danger"></span>
+
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Tipo de curso</label>
+                                <div class="anchoimput">
+
+                                    @Html.DropDownList("CourseTypeId", courseType, "Seleccione...", new { @class = "form-control" })
+
+                                    <span asp-validation-for="CourseTypeId" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Interno o externo</label>
+                                <div class="anchoimput">
+                                    <select asp-for="InternalExternal" class="form-control" asp-items="Html.GetEnumSelectList<InternalExternal>()">
+                                    </select>
+                                    <span asp-validation-for="InternalExternal" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Curso padre</label>
+                                <div class="anchoimput">
+                                    @*<select asp-for="CourseParentId" class="form-control"
+                                                asp-items="@(new SelectList(@ViewBag.SelectListItemCourse,"Value", "Text"))">
+                                        </select>*@
+                                    @Html.DropDownList("CourseParentId", courseParentId, "Seleccione...", new { @class = "form-control" })
+
+                                    <span asp-validation-for="CourseParentId" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Aula o salón</label>
+                                <div class="anchoimput">
+
+                                    @Html.DropDownList("ClassRoomId", classRoomId, "Seleccione...", new { @class = "form-control" })
+
+                                    <span asp-validation-for="ClassRoomId" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Matriz de capacitación</label>
+                                <div class="anchoimput">
+                                    <label class="switch">
+                                        <input asp-for="MatrixTraining" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="contenInputForm">
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Fecha y hora de inicio</label>
+                                @*<div class="anchoimput">
+                                        <input asp-for="StartDateTime" class="form-control" />
+                                        <span asp-validation-for="StartDateTime" class="text-danger"></span>
+                                    </div>*@
+                                <div class="anchoimput">
+                                    <div class="app-input-date">
+                                        <input asp-for="StartDateTime" class="form-control" />
+                                        <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                        <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                    </div>
+
+                                    <span asp-validation-for="StartDateTime" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Fecha y hora final</label>
+                                @*<div class="anchoimput">
+                                        <input asp-for="EndDateTime" class="form-control" />
+                                        <span asp-validation-for="EndDateTime" class="text-danger"></span>
+                                    </div>*@
+
+                                <div class="anchoimput">
+                                    <div class="app-input-date">
+                                        <input asp-for="EndDateTime" class="form-control" />
+                                        <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                        <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                    </div>
+
+                                    <span asp-validation-for="EndDateTime" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Minimo de participantes</label>
+                                <div class="anchoimput">
+                                    <input asp-for="MinStudents" class="form-control" />
+                                    <span asp-validation-for="MinStudents" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Máximo de participantes</label>
+                                <div class="anchoimput">
+                                    <input asp-for="MaxStudents" class="form-control" />
+                                    <span asp-validation-for="MaxStudents" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Periodicidad</label>
+                                <div class="anchoimput">
+                                    <input asp-for="Periodicity" class="form-control" />
+                                    <span asp-validation-for="Periodicity" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Cantidad de sesiones</label>
+                                <div class="anchoimput">
+                                    <input asp-for="QtySessions" class="form-control" />
+                                    <span asp-validation-for="QtySessions" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="contenInputFormTwo">
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabeltwo">Descripción</label>
+                            <div class="anchoimputtwo">
+                                <textarea asp-for="Description" class="form-control" rows="2"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabeltwo">Objetivos del curso</label>
+                            <div class="anchoimputtwo">
+                                <textarea asp-for="Objetives" class="form-control" placeholder="Máximo 1000 caracteres" rows="5"></textarea>
+                                <span asp-validation-for="Objetives" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabeltwo">Temas del curso</label>
+                            <div class="anchoimputtwo">
+                                <textarea asp-for="Topics" class="form-control" placeholder="Máximo 1000 caracteres" rows="5"></textarea>
+                                <span asp-validation-for="Topics" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

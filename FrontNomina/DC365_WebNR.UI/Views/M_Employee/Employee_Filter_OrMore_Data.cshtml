@@ -1,0 +1,36 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Employee>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectEmployees">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal EmployeeIdtbl" data-title="Número de personal">
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td class="cell-app Nametbl" data-title="Nombre">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="cell-app LastNametbl" data-title="Apellido">
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+
+        <td class="cell-app EmployeeTypetbl" data-title="Tipo de empleado">
+            @Html.DisplayFor(modelItem => item.EmployeeType)
+        </td>
+        <td class="cell-app AdmissionDatetbl" data-title="Fecha de ingreso">
+            @Convert.ToDateTime(item.AdmissionDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app Agetbl" data-title="Edad">
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+
+    </tr>
+}

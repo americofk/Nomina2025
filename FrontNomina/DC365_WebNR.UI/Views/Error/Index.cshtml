@@ -1,0 +1,35 @@
+﻿@model string
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+    <link rel="stylesheet" href="~/css/Layout/Layout.css" />
+    <link href="~/css/Error/Error.css" rel="stylesheet" />
+</head>
+<body class="nav-md principal">
+    <header class="headerlayoaut">
+        <div class="contTitulo">
+            <div class="Titulo1">Dynacorp 365</div>
+        </div>
+        <span class="title-error">Error</span>
+    </header>
+    
+    <section class="body-error">
+        @{ 
+            if(Model == null)
+            {
+                <h1>Recurso solicitado no encontrado</h1>
+            }
+            else
+            {
+                <h1>Model</h1>
+            }
+        }
+    </section>
+</body>
+</html>

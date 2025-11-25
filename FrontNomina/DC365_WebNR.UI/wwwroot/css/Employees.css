@@ -1,0 +1,158 @@
+﻿.formEmploye {
+    height: calc(100% - 40px);
+}
+.anchoimput {
+    height: 34px;
+}
+.contoneEmploye {
+    display: flex;
+    /*align-items: center;*/
+}
+
+
+.optionform {
+    height: 100px;
+    background-color: #AAAAAA;
+    display: flex;
+    padding: 15px 0px;
+}
+.optionformOne {
+    border-right: 1px solid white;
+    width: 25%;
+     padding-left: 2%; 
+    font-weight: 600;
+}
+
+.optionformTwo {
+    width: 25%;
+    padding-left: 2%;
+    font-weight: 600;
+}
+
+.contenidoprimariEmploye {
+    border: 1px solid #E6E9ED;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.styletitleemployetwo {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+    font-size: 20px;
+}
+.ContenedorNewemploye {
+    height: calc(100% - 50px);
+    padding-left: 20px;
+    padding-right: 25px;
+    background: white;
+    padding-top: 10px;
+    
+}
+.ContenedorNewemploye-two {
+    height: calc(100% - 50px);
+    padding-left: 2%;
+    padding-right: 25px;
+    background: white;
+    padding-top: 10px;
+    
+}
+.contImputDatosLeft {
+    width: 40%;
+}
+
+.ancholabelSeconeEmploye {
+    width: 30%;
+}
+
+.contInput-foto {
+    height: 150px;
+    width: 150px;
+    /*border: 1px solid #34495e;*/
+    border: 3px solid #34495e;
+    padding: 3px;
+    border-radius: 100%;
+    text-align: center;
+    /*background: #307bb5;*/
+    background: #fff;
+    margin: auto;
+}
+
+.clasdynamicsforcontenemploye {
+    height: 100%;
+    padding-left: 2%;
+    padding-right: 2%;
+    background: white;
+    padding-top: 10px;
+    
+}
+.contImputDatosRightEmployee {
+    width: 30%;
+    height: 132px;
+    display: flex;
+    /* justify-content: end; */
+    align-content: end;
+    flex-direction: row-reverse;
+}
+.contenstatusEmploye{
+    width:70%;
+}
+
+.EmployeeStatus {
+    margin-bottom: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.contenedorSwichs {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 10px;
+}
+.label-switch {
+    margin-right: 10px;
+}
+
+.inhabilitar {
+    width: 125px;
+    font-weight: 500;
+    padding-top: 5px;
+}
+
+
+/***************************************************/
+/********Sección Información de contacto****/
+.labelModEmploye-izq {
+    font-size: 14px;
+    /*width: 75px;*/
+}
+/***************************************************/
+/********Sección Información de contacto****/
+
+
+
+
+
+@media (max-width: 1370px) {
+    .ContenedorNewemploye {
+        height: calc(100% - 90px);
+        padding-left: 20px;
+        padding-right: 25px;
+        background: white;
+        padding-top: 10px;
+    }
+
+    .ContenedorNewemploye-two {
+        height: calc(100% - 90px);
+        padding-left: 2%;
+        padding-right: 25px;
+        background: white;
+        padding-top: 10px;
+    }
+}
+
+
+
+
+

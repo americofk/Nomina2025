@@ -1,0 +1,164 @@
+﻿
+.informe {
+    padding-left: 0px !important;
+    
+}
+.ConteInforme {
+    height: 100%;
+    width: 100%;
+    background: #ffffff;
+    padding: 5px 30px;
+}
+
+.ContFecha{
+    height:38px;
+    /*border:1px solid #000000;*/
+    padding:3px;
+
+}
+.contenedorlogo {
+    height: 100%;
+    margin-left: 10px;
+}
+.contegeneeralInforrme {
+    border: 1px solid #999;
+}
+
+.imagenax {
+    border-radius: 20px;
+    height: 100%;
+    width: 280px;
+}
+.ContCabecera {
+    height: 100px;
+    display: flex;
+    border-bottom: 1px solid #ccc;
+}
+
+.ContLogo {
+    /*border: 1px solid #000000;*/
+    width: 33%;
+    padding: 5px;
+    
+}
+.ContTitulo {
+    /*border: 1px solid #000000;*/
+    width: 34%;
+    /*margin: auto;*/
+    text-align: center;
+}
+
+.ContUsuMoneda {
+    /*border: 1px solid #000000;*/
+    width: 33%;
+    text-align: right;
+    padding-top: 70px;
+}
+.contenidoNuevoGasto2-Informe {
+   
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+}
+
+.contIconos {
+    float: right;
+    position: relative;
+    margin-top: -35px;
+    margin-right: 20px;
+}
+
+
+.ContDatosCabecera {
+    height: 110px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+.ContTabla {
+    height: 260px;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+.ContPiePagona {
+    height: 95px;
+    /*border: 1px solid #000000;*/
+    padding: 5px;
+}
+.contlotes-informe {
+    margin-bottom: 5px;
+    display: flex;
+}
+
+.contInterNuevoConteBL-Informe {
+    width: 100%;
+}
+
+
+.contfecha-1 {
+    margin-bottom: 10px;
+    display: flex;
+    width: 300px;
+    /* right: 250px; */
+}
+
+.ancholabel-fecha {
+    /* width: 50px; */
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+
+.wrapper {
+    max-width: 400px;
+    padding: 100px 0;
+    margin: 0 auto;
+}
+
+
+
+
+
+
+@media print {
+    @page {
+        margin: 0px;
+    }
+
+    .imprimirInforme{
+        display:none;
+    }
+
+    .cerrarInforme {
+        display: none;
+    }
+
+    .ContDatosCabecera {
+        height: 130px;
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+    }
+    .ContTabla {
+        height: 350px;
+        border-bottom: 1px solid #ccc;
+        padding: 5px;
+    }
+
+    .ContPiePagona {
+        height: 130px;
+        /*border: 1px solid #000000;*/
+        padding: 5px;
+    }
+
+    .scrollbartblFPGastos {
+        /* height: 100%; */
+        overflow-y: scroll;
+        overflow-x: scroll;
+        height: 350px;
+        padding-right: 0px;
+        padding-left: 0px;
+        border: 1px solid #ccc;
+        width: 100%;
+    }
+}

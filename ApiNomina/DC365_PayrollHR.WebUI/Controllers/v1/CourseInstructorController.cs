@@ -1,0 +1,63 @@
+﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseInstructors;
+using DC365_PayrollHR.Core.Application.Common.Filter;
+using DC365_PayrollHR.Core.Application.Common.Interface;
+using DC365_PayrollHR.Core.Application.Common.Model.CourseInstructors;
+using DC365_PayrollHR.Core.Domain.Consts;
+using DC365_PayrollHR.Core.Domain.Entities;
+using DC365_PayrollHR.Core.Domain.Enums;
+using DC365_PayrollHR.WebUI.Attributes;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace DC365_PayrollHR.WebUI.Controllers
+{
+    [Route("api/courseinstructors")]
+    [ApiController]
+    [Authorize]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    public class CourseInstructorController : ControllerBase
+    {
+        private readonly IQueryHandler<CourseInstructorResponse> _QueryHandler;
+        private readonly ICourseInstructorCommandHandler _CommandHandler;
+
+        public CourseInstructorController(IQueryHandler<CourseInstructorResponse> queryHandler, ICourseInstructorCommandHandler commandHandler)
+        {
+            _QueryHandler = queryHandler;
+            _CommandHandler = commandHandler;
+        }
+
+        [HttpGet("{courseid}")]
+        [AuthorizePrivilege(MenuId = MenuConst.CourseInstructor, View = true)]
+        public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter, string courseid)
+        {
+            return Ok(await _QueryHandler.GetAll(paginationFilter,searchFilter, courseid));
+        }
+
+        [HttpPost]
+        [AuthorizePrivilege(MenuId = MenuConst.CourseInstructor, Edit = true)]
+        public async Task<ActionResult> Post([FromBody] CourseInstructorRequest model)
+        {
+            return Ok(await _CommandHandler.Create(model));
+        }
+
+        [HttpDelete("{courseid}")]
+        [AuthorizePrivilege(MenuId = MenuConst.CourseInstructor, Delete = true)]
+        public async Task<ActionResult> Delete([FromBody] List<string> ids, string courseid)
+        {
+            return Ok(await _CommandHandler.DeleteByCourseId(ids, courseid));
+        }
+
+        [HttpPut("{courseid}")]
+        [AuthorizePrivilege(MenuId = MenuConst.CourseInstructor, Edit = true)]
+        public async Task<ActionResult> Update([FromBody] CourseInstructorRequest model, string courseid)
+        {
+            return Ok(await _CommandHandler.Update(courseid, model));
+        }
+    }
+
+}

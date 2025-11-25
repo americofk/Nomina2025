@@ -1,0 +1,150 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Loan
+
+@{
+    List<SelectListItem> daparment = (List<SelectListItem>)ViewBag.Deparment;
+    List<SelectListItem> projects = (List<SelectListItem>)ViewBag.Projects;
+    List<SelectListItem> projcategory = (List<SelectListItem>)ViewBag.ProjCategory;
+
+}
+<!--Opciones de vista parcial  -->
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="FormNewAndEditLoan" class="btn2" />
+
+                </a>
+            </li>
+
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- New Payroll -->
+<div class="collapse contNewEntyti">
+
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                @{
+                    if (string.IsNullOrEmpty(Model.LoanId))
+                    {
+                        <h3 class="TituloFormularios seteartitulo">Nuevo código de prestamo</h3>
+                    }
+                    else
+                    {
+                        <h3 class="TituloFormularios seteartitulo">Editar código de prestamo</h3>
+                    }
+                }
+                @*<h3 class="TituloFormularios seteartitulo">Nuevo código de prestamo</h3>*@
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="FormNewAndEditLoan" asp-action="save">
+
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes showid collapse">
+
+                            <label class="control-label ancholabel">Id. Código</label>
+                            <div class="anchoimput">
+                                <input asp-for="LoanId" class="form-control LoanId" readonly="readonly" />
+                                <span asp-validation-for="LoanId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nombre</label>
+                            <div class="anchoimput">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Proyecto</label>
+                            <div class="anchoimput">
+                                @Html.DropDownList("ProjId", projects, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="ProjId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Categoría de proyecto</label>
+                            <div class="anchoimput">
+                                @Html.DropDownList("ProjCategoryId", projcategory, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="ProjCategoryId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Departamento</label>
+
+                            <div class="anchoimput">
+                                @Html.DropDownList("DepartmentId", daparment, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Válido desde</label>
+
+                            <div class="anchoimput">
+                                <div class="app-input-date">
+                                    <input asp-for="ValidFrom" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+
+                                <span asp-validation-for="ValidFrom" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Válido hasta</label>
+                            <div class="anchoimput">
+
+                                <div class="app-input-date">
+                                    <input asp-for="ValidTo" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="ValidTo" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Cuenta contable</label>
+
+                            <div class="anchoimput">
+                                <input asp-for="LedgerAccount" class="form-control" />
+                                <span asp-validation-for="LedgerAccount" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Máximo 100 caracteres"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

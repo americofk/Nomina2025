@@ -1,0 +1,21 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    //"target": "es5",
+    "target": "ES6",
+    "outDir": "wwwroot/js",
+    "allowJs": true,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+
+    //Línea adicional para ES6
+    "moduleResolution": "Node"
+  },
+
+  "include": [
+    "TypeScriptFile/**/*"
+  ]
+}

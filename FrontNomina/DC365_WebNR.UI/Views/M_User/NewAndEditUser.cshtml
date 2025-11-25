@@ -1,0 +1,177 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.User
+
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li class="SaveNewAndEditUsers">
+                <a class="btn2 btn-app">
+                    @*<img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">*@
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="CreateAndEditUser" class="btn2" />
+                </a>
+            </li>
+
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="collapse contNewEntyti">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios setiartitulo"></h3>
+                <div class="contenidoNuevoRegistro">
+                    <div class="contImputDatosPersonalesFoto collapse">
+                        <div class="contInternoFoto contInput-foto">
+                            <img id="FotoperfilDP" class="dimensionfoto" src="~/Images/Dashboard/default_perfil.png">
+
+                            @*Formulario para la foto de perfil*@
+                            <form id="save-userimages-form" asp-action="UploadImage" class="form-managed-file btnRr btn-app">
+                                <input type="file" class="form-file Image" name="file" />
+                                <a class="trigger-upload" style="color:black"><i class="fa fa-pencil"></i></a>
+                            </form>
+                            @*Fin del formulario para la foto de perfil*@
+                        </div>
+                    </div>
+                    <form id="CreateAndEditUser" asp-action="Save" class="FormoNuevoRegistro">
+                        <div class="contImputDatosLeft">
+                            <div class="contInput">
+                                <label class="control-label ancholabelcustonUser">Nombre</label>
+                                <div class="anchoimputCustonUser">
+                                    <input asp-for="Name" class="form-control">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contInput">
+                                <label class="control-label ancholabelcustonUser">Email</label>
+                                <div class="anchoimputCustonUser" readonly="readonly">
+                                    <input asp-for="Email" class="form-control">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contInput Contempresa collapse">
+                                <label class="control-label ancholabelcustonUser">Empresa</label>
+                                <div class="anchoimputCustonUser">
+                                    <span asp-validation-for="CompanyDefaultId" class="text-danger"></span>
+                                    <select asp-for="CompanyDefaultId" class="form-control CompanyDefaultId">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contImputDatosRight">
+                            <div class="contInput">
+                                <label class="control-label ancholabel">Alias</label>
+                                <div class="anchoimputRh">
+                                    <input asp-for="Alias" class="form-control">
+                                    <span asp-validation-for="Alias" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contInput">
+                                <label class="control-label ancholabel">Formato regional</label>
+                                <div class="anchoimputRh">
+                                    <span asp-validation-for="FormatCodeId" class="text-danger"></span>
+                                    @Html.DropDownList("FormatCodeId", (IEnumerable<SelectListItem>)ViewBag.FormatCode, "Seleccione...", new { @class = "form-control FormatCodeId" })
+                                </div>
+
+                            </div>
+                            <div class="contInput">
+                                <label class="control-label ancholabel">¿Administrador?</label>
+                                <div class="anchoimputRh">
+                                    <label class="switch">
+                                        <input asp-for="ElevationTypeBool" class="ElevationType">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="contendorRolandCompaies collapse">
+                    <h3 class="TituloFormularios">
+                        <i class="fa fa-angle-up" id="toggle-rol" data-value="1"></i>
+                        Roles asignados
+                    </h3>
+                    <div id="rol-container-toggle">
+                        <div class="opcionesTwo">
+                            @*<ul class="menuopciones">*@
+                            <ul class="menuoptions">
+                                <li class="showRoles">
+                                    <a class="btn2 btn-app">
+                                        @*<img src="~/images/Dashboard/Registrar.png" class="Iconos_opciones">*@
+                                        <i class="fa fa-check"></i>
+                                        Asignar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash-o"></i>
+                                        <input type="submit" value="Remover" form="DeleteUserRolForm" class="btn2" />
+                                        @*<img src="~/images/Dashboard/Borrar.png" class="Iconos_opciones-Pagina"> Eliminar*@
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="contTableRolOne" id="AllTableRol">
+
+                        </div>
+                        <form asp-action="DeleteRolfromUser" id="DeleteUserRolForm" hidden>
+                            <input name="Alias" class="AliasForRole" />
+                        </form>
+                    </div>
+
+
+
+                    @* *************** Línea de divisoria *********************************** *@
+
+
+
+                    <h3 class="TituloFormularios">
+                        <i class="fa fa-angle-up" id="toggle-company" data-value="1"></i>
+                        Empresas asignadas
+                    </h3>
+                    <div id="companies-container-toggle">
+                        <div class="opcionesTwo">
+                            <ul id="opcionescajachica" class="menuoptions ">
+                                <li class="ShowModCompanies">
+                                    <a class="btn2 btn-app">
+                                        @*<img src="~/images/Dashboard/Registrar.png" class="Iconos_opciones"> Asignar*@
+                                        <i class="fa fa-check"></i>
+                                        Asignar
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        @*<img src="~/images/Dashboard/Borrar.png" class="Iconos_opciones-Pagina"> Eliminar*@
+                                        <i class="fa fa-trash-o"></i>
+                                        <input type="submit" value="Remover" form="DeleteUserCompanyForm" class="btn2" />
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="contTableCompaniesOne" id="AllTableCompany">
+
+                        </div>
+                        <form asp-action="DeleteCompaniesfromUser" id="DeleteUserCompanyForm" hidden>
+                            <input name="Alias" class="AliasForCompany" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- formulario para guardar ciclo de pago-->
+<form id="CreateAndEditUser" asp-action="Save" class="FormoNuevoRegistro">
+</form>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

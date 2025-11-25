@@ -1,0 +1,145 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Job>
+@{
+    ViewData["Title"] = "Jobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+  
+}
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<div class="contDasboard">
+    <input type="hidden" class="Image" />
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteJobsDisabled" class="inputTypesubmit" />
+
+                    </a>
+                </li>
+               
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-repeat"></i>
+                    </a>
+                </li>
+                <li class="Cerrar-JobsDisebled">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="opcioneslistpageForm collapse">
+
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">
+                    <input type="submit" value="Guardar" form="createAndEditJobs" class="btn2" />
+                </a>
+            </li>
+
+        </ul>
+        <div class="ContOpciones-Pagina contOpciones">
+            <div class="opciones-Pagina OpCloseform">
+                <img src="~/images/Dashboard/Cerrar.png" class="Iconos_opciones-Pagina">
+            </div>
+        </div>
+    </div>
+
+    <!-- tabla de cargos inactivos -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Cargos inactivos</h3>
+
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @*<input type="text" class="form-control-FiltroDepartment buscador BuscartblCargosActivos" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Habilitar cargos</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="jobEnabled" class="idCheckeditar">
+                    <span class="slider round" for="jobEnabled"></span>
+
+                </label>
+            </div>
+
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblCargosActivos" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id. Cargo</td>
+                            <td class="cell-app  cell-header-app">Nombre de cargo</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-jobdisabled">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectJobs">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal JobIdtblpos" data-title="Id de cargo">
+                                    @Html.DisplayFor(modelItem => item.JobId)
+                                </td>
+                                <td class="cell-app Nametblcr" data-title="Nombre de cargo">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app DescriptionIdtblcr" data-title="Descripción)">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Eliminar-->
+    <form asp-action="delete" class="DeleteJobsDisabled collapse" id="DeleteJobsDisabled">
+    </form>
+
+    <!-- habilitar-->
+    <form asp-action="updateStatus" class="form-Enebledjob collapse" id="form-Enebledjob">
+    </form>
+
+</div>
+<script src="~/js/JobsDisebled.js"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

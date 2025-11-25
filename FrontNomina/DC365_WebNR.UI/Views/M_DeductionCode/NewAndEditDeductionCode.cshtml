@@ -1,0 +1,262 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.DeductionCode
+@using DC365_WebNR.CORE.Domain.Models.Enums
+@{
+    List<SelectListItem> daparment = (List<SelectListItem>)ViewBag.Deparment;
+    List<SelectListItem> projects = (List<SelectListItem>)ViewBag.Projects;
+    List<SelectListItem> projcategory = (List<SelectListItem>)ViewBag.ProjCategory;
+}
+@{
+    bool isVersion = ViewBag.Version == null ? false : (bool)ViewBag.Version;
+}
+
+
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="NewAndEditDeductionCode" class="btn2" />
+                </a>
+            </li>
+
+            @{if (string.IsNullOrEmpty(Model.DeductionCodeId))
+                {
+                    <li class="li-separador">
+                        <a class="btn2 btn-app" style="border: 1px solid #fff;">
+                        </a>
+                    </li>
+                    <li class="dc-versions-form">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-list-ul"></i>
+                            Versiones
+                        </a>
+                    </li>
+                }
+            }
+        </ul>
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- nuevo código de deducion -->
+<div class="collapse contNewEntyti">
+    <input type="text" class="form-control codigoDeparment" style="display:none">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                @{if (!isVersion)
+                    {<h3 class="TituloFormularios seteartitulo">Nuevo código de descuento</h3>}
+                    else
+                    {<h3 class="TituloFormularios title-version">Versiones código de descuento</h3>}
+                }
+                <form class="" role="tabpanel" data-example-id="togglable-tabs" id="NewAndEditDeductionCode" asp-action="save">
+
+                    <div class="contenidoNuevoGasto2">
+                        <div class="contInterNuevoConteGastos">
+
+                            <div class="contlotes Showid collapse">
+
+                                <label class="control-label ancholabel">Id. Código de descuento</label>
+                                <div class="anchoimput">
+                                    <input asp-for="DeductionCodeId" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="DeductionCodeId" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Nombre del código</label>
+
+                                <div class="anchoimput">
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Proyecto</label>
+                                <div class="anchoimput">
+                                    @Html.DropDownList("ProjId", projects, "Seleccione...", new { @class = "form-control" })
+
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Categoría de proyecto</label>
+                                <div class="anchoimput">
+                                    @Html.DropDownList("ProjCategory", projcategory, "Seleccione...", new { @class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Válido desde</label>
+                                <div class="anchoimput-custon">
+                                    <div class="app-input-date">
+                                        <input asp-for="ValidFrom" class="form-control" />
+                                        <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                        <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                    </div>
+
+                                    <span asp-validation-for="ValidFrom" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Válido hasta</label>
+                                <div class="anchoimput-custon">
+                                    <div class="app-input-date">
+                                        <input asp-for="ValidTo" class="form-control" />
+                                        <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                        <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                    </div>
+                                    <span asp-validation-for="ValidTo" class="text-danger"></span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="contInterNuevoConteGastos">
+
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Cuenta contable</label>
+                                <div class="anchoimput">
+                                    <input asp-for="LedgerAccount" class="form-control" />
+                                    <span asp-validation-for="LedgerAccount" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Departamento</label>
+
+                                <div class="anchoimput">
+                                    @Html.DropDownList("Department", daparment, "Seleccione...", new { @class = "form-control" })
+
+                                </div>
+                            </div>
+
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Impacto en nómina</label>
+                                <div class="anchoimput">
+                                    <select asp-for="PayrollAction" class="form-control" asp-items="Html.GetEnumSelectList<PayrollAction>()">
+                                    </select>
+                                    <span asp-validation-for="PayrollAction" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Descripción</label>
+                                <div class="anchoimput">
+                                    <textarea asp-for="Description" class="form-control" rows="3" placeholder="Máximo 100 caracteres"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes" style="margin-top:50px;">
+                                <label class="control-label ancholabel">¿Aplica para cálculo de impuesto?</label>
+                                <div class="anchoimput">
+                                    <label class="switch">
+                                        <input asp-for="IsForTaxCalc" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="contlotes" style="margin-top:50px;">
+                                <label class="control-label ancholabel">¿Es un descuento de tss?</label>
+                                <div class="anchoimput">
+                                    <label class="switch">
+                                        <input asp-for="IsForTssCalc" />
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="Contribution" class="collapse">
+                        <h3 class="TituloFormularios">Contribución</h3>
+                        <div class="contenidoNuevoGasto2">
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Base de índice</label>
+                                    <div class="anchoimput">
+                                        <select asp-for="Ctbution_IndexBase" class="form-control" asp-items="Html.GetEnumSelectList<IndexBaseDeduction>()">
+                                        </select>
+                                        <span asp-validation-for="Ctbution_IndexBase" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Monto o porcentaje</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="Ctbution_MultiplyAmount" class="form-control plugin-number-format" />
+                                        <span asp-validation-for="Ctbution_MultiplyAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                             
+
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+
+
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Importe límite</label>
+
+                                    <div class="anchoimput">
+                                        <input asp-for="Ctbution_LimitAmount" class="form-control plugin-number-format" />
+                                        <span asp-validation-for="Ctbution_LimitAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                               
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="Deduction" class="collapse">
+                        <h3 class="TituloFormularios">Deducción</h3>
+                        <div class="contenidoNuevoGasto2">
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Base de índice</label>
+                                    <div class="anchoimput">
+                                        <select asp-for="Dduction_IndexBase" class="form-control" asp-items="Html.GetEnumSelectList<IndexBaseDeduction>()">
+                                        </select>
+                                        <span asp-validation-for="Dduction_IndexBase" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Monto o porcentaje</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="Dduction_MultiplyAmount" class="form-control plugin-number-format" />
+                                        <span asp-validation-for="Dduction_MultiplyAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Importe límite</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="Dduction_LimitAmount" class="form-control plugin-number-format" />
+                                        <span asp-validation-for="Dduction_LimitAmount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                              
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

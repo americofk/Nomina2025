@@ -1,0 +1,75 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeDocumentResponse>
+@using System.Globalization;
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Código</td>
+                        <td class="cell-app  cell-header-app">Tipo</td>
+                        <td class="cell-app  cell-header-app">Número</td>
+                        <td class="cell-app  cell-header-app">Vence</td>
+                        <td class="cell-app  cell-header-app">Adjunto</td>
+                        <td class="cell-app  cell-header-app">Principal</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+                        var EmployeeDocumentStatus = item.IsPrincipal == true ? "checked='checked'" : "";
+                        var EmployeeDocumentAttach = item.HasAttach == true ? "fa fa-paperclip" : "fa fa-times-circle-o";
+
+                        string idCheck2 = $"check-EmployeeDocument-{indexCheck2++}";
+                        <tr class="row-app rowtable-EmployeeDocument">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app select-EmployeeDocument">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal InternalIdtblEd" data-title="Código">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+                            <td class="cell-app cell-principal PositionIdtbl" data-title="Tipo">
+                                @Html.DisplayFor(modelItem => item.DocumentType)
+                            </td>
+
+                            <td class="cell-app" data-title="Número">
+                                @Html.DisplayFor(modelItem => item.DocumentNumber)
+                            </td>
+                            <td class="cell-app " data-title="Vence">
+                                @Convert.ToDateTime(item.DueDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+
+                            <td class="cell-app " data-title="Adjunto">
+                                <a href="@(item.HasAttach == true?Url.Action("descargardocumento", "documentosempleados", new {IdEmployee = item.EmployeeId, internalid = item.InternalId}):"#")"
+                                   target=@(item.HasAttach == true?"_blank":"")>
+                                    <i class="@EmployeeDocumentAttach cell-app-icon"></i>
+                                </a>
+                            </td>
+
+                            <td class="cell-app " data-title="Estado">
+                                <label class="switch disabled">
+                                    <input type="checkbox" disabled @EmployeeDocumentStatus>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    }
+}
+

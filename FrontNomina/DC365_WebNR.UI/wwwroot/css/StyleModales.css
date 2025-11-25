@@ -1,0 +1,562 @@
+﻿.ContenModModule {
+    background: white;
+    /*width: 50%;*/
+    width: 70%;
+    /*width: 80%;*/
+    margin: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding-bottom: 15px;
+}
+.cont-option-controlassist {
+    display: flex;
+    justify-content: flex-start;
+    gap: 42px;
+}
+.Conten-mod-earningcode {
+    background: white;
+    /*width: 50%;*/
+    width: 70%;
+    /*width: 80%;*/
+    margin: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding-bottom: 15px;
+}
+
+
+.ContenModal-contact {
+    background: white;
+    width: 50%;
+    margin: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding-bottom: 15px;
+}
+
+button:focus {
+    outline: 0px dotted;
+   /* outline: 5px auto -webkit-focus-ring-color;*/
+}
+.HeaderModal {
+    background: #337ab7;
+    margin-bottom: 10px;
+    padding: 5px 12px 5px 15px;
+}
+.modalfooter {
+    padding: 0px 6px 0px 12px;
+    text-align: right;
+}
+.headeroptionListPageDePe {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+}
+
+.Conten-mod-earningcode-proper {
+    background: white;
+    width: 90%;
+    margin: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding-bottom: 15px;
+}
+
+.BuscadorModalone {
+   
+    height: 35px;
+    margin-bottom: 10px;
+    width: 220px;
+    display: flex;
+}
+.titleModal {
+    font: normal normal 150 24px/30px 'Segoe UI',tahoma,sans-serif;
+    color: #333;
+    top: 0;
+    margin-top: 0px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-top: 10px;
+}
+.buscadorModal {
+    margin-left: 2%;
+}
+
+.empleadoCollapse {
+    visibility: hidden;
+    opacity: 0.5;
+    height: 50px;
+}
+
+.stylebtnsearchDePe {
+    padding: 5px 20px;
+    border-radius: 5px;
+    background: #699dc5;
+    color: white;
+    font-weight: bold;
+    border: 1px solid;
+    margin-left: 10px;
+    height: 35px;
+    width: 15%;
+    margin-bottom: 0px;
+}
+
+.ModCompaniesAsing {
+    top: 50px;
+}
+
+.ContenModModuleDePe {
+    background: white;
+    width: 40%;
+    margin: auto;
+    top: 15%;
+}
+.labelDePe {
+    width: 25%;
+    font-weight: 500;
+    padding: 8px;
+    margin-bottom: 0;
+}
+.TituloModal {
+    color: white;
+    margin-bottom: 0;
+    margin-top: 0;
+    font: normal normal 200 18px/25px 'Segoe UI',tahoma,sans-serif;
+    font-weight: 100;
+}
+
+.BuscadorModal {
+    margin-left: 12px;
+    height: 35px;
+    margin-bottom: 10px;
+    width: 220px;
+    display: flex;
+}
+
+.BuscadorModal-control {
+    display: block;
+    width: 100%;
+    padding: 3px 10px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-image: none;
+    border: 1px solid #699dc5;
+    border-radius: 4px;
+  
+}
+
+.container-table-modal {
+    margin: 0 auto 10px auto;
+    background-color: #fff;
+    height: 350px;
+    overflow-x: auto;
+    /* max-width: 96%; */
+    /* width: 96%; */
+    /* margin-left: 2%; */
+    /*border: 1px solid #ccc;*/
+    height: 100%;
+}
+
+.modal-content {
+    /*position: relative;*/
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    /*border: 1px solid rgba(0,0,0,.2);*/
+    border: 0;
+    border-radius: .3rem;
+    outline: 0;
+    max-height: calc(100vh - 60px);
+    min-height: 70vh;
+}
+
+.scrollbar-TableModal {
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 355px;
+    padding-right: 0px;
+    padding-left: 0px;
+    border: 1px solid #ccc;
+    margin: 12px;
+    width: 96%;
+    margin-left: 2%;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.5) rgba(0,0,0,0);
+}
+
+.modal {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    z-index: 1050;
+    display: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    outline: 0;
+}
+
+.row-header-app-tableModal {
+    font-size: 14px;
+    /* font-weight: 600; */
+    color: #fff;
+    background-color: #699dc5;
+    height: 28px;
+    /* display: table-row; */
+}
+.stylebtnModal {
+    padding: 5px 20px;
+    border-radius: 5px;
+    background: #337ab7;
+    color: white;
+    font-weight: bold;
+    border: 1px solid;
+}
+
+.ContenModalLoadFile {
+    background: white;
+    width: 95%;
+    margin: 50px auto;
+}
+
+.contenPretablamodalLoadFile {
+    margin-left: 2%;
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    border-bottom: 1px solid #ccc;
+}
+
+.contenPretablamodal {
+    margin-left: 2%;
+    
+}
+
+.headerloadfile {
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+}
+
+.Optionheaderloadfile {
+    /* margin-left: 12px; */
+    height: 35px;
+    margin-bottom: 10px;
+    width: 150px;
+    display: flex;
+}
+
+.modalfooterloadFile {
+    padding: 0px 6px 0px 12px;
+    height: 30px;
+}
+
+.TituloForMod {
+    font: normal normal 200 24px/30px 'Segoe UI', tahoma, sans-serif;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    margin-top: 0;
+}
+
+/*.contformnewaddres {*/
+.cont-form-newandedit {
+    padding: 5px 2%;
+}
+
+.cont-form-newandedit-two {
+    padding: 5px 1%;
+    margin-bottom: 15px;
+}
+
+.newAddresEmp {
+    background-color: white;
+     position: relative;
+    top: 10px;
+    border: 1px solid #106a8c;
+    padding: 15px 15px 5px 15px;
+    box-shadow: bisque;
+    box-shadow: 0 2px 6px #09384a;
+}
+
+.new-Addres-Emp {
+    background-color: white;
+    width:70%;
+    position: relative;
+    top: 10px;
+    border: 1px solid #106a8c;
+    padding: 15px 15px 5px 15px;
+    box-shadow: bisque;
+    box-shadow: 0 2px 6px #09384a;
+}
+
+.new-document-Emp {
+    background-color: white;
+    width: 70%;
+    position: relative;
+    top: 10px;
+    border: 1px solid #106a8c;
+    padding: 15px 15px 5px 15px;
+    box-shadow: bisque;
+    box-shadow: 0 2px 6px #09384a;
+}
+
+.newAddresEmp-two {
+    background-color: white;
+    width: 50%;
+    position: relative;
+    top: 10px;
+    border: 1px solid #106a8c;
+    padding: 15px 15px 5px 15px;
+    box-shadow: bisque;
+    box-shadow: 0 2px 6px #09384a;
+}
+
+.cont-taxdetail {
+    display: flex;
+    
+}
+
+/*.indicator-new-address:before {*/
+.new-indicator:before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    left: 51px;
+    top: 35px;
+    transform: rotate( 45deg );
+    border-top: 1px solid #106a8c;
+    border-left: 1px solid #106a8c;
+    z-index: 100;
+}
+.TaxDetail-indicator:before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    left: 22px;
+    top: -21px;
+    transform: rotate( 45deg );
+    border-top: 1px solid #106a8c;
+    border-left: 1px solid #106a8c;
+    z-index: 100;
+}
+.cont-input-newform-two {
+    width: 50%;
+    margin-right: 5px;
+}
+
+.new-indicator-two:before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    left: 50px;
+    top: 57.5%;
+    transform: rotate( 45deg );
+    border-top: 1px solid #106a8c;
+    border-left: 1px solid #106a8c;
+    z-index: 100;
+}
+
+.new-indicator-editar:before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    left: 50px;
+    top: 53.5%;
+    transform: rotate( 45deg );
+    border-top: 1px solid #106a8c;
+    border-left: 1px solid #106a8c;
+    z-index: 100;
+}
+
+
+
+
+.form-group {
+    margin-bottom: 10px;
+    /*margin-right: 10px;*/
+}
+
+.btn {
+    padding: 5px 10px 5px 10px;
+    font-size: 14px;
+}
+
+.contbtnAddres {
+    display: flex;
+    justify-content: flex-end;
+   
+}
+
+.labelModEmploye {
+    font-size: 14px;
+    width: 45px;
+    margin-bottom: 0;
+}
+
+.labelModEmployeTwo {
+    font-size: 14px;
+    width: 68px;
+    margin-bottom: 0;
+}
+
+.labelModEmployeComen {
+    font-size: 14px;
+    /*width: 87px;*/
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.labelModEmployeComen-Two {
+    font-size: 14px;
+    width: 100px;
+    margin-bottom: 0;
+}
+
+.label-mod-taxDetail {
+    font-size: 14px;
+}
+
+label {
+    
+    margin-bottom: 0;
+}
+.label-three-Employee {
+    font-size: 14px;
+    width: 150px;
+    /*margin-left: 10px;*/
+}
+
+.contlotesmploye {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+/*.contlotesmploye-slider {
+    margin-bottom: 5px;
+      display: flex;
+}*/
+.contlotesmploye-slider {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50px;
+}
+
+.anchoimputEmploye {
+    width: 90%;
+}
+
+
+
+
+@media (max-width: 1370px) {
+    .ContenModModule {
+        background: white;
+        width: 70%;
+        margin: auto;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    .ContenModal-contact {
+        width: 60%;
+    }
+
+    .new-document-Emp {
+        width: 70%;
+    }
+
+    .Conten-mod-earningcode-proper {
+        width:95%;
+    }
+
+    .new-indicator-two:before {
+        
+        top: 61%;
+        
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .Conten-mod-earningcode {
+        width: 90%;
+    }
+    .Conten-mod-earningcode-proper {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1100px) {
+    .ContenModModule {
+        background: white;
+        width: 80%;
+        margin: auto;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    .ContenModal-contact {
+        width: 80%;
+    }
+
+    .new-document-Emp {
+        width: 80%;
+    }
+    
+}
+
+@media (max-width: 1000px) {
+    .ContenModModule {
+        background: white;
+        width: 90%;
+        margin: auto;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    .new-document-Emp {
+        width: 90%;
+    }
+    .Conten-mod-earningcode {
+        width: 100%;
+    }
+
+@media (max-width: 900px) {
+    .ContenModModule {
+        background: white;
+        width: 100%;
+        margin: auto;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+    }
+    .new-document-Emp {
+        width: 100%;
+    }
+}
+
+@media (max-width: 650px) {
+    .ContenModModule {
+     
+        width: 80%;
+       
+    }
+
+
+}

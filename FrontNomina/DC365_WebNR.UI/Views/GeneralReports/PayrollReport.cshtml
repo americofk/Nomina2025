@@ -1,0 +1,222 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Reports.ReportPayrollProcess
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Reporte de nómina";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payroll;
+    List<SelectListItem> deparment = (List<SelectListItem>)ViewBag.Deparment;
+
+}
+
+<link href="~/css/HorizontalReportDesign.css" rel="stylesheet" />
+<link href="~/css/EstyleReportsPrint.css" rel="stylesheet" media="print" />
+@{
+    var show = !ViewBag.hidefilter ? "show" : "";
+}
+<div class="report-filter-section @show">
+    <h3> Paramétros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+        <div class="param-fields">
+            <label class="control-label">Nómina</label>
+            @Html.DropDownList("Payrolls", payrolls, "Seleccione...", new { @class = "form-control" })
+
+
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Proceso de nómina</label>
+            <select class="form-control payrollprocessid" type="text">
+            </select>
+        </div>
+         <div class="param-fields">
+            <label class="control-label">Departamento</label>
+            @Html.DropDownList("Department", deparment, "Seleccione...", new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" id="update-report" data-type="payroll-report" />
+
+    </div>
+</div>
+
+
+
+@*Cuerpo del reporte*@
+
+<div class="cont-general-report">
+
+    @*Content*@
+
+
+    @{
+        if (Model.DepartmentGroups == null)
+        {
+            await Html.RenderPartialAsync("DefaultReportHeader", new string[] { "REPORTE DE NÓMINA", "horizontal" });
+        }
+        else
+        {
+            @*Header*@
+            <div class="report-body-header">
+                <div class="report-logo">
+                    <img src="~/Images/ImagenLogin.png" />
+                </div>
+                <div class="report-title">
+                    <h3>REPORTE DE NÓMINA</h3>
+                </div>
+                <div class="report-date">
+                    <p>@DateTime.Now</p>
+                </div>
+            </div>
+            @*Content*@
+            <div class="report-body-content">
+                <div class="body-content-head">
+                    <div>
+                        <div class="content-title">
+                            <label>Nómina</label>
+                            <label>Período de nómina</label>
+                            <label>Total empleados</label>
+                            <label>Total empleados para pago</label>
+                        </div>
+                        <div class="content-value">
+                            <label>@Model.PayrollName</label>
+                            <label>@Model.Period</label>
+                            <label>@Model.TotalEmployee</label>
+                            <label>0</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="content-title">
+                            <label>Id de proceso</label>
+                            <label>Fecha de pago</label>
+                            <label>Proyecto</label>
+                            <label>Total a pagar</label>
+                        </div>
+                        <div class="content-value">
+                            <label>@Model.PayrollProcessId</label>
+                            <label>@Convert.ToDateTime(Model.PaymentDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                            <label>@(string.IsNullOrEmpty(Model.ProjId)?"N/A":Model.ProjId)</label>
+                            <label>@Convert.ToDecimal(@Model.Total).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+
+                    </div>
+                </div>
+                @{
+                    foreach (var item2 in Model.DepartmentGroups)
+                    {
+                        <p class="title-group">@item2.DepartmentName</p>
+                        <table class="table-report">
+                            <thead>
+                                <tr class="row-header-report">
+                                    <td> Id empleado</td>
+                                    <td> Nombre</td>
+                                    <td class="cell-report-amount"> Salario</td>
+                                    <td class="cell-report-amount"> Horas Extras</td>
+                                    <td class="cell-report-amount"> Comisión</td>
+                                    <td class="cell-report-amount"> Otros ingresos</td>
+                                    <td class="cell-report-amount"> Ingresos totales</td>
+                                    <td class="cell-report-amount"> ISR</td>
+                                    <td class="cell-report-amount"> AFP</td>
+                                    <td class="cell-report-amount"> SFS</td>
+                                    <td class="cell-report-amount"> Abono cooperativa</td>
+                                    <td class="cell-report-amount"> Préstamo cooperativa</td>
+                                    <td class="cell-report-amount"> Préstamo</td>
+                                    <td class="cell-report-amount"> Otros descuentos</td>
+                                    <td class="cell-report-amount"> Total descuento</td>
+                                    <td class="cell-report-amount"> Neto a pagar</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    foreach (var item in item2.Details)
+                                    {
+                                        <tr class="row-body-report">
+                                            <td>@item.EmployeeId</td>
+                                            <td>@item.EmployeeName </td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.Salary).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.ExtraHour).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.Commision).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.OtherEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.TotalEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount"> @Convert.ToDecimal(@item.ISR).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount"> @Convert.ToDecimal(@item.AFP).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount"> @Convert.ToDecimal(@item.SFS).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.DeductionCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.LoanCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount"> @Convert.ToDecimal(@item.Loan).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.OtherDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.TotalDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                            <td class="cell-report-amount">@Convert.ToDecimal(@item.TotalAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr class="row-footer-report">
+                                    <td> Totales:</td>
+                                    <td> </td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.Salary).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.ExtraHour).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.Commision).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.OtherEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.TotalEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount"> @Convert.ToDecimal(@item2.ISR).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount"> @Convert.ToDecimal(@item2.AFP).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount"> @Convert.ToDecimal(@item2.SFS).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.DeductionCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount"> @Convert.ToDecimal(@item2.LoanCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount"> @Convert.ToDecimal(@item2.Loan).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.OtherDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.TotalDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td class="cell-report-amount">@Convert.ToDecimal(@item2.TotalAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    }
+                }
+                <table class="table-report">
+                    <thead>
+
+                        <tr class="row-header-report">
+                            <td>Total</td>
+                            <td></td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.Salary).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.ExtraHour).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.Commision).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.OtherEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.TotalEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount"> @Convert.ToDecimal(@Model.ISR).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount"> @Convert.ToDecimal(@Model.AFP).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount"> @Convert.ToDecimal(@Model.SFS).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.DeductionCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount"> @Convert.ToDecimal(@Model.LoanCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount"> @Convert.ToDecimal(@Model.Loan).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.OtherDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.TotalDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            <td class="cell-report-amount">@Convert.ToDecimal(@Model.Total).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                        </tr>
+
+                    </thead>
+                </table>
+            </div>
+
+
+
+            @*Footer*@
+            <div class="report-body-footer">
+            </div>
+
+
+        }
+    }
+
+
+</div>
+
+@section Scripts {
+<script src="~/js/Reports.js" type="module"></script>
+}
+

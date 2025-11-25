@@ -1,0 +1,7 @@
+﻿@{
+    List<SelectListItem> filters = (List<SelectListItem>)ViewBag.Filter;
+}
+<div class="contenedor-filtros">
+    @Html.DropDownList("Filter", filters, new { @class = "form-control-option-filtre optionFilter-prospect" })
+    <input type="text" class="form-control-text-filtre buscador textFilter-prospect" placeholder="Filtro">
+</div>

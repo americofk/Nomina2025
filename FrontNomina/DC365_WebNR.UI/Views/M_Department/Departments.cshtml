@@ -1,0 +1,163 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Department>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Departamentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+
+}
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewDepartment">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditDepartment">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="deleteDepartment" class="inputTypesubmit" />
+                    </a>
+                </li>
+
+                <li class="li-separador">
+                    <a class="btn2 btn-app" style="border: 1px solid #fff;">
+
+                    </a>
+                </li>
+                <li class="MdepartamentInac">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-building"></i>
+                        Departamentos Inactivos
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <!-- tabla departamentos -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Departamentos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+               
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Inhabilitar departamento</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="DisebleDepartment" class="idCheckeditar" checked="checked">
+                    <span class="slider round" for="DisebleDepartment"></span>
+
+                </label>
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblDepartment" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Departamento</td>
+                            <td class="cell-app  cell-header-app">Nombre del departamento</td>
+                            <td class="cell-app  cell-header-app">Trabajadores</td>
+                            <td class="cell-app  cell-header-app">Fecha inicial</td>
+                            <td class="cell-app  cell-header-app">Fecha final</td>
+                            <td class="cell-app  cell-header-app styleRowDescripThree">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Department">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectDepartment">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal DepartmentIdtbl" data-title="Id Departamento">
+                                    @Html.DisplayFor(modelItem => item.DepartmentId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre del Departamento">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app QtyWorkerstbl" data-title="Trabajadores">
+                                    @Html.DisplayFor(modelItem => item.QtyWorkers)
+                                </td>
+                                <td class="cell-app StartDatetbl" data-title="Fecha inicial">
+                                    @Convert.ToDateTime(item.StartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app EndDatetbl" data-title="Fecha final">
+                                    @Convert.ToDateTime(item.EndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app Descriptiontbl" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- nuevo departamento -->
+    @{await Html.RenderPartialAsync("NewAndEditDepartment", new DC365_WebNR.CORE.Domain.Models.Department());}
+
+
+    <form asp-action="delete" class="deleteDepartment collapse" id="deleteDepartment">
+    </form>
+
+    <form asp-action="updateStatus" class="updateStatusDepartment collapse" id="updateStatusDepartment">
+    </form>
+
+</div>
+
+<script src="~/js/M_Department.js?@version" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

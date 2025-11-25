@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "Principal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var defaultYear = DateTime.Now.Year;
+}
+@{
+    List<SelectListItem> payroll = (List<SelectListItem>)ViewBag.Payroll;
+}
+<link href="~/css/Dashboard/Dashboard.css" rel="stylesheet" />
+<div class="contDasboard" id="contDasboard">
+
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        @*<div class="changeCustomer">@ViewBag.nameCustomer</div>*@
+        <div class="contenedorSeleccionFecha">
+            <div class="opcioncampos">
+
+
+                <label class="control-label labeldatedashboard">Año:</label>
+                <input type="number" class="from_year" step="1000" value="@defaultYear" style="text-align:right; font-size: 16px; height:34px">
+                <label class="control-label labeldatedashboard">Nómina:</label>
+                @Html.DropDownList("Payroll", payroll, new { @class = "form-control Payroll Payroll-style" })
+                <button type="button" class="stylebtnsearchDashboard BtnSearchDashboard">Buscar</button>
+                @*<a class="stylebtnsearchDashboard" href="/Dashboard/txt" >Test</a>*@
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="opcionmenu2 containerdashboard">
+        @*<p>@ViewBag.IP</p>*@
+        @*@using SPlantini_PortalWeb.Models
+
+            @Html.Dashborard((string)ViewBag.AliasUser)*@
+
+        <div class="container-AppDashboard">
+            @* Card 1 *@
+            <div class="card-AppDashboard">
+                <i class="fa fa-group"></i>
+                <div class="text-section Employee">
+                    <p class="card-qty employees">0</p>
+                    <p class="text-section-title">Empleados</p>
+                    <p class="card-sub-title">Activos</p>
+                </div>
+            </div>
+
+            @* Card 2 *@
+            <div class="card-AppDashboard">
+                <i class="fa fa-building"></i>
+                <div class="text-section MDepartamentos">
+                    <p class="card-qty departments">0</p>
+                    <p class="text-section-title">Departamentos</p>
+                    <p class="card-sub-title">Activos</p>
+                </div>
+            </div>
+
+            @* Card 3 *@
+            <div class="card-AppDashboard">
+                <i class="fa fa-mortar-board"></i>
+                <div class="text-section Course">
+                    <p class="card-qty courses">0</p>
+                    <p class="text-section-title">Cursos</p>
+                    <p class="card-sub-title">Realizados</p>
+                </div>
+            </div>
+
+            @* Card 4 *@
+            <div class="card-AppDashboard">
+                <i class="fa fa-briefcase"></i>
+                <div class="text-section PositionEnabled">
+                    <p class="card-qty positions">0</p>
+                    <p class="text-section-title">Puestos</p>
+                    <p class="card-sub-title">Activos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-Graphics">
+            <div class="custom-chart bar-chart" id="chart1">
+                <span>Empleados por departamentos</span>
+                <canvas id="barChart"></canvas>
+            </div>
+
+            <div class="custom-chart " id="chart2">
+                <span>Deducciones y contribuciones del año</span>
+                <canvas id="doubleBarChart"></canvas>
+            </div>
+
+            <div class="custom-chart " id="chart3">
+                <span>Pago de nómina por trimestre</span>
+                <canvas id="barChartPayrollAmount"></canvas>
+            </div>
+
+            <div class="custom-chart bar-chart" id="chart4">
+                <span>Monto por novedades</span>
+                <canvas id="barChartActionAmount"></canvas>
+            </div>
+
+            @*<div class="custom-chart">
+                    <canvas id="Firtbarchart" width="3" height="2"></canvas>
+                </div>
+
+                <div class="custom-chart">
+                    <canvas id="twolineChart" width="3" height="2"></canvas>
+                </div>
+
+                <div class="custom-chart">
+                    <canvas id="linearChart" width="3" height="2"></canvas>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/DashboardInfo.js" type="module"></script>
+<script src="~/lib/Chart.js/Chart.min.js"></script>

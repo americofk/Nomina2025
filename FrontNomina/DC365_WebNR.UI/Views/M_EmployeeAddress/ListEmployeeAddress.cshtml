@@ -1,0 +1,78 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeAddress>
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table-app tblCargosActivos">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Casa</td>
+                        <td class="cell-app  cell-header-app">Calle</td>
+                        <td class="cell-app  cell-header-app">Sector</td>
+                        <td class="cell-app  cell-header-app">Ciudad</td>
+                        <td class="cell-app  cell-header-app">Provincia</td>
+                        <td class="cell-app  cell-header-app">Pais</td>
+                        <td class="cell-app  cell-header-app">Principal</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+                        var principal = item.IsPrincipal == true ? "checked='checked'" : "";
+
+                        string idCheck2 = $"check-tableAddres-{indexCheck2++}";
+                        <tr class="row-app LineTableAddres">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app selectAddres">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal NamePositionRequirement" data-title="Casa">
+                                @Html.DisplayFor(modelItem => item.Home)
+                            </td>
+                            <td class="cell-app DetailPositionRequirement" data-title="Calle">
+                                @Html.DisplayFor(modelItem => item.Street)
+                            </td>
+
+                            <td class="cell-app DetailPositionRequirement" data-title="Sector">
+                                @Html.DisplayFor(modelItem => item.Sector)
+                            </td>
+
+                            <td class="cell-app DetailPositionRequirement" data-title="Ciudad">
+                                @Html.DisplayFor(modelItem => item.City)
+                            </td>
+                            <td class="cell-app DetailPositionRequirement" data-title="Provincia">
+                                @Html.DisplayFor(modelItem => item.ProvinceName)
+                            </td>
+
+
+                            <td class="cell-app DetailPositionRequirement" data-title="Comentario">
+                                @Html.DisplayFor(modelItem => item.CountryId)
+                            </td>
+                            <td class="cell-app DetailPositionRequirement" data-title="Principal">
+                                <label class="switch disabled">
+                                    <input type="checkbox" disabled @principal>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+
+                            <td class="cell-app InternalIdtbl" style="display:none">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+}
+

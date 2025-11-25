@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Job>
+
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectJobs">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal JobIdtblpos" data-title="Id de cargo">
+            @Html.DisplayFor(modelItem => item.JobId)
+        </td>
+        <td class="cell-app Nametblcr" data-title="Nombre de cargo">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="cell-app DescriptionIdtblcr" data-title="Descripción)">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+    </tr>
+}

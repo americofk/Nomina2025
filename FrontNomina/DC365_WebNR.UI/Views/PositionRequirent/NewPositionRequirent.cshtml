@@ -1,0 +1,65 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.PositionRequirement
+
+<div class="new-indicator for-employee-contactinfo">
+
+</div>
+<div class="newAddresEmp">
+    <div class="contenTitleandHistori">
+        @{
+            if (string.IsNullOrEmpty(Model.Name))
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo requisitos del puesto</h3>
+            }
+            else
+            {
+    <h3 class="TituloForMod titulonuevadireccion">Editar requisitos del puesto</h3>
+            }
+        }
+    </div>
+    <form id="new_PositionRequirement" asp-action="Save">
+        <div class="contoneEmploye">
+            @* Sección de la izquierda *@
+            <div class="cont-input-newform-col2">
+                
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq lblInfoContact">Nombre</label>
+                    <div class="anchoimputEmploye">
+                        <input asp-for="Name" class="form-control" placeholder="Máximo 50 caracteres"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            @* Sección del medio *@
+            <div class="cont-input-newform-col2">
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmployeComen">Código</label>
+                        <div class="anchoimputEmploye">
+                            <input asp-for="PositionIdRequirement" class="form-control" />
+                            <span asp-validation-for="PositionIdRequirement" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Detalle</label>
+                    <div class="anchoimputEmploye">
+                        <textarea asp-for="Detail" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Detail" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_PositionRequirement" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>
+
+

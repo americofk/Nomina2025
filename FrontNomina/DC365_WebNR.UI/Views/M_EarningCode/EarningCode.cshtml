@@ -1,0 +1,258 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EarningCode>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "EarningCode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    bool isVersion = ViewBag.Version == null ? false : (bool)ViewBag.Version;
+}
+
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <input type="hidden" class="id-version" value="@ViewBag.IdVersion" />
+            <ul class="menuoptions">
+                @{
+                    if (!isVersion)
+                    {
+                        <li class="NewEarningCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-plus-square-o"></i>
+                                Nuevo
+                            </a>
+                        </li>
+                        <li class="EditEarningCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-edit "></i>
+                                Editar
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-trash"></i>
+                                <input type="submit" value="Eliminar" form="DeleteEarningCode" class="inputTypesubmit" />
+
+                            </a>
+                        </li>
+                        <li class="li-separador">
+                            <a class="btn2 btn-app" style="border: 1px solid #fff;">
+                            </a>
+                        </li>
+                        <li class="DisabledEarningCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-money"></i>
+                                Ingresos deshabilitados
+                            </a>
+                        </li>
+                        <li class="ec-versions">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-list-ul"></i>
+                                Versiones
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li>
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-trash"></i>
+                                <input type="submit" value="Eliminar" form="Delete-Earning-CodeVersion" class="inputTypesubmit" />
+
+                            </a>
+                        </li>
+                    }
+                }
+
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                @{
+                    if (!isVersion)
+                    {
+                        <li class="CerrarModulo">
+                            <a class="btn2 btn-app ">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="Close-back">
+                            <a class="btn2 btn-app ">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    }
+                }
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        @{
+            if (!isVersion)
+            {
+                <h3 class="TituloEstandar title-for-pagination">Ingresos</h3>
+            }
+            else
+            {
+                <h3 class="TituloEstandar title-for-pagination">Versiones ingresos</h3>
+            }
+        }
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+
+                <!-- filtro-->
+                @{
+                    await Html.RenderPartialAsync("ViewFilter");
+                }
+                @{
+                    if (!isVersion)
+                    {
+                        <span class="tituloStatusDepartment">Inhabilitar código de ingreso</span>
+                        <label class="switch clickCheckeditar">
+                            <input type="checkbox" id="DisebleEarningCode" class="idCheckeditar" checked="checked">
+                            <span class="slider round" for="DisebleEarningCode"></span>
+
+                        </label>
+                    }
+                }
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app-width table-app tblEarningCode" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Código</td>
+                            <td class="cell-app  cell-header-app">Nombre de código</td>
+                            <td class="cell-app  cell-header-app">Aplica TSS</td>
+                            <td class="cell-app  cell-header-app">Aplica ISR</td>
+                            <td class="cell-app  cell-header-app">Aplica regalía</td>
+                            <td class="cell-app  cell-header-app">Proyecto</td>
+                            <td class="cell-app  cell-header-app">Válido desde</td>
+                            <td class="cell-app  cell-header-app">Válido hasta</td>
+                            <td class="cell-app  cell-header-app">Base índice</td>
+                            <td class="cell-app  cell-header-app">Monto o porcentaje</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-EarningCode">
+                        @{
+                            int indexCheck = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            var tss = item.IsTSS == true ? "checked='checked'" : "";
+                            var isr = item.IsISR == true ? "checked='checked'" : "";
+                            var royalty = item.IsRoyaltyPayroll == true ? "checked='checked'" : "";
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectEarningCode">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal EarningCodeIdtbl" data-title="Id Código">
+                                    @Html.DisplayFor(modelItem => item.EarningCodeId)
+                                </td>
+                                <td class="cell-app Nametbl-Ec" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app" data-title="Aplica TSS">
+                                    <label class="switch disabled">
+                                        <input type="checkbox" disabled @tss>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td class="cell-app " data-title="Aplica ISR">
+                                    <label class="switch disabled">
+                                        <input type="checkbox" disabled @isr>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td class="cell-app " data-title="Aplica regalía">
+                                    <label class="switch disabled">
+                                        <input type="checkbox" disabled @royalty>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td class="cell-app ProjId-Ec" data-title="Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+                                <td class="cell-app ValidFrom-Ec" data-title="Válido desde">
+                                    @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app ValidTo-Ec" data-title="Válido hasta">
+                                    @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+                                <td class="cell-app" data-title="Índice base">
+                                    @Html.DisplayFor(modelItem => item.IndexBase)
+                                </td>
+                                <td class="cell-app" data-title="Monto o porcentaje">
+                                    @Html.DisplayFor(modelItem => item.MultiplyAmount)
+                                </td>
+                                <td class="cell-app Description-Ec" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+                                <td class="cell-app Internalid-Ec" data-title="Descripción" hidden>
+                                    @Html.DisplayFor(modelItem => item.Internalid)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- nuevo -->
+    @{
+        await Html.RenderPartialAsync("NewAndEditEarningCode", new DC365_WebNR.CORE.Domain.Models.EarningCode());
+    }
+
+    <form asp-action="delete" class="DeleteEarningCode collapse" id="DeleteEarningCode">
+    </form>
+    <!-- eliminar version -->
+    <form asp-action="DeleteVersion" class="DeleteEarningCodeVersion collapse" id="Delete-Earning-CodeVersion">
+    </form>
+
+    <form asp-action="updateStatus" class="disabledEarningCode collapse" id="disabledEarningCode">
+    </form>
+
+
+
+</div>
+<script src="~/js/EarningCode.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+<script src="~/js/CustomValidation.js"></script>
+}

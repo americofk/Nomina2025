@@ -1,0 +1,38 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.PositionRequirement>
+
+<table class="table-app tblCargosActivos">
+    <thead>
+        <tr class="row-header-app">
+            <td class="cell-app check-cell-app cell-header-app">
+                <input id="check-table-0" type="checkbox" class="check-table-app">
+                <label for="check-table-0"> </label>
+            </td>
+            <td class="cell-app  cell-header-app">Nombre</td>
+            <td class="cell-app  cell-header-app">Detalle</td>
+
+        </tr>
+    </thead>
+    <tbody class="tbodyTableOne">
+        @{int indexCheck2 = 1; }
+        @foreach (var item in Model)
+        {
+
+            string idCheck2 = $"check-table2-{indexCheck2++}";
+            <tr class="row-app LineTablePositionRequirement" style="cursor:pointer">
+
+                <td class="cell-app check-cell-app">
+                    <input id="@idCheck2" type="checkbox" class="check-table-app selectPositionRequirement">
+                    <label for="@idCheck2" class="label-cell"></label>
+                </td>
+                
+                <td class="cell-app cell-principal NamePositionRequirement" data-title="Id de cargo">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td class="cell-app DetailPositionRequirement" data-title="Nombre de cargo">
+                    @Html.DisplayFor(modelItem => item.Detail)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

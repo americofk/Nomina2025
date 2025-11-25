@@ -1,0 +1,45 @@
+﻿
+@{
+    List<SelectListItem> position = (List<SelectListItem>)ViewBag.Position;
+   
+}
+<form asp-action="HireEmployee" class="TinyModal-hire-employee" id="Form-hire-employee">
+    <h3 class="TituloEstandar-modal-contratar">Contratar empleado</h3>
+    <div class="cont-input-newform-col1">
+        <div class="collapse">
+            <input name="EmployeeId" class="form-control EmployeeIdhire" />
+        </div>
+
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Puesto</label>
+            <div class="">
+                @Html.DropDownList("PositionId", position, "Seleccione...", new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Fecha ingreso</label>
+            <div class="">
+                <div class="app-input-date">
+                    <input name="FromDate" class="form-control" type="date" />
+                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                </div>
+            </div>
+        </div>
+        <div class="contlotesmploye">
+            <label class="control-label labelModEmployeComen">Fecha final</label>
+            <div class="">
+                <div class="app-input-date">
+                    <input name="ToDate" class="form-control" type="date" />
+                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contbtn-tinymodal">
+        <input type="button" class="btn btn-danger btncancelar-hire-employee" value="Cancelar">
+        <input type="submit" value="Aceptar" class="btn btn-primary">
+    </div>
+</form>

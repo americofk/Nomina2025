@@ -1,0 +1,249 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Payroll
+@using DC365_WebNR.CORE.Domain.Models.Enums
+
+@{
+    List<SelectListItem> currencies = (List<SelectListItem>)ViewBag.Currencies;
+}
+<!--Opciones de vista parcial  -->
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="NewAndEditPayrolls" class="btn2" />
+
+                </a>
+            </li>
+
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- New Payroll -->
+<div class="collapse contNewEntyti">
+
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+
+
+                <h3 class="TituloFormularios">
+                    <i class="fa fa-angle-up" id="toggle-title" data-value="1" style="cursor: pointer;font-weight: bold"></i>
+                    <span class="seteartitulo">Nueva nómina</span>
+                </h3>
+
+                <form class="contenidoNuevoGasto2 show-header" role="tabpanel" data-example-id="togglable-tabs" id="NewAndEditPayrolls" asp-action="save">
+
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes Showid collapse">
+
+                            <label class="control-label ancholabel">Id. Nómina</label>
+                            <div class="anchoimput">
+                                <input asp-for="PayrollId" class="form-control PayrollId" readonly="readonly" />
+                                <span asp-validation-for="PayrollId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nombre de nómina</label>
+                            <div class="anchoimput">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Frecuencia de pago</label>
+                            <div class="anchoimput">
+                                <select asp-for="PayFrecuency" class="form-control" asp-items="Html.GetEnumSelectList<PayFrecuency>()">
+                                </select>
+                                <span asp-validation-for="PayFrecuency" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Moneda</label>
+                            <div class="anchoimput">
+
+                                @Html.DropDownList("CurrencyId", currencies, "Seleccione...", new { @class = "form-control" })
+
+                                <span asp-validation-for="CurrencyId" class="text-danger"></span>
+                            </div>
+                           
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">¿Nómina de regalia?</label>
+
+                            <div class="anchoimput">
+                                <label class="switch">
+                                    <input asp-for="IsRoyaltyPayroll" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Fecha inicial de pago</label>
+                            <div>
+
+                                <div class="app-input-date">
+                                    <input asp-for="ValidFrom" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+
+                                </div>
+                                <span asp-validation-for="ValidFrom" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Fecha final de pago</label>
+                            <div>
+
+                                <div class="app-input-date">
+                                    <input asp-for="ValidTo" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="ValidTo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Secuencia de banco</label>
+                            <div class="anchoimput">
+                                <input asp-for="BankSecuence" class="form-control" />
+                                <span asp-validation-for="BankSecuence" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">¿Nómina por hora?</label>
+
+                            <div class="anchoimput">
+                                <label class="switch">
+                                    <input asp-for="IsForHourPayroll" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Máximo 100 caracteres"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                       
+
+                        
+                    </div>
+                </form>
+
+                <div class="contenedor-paycycle collapse">
+
+                    <h3 class="TituloFormularios">Ciclos de pago</h3>
+
+                    <div class="opcionesTwo">
+                        <div class="menuoptions-flex">
+                            <ul class="menuoptions">
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="deletePayCycle" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                                <li class="li-separador">
+                                    <a class="btn2 btn-app" style="">
+                                        @*<i class="fa fa-minus" style="transform:rotate(90deg);"></i>*@
+                                    </a>
+                                </li>
+                                <li class="li-input">
+                                    <form asp-action="Save" id="SavePayCycle">
+                                        <input type="hidden" name="PayrollId" class="inputTypesubmit PayrollIdPayCycle">
+                                        <input type="number" name="PayCycleQty" class="form-control" placeholder="Cnt. Períodos">
+                                    </form>
+                                </li>
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-database"></i>
+                                        <input type="submit" value="Generar períodos" form="SavePayCycle" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                            <div class="menuoptions">
+                                <input type="text" class="form-control BuscartblCyclePay" placeholder="Buscar">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="container-table-app" id="content-scroll-child">
+                        <table class="table-app tblCyclePay">
+                            <thead>
+                                <tr class="row-header-app">
+                                    <td class="cell-app check-cell-app cell-header-app">
+                                        <input id="check-table-0" type="checkbox" class="check-table-app">
+                                        <label for="check-table-0"> </label>
+                                    </td>
+                                    <td class="cell-app  cell-header-app">Id Período</td>
+                                    <td class="cell-app  cell-header-app">Fecha inicial de período</td>
+                                    <td class="cell-app  cell-header-app">Fecha final de período</td>
+                                    <td class="cell-app  cell-header-app">Fecha de pago predeterminada</td>
+                                    <td class="cell-app  cell-header-app">Fecha de pago</td>
+                                    <td class="cell-app  cell-header-app">Monto pagado en período</td>
+                                    <td class="cell-app  cell-header-app">Estado del período de pago</td>
+                                    <td class="cell-app  cell-header-app">¿Impuesto?</td>
+                                    <td class="cell-app  cell-header-app">¿TSS?</td>
+                                </tr>
+                            </thead>
+                            <tbody class="tbodyTableCyclePay">
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                </div>
+                <form asp-action="delete" class="deletePayCycle collapse" id="deletePayCycle">
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="MarkForTax" method="post" id="FormMarkIsForTax" hidden>
+        <input type="text" name="PayrollId" class="PayrollIdTax" />
+        <input type="text" name="PayCycleId" class="PayCycleIdTax" />
+        <input type="checkbox" name="IsForTax" class="IsForTaxTax" />
+    </form>
+    <form asp-action="MarkForTss" method="post" id="FormMarkIsForTss" hidden>
+        <input type="text" name="PayrollId" class="PayrollIdTss" />
+        <input type="text" name="PayCycleId" class="PayCycleIdTss" />
+        <input type="checkbox" name="IsForTss" class="IsForTss" />
+    </form>
+</div>
+
+
+
+
+

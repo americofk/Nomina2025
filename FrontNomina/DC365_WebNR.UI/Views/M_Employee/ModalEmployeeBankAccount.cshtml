@@ -1,0 +1,72 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!-- Cuentas bancarias de empleado-->
+<div class="modal modal-employee-bankaccount" aria-hidden="true">
+    <div class="main-content-modal w50">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-bankaccount">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-deletebankaccount" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+
+                    </ul>
+                    <ul class="menuoptions">
+                        <li id="id-help-empl-ba">
+                            <a class="btn2 btn-app ">
+                                <i class="fa fa-question i-question"></i>
+                            </a>
+                        </li>
+                        <li class="close-modal-bankaccount">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!--formulario nuevo cuenta bancaria-->
+                <div class="container-modal-scrolling">
+                    <div class="cont-form-newandedit cont-form-newbankaccount collapse">
+
+                    </div>
+
+                    <h3 class="TituloEstandar">Cuentas bancarias de empleados</h3>
+                    <div class="scrollbar-tableprimary-submodal ">
+                        <div class="container-table-app datatable-bankaccount" id="content-scroll">
+
+                        </div>
+                    </div>
+
+
+                    <form asp-action="delete" class="delete-bankaccount collapse" id="form-deletebankaccount">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*Sección de ayuda*@
+<div class="help-bankaccount"></div>
+

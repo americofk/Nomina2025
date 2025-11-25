@@ -1,0 +1,511 @@
+﻿@using DC365_WebNR.CORE.Domain.Models.Enums;
+@model DC365_WebNR.CORE.Domain.Models.Employee
+
+@{
+    WorkStatus workStatus = WorkStatus.Candidate;
+    List<SelectListItem> occupation = (List<SelectListItem>)ViewBag.Occupation;
+    List<SelectListItem> educationLevel = (List<SelectListItem>)ViewBag.EducationLevel;
+    List<SelectListItem> disabilityType = (List<SelectListItem>)ViewBag.DisabilityType;
+    List<SelectListItem> country = (List<SelectListItem>)ViewBag.Country;
+
+    if (ViewBag.typeEmployee == "Empleados")
+        workStatus = WorkStatus.Employ;
+
+    if (ViewBag.typeEmployee == "Dados de baja")
+        workStatus = WorkStatus.Dismissed;
+
+    var AdmissionDate = DateTime.Today.Date.ToString("yyyy-MM-dd");
+}
+
+@* Opciones de nuevo y editar empleado *@
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            @{
+                if (ViewBag.typeEmployee != "Empleados inactivos")
+                {
+                    <li>
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-save"></i>
+                            <input type="submit" value="Guardar" form="createAndEditEmployee" class="btn2" />
+                        </a>
+                    </li>
+                }
+            }
+
+            @{
+                if (ViewBag.typeEmployee == "Empleados")
+                {
+                    <li class="dissmis-employee-inside">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-ban"></i> Desvincular
+                        </a>
+                    </li>
+                }
+
+                if (ViewBag.typeEmployee == "Prospectos a empleado" || ViewBag.typeEmployee == "Dados de baja")
+                {
+                    <li class="hire-employee-inside">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-check-square"></i> Contratar
+                        </a>
+                    </li>
+                }
+
+            }
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+
+        @* Sección del formulario contratar *@
+        <div class="contenedor-dos-contratar collapse"></div>
+
+    </div>
+
+</div>
+
+<div class="collapse contNewEntyti formEmploye">
+    <div class="optionform collapse">
+        <div class="optionformOne">
+
+            <ul>
+
+                <li class="open-employee-address">
+                    <a class="btn2 btn-app">Direcciones</a>
+                </li>
+                <li class="open-employee-contacts">
+                    <a class="btn2 btn-app">Información de contactos</a>
+                </li>
+
+                <li class="open-employee-document">
+                    <a class="btn2 btn-app">Documentos</a>
+                </li>
+            </ul>
+
+        </div>
+
+        @{
+            if (ViewBag.typeEmployee == "Empleados" || ViewBag.typeEmployee == "Dados de baja" || ViewBag.typeEmployee == "Empleados inactivos")
+            {
+                <div class="optionformOne">
+                    <ul>
+
+                        <li class="open-employee-bankaccount">
+                            <a class="btn2 btn-app">Cuentas bancarias</a>
+                        </li>
+                        <li class="open-employee-earningCode">
+                            <a class="btn2 btn-app">Códigos de ingresos</a>
+                        </li>
+
+                        <li class="open-employee-deductionCode">
+                            <a class="btn2 btn-app">Código de descuentos</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="optionformOne">
+                    <ul>
+                        <li class="open-employee-position">
+                            <a class="btn2 btn-app">Puestos</a>
+                        </li>
+                        <li class="open-employee-loan">
+                            <a class="btn2 btn-app">Préstamos</a>
+                        </li>
+                        <li class="open-employee-tax">
+                            <a class="btn2 btn-app">Código de impuestos</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="optionformOne">
+                    <ul>
+                        <li class="open-employee-extraHour option-extra-hour collapse">
+                            <a class="btn2 btn-app">Horas extras</a>
+                        </li>
+                        <li class="open-employee-assist option-assist">
+                            <a class="btn2 btn-app">Control de asistencia</a>
+                        </li>
+
+                        <li class="open-employee-workcalendars option-workcalendars">
+                            <a class="btn2 btn-app">Horario de trabajo</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                //<div class="optionformTwo option-extra-hour collapse">
+                //    <ul>
+                //        <li class="open-employee-extraHour">
+                //            <a class="btn2 btn-app">Horas extras</a>
+                //        </li>
+
+                //        <li class="open-employee-extraHour">
+                //            <a class="btn2 btn-app">Horario de trabajo</a>
+                //        </li>
+
+                //    </ul>
+                //</div>
+
+            }
+        }
+
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorNewemploye-two">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios TitleEmploye">Nuevo empleado</h3>
+                <form id="save-employeesimages-form" asp-action="UploadImage" class="collapse">
+                    <input type="file" class="form-file Image" name="file" />
+                </form>
+
+                <form class="contenidoprimariEmploye" id="createAndEditEmployee" asp-action="Save">
+
+                    <div class="contoneEmploye">
+                        <!--Seccion cargar foto-->
+                        <div class="contImputDatosPersonalesFoto collapse">
+                            <canvas class="canvas" id="canvas" style="display:none"></canvas>
+
+                            <div class="contInternoFoto">
+
+                                <div class="contInput-foto">
+                                    <img id="FotoperfilEP" class="dimensionfoto" src="~/Images/Dashboard/default_perfil.png">
+                                </div>
+                                <div class=" form-managed-file btnRr btn-app">
+                                    <a class="trigger-upload-emp" style="color:black"><i class="fa fa-pencil"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contImputDatosLeft">
+                            <div class="Showid collapse">
+                                <div class="contlotes">
+                                    <label asp-for="EmployeeId" class="control-label ancholabelSeconeEmploye">Nº de Personal</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="EmployeeId" class="form-control" readonly="readonly" />
+                                        <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="collapse">
+                                <input asp-for="WorkStatus" value="@workStatus" />
+                            </div>
+
+                            <div class="contlotes">
+                                <label class="control-label ancholabelSeconeEmploye">Nombre</label>
+                                <div class="anchoimput">
+                                    <input asp-for="Name" class="form-control" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+
+                            </div>
+
+                            <div class="contlotes">
+                                <label asp-for="LastName" class="control-label ancholabelSeconeEmploye">Apellido</label>
+                                <div class="anchoimput">
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="contImputDatosLeft">
+
+                            <div class="contlotes">
+                                <label asp-for="StartWorkDate" class="control-label ancholabel"></label>
+                                <div class="anchoimput">
+                                    <input asp-for="StartWorkDate" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="StartWorkDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="EndWorkDate" class="control-label ancholabel"></label>
+                                <div class="anchoimput">
+                                    <input asp-for="EndWorkDate" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="EndWorkDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contImputDatosRightEmployee">
+
+                            @{
+                                if (ViewBag.typeEmployee == "Empleados" || ViewBag.typeView == false)
+                                {
+                                    <div class="contenstatusEmploye collapse">
+                                        <div class="EmployeeStatus">
+                                            <label asp-for="EmployeeStatus" class="control-label inhabilitar">Inhabilitar empleado</label>
+                                            <div class="">
+                                                <label class="switch">
+                                                    <input asp-for="EmployeeStatus" />
+                                                    <span class="slider round"></span>
+                                                </label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                        </div>
+                    </div>
+
+                    <h3 class="TituloFormularios styletitleemployetwo">Información general</h3>
+                    <div class="contoneEmploye">
+                        <div class="contInterNuevoConteGastos">
+                            <div class="contlotes">
+                                <label asp-for="PayMethod" class="control-label ancholabel"></label>
+                                <div class="anchoimput">
+                                    <select asp-for="PayMethod" class="form-control" asp-items="Html.GetEnumSelectList<PayMethod>()">
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="contlotes">
+                                <label asp-for="BirthDate" class="control-label ancholabel">Fecha de nacimiento</label>
+                                <div class="anchoimput">
+                                    <input asp-for="BirthDate" class="form-control" type="date" />
+                                    <span asp-validation-for="BirthDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="Gender" class="control-label ancholabel">Género</label>
+                                <div class="anchoimput">
+                                    <select asp-for="Gender" class="form-control">
+                                        <option value="0">Masculino</option>
+                                        <option value="1">Femenino</option>
+                                        <option value="2">No especificado</option>
+                                    </select>
+                                    <span asp-validation-for="Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="Age" class="control-label ancholabel">Edad</label>
+                                <div class="anchoimput">
+                                    <input asp-for="Age" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="Age" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="DependentsNumbers" class="control-label ancholabel">Nº Dependientes</label>
+                                <div class="anchoimput">
+                                    <input asp-for="DependentsNumbers" class="form-control" />
+                                    <span asp-validation-for="DependentsNumbers" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="MaritalStatus" class="control-label ancholabel">Estado civil</label>
+                                <div class="anchoimput">
+                                    <select asp-for="MaritalStatus" class="form-control">
+                                        <option value="0">Casado/a</option>
+                                        <option value="1">Soltero/a</option>
+                                        <option value="2">Viudo/a</option>
+                                        <option value="3">Divorciado/a</option>
+                                        <option value="4">Separado/a</option>
+                                    </select>
+                                    <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="PayMethod" class="control-label ancholabel">Ocupación</label>
+                                <div class="anchoimput">
+                                    @Html.DropDownListFor(x=>x.OccupationId, occupation, "Seleccione...", new { @class = "form-control required"})
+                                    <span asp-validation-for="OccupationId" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Nivel de educación</label>
+                                <div class="anchoimput">
+
+                                    @Html.DropDownListFor(x=>x.EducationLevelId, educationLevel, "Seleccione...", new { @class = "form-control required"})
+                                    <span asp-validation-for="EducationLevelId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contInterNuevoConteGastos">
+                            <div class="contlotes">
+                                <label asp-for="NSS" class="control-label ancholabel"></label>
+                                <div class="anchoimput">
+                                    <input asp-for="NSS" class="form-control" />
+                                    <span asp-validation-for="NSS" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="ARS" class="control-label ancholabel"></label>
+                                <div class="anchoimput">
+                                    <input asp-for="ARS" class="form-control" />
+                                    <span asp-validation-for="ARS" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="AFP" class="control-label ancholabel"></label>
+                                <div class="anchoimput">
+                                    <input asp-for="AFP" class="form-control" />
+                                    <span asp-validation-for="AFP" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="AdmissionDate" class="control-label ancholabel">Fecha de ingreso</label>
+                                <div class="anchoimput">
+                                    <div class="app-input-date">
+                                        <input asp-for="AdmissionDate" type="date" class="form-control" value="@AdmissionDate" />
+                                        <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                        <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                    </div>
+
+                                    <span asp-validation-for="AdmissionDate" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="Country" class="control-label ancholabel">País de origen</label>
+                                <div class="anchoimput">
+                                    @Html.DropDownListFor(x=>x.Country, country, "Seleccione...", new { @class = "form-control required"})
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Nacionalidad</label>
+                                <div class="anchoimput">
+                                    <input asp-for="Nationality" class="form-control" readonly="readonly" />
+                                    <span asp-validation-for="Nationality" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="EmployeeType" class="control-label ancholabel">Tipo de empleado</label>
+                                <div class="anchoimput">
+                                    <select asp-for="EmployeeType" class="form-control" asp-items="Html.GetEnumSelectList<EmployeeType>()">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Localidad</label>
+                                <div class="anchoimput">
+                                    <input asp-for="LocationId" class="form-control" />
+                                    <span asp-validation-for="LocationId" class="text-danger"></span>
+
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label asp-for="PayMethod" class="control-label ancholabel">Tipo de discapacidad</label>
+                                <div class="anchoimput">
+
+                                    @Html.DropDownListFor(x=>x.DisabilityTypeId, disabilityType, "Seleccione...", new { @class = "form-control required"})
+                                    <span asp-validation-for="Country" class="text-danger"></span>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="contenedorSwichs">
+                        <div class="contlotes">
+                            <label asp-for="HomeOffice" class="control-label label-switch">Trabaja en su casa</label>
+                            <div class="">
+                                <label class="switch">
+                                    <input asp-for="HomeOffice" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="OwnCar" class="control-label label-switch">Vehiculo propio</label>
+                            <div>
+                                <label class="switch">
+                                    <input asp-for="OwnCar" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label asp-for="HasDisability" class="control-label label-switch">Aplica para hora extras</label>
+
+                            <div class="">
+                                <label class="switch">
+                                    <input asp-for="ApplyforOvertime" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="HasDisability" class="control-label label-switch">Horario fijo</label>
+
+                            <div class="">
+                                <label class="switch">
+                                    <input asp-for="IsFixedWorkCalendar" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--horario de trabajo-->
+                    <div class="cont-calendar-work collapse">
+                        <h3 class="TituloFormularios styletitleemployetwo">Horario de trabajo</h3>
+                        <div class="contoneEmploye">
+
+                            <div class="contInterNuevoConteGastos">
+
+                                <div class="contlotes">
+                                    <label asp-for="WorkFrom" class="control-label ancholabel">Hora desde</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="WorkFrom" class="form-control" />
+                                        <span asp-validation-for="WorkFrom" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label asp-for="WorkTo" class="control-label ancholabel">Hora hasta</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="WorkTo" class="form-control" />
+                                        <span asp-validation-for="WorkTo" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+
+
+                                <div class="contlotes">
+                                    <label asp-for="BreakWorkFrom" class="control-label ancholabel">Descanso desde</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="BreakWorkFrom" class="form-control" />
+                                        <span asp-validation-for="BreakWorkFrom" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label asp-for="BreakWorkTo" class="control-label ancholabel">Descanso hasta</label>
+                                    <div class="anchoimput">
+                                        <input asp-for="BreakWorkTo" class="form-control" />
+                                        <span asp-validation-for="BreakWorkTo" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

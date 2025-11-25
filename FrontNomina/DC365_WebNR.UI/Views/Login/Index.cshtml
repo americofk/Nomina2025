@@ -1,0 +1,128 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Sendnewpassword
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div class="content_login">
+    <div class="inner fade-in-lightbox">
+
+        <div class="contenedorlogo">
+            <img src="~/Images/ImagenLoginOriginal.png" class="imagenax" />
+        </div>
+
+
+        <!--Ingresa correo-->
+        <div class="pagination-viewu Usuario">
+            <form id="formulariologin1" asp-action="ValidateEmail" class="form01">
+                <div role="heading" aria-level="1" class="text-title">Iniciar sesión</div>
+
+                <div class="input contUsuario">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" name="_email" class="form-control has-feedback-left UsuarioLogin" id="alias">
+                    </div>
+                </div>
+                <div>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Siguiente</button>
+            </form>
+        </div>
+
+        <!--Ingresa Contraseña-->
+        <div class="pagination-view2 ClaveOculto Clave">
+            <form id="formulariologin2" asp-action="ValidartePassword">
+                <span class="fa fa-user form-control-feedback left estiliIcon" aria-hidden="true"></span>
+                <div id="displayName" class="identity">
+                </div>
+
+                <div role="heading" aria-level="1" class="text-title">Escribir contraseña</div>
+
+                <div class="input contUsuario">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="password" class="form-control has-feedback-left" name="Password" id="Password">
+                        <input type="hidden" class="form-control has-feedback-left displayName" name="correo">
+                        <span class="form-control-feedback left estiliIcon" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <div>
+                    <a class="RegistroCliente linkOlvidoContraseña">¿Olvidaste la contraseña?</a>
+                </div>
+
+                <div>
+                    <a class="RegistroCliente linkTengoContraseña btnFormChangePassdirecto">¿Tienes contraseña temporal?</a>
+
+                </div>
+
+
+                <button type="submit" class="btn btn-primary" id="btnlogin">Iniciar sesión</button>
+                <button type="button" class="btn1 btnAtras">Atrás</button>
+
+            </form>
+        </div>
+
+        <!--Olvido su contraseña-->
+        <div class="pagination-view2 EnviarContraseña collapse">
+            <form id="formulariologin3"asp-action="Requestchangepassword">
+                <div role="heading" aria-level="1" class="text-title3">¿Olvidó su contraseña?</div>
+                <p class="InforChangePassword"> Recibirá una contraseña temporal a su cuenta de correo registrada en el sistema para que pueda reestablecer su contraseña. </p>
+
+                <div class="input">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                        <input type="text" class="form-control has-feedback-left" name="_email" id="EmailChange_01">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary btnFormChangePass">Enviar</button>
+                    <button type="button" class="btn1 btnAtrasCambioClave">Atrás</button>
+                </div>
+
+            </form>
+        </div>
+
+        <!--Cambio de contraseña-->
+        <div class="pagination-viewu CambiarContraseña collapse">
+            <form id="formulariologin4" asp-action="Sendnewpassword">
+                <div role="heading" aria-level="1" class="text-title5">Actualizar contraseña</div>
+                <span class="fa fa-user form-control-feedback left estiliIcon2" aria-hidden="true"></span>
+                <div id="displayName" class="identity-01">
+
+                </div>
+
+                <div class="input">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group-01 has-feedback">
+                        <input type="text" asp-for="TemporaryPassword" class="form-control has-feedback-left" placeholder="Contraseña temporal">
+
+                        <input type="hidden" asp-for="Email" class="form-control has-feedback-left displayName">
+                    </div>
+                </div>
+
+                <div class="input">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group-01 has-feedback">
+                        <input type="password" asp-for="NewPassword" class="form-control has-feedback-left" placeholder="Nueva contraseña">
+
+                    </div>
+                </div>
+
+                <div class="input">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group-01 has-feedback">
+                        <input type="password" asp-for="ConfirPassword" class="form-control has-feedback-left" placeholder="Confirmar contraseña">
+
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary" id="btnceptarCambioPassword">Aceptar</button>
+                    <button type="button" class="btn1 btnCancelarCambio">Volver</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

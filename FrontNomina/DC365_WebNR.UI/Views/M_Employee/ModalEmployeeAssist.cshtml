@@ -1,0 +1,73 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!-- Asistencia de empleados-->
+<div class="modal modal-employee-assist" aria-hidden="true">
+    <div class="Conten-mod-earningcode">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-assist">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-delete-assist" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-assist">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--formulario nueva asistencia-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-newAssist collapse">
+                </div>
+
+
+
+                <!--tabla-->
+                <h3 class="TituloEstandar">Control de asistencia</h3>
+
+                <!-- filtro-->
+                <div class="form-group-BuscadorDepartment">
+                    @{
+                        await Html.RenderPartialAsync("ViewFilterEmployeeModalEH");
+                    }
+
+                </div>
+                <div class="scrollbar-tableprimary-submodal">
+                    <div class="container-table-app datatable-assist" id="content-scroll">
+                    </div>
+                </div>
+            </div>
+
+            <form asp-action="delete" class="delete-assist collapse" id="form-delete-assist">
+                </form>
+            
+        </div>
+    </div>
+
+</div>
+

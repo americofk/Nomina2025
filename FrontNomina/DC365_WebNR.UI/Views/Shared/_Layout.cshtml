@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nómina</title>
+    <link rel="stylesheet" href="~/css/PreLoader.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/EstilosFormularios/Formularios.css" />
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/css/build/css/custom.css" />
+    <link rel="stylesheet" href="~/css/Layout/Layout.css" />
+    <link rel="stylesheet" href="~/css/MenuLef.css" />
+    <link rel="stylesheet" href="~/css/AppDashboard.css" />
+    <link rel="stylesheet" href="~/css/StyleModales.css" />
+    <link href="~/css/AppTable.css" rel="stylesheet" />
+    <link href="~/css/EstiloContenedores/formularios.css" rel="stylesheet" />
+    <link href="~/css/AppSwitch.css" rel="stylesheet" />
+    <link href="~/css/AppMenuoptions.css" rel="stylesheet" />
+    <link href="~/css/AppSidebaroptions.css" rel="stylesheet" />
+    <link href="~/css/AppAlert.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/css/Helps/Helps.css" rel="stylesheet" />
+    <link href="~/css/Modals/SubModalStyles.css" rel="stylesheet" />
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+    <script src="~/js/ChangeNotification.js"></script>
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body class="nav-md principal">
+    <header class="headerlayoaut">
+        <input type="checkbox" id="check1" style="display:none" />
+        <label for="check1" style="display: block;margin-bottom: 0px">
+            <i class="fa fa-navicon delado"></i>
+        </label>
+
+        <div class="contTitulo">
+            <div class="Titulo1">Smart Payroll</div>
+            <div class="TituloEmploye changeCompany">@ViewBag.nameCompany</div>
+            <div class="idcompany-active collapse">@ViewBag.empresa</div>
+            <i class="fa fa-angle-down icontitlecustomer changeCompany"></i>
+        </div>
+
+        @*<div class="space-isolate">ESPACIO AISLADO</div>*@
+
+        <div class="alfnal">
+            <div class="div2usuario">
+                @{
+                    string image = string.IsNullOrEmpty(ViewBag.Avatar) ? "/Images/Layout/usuariologin.png" : ViewBag.Avatar;
+                    string imageoptions = string.IsNullOrEmpty(ViewBag.Avatar) ? "/Images/Dashboard/default_perfil.png" : ViewBag.Avatar;
+                }
+                <img src=@image class="loginusuario">
+            </div>
+        </div>
+
+        <!-- Opciones del usuario -->
+        <div class="sidebar-options">
+            <div class="close-options">
+
+                <i class="fa fa-chevron-right"></i>
+            </div>
+            <!-- <div class="options-menu"> -->
+            <div class="options-properties">
+                <h3 class="TitelOptionUser">Opciones de usuario</h3>
+                <form asp-action="UploadImage" asp-controller="Dashboard" class="save-optionsimages-form"
+                      enctype="multipart/form-data">
+                    <div class="options-image">
+                        <input type="file" class="form-fileTwo ImagePerfil" name="file" />
+                        <img src="@imageoptions" class="perfil trigger-uploadTwo">
+                    </div>
+                </form>
+
+                <span class="user-name">@ViewBag.NombreUsuario</span>
+                <span class="email-user">@ViewBag.Email</span>
+
+                <form asp-action="SaveOpcionesDefaultUser" asp-controller="Dashboard" class="save-optionsdefaults-form">
+                    <div class="options-company">
+                        <span class="company-label">
+                            Empresa predefinida
+                        </span>
+                        @Html.DropDownList("CompanyDefaultIdoptions", (IEnumerable<SelectListItem>)ViewBag.companyDefault, "Seleccione", new { @class = "format-valueCompaniDefaul CompanyDefault" })
+                    </div>
+
+                    <div class="options-format">
+                        <span class="format-label">
+                            Formato regional
+                        </span>
+                        @Html.DropDownList("FormatCodeIdOptions", (IEnumerable<SelectListItem>)ViewBag.FormatCode, "Seleccione", new { @class = "format-value form-control FormatCodeId" })
+                    </div>
+
+                    <div class="save-options">
+
+                        <input type="submit" class="btnSaveOptionUserDefault" value="Guardar">
+                    </div>
+                </form>
+
+
+                <p class="information">
+                    Debe reiniciar el navegador para aplicar los cambios.
+                </p>
+            </div>
+            <div class="options-logout">
+                <form asp-action="Logout" asp-controller="Login">
+                    <div class="logout" id="Salir">
+                        @*<span class="fa fa-sign-out iconOut"></span>*@
+                        @*<img src="~/Images/logout.png" />*@
+                        <i class="fa fa-sign-out"></i>
+                        <input type="submit" class="TextOut btn-logout" value="Cerrar sesión" />
+                        @*<span class="TextOut">Cerrar sesión</span>*@
+                    </div>
+                </form>
+                <span class="info" id="id-help-user-options">
+                    ?
+                </span>
+            </div>
+            <!-- </div> -->
+        </div>
+
+        @*Sección de ayuda*@
+        <div class="help-useroptions"></div>
+
+
+
+    </header>
+
+    <div class="body">
+        <!-- sidebar menu -->
+        @using DC365_WebNR.UI.Process
+
+        @ViewData["menuLeft"]
+
+        <!-- Modal barra de carga -->
+        <div class="background-container modal progreso" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-Espera modal-lg-empleados">
+                @Html.HtmlLoader();
+            </div>
+        </div>
+
+        <!-- modal asignacion de compañias -->
+        <div class="modal ModCompaniesAsing">
+            <!--cambio de empresa-->
+            @{
+                await Html.RenderPartialAsync("ChangeCompani", (IEnumerable<DC365_WebNR.CORE.Domain.Models.CompanyForUser>)ViewData["ListCompanyUser"]);
+            }
+
+        </div>
+
+        <!-- modal configuracion -->
+        <div class="modal modal-configurationEmail" aria-hidden="true">
+            <div class="ContenModal-contact">
+                <div class="modal-content">
+                    <!--Opciones del Formulario-->
+                    <div class="modal-options">
+
+                        <div class="menuoptions-flex-submodal">
+                            <ul class="menuoptions">
+
+                            </ul>
+                            <ul class="menuoptions">
+                                <li class="close-modal-config">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-close i-close"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <!--formulario nuevo contacto-->
+                 
+                       
+
+                        <h3 class="TituloEstandar">Configuración para envio de correos</h3>
+                       @* <div class="scrollbar-tableprimary-submodal ">
+                            <div class="container-table-app datatable-contactinfo" id="content-scroll">
+                            </div>
+                        </div>*@
+
+                    <div class="new-document-Emp" style="margin: 0 20px;width: 96%;">
+
+                        <form id="SaveGeneralConfig" asp-action="/GeneralConfig/Save">
+                                <div class="conten-input-modal info-modal-generalconfig">
+                                    
+                                </div>
+
+                                <div class="contbtnAddres">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+                                    </div>
+                                    <div class="form-group">
+                                    <input type="button" class="btn btn-danger close-modal-config" id="btncancelar" value="Cancelar">
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+
+                        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+                        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+                        <form asp-action="delete" class="delete-contact collapse" id="form-deletecontactinfo">
+                        </form>
+
+                    
+                </div>
+
+            </div>
+        </div>
+
+        @* Cuerpo principal de la app *@
+        <div>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+
+    </div>
+    <!-- footer content -->
+    <footer class="footerMenu">
+        <div>
+            <i class="fa fa-registered"></i><span>@DateTime.Now.AddYears(+0).ToString("yyyy") Dynacorp 365. Todos los derechos reservados</span>
+        </div>
+    </footer>
+    <!-- /footer content -->
+    @{
+        string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    }
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/login.js?@version"></script>
+    <script src="~/js/Utilidades.js?@version"></script>
+    <script src="~/js/Navigation.js?@version"></script>
+    <script src="~/js/AppAlert.js"></script>
+    <script src="~/js/Helps.js"></script>
+    <script src="~/js/GeneralConfig.js"></script>
+
+    <script src="~/js/GeneralFilter.js"></script>
+    @RenderSection("Scripts", required: false)
+
+
+</body>
+</html>

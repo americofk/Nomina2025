@@ -1,0 +1,194 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Employee>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "EmployeesDisabled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    bool typeview = (bool)ViewBag.typeView;
+}
+
+<link href="~/css/Employees.css" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/Modals/SubModalStyles.css" rel="stylesheet" />
+<link href="~/css/Helps/Helps.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+
+
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+
+                <li class="EditEmployee">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Ver
+                    </a>
+                </li>
+                <li class="employee-history">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-user"></i>
+                        Historial del empleado
+                    </a>
+                </li>
+
+
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-repeat"></i>
+                    </a>
+                </li>
+                <li class="Close-back">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+
+
+        </div>
+    </div>
+
+
+
+    <!-- tabla empleados activos -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar title-for-pagination">Empleados inactivos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-Buscador">
+                @{await Html.RenderPartialAsync("ViewFilterEmployee_Disabled");}
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblEmpleyee" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Número de personal</td>
+                            <td class="cell-app  cell-header-app">Nombre</td>
+                            <td class="cell-app  cell-header-app">Apellido</td>
+                            <td class="cell-app  cell-header-app">Tipo de empleado</td>
+                            <td class="cell-app  cell-header-app">Fecha de ingreso</td>
+                            <td class="cell-app  cell-header-app">Edad</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Employee">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectEmployees">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal EmployeeIdtbl" data-title="Número de personal">
+                                    @Html.DisplayFor(modelItem => item.EmployeeId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app LastNametbl" data-title="Apellido">
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+
+                                <td class="cell-app EmployeeTypetbl" data-title="Tipo de empleado">
+                                    @Html.DisplayFor(modelItem => item.EmployeeType)
+                                </td>
+                                <td class="cell-app AdmissionDatetbl" data-title="Fecha de ingreso">
+                                    @Convert.ToDateTime(item.AdmissionDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+                                <td class="cell-app Agetbl" data-title="Edad">
+                                    @Html.DisplayFor(modelItem => item.Age)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- nuevo empleado -->
+    @{await Html.RenderPartialAsync("NewAndEditEmployee", new DC365_WebNR.CORE.Domain.Models.Employee());}
+
+    <!-- nueva direccion de empleado-->
+    @{await Html.RenderPartialAsync("ModalEmployeeAddress");}
+
+    <!--información de contacto-->
+    @{await Html.RenderPartialAsync("ModalEmployeeContacts");}
+
+    <!--cuentas bancarias-->
+    @{await Html.RenderPartialAsync("ModalEmployeeBankAccount");}
+
+    <!-- codigos de ganancias-->
+    @{await Html.RenderPartialAsync("ModalEmployeeEarning");}
+
+    <!-- codigos de deducciones-->
+    @{await Html.RenderPartialAsync("ModalEmployeeDeductionCode");}
+
+    <!-- puestos de empleados-->
+    @{await Html.RenderPartialAsync("ModalEmployeePosition");}
+
+    <!-- documentos de empleados-->
+    @{await Html.RenderPartialAsync("ModalEmployeeDocument");}
+
+    <!-- prestamos de empleados-->
+    @{await Html.RenderPartialAsync("ModalEmployeeLoan");}
+
+    <!-- impuestos de empleados-->
+    @{await Html.RenderPartialAsync("ModalEmployeeTax");}
+
+
+    <!-- horas extras de empleados-->
+    @{await Html.RenderPartialAsync("ModalEmployeeExtraHour.cshtml", (List<SelectListItem>)ViewBag.FilterExtraHours);}
+
+
+    <!-- eliminar-->
+    <form asp-action="delete" class="deleteEmployees collapse" id="deleteEmployees">
+    </form>
+
+    <!-- Deshabilitar-->
+    <form asp-action="updateStatus" class="collapse" id="form-EmployeeStatus">
+        <input id="idEmployeeDesh" name="idEmployeeDesh" class="form-control" />
+    </form>
+
+</div>
+
+
+<script src="~/js/Employees/Employee.js"></script>
+<script src="~/js/Employees/AddresEmployees.js"></script>
+<script src="~/js/Employees/ContactsInfoEmployee.js" type="module"></script>
+<script src="~/js/Employees/BankAccountEmployee.js" type="module"></script>
+<script src="~/js/Helps.js"></script>
+<script src="~/js/Employees/EarningCodeEmployee.js" type="module"></script>
+<script src="~/js/Employees/DeductionCodeEmployee.js" type="module"></script>
+<script src="~/js/Employees/PositionEmployee.js" type="module"></script>
+<script src="~/js/Employees/DocumentEmployee.js" type="module"></script>
+<script src="~/js/Employees/LoanEmploye.js" type="module"></script>
+<script src="~/js/Employees/EmployeeTax.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+<script src="~/js/Employees/EmployeeExtraHour.js" type="module"></script>
+@*<script src="~/js/Employees/ContactsEmployee.js"></script>*@
+@*<script src="~/js/Employee.js"></script>
+    <script src="~/js/AddresEmployees.js"></script>*@
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

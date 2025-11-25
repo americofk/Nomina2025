@@ -1,0 +1,179 @@
+﻿.report-body-content {
+    width: 100%;
+    font-size: 0.8em;
+
+    padding-top: 1em;
+}
+
+.table-report {
+    line-height: 20px;
+    font-weight: 400;
+    width: 100%;
+    border-spacing: 0px;
+}
+
+
+
+.row-header-report {
+    height: 35px;
+    color: #0c63a9;
+}
+
+    .row-header-report > td {
+        padding: 0.2em 0.3em;
+        /* display: table-cell; */
+        vertical-align: middle;
+        border-bottom: 1px solid #0c63a9;
+    }
+
+.row-body-report {
+    height: 30px;
+}
+
+    .row-body-report > td {
+        padding: 0.2em 0.3em;
+        vertical-align: middle;
+    }
+
+    .row-body-report:nth-of-type(odd) {
+        background: #7ec1f75c;
+    }
+
+.cell-report-amount {
+    text-align: right;
+}
+
+/*HEADER*/
+.report-body-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* align-items: center; */
+    height: 8.2em;
+    border-bottom: 1px solid #0c63a9;
+    padding-bottom: 0.8em;
+}
+
+.report-logo-date > .report-logo {
+    width: 50%;
+}
+
+    .report-logo-date > .report-logo > img {
+        object-fit: fill;
+        background-repeat: no-repeat;
+        width: 17em;
+        height: 70%;
+    }
+
+.report-body-header > .report-title {
+    /*width: 40%;*/
+    font-size: 1.3em;
+    /* align-self: end;*/
+    
+}
+
+    .report-body-header > .report-title > h3 {
+        margin: 0px;
+        text-align: center;
+       
+    }
+
+.report-subtitle {
+    color: #454343;
+    text-align: center;
+}
+
+.report-logo-date > .report-date {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8em;
+    justify-content: start;
+    align-items: end;
+    width: 30%;
+    line-height: 1px;
+}
+
+
+.cont-information-employee {
+    /*height: 180px;*/
+    border-bottom: 3px double #00245a;
+    padding-bottom: 15px;
+    padding-left: 1em;
+}
+
+.cont-title-values {
+    display: flex;
+    margin-bottom: 0.7em;
+}
+
+.line-label-title {
+ 
+    font-weight: bold;
+    width: 30%;
+}
+
+.report-logo-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%
+}
+
+.line-label-values {
+   
+}
+
+.cont-inform-pag {
+    padding: 15px 15px 0 15px;
+    border-bottom: 3px double #00245a;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.line-label-title-pag {
+    font-weight: bold;
+    width: 30%;
+}
+
+.line-label-values-pag {
+    width: 30%;
+}
+
+.cont-title-values-pago {
+    display: flex;
+    margin-bottom: 0.8em;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.total-pago {
+    margin-top: 1em;
+    color: #00245a
+}
+.report-body-footer {
+    margin-bottom: 3em;
+   
+}
+
+.report-body-footer {
+    height: 110px;
+   /* background-color: coral;*/
+    break-before: always;
+}
+.cont-firms {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+     width: 100%; 
+    justify-content: space-around;
+}
+.prepared {
+    width: 25%;
+    border-top: 1px solid;
+    text-align: center;
+    margin-top: 5em;
+}

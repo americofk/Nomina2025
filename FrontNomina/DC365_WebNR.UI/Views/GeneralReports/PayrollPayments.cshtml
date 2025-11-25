@@ -1,0 +1,213 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Reports.ReportPayrollpayment>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "PayrollPayments";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payroll;
+    List<SelectListItem> deparment = (List<SelectListItem>)ViewBag.Deparment;
+}
+
+<link href="~/css/Reportes.css" rel="stylesheet" />
+<link href="~/css/NewReportPayment.css" rel="stylesheet" />
+<link href="~/css/NewReportPaymentPrint.css?@version" rel="stylesheet" media="print" />
+
+@{
+    var show = !ViewBag.hidefilter ? "show" : "";
+}
+
+<div class="report-filter-section @show">
+    <h3> Parámetros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+        <div class="param-fields">
+            <label class="control-label">Nómina</label>
+            @Html.DropDownList("Payrolls", payrolls, "Seleccione...", new { @class = "form-control" })
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Proceso de nómina</label>
+            <select class="form-control payrollprocessid" type="text">
+            </select>
+        </div>
+        <div class="param-fields">
+            <label class="control-label">Departamento</label>
+            @Html.DropDownList("Department", deparment, "Seleccione...", new { @class = "form-control" })
+        </div>
+        <div class="param-fields">
+            <label class="control-label">Empleados</label>
+            <select class="form-control employee-id-select" type="text">
+            </select>
+        </div>
+    </div>
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" id="update-report" data-type="payroll-payments" />
+    </div>
+</div>
+<div class="cont-general-report">
+    @{
+        if (Model.Count() == 0)
+        {
+            await Html.RenderPartialAsync("DefaultReportHeader", new string[] { "RECIBO PAGO DE NÓMINA", "vertical" });
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                var earnings = item.Salary + item.Commision + item.DeductionCooperative + item.LoanCooperative + item.ExtraHour + item.OtherEarning;
+                var deductions = item.Loan + item.Afp + item.Sfs + item.Isr + item.OtherDiscount;
+                string[] periods = @item.Period.Split("-");
+
+                <div class="report-body-header">
+                    <div class="report-logo-date">
+                        <div class="report-logo">
+                            <img src="~/Images/ImagenLogin.png" />
+                        </div>
+                        <div class="report-date">
+                            <p>@DateTime.Now</p>
+                        </div>
+                    </div>
+                    <div class="report-title">
+                        <h3>RECIBO PAGO DE NÓMINA</h3>
+                    </div>
+                </div>
+                @*Cuerpo del reporte*@
+                <div class="receipt">
+                    <div class="tables-container">
+                        <table class="table positive">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Ingresos</th>
+                                </tr>
+                                <tr>
+                                    <th>Descrición</th>
+                                    <th>Cant.</th>
+                                    <th>Valor</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Descrición">Salario</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">@Convert.ToDecimal(item.Salary).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">Comisiones</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">@Convert.ToDecimal(item.Commision).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">Abono cooperativa</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">@Convert.ToDecimal(item.DeductionCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">Préstamo cooperativa</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">@Convert.ToDecimal(item.LoanCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">Horas extras</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">@Convert.ToDecimal(item.ExtraHour).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">Otros ingresos</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">@Convert.ToDecimal(item.OtherEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table negative">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">Deducciones</th>
+                                </tr>
+                                <tr>
+                                    <th>Descrición</th>
+                                    <th>Cant.</th>
+                                    <th>Valor</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-label="Descrición">Préstamos</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">(@Convert.ToDecimal(item.Loan).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">AFP</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">(@Convert.ToDecimal(item.Afp).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">SFS</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">(@Convert.ToDecimal(item.Sfs).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">ISR</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">(@Convert.ToDecimal(item.Isr).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                                <tr>
+                                    <td data-label="Descrición">Otras deducciones</td>
+                                    <td data-label="Cant."></td>
+                                    <td data-label="Valor">(@Convert.ToDecimal(item.OtherDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</td>
+                                    <td data-label="Balance"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <table class="table mb-6">
+                        <thead>
+                            <tr>
+                                <th class="responsive-only" colspan="4">Cabecera</th>
+                            </tr>
+                            <tr>
+                                <th>Periodo</th>
+                                <th>Ingresos/Deducciones</th>
+                                <th>Empleado</th>
+                                <th>Neto pagado</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr>
+                                <td class="always-labeled" data-label="Desde:">@periods[0]</td>
+                                <td class="always-labeled" data-label="Ingresos:">@Convert.ToDecimal(earnings).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                <td class="always-labeled" data-label="Nombre:">@item.EmployeeName</td>
+                                <td class="always-labeled" data-label="Neto a cobrar:">@Convert.ToDecimal(item.Total).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                            </tr>
+                            <tr>
+                                <td class="always-labeled" data-label="Hasta:">@periods[1]</td>
+                                <td class="always-labeled" data-label="Deducciones:">@Convert.ToDecimal(deductions).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</td>
+                                <td class="always-labeled" data-label="Email:">@item.EmployeeEmail</td>
+                                <td class="always-labeled" data-label="N° de cuenta:">@item.BankAccount</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            }
+        }
+    }
+    <form id="SendEmailReport" asp-action="EmailPayrollPayments" hidden></form>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/Reports.js" type="module"></script>
+}

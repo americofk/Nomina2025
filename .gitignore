@@ -1,0 +1,40 @@
+# Visual Studio / .NET
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+
+# Publish profiles & artifacts
+**/Properties/PublishProfiles/
+*.Publish.xml
+*.pubxml.user
+
+# NuGet / packages
+packages/
+*.nupkg
+
+# Node
+node_modules/
+
+# Logs and temp
+*.log
+tmp/
+temp/
+
+# IDEs
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Recycle bin (safety)
+$RECYCLE.BIN/
+

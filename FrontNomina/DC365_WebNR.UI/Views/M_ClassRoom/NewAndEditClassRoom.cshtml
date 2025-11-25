@@ -1,0 +1,109 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.ClassRoom
+<div class="opcioneslistpageForm collapse">
+
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="createAndEditClassRoom" class="btn2" />
+                </a>
+            </li>
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- nuevo salon de curso -->
+<div class="collapse contNewEntyti">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios setiartitulo">Nuevo salón de cursos</h3>
+
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditClassRoom" asp-action="Save">
+
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes Showid collapse">
+
+                            <label class="control-label ancholabel">Código de salón</label>
+                            <div class="anchoimput">
+                                <input asp-for="ClassRoomId" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="ClassRoomId" class="text-danger"></span>
+
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Ubicación</label>
+                            <div class="anchoimput">
+                                <select asp-for="CourseLocationId"
+                                        class="form-control"
+                                        asp-items="@(new SelectList(@ViewBag.CourseLocation,"Value", "Text"))">
+                                </select>
+                                <span asp-validation-for="CourseLocationId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nombre del salón</label>
+                            <div class="anchoimput">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Capacidad</label>
+                            <div class="anchoimput">
+                                <input asp-for="MaxStudentQty" class="form-control" />
+                                <span asp-validation-for="MaxStudentQty" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Hora desde</label>
+
+                            <div class="anchoimput">
+                                <input asp-for="AvailableTimeStart" class="form-control" />
+                                <span asp-validation-for="AvailableTimeStart" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Hora hasta</label>
+                            <div class="anchoimput">
+                                <input asp-for="AvailableTimeEnd" class="form-control" />
+                                <span asp-validation-for="AvailableTimeEnd" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Comentario</label>
+                            <div class="anchoimput">
+                                @*<input asp-for="Comment" class="form-control" />*@
+                                <textarea asp-for="Comment" class="form-control" rows="3" placeholder="Máximo de 100 caracteres"></textarea>
+                                <span asp-validation-for="Comment" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

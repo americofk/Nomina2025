@@ -1,0 +1,326 @@
+﻿@using DC365_WebNR.UI.Process
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title class="title-test">Report</title>
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css" />
+    <link href="~/css/AppSwitch.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/PreLoader.css" />
+    <link href="~/css/AppAlert.css" rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <style>
+        html {
+            font-family: 'Microsoft Sans Serif';
+        }
+
+        .report-container {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+            background-color: #dddddd;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .report-navbar {
+            width: 100%;
+            height: 40px;
+            background-color: #fefeff;
+            box-shadow: 0.5px 0.5px 4px 0 rgba(0,0,0,0.7);
+            z-index: 2;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding: 0px 30px;
+            box-sizing: border-box;
+        }
+
+            .report-navbar > .rnavbar-elements {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 20px;
+                color: #636363;
+                cursor: pointer;
+                font-size: 18px;
+            }
+
+                .report-navbar > .rnavbar-elements > i:active {
+                    transform: scale(1.1);
+                }
+
+                .report-navbar > .rnavbar-elements > .elements-separator {
+                    height: 60%;
+                    width: 0.5px;
+                    border: 1px solid #b5b4b4;
+                    border-radius: 50%;
+                    cursor: initial;
+                }
+
+        .container-scrollbody {
+            overflow: auto;
+            flex: 1;
+        }
+
+        .report-body {
+            background-color: #fff;
+            width: 60%;
+            margin: auto;
+            box-shadow: 1px 1px 8px 0 rgba(167, 167, 167, 0.83);
+            border: 1px solid rgba(167, 167, 167, 0.83);
+            border-radius: 3px;
+            box-sizing: border-box;
+            padding: 1%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            font-size: 16px;
+            min-height: 96%;
+        }
+
+            .report-body.w20 {
+                width: 20%;
+                font-size: 4px;
+            }
+
+            .report-body.w40 {
+                width: 40%;
+                font-size: 10px;
+            }
+
+            .report-body.w60 {
+                width: 60%;
+                font-size: 16px;
+            }
+
+            .report-body.w80 {
+                width: 80%;
+                font-size: 22px;
+            }
+
+            .report-body.w100 {
+                width: 100%;
+                font-size: 28px;
+            }
+
+            .report-body.w120 {
+                width: 120%;
+                font-size: 34px;
+            }
+
+            .report-body.w140 {
+                width: 140%;
+                font-size: 40px;
+            }
+
+        .image-report {
+            width: 100%;
+            height: 100%;
+            background-repeat: no-repeat;
+        }
+
+        .report-filter-section.show {
+            left: 0;
+        }
+
+        .report-filter-section {
+            height: calc(100vh - 40px);
+            position: fixed;
+            width: 20%;
+            min-width: 300px;
+            background-color: #fbfbfb;
+            top: 40px;
+            left: -500px;
+            box-shadow: 1px 1px 10px rgb(145 145 145 / 80%);
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: center;
+            /*padding: 20px;*/
+            transition: left 0.3s ease-in-out;
+        }
+
+            .report-filter-section > h3 {
+                border-bottom: 2px solid #ededed;
+            }
+
+            .report-filter-section > .shadow-text {
+                box-shadow: -1px 1px 15px 0.5px rgb(0 0 0 / 37%);
+                width: 50%;
+                margin-top: -16px;
+                background-color: rgb(0 0 0 / 4%);
+                height: 0.5px;
+            }
+
+        .body-filter-section {
+            display: flex;
+            flex-direction: column;
+            padding: 0px 10px;
+            width: 100%;
+            box-sizing: border-box;
+            flex: 1;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+            .body-filter-section > .param-fields {
+                display: flex;
+                flex-direction: column;
+                padding: 10px 20px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+        .param-fields > .form-control {
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+
+            .param-fields > .form-control:focus {
+                color: #495057;
+                background-color: #fff;
+                border-color: #80bdff;
+                outline: 0;
+                box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%)
+            }
+
+        .param-fields > label {
+            font-size: 15px;
+            display: inline-block;
+            margin-bottom: .5rem;
+        }
+
+        .footer-filter-section {
+            margin-top: 10px;
+            display: flex;
+            height: 60px;
+            padding: 10px 10px 20px 10px;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            border-top: 2px solid #ededed;
+        }
+
+            .footer-filter-section > .btnAction {
+                border: 0px;
+                font-size: 14px;
+                color: #fff;
+                background-color: rgb(65 151 243 / 82%);
+                border-radius: 3px;
+                padding: 10px;
+                width: 60%;
+                cursor: pointer;
+            }
+
+        .collapse {
+            display: none;
+        }
+
+        .background-container {
+            z-index: 0;
+        }
+    </style>
+</head>
+
+
+<body class="report-container">
+    <div class="report-navbar">
+        <div class="rnavbar-elements">
+            <i class="fa fa-list show-hide-parameters" title="Mostrar/Ocultar parámetros"></i>
+            <input type="hidden" class="Type-dgt" value="@ViewBag.typeDGT" />
+        </div>
+
+        <div class="rnavbar-elements">
+            <i class="fa fa-search-minus zoom-minus" title="- zoom"></i>
+            <label class="control-label" id="zoom-label">60%</label>
+            <i class="fa fa-search-plus zoom-plus" title="+ zoom"></i>
+        </div>
+
+        <div class="rnavbar-elements">
+            <button form="SendEmailReport"><i class="fa fa-book stylebtnsearchDashboard send-email"></i></button>
+            <a class="fa fa-file-excel-o stylebtnsearchDashboard generar-txt"></a>
+            <a class="fa fa-file-excel-o stylebtnsearchDashboard exportarExcel" title="Exportar a Excel"></a>
+            <div class="elements-separator"></div>
+            <i class="fa fa-print" title="Imprmimir" onclick="printFunction()"></i>
+            <div class="elements-separator"></div>
+            <i class="fa fa-gear" title="Configuración" onclick="openReportConfig()"></i>
+
+        </div>
+    </div>
+
+    <!-- Modal barra de carga -->
+    <div class="progreso collapse">
+        @Html.HtmlLoader();
+    </div>
+
+    <div class="container-scrollbody">
+        <div class="report-body" id="report-body" data-zoom="60">
+            @RenderBody()
+        </div>
+    </div>
+    @{
+        string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    }
+    <script src="~/js/AppAlert.js"></script>
+    <script src="~/js/Utilidades.js"></script>
+    
+    <script type="text/javascript">
+        $(".zoom-plus").on("click", function () {
+            var datazoom = $("#report-body").attr("data-zoom");
+
+            if (datazoom != "140") {
+                $("#report-body").removeClass(`w${datazoom}`);
+                $("#report-body").addClass(`w${parseFloat(datazoom) + 20}`);
+
+                $("#report-body").attr("data-zoom", `${parseFloat(datazoom) + 20}`);
+                $("#zoom-label").text(`${parseFloat(datazoom) + 20}%`);
+
+            }
+        });
+
+        $(".zoom-minus").on("click", function () {
+            var datazoom = $("#report-body").attr("data-zoom");
+
+            if (datazoom != "20") {
+                $("#report-body").removeClass(`w${datazoom}`);
+                $("#report-body").addClass(`w${parseFloat(datazoom) - 20}`);
+
+                $("#report-body").attr("data-zoom", `${parseFloat(datazoom) - 20}`);
+                $("#zoom-label").text(`${parseFloat(datazoom) - 20}%`);
+            }
+        });
+
+        $(".show-hide-parameters").on("click", function () {
+            $(".report-filter-section").toggleClass("show");
+        });
+
+        function printFunction() {
+            window.print();
+        }
+
+        function openReportConfig() {
+            window.open("/configuracionreportes", '_blank')
+        }
+
+
+
+
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

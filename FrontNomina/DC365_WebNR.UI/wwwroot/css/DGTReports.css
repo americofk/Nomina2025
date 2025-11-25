@@ -1,0 +1,10 @@
+﻿.body-content-head{
+    width: 100%;
+    /*padding-right: 37%;*/
+    box-sizing:border-box;
+}
+
+.content-title > label:last-child {
+    font-weight:100;
+}
+

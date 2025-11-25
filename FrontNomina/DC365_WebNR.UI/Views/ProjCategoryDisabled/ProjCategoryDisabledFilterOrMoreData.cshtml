@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.ProjCategory>
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app select-ProjectCategory">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal ProjCategoryIdtbl" data-title="ID Categoría">
+            @Html.DisplayFor(modelItem => item.ProjCategoryId)
+        </td>
+        <td class="cell-app Nametbl" data-title="Nombre de la categoría">
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td class="cell-app LedgerAccounttbl" data-title="Cuenta contable">
+            @Html.DisplayFor(modelItem => item.LedgerAccount)
+        </td>
+
+    </tr>
+}

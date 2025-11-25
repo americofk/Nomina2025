@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nómina - iniciar sesión</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/font-awesome/css/font-awesome.min.css" />
+
+    <link rel="stylesheet" href="~/css/Login.css" />
+    @*<link rel="stylesheet" href="~/css/popWindow.css" />*@
+    <link rel="stylesheet" href="~/css/PreLoader.css" />
+    <link href="~/css/AppAlert.css" rel="stylesheet" />
+</head>
+<body class="login_custon">
+    <div>
+        <!-- Modal barra de carga -->
+        <div class="modal progreso" tabindex="-1" role="dialog" aria-hidden="true" style="background: #edf1f5ba">
+            <div class="modal-Espera modal-lg-empleados">
+                @using DC365_WebNR.UI.Process
+                @Html.HtmlLoader();
+            </div>
+        </div>
+        <!--/ Modal barra de carga -->
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="footer_login">
+            &copy; @DateTime.Now.Year Dynacorp 365. Todos los derechos reservados
+        </div>
+        <div class="clearfix"></div>
+    </footer>
+    @{
+
+        string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    }
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @*<script src="~/js/popWindow.js?@version" asp-append-version="true"></script>*@
+    <script src="~/js/login.js?@version" asp-append-version="true"></script>
+    <script src="~/js/Utilidades.js?@version"></script>
+    <script src="~/js/AppAlert.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

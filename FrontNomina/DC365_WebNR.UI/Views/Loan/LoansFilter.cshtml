@@ -1,0 +1,43 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Loan>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectLoans">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal LoanIdIdTbl" data-title="Id Código">
+            @Html.DisplayFor(modelItem => item.LoanId)
+        </td>
+        <td class="cell-app Nametbl" data-title="Nombre del código">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="cell-app ProjIdtbl" data-title="Proyecto">
+            @Html.DisplayFor(modelItem => item.ProjId)
+        </td>
+        <td class="cell-app ProjCategoryIdtbl" data-title="Categoria de proyecto">
+            @Html.DisplayFor(modelItem => item.ProjCategoryId)
+        </td>
+        <td class="cell-app ValidFromtbl" data-title="Valido desde">
+            @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app ValidTotbl" data-title="Valido hastao">
+            @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app LedgerAccounttbl" data-title="Cuenta contable">
+            @Html.DisplayFor(modelItem => item.LedgerAccount)
+        </td>
+        <td class="cell-app DepartmentIdtbl" data-title="Departamento">
+            @Html.DisplayFor(modelItem => item.DepartmentId)
+        </td>
+
+        <td class="cell-app Descriptiontbl" data-title="Descripción">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+}

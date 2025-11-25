@@ -1,0 +1,41 @@
+﻿@using System.Globalization;
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.User>
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+
+    var Administrator = item.ElevationTypeBool ? "checked='checked'" : "";
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectUsers">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal Aliastbl" data-title="Alias">
+            @Html.DisplayFor(modelItem => item.Alias)
+        </td>
+        <td class="cell-app Nametbl" data-title="Nombre">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="cell-app QtyWorkerstbl" data-title="Email)">
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td class="cell-app FormatCodeIdtbl" data-title="Formato regional">
+            @Html.DisplayFor(modelItem => item.FormatCodeId)
+
+        </td>
+        <td class="cell-app CompanyDefaultIdtbl" data-title="Empresa predefinida">
+            @Html.DisplayFor(modelItem => item.CompanyDefaultId)
+        </td>
+
+        <td class="cell-app " data-title="¿Administrador?">
+            <label class="switch disabled">
+                <input type="checkbox" disabled @Administrator>
+                <span class="slider round"></span>
+            </label>
+        </td>
+
+    </tr>
+}

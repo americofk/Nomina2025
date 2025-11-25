@@ -1,0 +1,66 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!-- Impuestos de empleados-->
+<div class="modal modal-employee-Tax" aria-hidden="true">
+    <div class="main-content-modal w50">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-tax">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-delete-Tax" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-Tax">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--formulario nuevo impuesto-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-newTax collapse">
+
+
+                </div>
+
+                <!--tabla-->
+                <h3 class="TituloEstandar">Impuestos</h3>
+                <div class="scrollbar-tableprimary-submodal ">
+                    <div class="container-table-app datatable-Tax" id="content-scroll">
+
+                    </div>
+                </div>
+
+
+                <form asp-action="delete" class="delete-Tax collapse" id="form-delete-Tax">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

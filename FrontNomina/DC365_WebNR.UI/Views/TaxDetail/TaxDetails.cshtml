@@ -1,0 +1,37 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.TaxDetail>
+@using System.Globalization;
+
+@{int indexCheck = 1; }
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-TaxDetail-{indexCheck++}";
+    <tr class="row-app rowtable-TaxDetail" style="cursor:pointer">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectTaxDetail">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal AnnualAmountHigherTbl" data-title="Salario anual superior a">
+            @Convert.ToDecimal(item.AnnualAmountHigher).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app" data-title="Salario anual no excede ">
+            @Convert.ToDecimal(item.AnnualAmountNotExceed).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app" data-title="% Tasa">
+            @Convert.ToDecimal(item.Percent).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app" data-title="Cuota fija">
+            @Convert.ToDecimal(item.FixedAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+
+        <td class="cell-app" data-title="Escala aplicable">
+            @Convert.ToDecimal(item.ApplicableScale).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+
+        <td class="cell-app InternalIdtbltax" style="display:none">
+            @Html.DisplayFor(modelItem => item.InternalId)
+        </td>
+
+    </tr>
+}

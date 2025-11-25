@@ -1,0 +1,69 @@
+﻿@using DC365_WebNR.CORE.Domain.Models.Enums;
+@model DC365_WebNR.CORE.Domain.Models.CourseInstructors
+
+@{
+    List<SelectListItem> instructorId = (List<SelectListItem>)ViewBag.InstructorId;
+}
+<div class="new-indicator for-employee-contactinfo">
+
+</div>
+
+<div class="new-Addres-Emp">
+    <div class="contenTitleandHistori">
+        @{
+            if (string.IsNullOrEmpty(Model.CourseIdInstructor))
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo instructor de curso</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar instructor de curso</h3>
+            }
+        }
+    </div>
+    <form id="new_course-instructors" asp-action="Save">
+        <div class="conten-input-modal">
+
+            <div class="cont-input-newform-col2">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Instructor</label>
+                    <div>
+                        @Html.DropDownList("InstructorId", instructorId, "Seleccione...", new { @class = "form-control" })
+                        <span asp-validation-for="InstructorId" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cont-input-newform-col2">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Comentario</label>
+                    <div>
+                        <textarea asp-for="Comment" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="CourseIdInstructor" class="form-control" />
+                            <span asp-validation-for="CourseIdInstructor" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_course_instructors" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>

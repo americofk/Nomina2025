@@ -1,0 +1,62 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.CalendarHolidayResponse
+@* Opciones de vista parcial *@
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="createAndEditCalendarHoliday" class="btn2" />
+                </a>
+            </li>
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- nuevo dia feriado -->
+<div class="collapse contNewEntyti">
+    <input type="text" class="form-control codigoDeparment" style="display:none">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios">Nuevo dia feriado</h3>
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditCalendarHoliday" asp-action="save">
+
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Fecha</label>
+                            <div class="anchoimput">
+                                <input asp-for="CalendarDate" class="form-control"/>
+                                <span asp-validation-for="CalendarDate" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                       
+
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

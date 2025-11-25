@@ -1,0 +1,155 @@
+﻿/*a:not([href]):not([tabindex]) {
+    color: white;
+    text-decoration: none;
+}
+
+    a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
+        color: white;
+        text-decoration: none;
+    }*/
+
+/*Clase para el contenedor del menú*/
+.menuoptions-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menuoptions {
+    /*background-color: rgb(27, 76, 236);*/
+    /*width: 100%;*/
+    height: 40px;
+    padding: 1px 1% 1px 1.5%;
+    display: flex;
+    align-items: center;
+}
+
+    /*.menuoptions > li {
+        display: inline-block;
+        list-style: none;
+        height: 100%;
+        padding-right: 5px;
+        padding-left: 5px;
+        cursor: pointer;
+        margin-right: 5px;*/
+        /* width: 100px; */
+    /*}*/
+
+    .menuoptions > li {
+        padding: 8px 10px 8px 10px;
+        list-style: none;
+        height: 40px;
+        color: #fff;
+        display: inline-block;
+        /*margin-right: 5px;*/
+    }
+
+        .menuoptions > li:hover {
+            /*background-color: rgb(76, 132, 243);*/
+            background-color: rgb(211 225 255 / 23%);
+            transition: all .1s ease-in;
+            border-radius: 1px;
+            transform: scale(0.97);
+        }
+
+        /*Efecto del botón al pulsarlo*/ 
+        .menuoptions > li:active {
+            /*background-color: rgb(76, 132, 243);*/
+            background-color: #172c4d;
+            transform: scale(1.1);
+            box-shadow: 1px 1px 10px 1px rgba(0,0,0, 0.7);
+        }
+
+
+    .menuoptions > .li-separador:hover {
+        background-color: transparent;
+    }
+
+    .menuoptions > li > a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        /* align-content: center; */
+        /* justify-content: center; */
+        /* justify-items: center; */
+        color: white;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .menuoptions > .li-separador > a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        color: white;
+        height: 100%;
+        background: #fff;
+        border: 1px solid #fff;
+        cursor: initial;
+    }
+
+        /*.menuoptions > .li-separador > a > img {
+            margin-right: 5px;*/
+            /*width: 60%;
+                height: 60%;*/
+        /*}*/
+
+            .menuoptions > li > a > i {
+                /*font-size: 21px;*/
+                margin-right: 5px;
+                /*color: #fff;
+                height: 100%;*/
+                font-size: 18px;
+                color: #d9d9d9;
+                height: 70%;
+            }
+
+            .menuoptions > li > a > .i-close {
+                font-size: 22px;
+                line-height: 0.7;
+                margin: 0;
+            }
+
+            .menuoptions > li > a > .i-question {
+                font-size: 21px;
+                line-height: 0.8;
+                margin: 0;
+            }
+
+
+
+/*Estilos para probar */
+.opciones-Pagina {
+    font-size: 18px;
+    color: #d9d9d9;
+}
+
+    .opciones-Pagina:hover {
+        transform: scale(1.1);
+    }
+
+.ContOpciones-Pagina {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 0;
+    flex-direction: row-reverse;
+    margin-right: 1.5%;
+    top: -22px;
+}
+
+.fa-close {
+    font-size: 20px;
+    color: #d9d9d9;
+}
+
+.alfnal {
+    margin-right: 1.5%;
+}
+
+
+
+
+
+

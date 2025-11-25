@@ -1,0 +1,154 @@
+﻿@using System.Globalization;
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.User>
+@{
+    ViewData["Title"] = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/User.css" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+
+<div class="contDasboard">
+    <input type="hidden" class="Image" />
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewUser">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+
+                <li class="EditUsers">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteUser" class="btn2" />
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="menuoptions">
+                <li id="id-help-user">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-question i-question"></i>
+                    </a>
+                </li>
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-repeat"></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla de usuarios -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Usuarios</h3>
+       
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+               
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblUser" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Alias</td>
+                            <td class="cell-app  cell-header-app">Nombre</td>
+                            <td class="cell-app  cell-header-app">Email</td>
+                            <td class="cell-app  cell-header-app">Formato regional</td>
+                            <td class="cell-app  cell-header-app">Empresa predefinida</td>
+                            <td class="cell-app  cell-header-app">¿Administrador?</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-user">
+                        @{ int indexCheck = 1;}
+                        @foreach (var item in Model)
+                        {
+
+                            var Administrator = item.ElevationTypeBool ? "checked='checked'" : "";
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectUsers">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal Aliastbl" data-title="Alias">
+                                    @Html.DisplayFor(modelItem => item.Alias)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app QtyWorkerstbl" data-title="Email)">
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td class="cell-app FormatCodeIdtbl" data-title="Formato regional">
+                                    @Html.DisplayFor(modelItem => item.FormatCodeId)
+
+                                </td>
+                                <td class="cell-app CompanyDefaultIdtbl" data-title="Empresa predefinida">
+                                    @Html.DisplayFor(modelItem => item.CompanyDefaultId)
+                                </td>
+
+                                <td class="cell-app " data-title="¿Administrador?">
+                                    <label class="switch disabled">
+                                        <input type="checkbox" disabled @Administrator>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- nuevo usuario -->
+    @{await Html.RenderPartialAsync("NewAndEditUser", new DC365_WebNR.CORE.Domain.Models.User());}
+
+    <!-- modal asignacion de empresas al usuario -->
+    <div class="modal ModCompanies" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <!-- modal asignacion de roles al usuario -->
+    <div class="modal ModAsigRoles" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
+    <form asp-action="Delete" id="DeleteUser" hidden>
+    </form>
+
+    @*Sección de ayuda*@
+    <div class="help-user"></div>
+</div>
+
+<script src="~/js/User.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

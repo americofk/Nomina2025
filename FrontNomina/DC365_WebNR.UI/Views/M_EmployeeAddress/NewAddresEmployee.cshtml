@@ -1,0 +1,126 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.EmployeeAddress
+@{
+    List<SelectListItem> provinces = (List<SelectListItem>)ViewBag.Provinces;
+
+}
+<div class="new-indicator for-employee-address">
+    @*<div class="new-indicator">*@
+
+</div>
+
+<div class="newAddresEmp">
+    <div class="contenTitleandHistori">
+        <h3 class="TituloForMod titulonuevadireccion">Nueva dirección</h3>
+    </div>
+    <form id="newAddres" asp-action="Save">
+        <div class="conten-input-modal">
+            <div class="cont-input-newform-col3">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye">Casa</label>
+                    <div>
+                        <input asp-for="Home" class="form-control" />
+                        <span asp-validation-for="Home" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye">Calle</label>
+                    <div>
+                        <input asp-for="Street" class="form-control" />
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye">Sector</label>
+                    <div>
+                        <input asp-for="Sector" class="form-control" />
+                        <span asp-validation-for="Sector" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Casa</label>
+                        <div>
+                            <input asp-for="EmployeeIdAddres" class="form-control" />
+                            <span asp-validation-for="EmployeeIdAddres" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cont-input-newform-col3">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeTwo">Ciudad</label>
+                    <div>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeTwo">Provincia</label>
+                    <div>
+                        @Html.DropDownList("Province", provinces, "Seleccione...", new { @class = "form-control" })
+                        <span asp-validation-for="Province" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeTwo">País</label>
+                    <div>
+                       @* <select asp-for="CountryId" class="form-control">
+                        </select>*@
+                        <input asp-for="CountryId" class="form-control" value="DOM" readonly="readonly"/>
+
+                        <span asp-validation-for="CountryId" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cont-input-newform-col3">
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmployeComen">Código</label>
+                        <div>
+                            <input asp-for="InternalId" class="form-control" />
+                            <span asp-validation-for="InternalId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Comentario</label>
+                    <div>
+                        <textarea asp-for="Comment" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye-slider">
+                    <label class="control-label label-switch">Principal</label>
+                    <div>
+                        <label class="switch">
+                            <input asp-for="IsPrincipal" id="IsPrincipal" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelarNewAddress" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,187 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Course>
+@{
+    ViewData["Title"] = "Courses";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+<link href="~/css/Employees.css" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+
+<div class="contDasboard">
+    <input type="hidden" class="Image" />
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewCourse">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+
+                <li class="EditCourse">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteCourse" class="inputTypesubmit" />
+
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="opcioneslistpageForm collapse">
+
+
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-save"></i>
+                        <input type="submit" value="Guardar" form="createAndEditCourse" class="btn2" />
+
+
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpCloseform">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- tabla de cursos -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Cursos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @*<input type="text" class="form-control-Filtro buscador BuscartblClassRoom" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblCourse">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Curso</td>
+                            <td class="cell-app  cell-header-app">Tipo de curso</td>
+                            <td class="cell-app  cell-header-app">Nombre de curso</td>
+                            <td class="cell-app  cell-header-app">Fecha y hora de inicio</td>
+                            <td class="cell-app  cell-header-app">Fecha y hora final</td>
+                            <td class="cell-app  cell-header-app">Aula o salón</td>
+                            <td class="cell-app  cell-header-app">Estado</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Course">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectCourse">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal CourseIdtblcur" data-title="Id Curso">
+                                    @Html.DisplayFor(modelItem => item.CourseId)
+                                </td>
+                                <td class="cell-app CourseTypeNametblcur" data-title="Tipo de curso">
+                                    @Html.DisplayFor(modelItem => item.CourseTypeName)
+                                </td>
+                                <td class="cell-app CourseNametblcur" data-title="Nombre de curso">
+                                    @Html.DisplayFor(modelItem => item.CourseName)
+                                </td>
+
+                                <td class="cell-app StartDateTimetblcur" data-title="Fecha y hora de inicio">
+                                    @Html.DisplayFor(modelItem => item.StartDateTime)
+                                </td>
+
+                                <td class="cell-app EndDateTimetblcur" data-title="Fecha y hora final">
+                                    @Html.DisplayFor(modelItem => item.EndDateTime)
+                                </td>
+
+                                <td class="cell-app ClassRoomNametblcur" data-title="Aula o salón">
+                                    @Html.DisplayFor(modelItem => item.ClassRoomName)
+                                </td>
+
+                                <td class="cell-app CourseStatustblcur" data-title="Estado)">
+                                    @Html.DisplayFor(modelItem => item.CourseStatus)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- nuevo curso -->
+    @{await Html.RenderPartialAsync("NewAndEditCourse", new DC365_WebNR.CORE.Domain.Models.Course());}
+
+    <!-- Modal instuctores de cursos-->
+    @{await Html.RenderPartialAsync("ModalCourseInstructor");}
+
+    <!-- Modal participantes de cursos-->
+    @{await Html.RenderPartialAsync("ModalCourseEmployees");}
+    
+    <!-- Modal puestos de cursos-->
+    @{await Html.RenderPartialAsync("ModalCoursePosition");}
+
+    <form asp-action="delete" class="DeleteCourse collapse" id="DeleteCourse">
+    </form>
+
+</div>
+<script src="~/js/Course.js"></script>
+<script src="~/js/AppInputDate.js"></script>
+<script src="~/js/Course/CourseInstructors.js" type="module"></script>
+<script src="~/js/Course/CourseEmployees.js" type="module"></script>
+<script src="~/js/Course/CoursePosition.js" type="module"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

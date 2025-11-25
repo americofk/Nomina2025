@@ -1,0 +1,144 @@
+﻿@using System.Globalization;
+@{
+    ViewData["Title"] = "Departmentdisabled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+<link href="~/css/Department.css" rel="stylesheet" />
+<div class="contDasboard">
+    <input type="hidden" class="Image" />
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="deleDPDisable" class="inputTypesubmit" />
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class=" OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class=" Cerrar-DepartmentDisabled">
+
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="opcioneslistpageForm collapse">
+        <ul id="opcionescajachica" class="menuopciones">
+            <li class="SaveNewAndEditDepartment">
+                <a class="btn2 btn-app">
+                    <img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones"> Guardar
+                </a>
+            </li>
+        </ul>
+        <div class="ContOpciones-Pagina contOpciones">
+            <div class="opciones-Pagina OpCloseform">
+                <img src="~/images/Dashboard/Cerrar.png" class="Iconos_opciones-Pagina">
+            </div>
+        </div>
+    </div>
+
+    <!-- tabla departamentos -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Departamentos inactivos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @*<input type="text" class="form-control-FiltroDepartment buscador BuscartblDepartment" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Habilitar departamento</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="EnabledDepartment" class="idCheckeditar">
+                    <span class="slider round" for="DisebleDepartment"></span>
+
+                </label>
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblDepartmentDisabled" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">ID Departamento</td>
+                            <td class="cell-app  cell-header-app">Nombre del Departamento</td>
+                            <td class="cell-app  cell-header-app">Trabajadores</td>
+                            <td class="cell-app  cell-header-app">Fecha inicial</td>
+                            <td class="cell-app  cell-header-app">Fecha final</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Department-Disabled">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in ViewData["ListDepartment"] as IList<DC365_WebNR.CORE.Domain.Models.Department>)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectDepartment">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal DepartmentIdtbl" data-title="ID Departamento">
+                                    @Html.DisplayFor(modelItem => item.DepartmentId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre del Departamento">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app QtyWorkerstbl" data-title="Trabajadores">
+                                    @Html.DisplayFor(modelItem => item.QtyWorkers)
+                                </td>
+                                <td class="cell-app StartDatetbl" data-title="Fecha inicial">
+                                    @Convert.ToDateTime(item.StartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app EndDatetbl" data-title="Fecha final">
+                                    @Convert.ToDateTime(item.EndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app Descriptiontbl" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Eliminar -->
+    <form asp-action="deleteDepartmentDisabled" class="deleteDepartmentDisabled collapse" id="deleDPDisable">
+    </form>
+
+    <!-- habilitar -->
+    <form asp-action="updateStatus" class="updateStatusDepartment collapse" id="updateStatusDepartment">
+    </form>
+</div>
+
+<script src="~/js/M_Departmentdisabled.js?@version" type="module"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

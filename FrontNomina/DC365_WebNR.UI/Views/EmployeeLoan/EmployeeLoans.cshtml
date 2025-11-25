@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeLoan>
+@using System.Globalization;
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Id</td>
+                        <td class="cell-app  cell-header-app">Código</td>
+                        <td class="cell-app  cell-header-app">Nombre</td>
+                        <td class="cell-app  cell-header-app">Monto del préstamo</td>
+                        <td class="cell-app  cell-header-app">Cuotas</td>
+                        <td class="cell-app  cell-header-app">Pagado</td>
+                        <td class="cell-app  cell-header-app">Pendiente</td>
+                        <td class="cell-app  cell-header-app">Nómina</td>
+                        <td class="cell-app  cell-header-app">Nombre nómina</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+
+                        string idCheck2 = $"check-loan-{indexCheck2++}";
+                        <tr class="row-app rowtable-loan">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app select-loan-Employe">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal LoanIdtbl" data-title="Id">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+                            <td class="cell-app cell-principal" data-title="Código">
+                                @Html.DisplayFor(modelItem => item.LoanId)
+                            </td>
+                            <td class="cell-app cell-principal" data-title="Nombre">
+                                @Html.DisplayFor(modelItem => item.LoanName)
+                            </td>
+                          
+                            <td class="cell-app " data-title="Monto del préstamo">
+                                @Convert.ToDecimal(item.LoanAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app " data-title="Cuotas">
+                                @Html.DisplayFor(modelItem => item.TotalDues)
+                            </td>
+                            <td class="cell-app " data-title="Pagado">
+                                @Convert.ToDecimal(item.PaidAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app " data-title="Pendiente">
+                                @Convert.ToDecimal(item.PendingAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app " data-title="Nomina">
+                                @Html.DisplayFor(modelItem => item.PayrollId)
+                            </td>
+                            <td class="cell-app " data-title="Nomina">
+                                @Html.DisplayFor(modelItem => item.PayrollName)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    }
+}

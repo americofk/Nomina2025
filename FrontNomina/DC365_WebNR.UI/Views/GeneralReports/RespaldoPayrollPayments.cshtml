@@ -1,0 +1,239 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Reports.ReportPayrollpayment>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "PayrollPayments";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+
+}
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payroll;
+    List<SelectListItem> deparment = (List<SelectListItem>)ViewBag.Deparment;
+}
+
+
+<link href="~/css/Reportes.css" rel="stylesheet" />
+<link href="~/css/EstyleReportsPrint.css?@version" rel="stylesheet" media="print" />
+
+@{
+    var show = !ViewBag.hidefilter ? "show" : "";
+}
+<div class="report-filter-section @show">
+    <h3> Parámetros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+        <div class="param-fields">
+            <label class="control-label">Nómina</label>
+            @Html.DropDownList("Payrolls", payrolls, "Seleccione...", new { @class = "form-control" })
+
+        </div>
+        <div class="param-fields">
+            <label class="control-label"> Proceso de nómina</label>
+            <select class="form-control payrollprocessid" type="text">
+            </select>
+        </div>
+        <div class="param-fields">
+            <label class="control-label">Departamento</label>
+            @Html.DropDownList("Department", deparment, "Seleccione...", new { @class = "form-control" })
+        </div>
+         <div class="param-fields">
+            <label class="control-label">Empleados</label>
+            <select class="form-control employee-id-select" type="text">
+            </select>
+        </div>
+    </div>
+
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" id="update-report" data-type="payroll-payments" />
+    </div>
+</div>
+<div class="cont-general-report">
+    @{
+        if (Model.Count() == 0)
+        {
+            await Html.RenderPartialAsync("DefaultReportHeader", new string[] { "RECIBO PAGO DE NÓMINA", "vertical" } );
+        }
+        else
+        {
+            @*Cuerpo del reporte*@
+            @foreach (var item in Model)
+            {
+
+                @*Header*@
+                <div class="report-body-header">
+                    <div class="report-logo-date">
+                        <div class="report-logo">
+                            <img src="~/Images/ImagenLogin.png" />
+                        </div>
+                        <div class="report-date">
+                            <p>@DateTime.Now</p>
+                        </div>
+                    </div>
+
+                    <div class="report-title">
+                        <h3>RECIBO PAGO DE NÓMINA</h3>
+                    </div>
+
+                </div>
+
+                @*Content*@
+                <div class="report-body-content">
+
+                    <div class="cont-information-employee">
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Nombre del empleado</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@item.EmployeeName</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Fecha de ingreso</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@Convert.ToDateTime(item.StartWorkDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Cédula</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@item.Document</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Departamento</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@item.Department</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Puesto</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@item.PositionName</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Nómina</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@item.PayrollName</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Periodo de pago</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@item.Period</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Fecha de pago</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@Convert.ToDateTime(item.PaymentDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                            </div>
+                        </div>
+
+                        <div class="cont-title-values">
+                            <label class="control-label line-label-title">Forma de pago</label>
+                            <div class="anchoimput">
+                                <label class="line-label-values">@Html.DisplayFor(x => item.PayMethod)</label>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="cont-inform-pag">
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Salario</label>
+                            <label class="line-label-values-pag"> RD$  @Convert.ToDecimal(item.Salary).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))  </label>
+
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Préstamos</label>
+                            <label class="line-label-values-pag">(RD$  @Convert.ToDecimal(item.Loan).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">AFP</label>
+                            <label class="line-label-values-pag">(RD$  @Convert.ToDecimal(item.Afp).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">SFS</label>
+                            <label class="line-label-values-pag">(RD$  @Convert.ToDecimal(item.Sfs).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">ISR</label>
+                            <label class="line-label-values-pag">(RD$  @Convert.ToDecimal(item.Isr).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Comisiones</label>
+                            <label class="line-label-values-pag">RD$  @Convert.ToDecimal(item.Commision).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+                        
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Abono cooperativa</label>
+                            <label class="line-label-values-pag">RD$  @Convert.ToDecimal(item.DeductionCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+                        
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Préstamo cooperativa</label>
+                            <label class="line-label-values-pag">RD$  @Convert.ToDecimal(item.LoanCooperative).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Horas extras</label>
+                            <label class="line-label-values-pag">RD$  @Convert.ToDecimal(item.ExtraHour).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Otros ingresos</label>
+                            <label class="line-label-values-pag">RD$  @Convert.ToDecimal(item.OtherEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+
+
+                        <div class="cont-title-values-pago">
+                            <label class="control-label line-label-title-pag">Otras deducciones</label>
+                            <label class="line-label-values-pag">(RD$  @Convert.ToDecimal(item.OtherDiscount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture)))</label>
+                        </div>
+
+                        <div class="cont-title-values-pago total-pago">
+                            <label class="control-label line-label-title-pag">Total a cobrar</label>
+                            <label class="line-label-values-pag">RD$  @Convert.ToDecimal(item.Total).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @*Footer*@
+                <div class="report-body-footer">
+
+                </div>
+
+            }
+        }
+    }
+
+    <form id="SendEmailReport" asp-action="EmailPayrollPayments" hidden>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/Reports.js" type="module"></script>
+}
+
+
+

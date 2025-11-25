@@ -1,0 +1,83 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeWorkControlCalendarResponse>
+
+@using System.Globalization;
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Dia</td>
+                        <td class="cell-app  cell-header-app">Fecha</td>
+                        <td class="cell-app  cell-header-app">Hora desde</td>
+                        <td class="cell-app  cell-header-app">Hora hasta</td>
+                        <td class="cell-app  cell-header-app">Total de horas</td>
+                        <td class="cell-app  cell-header-app">Descanso desde</td>
+                        <td class="cell-app  cell-header-app">Descanso hasta</td>
+                        <td class="cell-app  cell-header-app">Estado</td>
+                    </tr>
+                </thead>
+
+                <tbody class="tbody-Table-EmployeeAssist" style="cursor:pointer">
+                    @{
+                        int indexCheck3 = 1;
+                    }
+                    @foreach (var item in Model)
+                    {
+
+                        string idCheck3 = $"check-assist-{indexCheck3++}";
+                        <tr class="row-app rowtable-assist">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck3" type="checkbox" class="check-table-app select-assist">
+                                <label for="@idCheck3" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal" data-title="WorkFrom">
+                                @Html.DisplayFor(modelItem => item.CalendarDay)
+                            </td>
+                            <td class="cell-app cell-principal WorkCalendarDayId" data-title="Fecha">
+                                @Convert.ToDateTime(item.CalendarDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                            </td>
+
+                            <td class="cell-app cell-principal" data-title="WorkFrom">
+                                @Html.DisplayFor(modelItem => item.WorkFrom)
+                            </td>
+
+                            <td class="cell-app cell-principal" data-title="WorkTo">
+                                @Html.DisplayFor(modelItem => item.WorkTo)
+                            </td>
+                            <td class="cell-app cell-principal" data-title="WorkTo">
+                                @Html.DisplayFor(modelItem => item.TotalHour)
+                            </td>
+                            <td class="cell-app " data-title="BreakWorkFrom">
+                                @Html.DisplayFor(modelItem => item.BreakWorkFrom)
+                            </td>
+
+                            <td class="cell-app " data-title="BreakWorkTo">
+                                @Html.DisplayFor(modelItem => item.BreakWorkTo)
+                            </td>
+                            <td class="cell-app cell-principal InternalId-control-assisttbl collapse" data-title="Código">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+                            <td class="cell-app cell-principal" data-title="Estado">
+                                @Html.DisplayFor(modelItem => item.StatusExtraHour)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    }
+}
+

@@ -1,0 +1,82 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!-- Prestamos de empleados-->
+<div class="modal modal-employee-Loan" aria-hidden="true">
+    <div class="ContenModModule">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        <li class="backward-btn collapse">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-arrow-left"></i>
+                            </a>
+                        </li>
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-Loan forward">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li class="forward">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-deleteLoan" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+                        <li class="Histori-employe-loans forward">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-edit "></i>
+                                Historial
+                            </a>
+                        </li>
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-Loan">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--formulario nuevo prestamo-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-newLoan collapse">
+
+
+                </div>
+
+                <!--tabla-->
+                <h3 class="TituloEstandar set-title-modloan">Préstamos</h3>
+                @*<h3 class="TituloEstandar set-title-modloan">Historial</h3>*@
+                <div class="scrollbar-tableprimary-submodal ">
+                    <div class="container-table-app datatable-Loan" id="content-scroll">
+
+                    </div>
+
+                    <div class="container-table-app datatable-Loan-history collpase-modal">
+
+                    </div>
+
+                </div>
+
+
+                <form asp-action="delete" class="delete-Loan collapse" id="form-deleteLoan">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

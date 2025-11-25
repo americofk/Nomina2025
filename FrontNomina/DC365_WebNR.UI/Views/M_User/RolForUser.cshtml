@@ -1,0 +1,67 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.MenuAssignedToUser>
+
+<div class="container-table-app" id="content-scroll" style="margin-bottom:50px">
+    <table class="table-app tblUser">
+        <thead>
+            <tr class="row-headerCustomUsers row-header-app">
+                <td class="cell-app check-cell-app cell-header-app">
+                    <input id="check-table-0" type="checkbox" class="check-table-app">
+                    <label for="check-table-0"> </label>
+                </td>
+                <td class="cell-app  cell-header-app">Descripción</td>
+                <td class="cell-app  cell-header-app">Ver</td>
+                <td class="cell-app  cell-header-app">Editar</td>
+                <td class="cell-app  cell-header-app">Eliminar</td>
+            </tr>
+        </thead>
+        <tbody class="tbodyTableRol">
+            @{int indexCheck2 = 1; }
+
+            @foreach (var item in Model)
+            {
+                var ver = item.PrivilegeView == true ? "checked='checked'" : "";
+                var edi = item.PrivilegeEdit == true ? "checked='checked'" : "";
+                var eli = item.PrivilegeDelete == true ? "checked='checked'" : "";
+
+                string idCheck = $"check-tableRolAsignados-{indexCheck2++}";
+                <tr class="row-app">
+
+                    <td class="cell-app check-cell-app">
+                        <input id="@idCheck" type="checkbox" class="check-table-app selecRolAsignados">
+                        <label for="@idCheck" class="label-cell"></label>
+                    </td>
+
+                    <td class="cell-app Nametbl" data-title="Descripcion">
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td class="cell-app Nametbl" data-title="Ver">
+                        <label class="switch disabled">
+                            <input type="checkbox" disabled @ver>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td class="cell-app Nametbl" data-title="Editar">
+                        <label class="switch disabled">
+                            <input type="checkbox" disabled @edi>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td class="cell-app Nametbl" data-title="Eliminar">
+                        <label class="switch disabled">
+                            <input type="checkbox" disabled @eli>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+
+                    <td class="cell-app MenuIdAssignedtbl" data-title="MenuId" style="display:none">
+                        @Html.DisplayFor(modelItem => item.MenuId)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

@@ -1,0 +1,174 @@
+﻿.bg-help-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 3000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+    .bg-help-section:before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        background-color: rgba(0,0,0,0.2);
+        z-index: -1;
+        width: 100%;
+        height: 100vh;
+    }
+
+.container-help-section {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    box-sizing: border-box;
+    /*height: 95%;*/
+    height: calc(100% - 27px);
+    width: 400px;
+    padding: 20px;
+    position: fixed;
+}
+
+.help-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #c3c3c3;
+    padding-bottom: 10px;
+}
+
+    .help-title > h3 {
+        margin-top: 0px;
+        color: #747474;
+        margin-bottom: 0px;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 1.5;
+    }
+
+    .help-title > .close-help {
+        width: 20px;
+        font-size: 20px;
+        font-weight: 100;
+        cursor: pointer;
+        color: #747474;
+    }
+
+        .help-title > .close-help:hover {
+            transform: scale(1.1);
+        }
+
+.card-content {
+    overflow-y: auto;
+    padding: 5px;
+}
+
+    .card-content > .card-help {
+        color: #747474;
+        margin-top: 30px;
+        padding: 10px;
+        box-sizing: border-box;
+        box-shadow: 0 1px 8px rgba(0,0,0,0.16);
+        border-radius: 3px;
+        width: 100%;
+        min-height: 100px;
+        line-height: 1.5;
+    }
+
+        .card-content > .card-help.hidden-more {
+            overflow-y: hidden;
+            max-height: 230px;
+        }
+
+        .card-content > .card-help > img {
+            margin-top: 10px;
+            width: 100%;
+            border: 1px;
+            vertical-align: text-bottom;
+            cursor: pointer;
+        }
+
+        .card-content > .card-help > h4 {
+            margin-top: 0px;
+            font-size: 18px;
+            margin-bottom: 0px;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+    .card-content > .card-help > p {
+        margin-top: 5px;
+        font-size: 16px;
+        margin-bottom:0px;
+    }
+
+    .card-content > .card-help > ul > li {
+        font-size: 16px;
+        margin-left: 30px;
+        list-style:disc;
+    }
+
+    .card-content > .card-help > .see-more {
+        position: relative;
+        font-size: 12px;
+        color: rgb(28, 59, 161);
+        display: block;
+        float: right;
+        cursor: pointer;
+        margin-top: -5px;
+    }
+
+.required::after {
+    content: "Obligatorio";
+    color: #EB4F4F;
+    margin-left: 3px;
+}
+
+.optional::after {
+    content: "Opcional";
+    color: #118c66;
+    margin-left: 3px;
+}
+
+.info-show {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #747474;
+    border: 0px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0;
+    /*position: fixed;*/
+}
+
+.help-image-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.77);
+    z-index: 2000;
+    cursor: pointer;
+}
+
+    .help-image-section > img {
+        width: 60%;
+        height: 50%;
+    }
+

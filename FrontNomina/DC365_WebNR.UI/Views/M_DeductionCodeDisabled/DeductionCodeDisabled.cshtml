@@ -1,0 +1,160 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.DeductionCode>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "DeductionCodeDisabled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/Employees.css" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteDeductionCode" class="inputTypesubmit" />
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="close-deductionCode">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="opcioneslistpageForm collapse">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-save"></i>
+                        <input type="submit" value="Guardar" form="NewAndEditDeductionCode" class="btn2" />
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpCloseform">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Códigos de descuento inactivos</h3>
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Habilitar código de descuento</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="EnableDeductionCode" class="idCheckeditar">
+                    <span class="slider round" for="EnableDeductionCode"></span>
+
+                </label>
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app-width table-app tblDeductionCode" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Código</td>
+                            <td class="cell-app  cell-header-app">Nombre del código</td>
+                            <td class="cell-app  cell-header-app">Impacto de nómina</td>
+                            <td class="cell-app  cell-header-app">Proyecto</td>
+                            <td class="cell-app  cell-header-app">Categoría proyecto</td>
+                            <td class="cell-app  cell-header-app">Válido desde</td>
+                            <td class="cell-app  cell-header-app">Válido hasta</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-deductionCode-Disabled">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectDeductionCode">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal DeductionCodeId-dc" data-title="Id Código">
+                                    @Html.DisplayFor(modelItem => item.DeductionCodeId)
+                                </td>
+                                <td class="cell-app Name-dc" data-title="Nombre del código">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app PayrollAction-dc" data-title="Impacto de nómina">
+                                    @Html.DisplayFor(modelItem => item.PayrollAction)
+                                </td>
+                                <td class="cell-app ProjId" data-title="Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+
+                                <td class="cell-app ProjCategory" data-title="Categoria proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjCategory)
+                                </td>
+                                <td class="cell-app ValidFrom" data-title="Valido desde">
+                                    @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                                </td>
+                                <td class="cell-app ValidTo" data-title="Valido hasta">
+                                    @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+
+                                <td class="cell-app Description" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    <form asp-action="delete" class="DeleteDeductionCode collapse" id="DeleteDeductionCode">
+    </form>
+
+    <form asp-action="updateStatus" class="enable-deductionCode collapse" id="enable-deductionCode">
+    </form>
+
+</div>
+<script src="~/js/DeductionCodeDisabled.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

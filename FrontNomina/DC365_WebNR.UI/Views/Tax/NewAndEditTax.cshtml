@@ -1,0 +1,237 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Tax
+
+@using DC365_WebNR.CORE.Domain.Models.Enums
+
+@{
+    List<SelectListItem> daparment = (List<SelectListItem>)ViewBag.Deparment;
+
+    List<SelectListItem> projects = (List<SelectListItem>)ViewBag.Projects;
+    List<SelectListItem> categoriaProyecto = (List<SelectListItem>)ViewBag.ProjCategories;
+    List<SelectListItem> currencies = (List<SelectListItem>)ViewBag.Currencies;
+}
+
+<!--Opciones de vista parcial  -->
+<div class="opcioneslistpageForm">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="FormNewAndEdiTax" class="btn2" />
+
+                </a>
+            </li>
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- New PayrollProcess -->
+<div class="collapse contNewEntyti">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                @{
+                    if (string.IsNullOrEmpty(Model.TaxId))
+                    {
+                        <h3 class="TituloFormularios seteartitulo">Nuevo impuesto</h3>
+
+                    }
+                    else
+                    {
+                        <h3 class="TituloForMod titulonuevadireccion">Editar impuesto</h3>
+                    }
+                }
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="FormNewAndEdiTax" asp-action="save">
+
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Id. Código</label>
+                            <div class="anchoimput-tax">
+                                @{
+                                    if (!string.IsNullOrEmpty(Model.TaxId))
+                                    {
+                                        <input asp-for="TaxId" class="form-control" readonly="readonly"/>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="TaxId" class="form-control" />
+                                        <span asp-validation-for="TaxId" class="text-danger"></span>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nombre del código</label>
+                            <div class="anchoimput-tax">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Proyecto</label>
+                            <div class="anchoimput-tax">
+                                @Html.DropDownList("ProjId", projects, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="ProjId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Categoría de proyecto</label>
+                            <div class="anchoimput-tax">
+                                @Html.DropDownList("ProjCategory", categoriaProyecto, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="ProjCategory" class="text-danger"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Departamento</label>
+
+                            <div class="anchoimput-tax">
+                                @Html.DropDownList("DepartmentId", daparment, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Válido desde</label>
+                            <div class="anchoimput-tax">
+                                <div class="app-input-date">
+                                    <input asp-for="ValidFrom" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                               
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Válido hasta</label>
+                            <div class="anchoimput-tax">
+                                <div class="app-input-date">
+                                    <input asp-for="ValidTo" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Cuenta contable</label>
+                            <div class="anchoimput-tax">
+                                <input asp-for="LedgerAccount" class="form-control" />
+                                <span asp-validation-for="LedgerAccount" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Moneda</label>
+
+                            <div class="anchoimput-tax">
+                                @{
+                                    if (!string.IsNullOrEmpty(Model.TaxId))
+                                    {
+                                        <input asp-for="Currency" class="form-control" readonly="readonly"/>
+                                    }
+                                    else
+                                    {
+                                        @Html.DropDownList("Currency", currencies, "Seleccione...", new { @class = "form-control" })
+                                        <span asp-validation-for="Currency" class="text-danger"></span>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput-tax">
+                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Máximo 100 caracteres"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+                <div class="contenedor-paycycle collapse">
+                    <h3 class="TituloFormularios">Configuración de tasa</h3>
+
+                    <div class="opcionesTwo">
+                        <div class="menuoptions-flex">
+                            <ul class="menuoptions">
+                                <li class="NewTaxDetail">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Agregar
+                                    </a>
+                                </li>
+                                
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="deleteTaxDetail" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+
+                    <!--formulario nuevo Configuración de tasas ISR-->
+                    <div class="cont-form-newandedit-two cont-form-new-config-isr collapse">
+
+
+                    </div>
+
+                    <div class="container-table-app">
+                        <div class="container-table-app" id="content-scroll">
+                            <table class="table-app tblCyclePay">
+                                <thead>
+                                    <tr class="row-header-app">
+                                        <td class="cell-app check-cell-app cell-header-app">
+                                            <input id="check-table-0" type="checkbox" class="check-table-app">
+                                            <label for="check-table-0"> </label>
+                                        </td>
+                                        <td class="cell-app  cell-header-app ">Salario anual superior a</td>
+                                        <td class="cell-app  cell-header-app ">Salario anual no excede</td>
+                                        <td class="cell-app  cell-header-app ">% Tasa</td>
+
+                                        <td class="cell-app  cell-header-app ">Cuota fija</td>
+                                        <td class="cell-app  cell-header-app ">Escala aplicable</td>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyTableTaxDetail">
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+                <form asp-action="delete" class="deleteTaxDetail collapse" id="deleteTaxDetail">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

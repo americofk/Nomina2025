@@ -1,0 +1,62 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeTax>
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Código</td>
+                        <td class="cell-app  cell-header-app">Desde</td>
+                        <td class="cell-app  cell-header-app">Hasta</td>
+                        <td class="cell-app  cell-header-app">Nómina</td>
+                        <td class="cell-app  cell-header-app">Nombre nómina</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+
+                        string idCheck2 = $"check-tax-{indexCheck2++}";
+                        <tr class="row-app rowtable-tax">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app select-tax-Employe">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal TaxIdtbl" data-title="Código">
+                                @Html.DisplayFor(modelItem => item.TaxId)
+                            </td>
+
+                            <td class="cell-app " data-title="Desde">
+                                @Html.DisplayFor(modelItem => item.ValidFrom)
+                            </td>
+
+                            <td class="cell-app " data-title="Hasta">
+                                @Html.DisplayFor(modelItem => item.ValidTo)
+                            </td>
+
+                            <td class="cell-app " data-title="Nomina">
+                                @Html.DisplayFor(modelItem => item.PayrollId)
+                            </td>
+
+                            <td class="cell-app " data-title="Nomina">
+                                @Html.DisplayFor(modelItem => item.PayrollName)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    }
+}

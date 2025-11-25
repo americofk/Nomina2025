@@ -1,0 +1,67 @@
+﻿@using System.Globalization
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.PayrollProcessDetail>
+@{
+    int count = 0;
+    string selectrow = "";
+}
+@foreach (var item in Model)
+{
+    count++;
+    if (count == 1) selectrow = "selected-row"; else selectrow = "selected-row";
+
+    <tr class="table-app see-novelties" style="cursor:pointer">
+        <td class="cell-app cell-principal style-td-icon">
+            <a href="@(Url.Action("", "empleadosactivos", new {workStatus="2",IdEmployee = item.EmployeeId}))"
+               target=@("_blank")>
+                <i class="fa fa-external-link link-payroll"></i>
+            </a>
+        </td>
+        
+        <td class="cell-app cell-principal PayrollProcessIdtbl" style="display:none">
+            @Html.DisplayFor(modelItem => item.PayrollProcessId)
+        </td>
+        <td class="cell-app EmployeeIdtbl" data-title="Id Empleado">
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+
+        <td class="cell-app " data-title="Nombre del empleado">
+            @Html.DisplayFor(modelItem => item.EmployeeName)
+        </td>
+
+        <td class="cell-app TotalAmounttbl cell-app-number" data-title="Salario">
+            @Convert.ToDecimal(item.TotalAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+
+        <td class="cell-app cell-app-number" data-title="Impuesto">
+            @Convert.ToDecimal(item.TotalTaxAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        
+        <td class="cell-app cell-app-number" data-title="Impuesto">
+            @Convert.ToDecimal(item.TotalTssAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        
+        <td class="cell-app cell-app-number" data-title="Impuesto">
+            @Convert.ToDecimal(item.TotalTssAndTaxAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+
+        <td class="cell-app " data-title="Forma de pago">
+            @Html.DisplayFor(modelItem => item.PayMethod)
+        </td>
+
+        <td class="cell-app " data-title="Cta. Banco">
+            @Html.DisplayFor(modelItem => item.BankAccount)
+        </td>
+
+        <td class="cell-app " data-title="Banco">
+            @Html.DisplayFor(modelItem => item.BankName)
+        </td>
+
+        <td class="cell-app " data-title="Documento">
+            @Html.DisplayFor(modelItem => item.Document)
+        </td>
+
+
+    </tr>
+}
+
+

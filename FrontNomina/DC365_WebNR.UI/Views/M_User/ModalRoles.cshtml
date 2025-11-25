@@ -1,0 +1,111 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.MenuApp>
+
+<div class="ContenModModule">
+    @*<div class="HeaderModal">
+            <button type="button" class="close" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h3 class="TituloModal">Lista de roles</h3>
+
+        </div>*@
+    <div class="opcioneslistpageForm">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="SaveNewAndEditUsers">
+                    <a class="btn2 btn-app">
+                        @*<img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">*@
+                        <i class="fa fa-save"></i>
+                        <input type="submit" value="Guardar" form="SaveUserRolForm" class="btn2" />
+                    </a>
+                </li>
+
+            </ul>
+
+            <ul class="menuoptions">
+                <li data-dismiss="modal">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <h3 class="titleModal">Lista de roles</h3>
+    <div class="contenPretabla buscadorModal">
+        <div class="BuscadorModalone">
+
+            <input type="text" class="BuscadorModal-control  Buscartblroles" placeholder="Filtro">
+        </div>
+    </div>
+    <div class="scrollbar-TableModal" style="background-color: #ffffff;">
+        <div class="container-container-table-app">
+            <div class="container-table-modal">
+                <div class="container-table-app" id="content-scroll" style="margin-bottom:50px">
+                    <table class="table-app tblroles-para-asignar">
+                        <thead>
+                            <tr class="row-header-app-tableModal">
+                                <td class="cell-app check-cell-app cell-header-app">
+                                    <input id="check-table-AsigCust" type="checkbox" class="check-table-app selectOptionCompaniesAll">
+                                    <label for="check-table-AsigCust" class="label-cell"> </label>
+                                </td>
+                                @*<td class="cell-app  cell-header-app">Rol</td>*@
+                                <td class="cell-app  cell-header-app">Descripción</td>
+                                <td class="cell-app  cell-header-app">Ver</td>
+                                <td class="cell-app  cell-header-app">Editar</td>
+                                <td class="cell-app  cell-header-app">Eliminar</td>
+
+                            </tr>
+                        </thead>
+                        <tbody class="tbodyTableMenu">
+                            @{int indexCheckrol = 0;}
+                            @foreach (var item in Model)
+                            {
+                                indexCheckrol++;
+                                string idCheck = $"check-table-rol-{indexCheckrol}";
+                                string idCheckver = $"check-table-rol-ver-{indexCheckrol}";
+                                string idCheckeditar = $"check-table-rol-edit-{indexCheckrol}";
+                                string idCheckeliminar = $"check-table-rol-eli-{indexCheckrol}";
+                                <tr class="row-app">
+
+                                    <td class="cell-app check-cell-app">
+                                        <input id="@idCheck" type="checkbox" class="check-table-app selectAsigRol">
+                                        <label for="@idCheck" class="label-cell"></label>
+                                    </td>
+
+                                    <td class="cell-app Nametbl" data-title="">
+                                        @Html.DisplayFor(modelItem => item.Description)
+                                    </td>
+                                    <td class="cell-app optionver" data-title="Ver">
+                                        <label class="switch clickCheckver">
+                                            <input type="checkbox" id="@idCheckver" class="idCheckver">
+                                            <span class="slider round" for="@idCheckver"></span>
+                                        </label>
+                                    </td>
+                                    <td class="cell-app optionEdi" data-title="Editar">
+                                        <label class="switch clickCheckeditar">
+                                            <input type="checkbox" id="@idCheckeditar" class="idCheckeditar">
+                                            <span class="slider round" for="@idCheckeditar"></span>
+                                        </label>
+                                    </td>
+                                    <td class="cell-app optionDelete" data-title="Eliminar">
+                                        <label class="switch clickCheckeliminar">
+                                            <input type="checkbox" id="@idCheckeliminar" class="idCheckeliminar">
+                                            <span class="slider round" for="@idCheckeliminar"></span>
+                                        </label>
+                                    </td>
+
+                                    <td class="cell-app MenuIdtblrol" data-title="Código" style="display:none">
+                                        @Html.DisplayFor(modelItem => item.MenuId)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <form asp-action="SaveRol" id="SaveUserRolForm" hidden>
+    </form>
+</div>

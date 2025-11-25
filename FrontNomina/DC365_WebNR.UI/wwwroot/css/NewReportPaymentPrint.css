@@ -1,0 +1,35 @@
+@page {
+    margin: 6mm;
+}
+
+.report-body {
+    font-size: 14px !important;
+    width: 100% !important;
+    height: 100%;
+    margin: 0;
+}
+
+.report-navbar {
+    display: none;
+}
+
+.report-filter-section {
+    display: none;
+}
+
+.container-scrollbody {
+    overflow: hidden;
+    flex: 1;
+}
+
+.report-container {
+    height: auto !important;
+}
+
+.receipt, cont-general-report {
+    font-size: 14px !important;
+}
+
+.mb-6 {
+    margin-bottom: 319px;
+}

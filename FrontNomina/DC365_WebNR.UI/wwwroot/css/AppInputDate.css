@@ -1,0 +1,57 @@
+﻿.app-input-date {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: initial;
+    position:relative;
+}
+
+
+    .app-input-date > input {
+        padding-right:70px;
+        flex: 1;
+    }
+
+    .app-input-date > i {
+        width: 30px;
+        background-color: #fff;
+        font-size: 17px;
+        /* border-radius: 2px; */
+        /*font-family: sans-serif;*/
+        /* border: 1px solid rgba(0, 0, 0, 1); */
+        cursor: pointer;
+        /* padding: 2px; */
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        height: 80%;
+        color: #474747;
+    }
+
+        .app-input-date > .app-input-date-today {
+            left: calc(100% - 67px);
+            line-height: 0px;
+            margin-top: 1px;
+            font-size: 19px;
+
+        }
+
+    .app-input-date > .app-input-date-never {
+        left: calc(100% - 42px);
+        font-size: 15px;
+        margin-top: -1px;
+        /*font-family: Roboto, monospace;*/
+    }
+
+
+#ValidFrom.disabledDate ~ i {
+    display: none;
+}
+
+@media (max-width: 1370px) {
+    .app-input-date {
+        flex-wrap: wrap;
+    }
+}

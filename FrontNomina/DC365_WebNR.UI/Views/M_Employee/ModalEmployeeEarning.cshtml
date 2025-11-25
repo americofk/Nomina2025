@@ -1,0 +1,69 @@
+﻿@{
+    bool typeview = (bool)ViewBag.typeView;
+}
+<!-- Codigos de ganancia-->
+<div class="modal modal-employee-EarningCode" aria-hidden="true">
+    <div class="Conten-mod-earningcode-proper">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+                        @{
+                            if (typeview)
+                            {
+                                <li class="new-EarningCode">
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-plus-square-o"></i>
+                                        Nuevo
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app">
+                                        <i class="fa fa-trash"></i>
+                                        <input type="submit" value="Eliminar" form="form-deleteEarningCode" class="inputTypesubmit" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+
+                    </ul>
+
+                    <ul class="menuoptions">
+                        <li class="close-modal-EarningCode">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--formulario nuevo Codigos de ganancia-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-newEarningCode collapse">
+
+                </div>
+
+                <h3 class="TituloEstandar">Códigos de ingresos</h3>
+                <!-- filtro-->
+                <div class="form-group-BuscadorDepartment">
+                    @{await Html.RenderPartialAsync("ViewFilterEmployeeModalEC");}
+                </div>
+                <div class="scrollbar-tableprimary-submodal ">
+                    <div class="container-table-app datatable-EarningCode" id="content-scroll">
+
+                    </div>
+                </div>
+
+
+                <form asp-action="delete" class="delete-EarningCode collapse" id="form-deleteEarningCode">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

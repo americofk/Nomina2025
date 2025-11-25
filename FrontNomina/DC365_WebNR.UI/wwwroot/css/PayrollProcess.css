@@ -1,0 +1,145 @@
+﻿.tblempleados-novedades {
+    display: flex;
+    justify-content: space-between;
+    height: 310px;
+}
+.contenedor-novedades {
+    height: 350px;
+    width: 30%;
+    border-left: 1px solid #ccc;
+    overflow-x: auto;
+    overflow-y: auto;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 16px;
+    padding-top: 0px;
+}
+.link-payroll {
+    color: #ffff;
+}
+    .link-payroll:hover {
+        color: #73879C;
+    }
+
+.Cont-total-pago {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.Title-pay, .total-amount {
+    font: normal normal 150 24px/30px 'Segoe UI',tahoma,sans-serif;
+    color: #333;
+    top: 0;
+    margin-top: 0px;
+    margin-bottom: 0;
+    color: #b51515;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+    /*.TituloFormularios-two {
+        font: normal normal 150 24px/30px 'Segoe UI',tahoma,sans-serif;
+        color: #333;
+        top: 0;
+        margin-top: 0px;*/
+        /* border-bottom: 1px solid rgba(0,0,0,0.1); */
+        /*margin-bottom: 0;
+        color: red;
+    }*/
+
+.cont-title-buscador {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.cont-one-detail {
+    height: 100%;
+    width: 69%;
+}
+.style-td-icon {
+    padding: 0 0;
+    text-align: right;
+}
+
+.selected-row {
+    background-color: #cee7f1;
+    color: #2f2d2d;
+    box-shadow: 1px 1px 4px rgb(0,0,0,0.6);
+}
+    .selected-row > td > a > .link-payroll {
+        color: #73879C;
+    }
+    /********************************************************/
+    .container-AppDashboard {
+        box-sizing: border-box;
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+        grid-gap: 20px;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+        padding-bottom: 20px;
+        /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
+    }
+
+.card-AppDashboard {
+    align-items: center;
+    padding-top: 0px;
+}
+
+    .card-AppDashboard > i {
+        padding-bottom: 10px;
+        font-size: 30px;
+    }
+
+.card-qty {
+    font-size: 28px;
+}
+
+.text-section-title {
+    font-size: 13px;
+}
+
+.card-yellow {
+    box-shadow: inset 0 0px 3px 3px #8290078f;
+}
+
+.card-green {
+    box-shadow: inset 0 0px 3px 3px #098e16;
+}
+
+.card-orange {
+    box-shadow: inset 0 0px 3px 3px #d86615d1;
+}
+
+.card-blue {
+    box-shadow: inset 0 0px 3px 3px #22b4ea;
+}
+
+.card-cyan {
+    box-shadow: inset 0 0px 3px 3px #07c3ba;
+}
+
+
+.hide-totals {
+    height: 0px;
+    overflow-y: hidden;
+    transition: all 1s cubic-bezier(0, 0, 0.2, 1);
+    padding-bottom: 0;
+    padding-top:10px;
+}
+
+.show-totals {
+    height: 110px;
+    transition: all 1s cubic-bezier(0, 0, 0.2, 1);
+    overflow-y: hidden;
+    padding-top: 10px;
+}
+

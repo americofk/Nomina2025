@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.PayCycle>
+@using System.Globalization;
+@using DC365_WebNR.CORE.Domain.Models.Enums;
+
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+    var isfortax = item.IsForTax == true ? "checked='checked'" : "";
+    var isfortss = item.IsForTss == true ? "checked='checked'" : "";
+    string idCheck2 = $"check--PayCycle{indexCheck++}";
+
+    string status = item.StatusPeriod != StatusPeriod.Paid ? "fa fa-exclamation-triangle icon-yellow" : "fa fa-check icon-green";
+
+    <tr class="row-app rowtable-EarningCode">
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck2" type="checkbox" class="check-table-app selectPayCycle">
+            <label for="@idCheck2" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal PayCycleIdtbl" data-title="Id Periodo">
+            @Html.DisplayFor(modelItem => item.PayCycleId)
+        </td>
+        <td class="cell-app " data-title="Fecha inicial de período">
+            @Convert.ToDateTime(item.PeriodStartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app " data-title="Fecha final de período">
+            @Convert.ToDateTime(item.PeriodEndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app " data-title="Fecha de pago predeterminada">
+            @Convert.ToDateTime(item.DefaultPayDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app " data-title="Fecha de pago">
+            @Convert.ToDateTime(item.PayDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app " data-title="Monto pagado en período">
+            @Convert.ToDecimal(item.AmountPaidPerPeriod).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app " data-title="Estado del período de pago">
+            @Html.DisplayFor(modelItem => item.StatusPeriod)
+            <i class="@status"></i>
+        </td>
+        <td class="cell-app " data-title="¿Impuesto?">
+            <label class="switch">
+                <input type="checkbox" class="isfortax" @isfortax>
+                <span class="slider round"></span>
+            </label>
+        </td>
+        
+        <td class="cell-app " data-title="¿TSS?">
+            <label class="switch">
+                <input type="checkbox" class="isfortss" @isfortss>
+                <span class="slider round"></span>
+            </label>
+        </td>
+    </tr>
+}

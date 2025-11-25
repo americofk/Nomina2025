@@ -1,0 +1,96 @@
+﻿@using DC365_WebNR.CORE.Domain.Models.Enums;
+@model DC365_WebNR.CORE.Domain.Models.EmployeeContactInf
+
+
+<div class="new-indicator for-employee-contactinfo">
+
+</div>
+
+<div class="new-Addres-Emp">
+    <div class="contenTitleandHistori">
+        @{
+            if (Model.InternalId == 0)
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nueva información de contacto</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar información de contacto</h3>
+            }
+        }
+    </div>
+    <form id="new_contactinfo" asp-action="Save">
+        <div class="conten-input-modal">
+            
+            <div class="cont-input-newform-col2">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Tipo</label>
+                    <div>
+                        <select asp-for="ContactType" class="form-control" asp-items="Html.GetEnumSelectList<ContactType>()">
+                        </select>
+                        <span asp-validation-for="ContactType" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Comentario</label>
+                    <div>
+                        <textarea asp-for="Comment" class="form-control" rows="2"></textarea>
+                      
+                    </div>
+                </div>
+                
+
+            </div>
+
+            <div class="cont-input-newform-col2">
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmployeComen">Código</label>
+                        <div>
+                            <input asp-for="InternalId" class="form-control" />
+                            <span asp-validation-for="InternalId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq lblInfoContact">Número</label>
+                    <div>
+                        <input asp-for="NumberAddress" class="form-control" />
+                        <span asp-validation-for="NumberAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="contlotesmploye-slider">
+                    <label class="control-label label-switch">Principal</label>
+                    <div class="">
+                        <label class="switch">
+                            <input asp-for="IsPrincipal" id="IsPrincipal" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="EmployeeIdContactInf" class="form-control" />
+                            <span asp-validation-for="EmployeeIdContactInf" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_contactinfo" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

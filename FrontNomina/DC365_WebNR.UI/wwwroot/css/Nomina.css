@@ -1,0 +1,45 @@
+﻿
+.li-input {
+    padding: 3px 15px 8px 15px !important;
+    width: 155px;
+}
+
+    .li-input:hover {
+        background-color: transparent !important;
+        transform: scale(1) !important;
+    }
+
+
+.contenedor-paycycle {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.show-header {
+    height: 283px;
+    transition: all 1s cubic-bezier(0, 0, 0.2, 1);
+    overflow-y: hidden;
+  
+}
+
+.hide-header {
+    height: 0px;
+    overflow-y: hidden;
+    transition: all 1s cubic-bezier(0, 0, 0.2, 1);
+    padding-bottom: 0;
+    padding: 0px;
+    border: 0px solid #E6E9ED;
+}
+
+.icon-yellow {
+    color: #dd7d12;
+    font-size: 17px;
+    margin-left: 16px;
+}
+
+.icon-green {
+    margin-left: 11px;
+    font-size: 21px;
+    color: #099b09;
+}

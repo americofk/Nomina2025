@@ -1,0 +1,120 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.ReportConfig
+@{
+    ViewData["Title"] = "Configuración reportes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<SelectListItem> earnings = (List<SelectListItem>)ViewBag.Earnings;
+    List<SelectListItem> deductions = (List<SelectListItem>)ViewBag.Deductions;
+    List<SelectListItem> taxes = (List<SelectListItem>)ViewBag.Taxes;
+    List<SelectListItem> loans = (List<SelectListItem>)ViewBag.Loans;
+
+}
+<link href="~/css/Department.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    <!--Opciones de vista parcial  -->
+    <div class="opcioneslistpageForm">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-save"></i>
+                        <input type="submit" value="Guardar" form="FormReportConfig" class="btn2" />
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpCloseform">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="contNewEntyti">
+        <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+            <div class="x_panel">
+                <div class="x_content">
+                    <h3 class="TituloFormularios">Configuración reportes</h3>
+
+                    <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="FormReportConfig" asp-action="save">
+                        @*Left*@
+                        <div class="contInterNuevoConteGastos">
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Salario</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("Salary", earnings, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Comisión</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("Comission", earnings, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">AFP</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("AFP", deductions, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*Right*@
+                        <div class="contInterNuevoConteGastos">
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">SFS</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("SFS", deductions, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">ISR</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("ISR", taxes, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Abono cooperativa</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("DeductionCooperative", deductions, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Préstamo cooperativa</label>
+                                <div class="anchoimput">
+                                    <div class="anchoimput">
+                                        @Html.DropDownList("LoanCooperative", loans, "Seleccione...", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/ReportConfig.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

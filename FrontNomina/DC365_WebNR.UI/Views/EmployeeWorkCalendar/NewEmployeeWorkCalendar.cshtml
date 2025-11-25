@@ -1,0 +1,121 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.EmployeeWorkCalendar
+
+@{
+    //List<SelectListItem> selecpayroll = (List<SelectListItem>)ViewBag.Payroll;
+    //List<SelectListItem> selecDeductioncode = (List<SelectListItem>)ViewBag.DeductionCode;
+    bool onlyview = !string.IsNullOrEmpty(Model.CalendarDay);
+}
+
+<div class="new-indicator for-employee-contactinfo">
+</div>
+
+<div class="new-document-Emp">
+    <div class="contenTitleandHistori">
+        @{
+            if (onlyview)
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo horario</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar horario</h3>
+            }
+        }
+    </div>
+    <form id="new_EmployeeWorkCalendar" asp-action="Save">
+        <div class="conten-input-modal">
+
+            <div class="cont-input-newform-col2">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Fecha</label>
+                   
+                            <div>
+                                <div class="app-input-date">
+                                    <input asp-for="CalendarDate" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                            </div>
+                  
+                    <span asp-validation-for="CalendarDate" class="text-danger"></span>
+
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen-Two">Hora desde</label>
+                    <div>
+                       
+                                <input asp-for="WorkFrom" class="form-control" />
+
+                        <span asp-validation-for="WorkFrom" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Hora hasta</label>
+                    <div>
+                        
+                                <input asp-for="WorkTo" class="form-control" />
+
+                        <span asp-validation-for="WorkTo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div class="cont-input-newform-col2">
+
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Descanso desde</label>
+                    <div>
+                       
+                                <input asp-for="BreakWorkFrom" class="form-control" />
+
+                        <span asp-validation-for="BreakWorkFrom" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Descanso hasta</label>
+                    <div>
+                        
+                                <input asp-for="BreakWorkTo" class="form-control" />
+
+                        <span asp-validation-for="BreakWorkTo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="InternalId" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="EmployeeIdWorkCalendar" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_workcalendars" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/js/CustomValidation.js"></script>

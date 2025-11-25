@@ -1,0 +1,120 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.EmployeePosition
+
+@{
+    List<SelectListItem> positions = (List<SelectListItem>)ViewBag.Positions;
+    bool onlyview = !string.IsNullOrEmpty(Model.PositionId);
+}
+
+<div class="new-indicator for-employee-contactinfo">
+</div>
+
+<div class="newAddresEmp">
+    <div class="contenTitleandHistori">
+        @{
+            if (!onlyview)
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo puesto</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar puesto</h3>
+            }
+        }
+    </div>
+    <form id="new_EmployeePosition" asp-action="Save">
+        <div class="conten-input-modal">
+
+            @* Sección de la izquierda *@
+            <div class="cont-input-newform-col2">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Puesto</label>
+                    <div>
+                        @{
+                            if (onlyview)
+                            {
+                                <input asp-for="PositionId" class="form-control" readonly hidden />
+                                <input asp-for="PositionName" class="form-control" readonly />
+                            }
+                            else
+                            {
+                                @Html.DropDownList("PositionId", positions, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="PositionId" class="text-danger"></span>
+
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Comentario</label>
+                    <div>
+                        <textarea asp-for="Comment" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            @* Sección del medio *@
+            <div class="cont-input-newform-col2">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq lblInfoContact">Desde</label>
+
+                    @{
+                        if (onlyview)
+                        {
+                            <div class="app-input-date">
+                                <input asp-for="FromDate" class="form-control" readonly />
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="app-input-date">
+                                <input asp-for="FromDate" class="form-control" />
+                                <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                            </div>
+                            <span asp-validation-for="FromDate" class="text-danger"></span>
+
+                        }
+                    }
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq lblInfoContact">Hasta</label>
+                    <div class="app-input-date">
+                        <input asp-for="ToDate" class="form-control" />
+                        <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                        <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                    </div>
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="EmployeeIdPosition" class="form-control" />
+                            <span asp-validation-for="EmployeeIdPosition" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_EmployeePosition" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+

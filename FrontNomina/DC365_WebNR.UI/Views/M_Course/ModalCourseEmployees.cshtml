@@ -1,0 +1,58 @@
+﻿<!-- particupantes de curso-->
+<div class="modal modal-course-employees" aria-hidden="true">
+    <div class="ContenModal-contact">
+        <div class="modal-content">
+            <!--Opciones del Formulario-->
+            <div class="modal-options">
+
+                <div class="menuoptions-flex-submodal">
+                    <ul class="menuoptions">
+
+                        <li class="new-course-employees">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-plus-square-o"></i>
+                                Nuevo
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-trash"></i>
+                                <input type="submit" value="Eliminar" form="form-course-employees" class="inputTypesubmit" />
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="menuoptions">
+                        <li class="close-modal-course-employees">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-close i-close"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!--formulario nuevo instructor de curso-->
+            <div class="container-modal-scrolling">
+                <div class="cont-form-newandedit cont-form-new-course-employees collapse">
+
+                </div>
+
+                <h3 class="TituloEstandar">Participantes del curso</h3>
+                <div class="scrollbar-tableprimary-submodal ">
+                    <div class="container-table-app datatable-course-employees" id="content-scroll">
+
+                    </div>
+                </div>
+
+
+                <form asp-action="delete" class="delete-course-employees collapse" id="form-course-employees">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>

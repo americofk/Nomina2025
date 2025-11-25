@@ -1,0 +1,72 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeDeductionCode>
+@using System.Globalization;
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Código</td>
+                        <td class="cell-app  cell-header-app">Nombre</td>
+                        <td class="cell-app  cell-header-app">Monto fijo</td>
+                        <td class="cell-app  cell-header-app">Desde</td>
+                        <td class="cell-app  cell-header-app">Hasta</td>
+                        <td class="cell-app  cell-header-app">Nómina</td>
+                        <td class="cell-app  cell-header-app">Nombre nómina</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+
+                        string idCheck2 = $"check-DeductionCode-{indexCheck2++}";
+                        <tr class="row-app rowtable-DeductionCode">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app select-EmployeeDeductionCode">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal DeductionCodeId" data-title="Código">
+                                @Html.DisplayFor(modelItem => item.DeductionCodeId)
+                            </td>
+
+                            <td class="cell-app cell-principal" data-title="Nombre">
+                                @Html.DisplayFor(modelItem => item.DeductionName)
+                            </td>
+
+                            <td class="cell-app cell-principal" data-title="Nombre">
+                                @Html.DisplayFor(modelItem => item.DeductionAmount)
+                            </td>
+                            <td class="cell-app " data-title="Desde">
+                                @Convert.ToDateTime(item.FromDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+
+                            <td class="cell-app " data-title="Hasta">
+                                @Convert.ToDateTime(item.ToDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app " data-title="Nómina">
+                                @Html.DisplayFor(modelItem => item.PayrollId)
+                            </td>
+
+                            <td class="cell-app cell-principal" data-title="Nombre nómina">
+                                @Html.DisplayFor(modelItem => item.PayrollName)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        }
+    }
+}
+

@@ -1,0 +1,39 @@
+﻿@page{
+    margin: 10mm;
+}
+
+.report-container {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.report-navbar {
+    display: none;
+}
+
+.report-filter-section {
+    display: none;
+}
+
+.container-scrollbody {
+    overflow: hidden;
+    flex: 1;
+}
+
+.report-body {
+    background-color: #fff;
+    width: 100%;
+    box-shadow: none;
+    border: 0px;
+    border-radius: 0px;
+    box-sizing: border-box;
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}

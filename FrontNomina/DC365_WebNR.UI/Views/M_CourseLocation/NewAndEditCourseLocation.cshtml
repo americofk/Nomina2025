@@ -1,0 +1,116 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.CourseLocation
+<div class="opcioneslistpageForm collapse">
+
+
+
+
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <i class="fa fa-save"></i>
+                    <input type="submit" value="Guardar" form="createAndEditCourseLocation" class="btn2" />
+
+                </a>
+            </li>
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- nueva -->
+<div class="collapse contNewEntyti">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios setiartitulo">Nueva ubicación de cursos</h3>
+
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditCourseLocation" asp-action="Save">
+
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes Showid collapse">
+
+                            <label class="control-label ancholabel">Código de ubicación</label>
+                            <div class="anchoimput">
+                                <input asp-for="CourseLocationId" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="CourseLocationId" class="text-danger"></span>
+
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nombre de ubicación</label>
+                            <div class="anchoimput">
+                                <input asp-for="Name" class="form-control" />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nombre del contacto</label>
+                            <div class="anchoimput">
+                                <input asp-for="ContactName" class="form-control" />
+                                <span asp-validation-for="ContactName" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Email</label>
+                            <div class="anchoimput">
+                                <input asp-for="Mail" class="form-control" />
+                                <span asp-validation-for="Mail" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Teléfono</label>
+                            <div class="anchoimput">
+                                <input asp-for="Phone" class="form-control" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Dirección</label>
+                            <div class="anchoimput">
+                                <textarea asp-for="Address" class="form-control" rows="3" placeholder="Máximo de 500 caracteres"></textarea>
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Comentario</label>
+                            <div class="anchoimput">
+                                @*<input asp-for="Comment" class="form-control" />*@
+                                <textarea asp-for="Comment" class="form-control" rows="3" placeholder="Máximo de 100 caracteres"></textarea>
+                                <span asp-validation-for="Comment" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,103 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Position
+@{
+    List<SelectListItem> deparment = (List<SelectListItem>)ViewBag.Department;
+    List<SelectListItem> job = (List<SelectListItem>)ViewBag.Job;
+}
+<!-- nuevo puesto activo -->
+<div class="collapse contNewEntyti">
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+                <h3 class="TituloFormularios setiartitulo">Nuevo puesto</h3>
+
+                <form class="height-custon contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditPosition" asp-action="Save">
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes Showid collapse">
+                            <label class="control-label ancholabel">Id.Puesto</label>
+                            <div class="anchoimput">
+                                <input asp-for="PositionId" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="PositionId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="PositionName" class="control-label ancholabel">Nombre de puesto</label>
+                            <div class="anchoimput">
+                                <input asp-for="PositionName" class="form-control" placeholder="Máximo 50 caracteres" />
+                                <span asp-validation-for="PositionName" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label asp-for="DepartmentId" class="control-label ancholabel">Departamento</label>
+                            <div class="anchoimput">
+                                @*<select asp-for="DepartmentId" class="form-control">
+                                </select>*@
+                                @Html.DropDownList("DepartmentId", deparment, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="JobId" class="control-label ancholabel">Cargo</label>
+                            <div class="anchoimput">
+                                @*<select asp-for="JobId" class="form-control">
+                                </select>*@
+                                @Html.DropDownList("JobId", job, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="JobId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label asp-for="StartDate" class="control-label ancholabel">Fecha inicial</label>
+                            <div class="anchoimput" style="width:280px">
+                                <div class="app-input-date">
+                                    <input asp-for="StartDate" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="StartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="EndDate" class="control-label ancholabel">Fecha final</label>
+                            <div class="anchoimput"style="width:280px">
+                                <div class="app-input-date">
+                                    <input asp-for="EndDate" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="EndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label asp-for="NotifyPositionId" class="control-label ancholabel">Notifica al puesto</label>
+                            <div class="anchoimput">
+                                <select asp-for="NotifyPositionId" class="form-control"
+                                        asp-items="@(new SelectList(@ViewBag.SelectListPosition,"Value", "Text"))">
+                                </select>
+                                <span asp-validation-for="NotifyPositionId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+
+                        <div class="contlotes">
+                            <label asp-for="Description" class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Máximo 100 caracteres"></textarea>
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

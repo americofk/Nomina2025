@@ -1,0 +1,396 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.PayrollProcess
+@using DC365_WebNR.CORE.Domain.Models.Enums
+@using System.Globalization
+
+
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payrolls;
+    List<SelectListItem> projects = (List<SelectListItem>)ViewBag.Projects;
+    List<SelectListItem> projcategory = (List<SelectListItem>)ViewBag.ProjCategory;
+    //List<SelectListItem> paycycle = null;
+
+    //if (ViewBag.Paycyle != null)
+    //{
+    //    paycycle = (List<SelectListItem>)ViewBag.Paycyle;
+    //}
+}
+
+<!--Opciones de vista parcial  -->
+<div class="opcioneslistpageForm">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            @{
+                if (Model.PayrollProcessStatus != PayrollProcessStatus.Paid && Model.PayrollProcessStatus != PayrollProcessStatus.Closed && Model.PayrollProcessStatus != PayrollProcessStatus.Canceled)
+                {
+                    <li>
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-save"></i>
+                            <input type="submit" value="Guardar" form="FormNewAndEditPayrollsProcess" class="btn2" />
+
+                        </a>
+                    </li>
+                }
+            }
+            
+            @{
+                if (!string.IsNullOrEmpty(Model.PayrollProcessId))
+                {
+                    if (Model.PayrollProcessStatus != PayrollProcessStatus.Paid && Model.PayrollProcessStatus != PayrollProcessStatus.Closed && Model.PayrollProcessStatus != PayrollProcessStatus.Canceled)
+                    {
+                        <li class="li-separador">
+                            <a class="btn2 btn-app" style="border: 1px solid #fff;">
+
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-database"></i>
+                                <input type="submit" value="Procesar" form="Process-Payroll" class="btn2" />
+
+
+                            </a>
+                        </li>
+                        <li class="">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-calculator"></i>
+                                <input type="submit" value="Calcular" form="Calc-Payroll" class="btn2" />
+
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-briefcase"></i>
+                                <input type="submit" value="Pagar" form="Pay-Payroll" class="btn2" />
+
+                            </a>
+                        </li>
+
+                        <li class="">
+                            <a class="btn2 btn-app">
+                                <i class="fa fa-ban"></i>
+                                <input type="submit" value="Cancelar" form="Cancel-Payroll" class="btn2" />
+
+                            </a>
+                        </li>
+
+                        <li class="li-separador">
+                            <a class="btn2 btn-app" style="border: 1px solid #fff;">
+
+                            </a>
+                        </li>
+                    }
+
+
+                    <li class="">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-clipboard"></i>
+                            <input type="submit" value="Recibos de pago" class="btn2 payroll-payment-report" />
+
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-file-text"></i>
+                            <input type="submit" value="Reporte de nómina" class="btn2 payroll-report" />
+
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-file"></i>
+                            <input type="submit" value="Resumen de nómina" class="btn2 payroll-summary-report" />
+
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-file"></i>
+                            <input type="submit" value="Recibos de empleado" class="btn2 payroll-payment-report-employee" />
+                        </a>
+                    </li>
+
+                    <li class="">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-file-excel-o"></i>
+                            <input type="submit" value="Txt pago nómina" class="btn2 txt-payroll" />
+                        </a>
+                    </li>
+
+
+                }
+            }
+
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="OpCloseform">
+                <a class="btn2 btn-app ">
+                    <i class="fa fa-close i-close"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- New PayrollProcess -->
+<div class="contNewEntyti">
+
+    <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+        <div class="x_panel">
+            <div class="x_content">
+
+                @* Totales *@
+                <h3 class="TituloFormularios" style="font-weight: 500">
+                    <i class="fa fa-angle-up" id="toggle-totals" data-value="1" style="cursor: pointer;font-weight: bold"></i>
+                    Totales nómina
+                </h3>
+
+                <div class="container-AppDashboard show-totals" id="totals-container">
+                    @* Beneficios *@
+                    <div class="card-AppDashboard card-yellow">
+                        <i class="fa fa-money"></i>
+                        <div class="text-section">
+                            <p class="card-qty">@Convert.ToDecimal(Model.TotalEarnings).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</p>
+                            <p class="text-section-title">Beneficios</p>
+                        </div>
+                    </div>
+
+                    @* Deducciones *@
+                    <div class="card-AppDashboard card-green">
+                        <i class="fa fa-minus-square"></i>
+                        <div class="text-section">
+                            <p class="card-qty">@Convert.ToDecimal(Model.TotalDeductions).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</p>
+                            <p class="text-section-title">Deducciones</p>
+                            @*<p class="card-sub-title">Activos</p>*@
+                        </div>
+                    </div>
+
+                    @* Impuestos *@
+                    <div class="card-AppDashboard card-orange">
+                        <i class="fa fa-calculator"></i>
+                        <div class="text-section">
+                            <p class="card-qty">@Convert.ToDecimal(Model.TotalTaxes).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</p>
+                            <p class="text-section-title">Impuestos</p>
+                            @*<p class="card-sub-title">Activos</p>*@
+                        </div>
+                    </div>
+
+                    @* Prestamo *@
+                    <div class="card-AppDashboard card-blue">
+                        <i class="fa fa-suitcase"></i>
+                        <div class="text-section">
+                            <p class="card-qty">@Convert.ToDecimal(Model.TotalLoans).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</p>
+                            <p class="text-section-title">Préstamos</p>
+                            @*<p class="card-sub-title">Activos</p>*@
+                        </div>
+                    </div>
+
+                    @* Total *@
+                    <div class="card-AppDashboard card-cyan">
+                        <i class="fa fa-signal"></i>
+                        <div class="text-section">
+                            <p class="card-qty">@Convert.ToDecimal(Model.Total).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))</p>
+                            <p class="text-section-title">Total a pagar</p>
+                            @*<p class="card-sub-title">Activos</p>*@
+                        </div>
+                    </div>
+                </div>
+
+                @* Fin de totales *@
+
+                @{
+                    if (string.IsNullOrEmpty(Model.PayrollProcessId))
+                    {
+                        <h3 class="TituloFormularios seteartitulo">Nuevo proceso de nómina</h3>
+                    }
+                    else
+                    {
+                        <h3 class="TituloFormularios seteartitulo">Editar proceso de nómina</h3>
+                    }
+                }
+
+                <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="FormNewAndEditPayrollsProcess"
+                      asp-action="save">
+
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes showid collapse">
+                            <label class="control-label ancholabel">Id. Proceso</label>
+                            <div class="anchoimput">
+                                <input asp-for="PayrollProcessId" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="PayrollProcessId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Nómina</label>
+                            <div class="anchoimput">
+                                @Html.DropDownList("PayrollId", payrolls, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="PayrollId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <input asp-for="Description" class="form-control" />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Fecha de pago</label>
+                            <div class="anchoimput">
+                                <div class="app-input-date">
+                                    <input asp-for="PaymentDate" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Ciclo de pago</label>
+                            <div class="anchoimput">
+                                <input asp-for="PayCycleFormat" class="form-control" disabled>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Inicio del período</label>
+                            <div class="anchoimput">
+                                <input asp-for="PeriodStartDate" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="PeriodStartDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Fin del período</label>
+                            <div class="anchoimput">
+                                <input asp-for="PeriodEndDate" class="form-control" readonly="readonly" />
+
+
+                                <span asp-validation-for="PeriodEndDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Estado</label>
+                            <div class="anchoimput">
+                                <select asp-for="PayrollProcessStatus" class="form-control" asp-items="Html.GetEnumSelectList<PayrollProcessStatus>()" disabled>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Proyecto</label>
+
+                            <div class="anchoimput">
+                                @Html.DropDownList("ProjId", projects, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="ProjId" class="text-danger"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Cat. de proyectos</label>
+                            <div class="anchoimput">
+                                @Html.DropDownList("ProjCategoryId", projcategory, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="ProjCategoryId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Cant. de empleados</label>
+                            <div class="anchoimput">
+                                <input asp-for="EmployeeQuantity" class="form-control" readonly="readonly" />
+                                <span asp-validation-for="EmployeeQuantity" class="text-danger"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+
+
+
+                @* Detalles y novedades *@
+                <div class="tblempleados-novedades">
+                    <div class="cont-one-detail">
+
+                        <div class="cont-title-buscador">
+                            <h3 class="TituloFormularios">Detalles de empleados</h3>
+
+                            <div class="contenPretabla">
+                                <div class="form-group-Buscador-cicloNomina">
+                                    <input type="text" class="form-control-FiltroDepartment buscador Buscar-tblPayrolls-Process" placeholder="Buscar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container-table-app" id="content-scroll">
+                            <table class="table-app tblPayrolls-Process" style="width:130%">
+                                <thead>
+                                    <tr class="row-header-app">
+                                        <td class="cell-app  cell-header-app" style="width:5px"></td>
+                                        <td class="cell-app  cell-header-app">Empleado</td>
+                                        <td class="cell-app  cell-header-app">Nombre</td>
+                                        <td class="cell-app  cell-header-app cell-app-number">Salario</td>
+                                        <td class="cell-app  cell-header-app cell-app-number">Impuesto</td>
+                                        <td class="cell-app  cell-header-app cell-app-number">Monto Tss</td>
+                                        <td class="cell-app  cell-header-app cell-app-number">Monto Tss e impuesto</td>
+                                        <td class="cell-app  cell-header-app">F.pago</td>
+                                        <td class="cell-app  cell-header-app">Cta. Banco</td>
+                                        <td class="cell-app  cell-header-app">Banco</td>
+                                        <td class="cell-app  cell-header-app">Documento</td>
+
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyTableEmployeeProcess">
+                                    @{
+                                        if (Model.PayrollProcessId != null)
+                                        {
+                                            { await Html.RenderPartialAsync("DetailEmployeesPayrollProcess", Model.PayrollProcessDetails); }
+
+                                        }
+
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="contenedor-novedades">
+                        <div class="cont-title-buscador">
+                            <h3 class="TituloFormularios">Novedades del empleado</h3>
+                        </div>
+                        <div class="container-table-app-three">
+                            <table class="table-app tblPayrolls-Process">
+                                <thead>
+                                    <tr class="row-header-app">
+                                        <td class="cell-app  cell-header-app">Tipo</td>
+                                        <td class="cell-app  cell-header-app">Nombre</td>
+                                        <td class="cell-app  cell-header-app cell-app-number">Monto</td>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbodyTableNovedad">
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="Cont-total-pago">
+                            <h3 class="Title-pay">Total a pagar:</h3>
+                            <span class="total-amount"></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+﻿@model string[]
+
+@if (Model[1] == "vertical")
+{
+    @*Header*@
+    <div class="report-body-header" style="border-bottom: 0px;">
+        <div class="report-logo-date">
+            <div class="report-logo">
+                <img src="~/Images/ImagenLogin.png" />
+            </div>
+            <div class="report-date">
+                <p>@DateTime.Now</p>
+            </div>
+        </div>
+
+        <div class="report-title">
+            <h3>@Model[0]</h3>
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="report-body-header">
+        <div class="report-logo">
+            <img src="~/Images/ImagenLogin.png" />
+        </div>
+        <div class="report-title">
+            <h3>@Model[0]</h3>
+        </div>
+        <div class="report-date">
+            <p>@DateTime.Now</p>
+        </div>
+    </div>
+}
+
+<h5 class="report-subtitle">No hay datos que mostrar en estos momentos, cambie la información del filtro para actualizar la información.</h5>

@@ -1,0 +1,30 @@
+﻿
+.row-headerCustomUsers {
+    font-size: 14px;
+    color: #fff;
+    background-color: #0d3b80;
+    height: 35px;
+}
+
+.contTableRolOne {
+    height: 250px;
+    /*overflow-y:auto;*/
+    margin-bottom: 20px;
+}
+
+.contTableCompaniesOne {
+    height: 250px;
+    /*overflow-y: auto;*/
+}
+
+.TituloFormularios > i{
+    color: rgb(128 128 128);
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select:none;
+}
+
+.contImputDatosRight {
+    width: 40%;
+}

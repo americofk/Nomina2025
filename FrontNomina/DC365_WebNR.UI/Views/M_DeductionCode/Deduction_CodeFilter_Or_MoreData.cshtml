@@ -1,0 +1,48 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.DeductionCode>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectDeductionCode">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal InternalDeductionCode" data-title="Id Código" hidden>
+            @Html.DisplayFor(modelItem => item.InternalId)
+        </td>
+        <td class="cell-app cell-principal DeductionCodeId-dc" data-title="Id Código">
+            @Html.DisplayFor(modelItem => item.DeductionCodeId)
+        </td>
+        <td class="cell-app Name-dc" data-title="Nombre del código">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="cell-app PayrollAction-dc" data-title="Impacto de nómina">
+            @Html.DisplayFor(modelItem => item.PayrollAction)
+        </td>
+        <td class="cell-app ProjId" data-title="Proyecto">
+            @Html.DisplayFor(modelItem => item.ProjId)
+        </td>
+
+        <td class="cell-app ProjCategory" data-title="Categoria proyecto">
+            @Html.DisplayFor(modelItem => item.ProjCategory)
+        </td>
+        <td class="cell-app ValidFrom" data-title="Valido desde">
+            @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+        <td class="cell-app ValidTo" data-title="Valido hasta">
+            @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+        </td>
+
+        <td class="cell-app Description" data-title="Descripción">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+
+
+    </tr>
+}

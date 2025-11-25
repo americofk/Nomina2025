@@ -1,0 +1,157 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Payroll>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Payrolls";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<link href="~/css/Department.css" rel="stylesheet" />*@
+<link href="~/css/Nomina.css" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewPayroll">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditPayroll">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="deletePayroll" class="inputTypesubmit" />
+                    </a>
+                </li>
+                <li class="li-separador">
+                    <a class="btn2 btn-app">
+                    </a>
+                </li>
+                <li class="Payroll-disabled">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-briefcase"></i>
+                        Nóminas deshabilitadas
+                    </a>
+                </li>
+
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Nóminas</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+                @*<input type="text" class="form-control-filtro" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Inhabilitar nómina</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="DiseblePayroll" class="idCheckeditar" checked="checked">
+                    <span class="slider round" for="DiseblePayroll"></span>
+                </label>
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblPayrolls" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Nómina</td>
+                            <td class="cell-app  cell-header-app">Nombre de nómina</td>
+                            <td class="cell-app  cell-header-app">Frecuenca de pago</td>
+                            <td class="cell-app  cell-header-app">Válida desde</td>
+                            <td class="cell-app  cell-header-app">Válida hasta</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Payroll">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectPayroll">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal PayrollIdtbl" data-title="ID Nomina">
+                                    @Html.DisplayFor(modelItem => item.PayrollId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre de nomina">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app QtyWorkerstbl" data-title="Frecuenca de pago">
+                                    @Html.DisplayFor(modelItem => item.PayFrecuency)
+                                </td>
+                                <td class="cell-app StartDatetbl" data-title="Valida desde">
+                                    @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app EndDatetbl" data-title="Valida hasta">
+                                    @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app Descriptiontbl" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- nuevo -->
+    @{await Html.RenderPartialAsync("NewAndEditPayrolls", new DC365_WebNR.CORE.Domain.Models.Payroll());}
+
+    <form asp-action="delete" class="deletePayroll collapse" id="deletePayroll">
+    </form>
+
+    <form asp-action="updateStatus" class="disabledPayrolls collapse" id="disabledPayrolls">
+    </form>
+
+
+</div>
+<script src="~/js/Payroll.js" type="module"></script>
+<script src="~/js/PayCycle.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

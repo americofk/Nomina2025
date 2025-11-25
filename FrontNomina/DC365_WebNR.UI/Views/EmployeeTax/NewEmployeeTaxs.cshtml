@@ -1,0 +1,140 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.EmployeeTax
+
+@{
+    List<SelectListItem> payrolls = (List<SelectListItem>)ViewBag.Payrolls;
+    List<SelectListItem> tax = (List<SelectListItem>)ViewBag.Tax;
+    bool onlyview = !string.IsNullOrEmpty(Model.TaxId);
+}
+<div class="new-indicator for-employee-contactinfo">
+</div>
+
+<div class="new-document-Emp">
+    <div class="contenTitleandHistori">
+        @{
+            if (string.IsNullOrEmpty(Model.TaxId))
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo impuesto</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar impuesto</h3>
+            }
+        }
+    </div>
+    <form id="new_TaxEmployee" asp-action="Save">
+        <div class="conten-input-modal">
+
+            <div class="cont-input-newform-col2">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Código</label>
+                    <div>
+                        @{
+                            if (!string.IsNullOrEmpty(Model.TaxId))
+                            {
+                                <input asp-for="TaxId" class="form-control" readonly />
+                            }
+                            else
+                            {
+                                @Html.DropDownList("TaxId", tax, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="TaxId" class="text-danger"></span>
+                            }
+                        }
+
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Nómina</label>
+                    <div>
+                        @{
+                            if (!string.IsNullOrEmpty(Model.TaxId))
+                            {
+                                <input asp-for="PayrollId" class="form-control" readonly />
+                            }
+                            else
+                            {
+                                @Html.DropDownList("PayrollId", payrolls, "Seleccione...", new { @class = "form-control" })
+                                <span asp-validation-for="PayrollId" class="text-danger"></span>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cont-input-newform-col2">
+
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Desde</label>
+                    @{
+                        if (onlyview)
+                        {
+
+                            <div>
+                                <div class="app-input-date">
+                                    <input asp-for="ValidFrom" class="form-control" readonly />
+                                </div>
+
+                            </div>
+                        }
+                        else
+                        {
+                            <div>
+                                <div class="app-input-date">
+                                    <input asp-for="ValidFrom" class="form-control" />
+                                    <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                                    <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                                </div>
+                                <span asp-validation-for="ValidFrom" class="text-danger"></span>
+                            </div>
+
+                        }
+                    }
+
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq lblInfoContact">Hasta</label>
+                    <div>
+                        <div class="app-input-date">
+                            <input asp-for="ValidTo" class="form-control" />
+                            <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
+                            <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
+                        </div>
+                        <span asp-validation-for="ValidTo" class="text-danger"></span>
+
+                    </div>
+
+
+
+                </div>
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="EmployeeIdTax" class="form-control" />
+                            <span asp-validation-for="EmployeeIdTax" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_Tax" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>
+<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.PayrollProcessAction>
+@using System.Globalization
+
+@foreach (var item in Model)
+{
+    <tr class="table-app calcular-total" style="cursor:pointer">
+
+        <td class="cell-app PayrollActionTypetbl">
+            @Html.DisplayFor(modelItem => item.PayrollActionType)
+        </td>
+
+        <td class="cell-app">
+            @Html.DisplayFor(modelItem => item.ActionName)
+        </td>
+
+        <td class="cell-app ActionAmounttblaction cell-app-number">
+            @Convert.ToDecimal(item.ActionAmount).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+        </td>
+
+    </tr>
+}

@@ -1,0 +1,52 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeEarningCode>
+@using System.Globalization;
+@{int indexCheck2 = 1; }
+@foreach (var item in Model)
+{
+
+    string idCheck2 = $"check-EarningCode-{indexCheck2++}";
+<tr class="row-app rowtable-EarningCode">
+
+    <td class="cell-app check-cell-app">
+        <input id="@idCheck2" type="checkbox" class="check-table-app select-EarningCode">
+        <label for="@idCheck2" class="label-cell"></label>
+    </td>
+    <td class="cell-app cell-principal EarningCodeIdtbl" data-title="Id">
+        @Html.DisplayFor(modelItem => item.InternalId)
+    </td>
+    <td class="cell-app cell-principal EarningCodeIdtbl" data-title="Código">
+        @Html.DisplayFor(modelItem => item.EarningCodeId)
+    </td>
+
+    <td class="cell-app cell-principal" data-title="Nombre">
+        @Html.DisplayFor(modelItem => item.EarningName)
+    </td>
+
+    <td class="cell-app " data-title="Desde">
+        @Html.DisplayFor(modelItem => item.FromDate)
+    </td>
+
+    <td class="cell-app " data-title="Hasta">
+        @Html.DisplayFor(modelItem => item.ToDate)
+    </td>
+
+    <td class="cell-app " data-title="Indice">
+        @*@Html.DisplayFor(modelItem => item.IndexEarning)*@
+        @Convert.ToDecimal(item.IndexEarning).ToString("N", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+    </td>
+
+    <td class="cell-app " data-title="Periodos para pago">
+        @Html.DisplayFor(modelItem => item.QtyPeriodForPaid)
+    </td>
+
+    <td class="cell-app " data-title="Nomina">
+        @Html.DisplayFor(modelItem => item.PayrollId)
+    </td>
+
+    <td class="cell-app cell-principal" data-title="Nombre nómina">
+        @Html.DisplayFor(modelItem => item.PayrollName)
+    </td>
+
+</tr>
+}

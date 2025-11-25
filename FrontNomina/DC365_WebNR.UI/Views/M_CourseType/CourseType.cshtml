@@ -1,0 +1,121 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.CourseType>
+@{
+    ViewData["Title"] = "Tipos de cursos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<div class="contDasboard">
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewCorseType">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+
+                <li class="EditCourseType">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="deleteCourseType" class="inputTypesubmit" />
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla de tipo de cursos -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Tipos de cursos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @*<input type="text" class="form-conrol-Filtro buscador BuscartblCourseTyper" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblCourseType">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Código</td>
+                            <td class="cell-app  cell-header-app">Nombre</td>
+                            <td class="cell-app  cell-header-app styleRowDescrip">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-CourseType">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectCourseType">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal CourseTypeIdtbltc" data-title="Código">
+                                    @Html.DisplayFor(modelItem => item.CourseTypeId)
+                                </td>
+                                <td class="cell-app NametblTc" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app Descriptiontbltc" data-title="Descripción)">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Nuevo y editar tipos de cursos -->
+    @{await Html.RenderPartialAsync("NewAndEditCourseType", new DC365_WebNR.CORE.Domain.Models.CourseType());}
+
+    <form asp-action="delete" class="deleteCourseType collapse" id="deleteCourseType">
+    </form>
+
+</div>
+
+<script src="~/js/CourseType.js?@version" type="module"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

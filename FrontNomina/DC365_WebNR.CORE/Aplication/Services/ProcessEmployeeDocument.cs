@@ -1,0 +1,204 @@
+﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models;
+using DC365_WebNR.INFRASTRUCTURE.Services;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+namespace DC365_WebNR.CORE.Aplication.Services
+{
+    public class ProcessEmployeeDocument: ServiceBase
+    {
+        public ProcessEmployeeDocument(string _token)
+        {
+            Token = _token;
+
+        }
+
+        //lista
+        public async Task<IEnumerable<EmployeeDocumentResponse>> GetAllDataAsync(string employeeid, int _PageNumber = 1)
+        {
+            List<EmployeeDocumentResponse> _model = new List<EmployeeDocumentResponse>();
+
+
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/{employeeid}?PageNumber={_PageNumber}&PageSize=20";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<Response<List<EmployeeDocumentResponse>>>(Api.Content.ReadAsStringAsync().Result);
+                _model = response.Data;
+            }
+            else
+            {
+                if (Api.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new Exception("Key-error");
+
+                }
+                return ValidateRolHelper<EmployeeDocumentResponse>.validate(Api, new EmployeeDocumentResponse());
+
+            }
+
+            return _model;
+        }
+
+        //guardar
+        public async Task<ResponseUI> PostDataAsync(EmployeeDocument _model)
+        {
+            Response<EmployeeDocument> DataApi = null;
+            ResponseUI responseUI = new ResponseUI();
+
+            string urlData = urlsServices.GetUrl("EmployeeDocument");
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, _model, HttpMethod.Post);
+            if (Api.IsSuccessStatusCode)
+            {
+                DataApi = JsonConvert.DeserializeObject<Response<EmployeeDocument>>(Api.Content.ReadAsStringAsync().Result);
+                responseUI.Message = DataApi.Message;
+                responseUI.Type = ErrorMsg.TypeOk;
+            }
+            else
+            {
+                return CatchError(Api);
+            }
+
+
+
+            return responseUI;
+        }
+
+        //editar
+        public async Task<ResponseUI> PutDataAsync(int InternalId, EmployeeDocument _model)
+        {
+            ResponseUI responseUI = new ResponseUI();
+
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/{InternalId}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, _model, HttpMethod.Put);
+            if (Api.IsSuccessStatusCode)
+            {
+                var DataApi = JsonConvert.DeserializeObject<Response<object>>(Api.Content.ReadAsStringAsync().Result);
+                responseUI.Message = DataApi.Message;
+                responseUI.Type = ErrorMsg.TypeOk;
+            }
+            else
+            {
+                return CatchError(Api);
+            }
+
+            return responseUI;
+        }
+
+        //eliminar
+        public async Task<ResponseUI> DeleteDataAsync(List<string> Obj, string employeeid)
+        {
+            ResponseUI responseUI = new ResponseUI();
+
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/{employeeid}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, Obj, HttpMethod.Delete);
+            if (Api.IsSuccessStatusCode)
+            {
+                var DataApi = JsonConvert.DeserializeObject<Response<object>>(Api.Content.ReadAsStringAsync().Result);
+                responseUI.Message = DataApi.Message;
+                responseUI.Type = ErrorMsg.TypeOk;
+            }
+            else
+            {
+                return CatchError(Api);
+            }
+           
+            return responseUI;
+        }
+
+        //buscar por id
+        public async Task<EmployeeDocument> GetDataAsync(string employeeid, string internalId)
+        {
+            EmployeeDocument _model = new EmployeeDocument();
+
+
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/{employeeid}/{internalId}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<Response<EmployeeDocument>>(Api.Content.ReadAsStringAsync().Result);
+                _model = response.Data;
+            }
+
+            return _model;
+        }
+
+
+        //cargar documento
+        public async Task<ResponseUI> UploadDocument(IFormFile file, string employeeid, int internalid)
+        {
+            //Response<Department> DataApi = null;
+            ResponseUI responseUI = new ResponseUI();
+
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/uploaddocument/{employeeid}/{internalid}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Post, file);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var dato = Api.Content.ReadAsStringAsync().Result;
+                var DataApi = JsonConvert.DeserializeObject<Response<bool>>(Api.Content.ReadAsStringAsync().Result);
+                
+                responseUI.Message = DataApi.Message;
+                responseUI.Type = ErrorMsg.TypeOk;
+            }
+            else
+            {
+                return CatchError(Api);
+            }
+
+            return responseUI;
+        }
+
+        // descargar documento
+        public async Task<ResponseUI<EmployeeDocumentDownload>> DownloadDocument(string employeeid, int internalid)
+        {
+            
+            //Response<Department> DataApi = null;
+            ResponseUI<EmployeeDocumentDownload> responseUI = new ResponseUI<EmployeeDocumentDownload>();
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/downloaddocument/{employeeid}/{internalid}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var dato = Api.Content.ReadAsStringAsync().Result;
+                var DataApi = JsonConvert.DeserializeObject<Response<EmployeeDocumentDownload>>(Api.Content.ReadAsStringAsync().Result);
+
+                responseUI.Obj = DataApi.Data;
+                responseUI.Type = ErrorMsg.TypeOk;
+            }
+            else
+            {
+                if (Api.StatusCode != HttpStatusCode.ServiceUnavailable)
+                {
+                    var resulError = JsonConvert.DeserializeObject<Response<string>>(Api.Content.ReadAsStringAsync().Result);
+                    responseUI.Type = ErrorMsg.TypeError;
+                    responseUI.Errors = resulError.Errors;
+                }
+                else
+                {
+                    responseUI.Type = ErrorMsg.TypeError;
+                    responseUI.Errors = new List<string>() { ErrorMsg.Error500 };
+                }
+            }
+
+            return responseUI;
+        }
+
+    }
+}

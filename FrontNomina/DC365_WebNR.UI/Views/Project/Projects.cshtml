@@ -1,0 +1,151 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.Project>
+
+@{
+    ViewData["Title"] = "Projects";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+
+}
+
+<link href="~/css/Department.css" rel="stylesheet" />
+
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewProject">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditProject">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="delete-Project" class="inputTypesubmit" />
+                    </a>
+                </li>
+
+                <li class="li-separador">
+                    <a class="btn2 btn-app" style="border: 1px solid #fff;">
+
+                    </a>
+                </li>
+
+                <li class="Project-disabled">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-building"></i>
+                        Proyectos Inactivos
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Proyectos activos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+               
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Inhabilitar proyecto</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="Diseble-Project" class="idCheckeditar" checked="checked">
+                    <span class="slider round" for="Diseble-Project"></span>
+
+                </label>
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tbl-Project" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">ID Proyecto</td>
+                            <td class="cell-app  cell-header-app">Nombre del proyecto</td>
+                            <td class="cell-app  cell-header-app">Cuenta contable</td>
+
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-Project">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app select-ProjId">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal ProjIdtbl" data-title="ID Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Nombre del proyecto">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app LedgerAccounttbl" data-title="Cuenta contable">
+                                    @Html.DisplayFor(modelItem => item.LedgerAccount)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- nuevo  -->
+    @{await Html.RenderPartialAsync("NewAndEditProject", new DC365_WebNR.CORE.Domain.Models.Project());}
+
+    <!-- Eliminar -->
+    <form asp-action="delete" class="delete-Project collapse" id="delete-Project">
+    </form>
+
+    <!-- Deshabilitar -->
+    <form asp-action="updateStatus" class="updateStatus-Project collapse" id="updateStatus-Project">
+    </form>
+
+</div>
+
+<script src="~/js/M_Department.js?@version" type="module"></script>
+<script src="~/js/Project.js?@version" type="module"></script>
+
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

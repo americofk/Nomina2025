@@ -1,0 +1,183 @@
+﻿    <div style="width:950px;
+        background-color:#fcfcfc;
+        border: 3px solid #f0f0f0;
+        font-size: 20px;
+        padding: 10px;">
+
+        <!--Header-->
+        <div style="
+            border-bottom: 1px solid #0c63a9;
+            padding-bottom: 0">
+            <div style="display:flex;width:100%;">
+                <div style="width: 50%">
+                    <img src="https://i.postimg.cc/B6k34BN5/logo.png" 
+                         style="object-fit:fill;
+                            background-repeat: no-repeat;
+                            width:6em;
+                            height:70%;"/>
+                </div>
+                <div class="report-date"style="margin-left: 50%;width: 50%;">
+                    <p>V-ReportDate</p>
+                </div>
+            </div>
+
+            <div style="font-size: 1.3em;text-align:center;
+                line-height:0;">
+                <h3>RECIBO PAGO DE NÓMINA</h3>
+            </div>
+
+        </div>
+
+        <!--Content-->
+        <div style="width:100%;font-size: 0.8em;padding-top:1em;">
+
+            <div style="border-bottom:3px double #00245a; padding-bottom:15px; padding-left: 1em;">
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Nombre del empleado</label>
+                    <div>
+                        <label>V-EmployeeName</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Fecha de ingreso</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-StartWorkDate</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Cédula</label>
+                    <div>
+                        <label class="line-label-values">V-DocumentNum</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Departamento</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-Department</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Puesto</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-PositionName</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Nómina</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-PayrollName</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Período de pago</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-Period</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Fecha de pago</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-PaymentDate</label>
+                    </div>
+                </div>
+
+                <div style="display:flex;margin-bottom: 0.7em;">
+                    <label style="font-weight: bold;width:30%;">Forma de pago</label>
+                    <div class="anchoimput">
+                        <label class="line-label-values">V-PayMethod</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div style="padding: 15px 15px 0 140px; border-bottom:3px double #00245a;
+                margin-bottom: 10px;
+                font-size:1.5em;">
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Salario</label>
+                    <label style="width:30%;"> RD$ V-Salary </label>
+
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Préstamos</label>
+                    <label style="width:30%;">RD$ (V-Loan)</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">AFP</label>
+                    <label style="width:30%;">RD$ (V-AFP)</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">SFS</label>
+                    <label style="width:30%;">RD$ (V-SFS)</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">ISR</label>
+                    <label style="width:30%;">RD$ (V-ISR)</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Comisiones</label>
+                    <label style="width:30%;">RD$  V-Comission</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Abono cooperativa</label>
+                    <label style="width:30%;">RD$  V-DeductionCooperative</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Préstamo cooperativa</label>
+                    <label style="width:30%;">RD$  V-LCooperative</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Horas extras</label>
+                    <label style="width:30%;">RD$  V-ExtraHour</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Otros ingresos</label>
+                    <label style="width:30%;">RD$  V-OtherEarning</label>
+                </div>
+
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Otras deducciones</label>
+                    <label style="width:30%;">RD$  (V-OtherDiscount)</label>
+                </div>
+
+                <div style="display:flex;margin-bottom:0.8em;
+                    width:100%;">
+                    <label style="font-weight:bold;width: 50%;">Total a cobrar</label>
+                    <label style="width:30%;">RD$  V-Total</label>
+                </div>
+
+            </div>
+
+        </div>
+    </div>

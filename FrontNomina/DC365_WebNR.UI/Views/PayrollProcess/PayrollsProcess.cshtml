@@ -1,0 +1,169 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.PayrollProcess>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Proceso de nómina";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/PayrollProcess.css" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewPayrollProcess">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditPayrollProcess">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeletePayrollProcess" class="inputTypesubmit" />
+                    </a>
+                </li>
+
+
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Procesos de nómina</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblPayrollsProcess" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id proceso</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                            <td class="cell-app  cell-header-app">Nómina</td>
+                            <td class="cell-app  cell-header-app">Fecha de pago</td>
+                            <td class="cell-app  cell-header-app">Inicio período</td>
+                            <td class="cell-app  cell-header-app">Fin período</td>
+                            <td class="cell-app  cell-header-app cell-app-number">Empleados</td>
+                            <td class="cell-app  cell-header-app">Proyecto</td>
+                            <td class="cell-app  cell-header-app">Estado</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbodyTableProcessPayroll tbody-Table-Payrollprocess">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectPayrollProcess">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal PayrollProcessIdTbl" data-title="Id Proceso">
+                                    @Html.DisplayFor(modelItem => item.PayrollProcessId)
+                                </td>
+                                <td class="cell-app Nametbl" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                
+                                <td class="cell-app Nametbl" data-title="Nómina">
+                                    @Html.DisplayFor(modelItem => item.PayrollId)
+                                </td>
+                                <td class="cell-app QtyWorkerstbl" data-title="Fecha de pago">
+                                    @Html.DisplayFor(modelItem => item.PaymentDate)
+                                </td>
+                                <td class="cell-app StartDatetbl" data-title="Inicio periodo">
+                                    @*@Convert.ToDateTime(item.PeriodStartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))*@
+                                    @Html.DisplayFor(modelItem => item.PeriodStartDate)
+                                </td>
+                                <td class="cell-app EndDatetbl" data-title="Fin periodo">
+                                    @*@Convert.ToDateTime(item.PeriodEndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))*@
+                                    @Html.DisplayFor(modelItem => item.PeriodEndDate)
+                                </td>
+                                <td class="cell-app Descriptiontbl cell-app-number" data-title="Empleados">
+                                    @Html.DisplayFor(modelItem => item.EmployeeQuantity)
+                                </td>
+                                <td class="cell-app Descriptiontbl" data-title="Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+                                <td class="cell-app PayrollProcessStatustbl" data-title="Estado">
+                                    @Html.DisplayFor(modelItem => item.PayrollProcessStatus)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- nuevo -->
+    <div id="ContNewAndEditPayrollProcess"></div>
+    @*@{await Html.RenderPartialAsync("NewAndEditPayrollProcess", new DC365_WebNR.CORE.Domain.Models.PayrollProcess());}*@
+
+
+    <form asp-action="delete" class="collapse" id="DeletePayrollProcess">
+    </form>
+
+    <!-- procesar nomina -->
+    <form asp-action="Payrollprocess" class="collapse" id="Process-Payroll">
+    </form>
+
+    <!-- calcular nomina -->
+    <form asp-action="Calcprocess" class="collapse" id="Calc-Payroll">
+    </form>
+
+    <!-- pagar nomina -->
+    <form asp-action="Payprocess" class="collapse" id="Pay-Payroll">
+    </form>
+
+    <!-- cancelar nomina -->
+    <form asp-action="Cancelprocess" class="collapse" id="Cancel-Payroll">
+    </form>
+
+</div>
+@*<script src="~/js/Payroll.js" type="module"></script>*@
+<script src="~/js/PayrollProcess.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

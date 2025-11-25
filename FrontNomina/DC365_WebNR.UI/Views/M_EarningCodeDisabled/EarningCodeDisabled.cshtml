@@ -1,0 +1,145 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EarningCode>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "EarningCodeDisabled";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<div class="contDasboard">
+
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteEarningCode" class="inputTypesubmit" />
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="close-EarningCode">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Códigos de ingreso inactivos</h3>
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+
+                @*<input type="text" class="form-control-FiltroDepartment buscador buscartblEarningCode" placeholder="Filtro">*@
+                <!-- filtro -->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+                <span class="tituloStatusDepartment">Habilitar códigos de ingreso</span>
+                <label class="switch clickCheckeditar">
+                    <input type="checkbox" id="EnabledEarningCode" class="idCheckeditar">
+                    <span class="slider round" for="EnabledEarningCode"></span>
+                </label>
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app-width table-app tblEarningCode" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Código</td>
+                            <td class="cell-app  cell-header-app">Nombre de código</td>
+                            <td class="cell-app  cell-header-app">Aplica TSS</td>
+                            <td class="cell-app  cell-header-app">Aplica ISR</td>
+                            <td class="cell-app  cell-header-app">Proyecto</td>
+                            <td class="cell-app  cell-header-app">Válido desde</td>
+                            <td class="cell-app  cell-header-app">Válido hasta</td>
+                            <td class="cell-app  cell-header-app">Descripción</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-EarningCode-Disabled">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+                            var tss = item.IsTSS == true ? "checked='checked'" : "";
+                            var isr = item.IsISR == true ? "checked='checked'" : "";
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectEarningCode">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal EarningCodeIdtbl" data-title="Id Código">
+                                    @Html.DisplayFor(modelItem => item.EarningCodeId)
+                                </td>
+                                <td class="cell-app Nametbl-Ec" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app " data-title="Aplica TSS">
+                                    <label class="switch disabled">
+                                        <input type="checkbox" disabled @tss>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td class="cell-app " data-title="Aplica ISR">
+                                    <label class="switch disabled">
+                                        <input type="checkbox" disabled @isr>
+                                        <span class="slider round"></span>
+                                    </label>
+                                </td>
+                                <td class="cell-app ProjId-Ec" data-title="Proyecto">
+                                    @Html.DisplayFor(modelItem => item.ProjId)
+                                </td>
+                                <td class="cell-app ValidFrom-Ec" data-title="Valido desde">
+                                    @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app ValidTo-Ec" data-title="Valido hasta">
+                                    @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+                                </td>
+                                <td class="cell-app Description-Ec" data-title="Descripción">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+   
+    <form asp-action="delete" class="DeleteEarningCode collapse" id="DeleteEarningCode">
+    </form>
+
+    <form asp-action="updateStatus" class="EnableEarningCode collapse" id="EnableEarningCode">
+    </form>
+
+</div>
+<script src="~/js/EarningCodeDisabled.js" type="module"></script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

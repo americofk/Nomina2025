@@ -1,0 +1,49 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EarningCode>
+@using System.Globalization;
+@{int indexCheck = 1 + ((int)ViewBag.CountPageNumber * 20); }
+@foreach (var item in Model)
+{
+    var tss = item.IsTSS == true ? "checked='checked'" : "";
+    var isr = item.IsISR == true ? "checked='checked'" : "";
+    string idCheck = $"check-table-{indexCheck++}";
+    <tr class="row-app">
+
+        <td class="cell-app check-cell-app">
+            <input id="@idCheck" type="checkbox" class="check-table-app selectEarningCode">
+            <label for="@idCheck" class="label-cell"></label>
+        </td>
+        <td class="cell-app cell-principal EarningCodeIdtbl" data-title="Id Código">
+            @Html.DisplayFor(modelItem => item.EarningCodeId)
+        </td>
+        <td class="cell-app Nametbl-Ec" data-title="Nombre">
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td class="cell-app " data-title="Aplica TSS">
+            <label class="switch disabled">
+                <input type="checkbox" disabled @tss>
+                <span class="slider round"></span>
+            </label>
+        </td>
+        <td class="cell-app " data-title="Aplica ISR">
+            <label class="switch disabled">
+                <input type="checkbox" disabled @isr>
+                <span class="slider round"></span>
+            </label>
+        </td>
+        <td class="cell-app ProjId-Ec" data-title="Proyecto">
+            @Html.DisplayFor(modelItem => item.ProjId)
+        </td>
+        <td class="cell-app ValidFrom-Ec" data-title="Valido desde">
+            @Convert.ToDateTime(item.ValidFrom).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+        </td>
+        <td class="cell-app ValidTo-Ec" data-title="Valido hasta">
+            @Convert.ToDateTime(item.ValidTo).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+
+        </td>
+        <td class="cell-app Description-Ec" data-title="Descripción">
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+
+    </tr>
+}

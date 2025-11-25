@@ -1,0 +1,63 @@
+﻿@using DC365_WebNR.CORE.Domain.Models.Enums;
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.EmployeeContactInf>
+
+@{
+    if (Model.ToList().Count > 0)
+    {
+        if (!string.IsNullOrEmpty(Model.First()?.Error))
+        {
+            <h3>@Model.First().Error</h3>
+        }
+        else
+        {
+            <table class="table-app">
+                <thead>
+                    <tr class="row-header-app">
+                        <td class="cell-app  cell-header-app"></td>
+                        <td class="cell-app  cell-header-app">Tipo</td>
+                        <td class="cell-app  cell-header-app">Número o dirección</td>
+                        <td class="cell-app  cell-header-app">Principal</td>
+                    </tr>
+                </thead>
+                <tbody class="tbodyTableOne" style="cursor:pointer">
+                    @{int indexCheck2 = 1; }
+                    @foreach (var item in Model)
+                    {
+                        var principal = item.IsPrincipal == true ? "checked='checked'" : "";
+                        var tipo = ((ContactType)item.ContactType).ToString();
+
+                        string idCheck2 = $"check-contactinfo-{indexCheck2++}";
+                        <tr class="row-app rowtable-contactinfo">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck2" type="checkbox" class="check-table-app select-contactinf">
+                                <label for="@idCheck2" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal" data-title="Tipo">
+                                @tipo
+                            </td>
+                            <td class="cell-app " data-title="Número o dirección">
+                                @Html.DisplayFor(modelItem => item.NumberAddress)
+                            </td>
+
+
+
+                            <td class="cell-app " data-title="Principal">
+                                <label class="switch disabled">
+                                    <input type="checkbox" disabled @principal>
+                                    <span class="slider round"></span>
+                                </label>
+                            </td>
+
+                            <td class="cell-app InternalIdtbl" style="display:none">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+
+}

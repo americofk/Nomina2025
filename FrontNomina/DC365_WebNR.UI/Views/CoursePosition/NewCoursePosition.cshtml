@@ -1,0 +1,70 @@
+﻿
+
+@model DC365_WebNR.CORE.Domain.Models.CoursePosition
+
+@{
+    List<SelectListItem> position = (List<SelectListItem>)ViewBag.Position;
+}
+<div class="new-indicator for-employee-contactinfo">
+
+</div>
+
+<div class="new-Addres-Emp">
+    <div class="contenTitleandHistori">
+        @{
+            if (string.IsNullOrEmpty(Model.CoursePositionId))
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Nuevo puesto de curso</h3>
+            }
+            else
+            {
+                <h3 class="TituloForMod titulonuevadireccion">Editar puesto de curso</h3>
+            }
+        }
+    </div>
+    <form id="new_course-position" asp-action="Save">
+        <div class="conten-input-modal">
+
+            <div class="cont-input-newform-col2">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmploye-izq">Puesto</label>
+                    <div>
+                        @Html.DropDownList("PositionId", position, "Seleccione...", new { @class = "form-control" })
+                        <span asp-validation-for="PositionId" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="cont-input-newform-col2">
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Comentario</label>
+                    <div>
+                        <textarea asp-for="Comment" class="form-control" rows="2"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label labelModEmploye">Id</label>
+                        <div>
+                            <input asp-for="CoursePositionId" class="form-control" />
+                            <span asp-validation-for="CoursePositionId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_course_position" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>

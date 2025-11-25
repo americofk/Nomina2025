@@ -1,0 +1,85 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.TaxDetail
+
+
+<div class="newAddresEmp-two TaxDetail-indicator">
+    <div class="contenTitleandHistori">
+        <h3 class="TituloForMod titulonuevadireccion">Nueva configuración</h3>
+    </div>
+    <form id="new_TaxDetail" asp-action="Save">
+        <div class="cont-taxdetail">
+            @* Sección de la izquierda *@
+            <div class="cont-input-newform-two">
+                <div class="contlotesmploye">
+                    <label class="control-label label-mod-taxDetail">Salario anual superior a</label>
+                    <div class="anchoimputEmploye">
+                        <input asp-for="AnnualAmountHigher" class="form-control plugin-number-format" />
+                        <span asp-validation-for="AnnualAmountHigher" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label label-mod-taxDetail">Salario anual no excede</label>
+                    <div class="anchoimputEmploye">
+                        <input asp-for="AnnualAmountNotExceed" class="form-control plugin-number-format" />
+                        <span asp-validation-for="AnnualAmountNotExceed" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label label-mod-taxDetail">% Tasa</label>
+                    <div class="anchoimputEmploye">
+                        <input asp-for="Percent" class="form-control plugin-number-format" />
+                        <span asp-validation-for="Percent" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+            @* Sección del medio *@
+            <div class="cont-input-newform-two">
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label label-mod-taxDetail">Id</label>
+                        <div class="anchoimputEmploye">
+                            <input asp-for="InternalId" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collapse">
+                    <div class="contlotesmploye">
+                        <label class="control-label label-mod-taxDetail">Id</label>
+                        <div class="anchoimputEmploye">
+                            <input name="TaxId" class="form-control TaxIddetail" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contlotesmploye">
+                    <label class="control-label label-mod-taxDetail">Cuota fija</label>
+                    <div class="anchoimputEmploye">
+                        <input asp-for="FixedAmount" class="form-control plugin-number-format" />
+                        <span asp-validation-for="FixedAmount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label label-mod-taxDetail">Escala aplicable</label>
+                    <div class="anchoimputEmploye">
+                        <input asp-for="ApplicableScale" class="form-control plugin-number-format" />
+                        <span asp-validation-for="ApplicableScale" class="text-danger"></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="contbtnAddres">
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" id="btnGuardar" value="Guardar">
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger btncancelar_new_TaxDetail" id="btncancelar" value="Cancelar">
+            </div>
+        </div>
+    </form>
+
+</div>

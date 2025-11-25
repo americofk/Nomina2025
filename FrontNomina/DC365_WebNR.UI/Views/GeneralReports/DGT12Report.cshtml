@@ -1,0 +1,133 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.Reports.ReportDGT12
+@using System.Globalization;
+@{
+    ViewData["Title"] = "DGT12Report";
+    Layout = "~/Views/Shared/_ReportLayout.cshtml";
+}
+
+<link href="~/css/HorizontalReportDesign.css" rel="stylesheet" />
+<link href="~/css/EstyleReportsPrint.css" rel="stylesheet" media="print" />
+<link href="~/css/DGTReports.css" rel="stylesheet" />
+@{
+    var show = !ViewBag.hidefilter ? "show" : "";
+}
+<div class="report-filter-section @show">
+    <h3> Paramétros del reporte</h3>
+    <div class="shadow-text"> </div>
+    <div class="body-filter-section">
+        <div class="param-fields">
+            <label class="control-label">Período</label>
+            <input class="form-control period" type="month">
+        </div>
+    </div>
+    <div class="footer-filter-section">
+        <input class="btnAction" type="button" value="Actualizar" id="update-report" data-type="dgt12-report" />
+
+    </div>
+</div>
+
+@*Cuerpo del reporte*@
+
+<div class="cont-general-report">
+
+    @*Content*@
+
+
+    @{
+        if (Model.RNC == null)
+        {
+            await Html.RenderPartialAsync("DefaultReportHeader", new string[] { "DGT12", "Horizontal" });
+        }
+        else
+        {
+            @*Header*@
+            <div class="report-body-header">
+                <div class="report-logo">
+                    <img src="~/Images/ImagenLogin.png" />
+                </div>
+                <div class="report-title">
+                    <h3>REPORTE DGT- 12</h3>
+                </div>
+                <div class="report-date">
+                    <p>@DateTime.Now</p>
+                </div>
+            </div>
+            @*Content*@
+<div class="report-body-content">
+    <div class="body-content-head">
+        @*<div class="content-title">
+            <label>Control</label>
+            <label>@Model.Control</label>
+        </div>*@
+        <div class="content-title">
+            <label>Tipo</label>
+            <label>@Model.ResgisterType</label>
+        </div>
+        <div class="content-title">
+            <label>Documento</label>
+            <label>@Model.RNC</label>
+        </div>
+        <div class="content-title">
+            <label>Mes</label>
+            <label>@Model.Month</label>
+        </div>
+        <div class="content-title">
+            <label>Año</label>
+            <label>@Model.Year</label>
+        </div>
+
+    </div>
+    <table class="table-report">
+        <thead>
+            <tr class="row-header-report">
+                <td>Nombres</td>
+                <td>Apellidos</td>
+                <td>Número de documento</td>
+                <td>Tipo de documento</td>
+                <td>Fecha de salida</td>
+                <td>Localidad</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Details)
+            {
+                <tr class="row-body-report">
+                    <td>@item.EmployeeName </td>
+                    <td>@item.LastName </td>
+                    <td>@item.DocumentNumber </td>
+                    <td>@item.DocumentType </td>
+                    <td>@item.DepartureDate </td>
+                    <td>@item.LocationId </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    @*Footer*@
+    <div class="report-body-footer">
+        <div class="body-content-head">
+            <div class="content-title">
+                <label>Cantidad de lineas</label>
+                <label>@Model.RegisterQty</label>
+            </div>
+            <div class="content-title">
+                <label>Control</label>
+                <label>S</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+           
+        }
+    }
+
+
+</div>
+
+@section Scripts {
+    <script src="~/js/Reports.js" type="module"></script>
+}
+

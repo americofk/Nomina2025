@@ -1,0 +1,191 @@
+﻿@model IEnumerable<DC365_WebNR.CORE.Domain.Models.BatchHistory>
+@using System.Globalization;
+@using DC365_WebNR.CORE.Domain.Models.Enums
+@{
+    ViewData["Title"] = "Historial de carga masiva";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+
+<div class="contDasboard">
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+
+                <li class="NewBatch">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteHistory" class="inputTypesubmit" />
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Historial de procesos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblbatch" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Código</td>
+                            <td class="cell-app  cell-header-app">Entidad</td>
+                            <td class="cell-app  cell-header-app">Fecha de inicio</td>
+                            <td class="cell-app  cell-header-app">Fecha de finalización</td>
+                            <td class="cell-app  cell-header-app">Estado</td>
+                            <td class="cell-app  cell-header-app">Progreso</td>
+                            <td class="cell-app  cell-header-app"></td>
+                            <td class="cell-app  cell-header-app" hidden></td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-History">
+
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+                            string progress = item.IsFinished ? "fa fa-check ok" : "fa fa-clock-o wait";
+                            string status = item.IsError ? "fa fa-exclamation-triangle iserror" : "fa fa-check ok";
+                            string idCheck = $"check-table-{indexCheck++}";
+                            string tdId=  $"batch-{item.InternalId}";
+                        <tr class="row-app">
+
+                            <td class="cell-app check-cell-app">
+                                <input id="@idCheck" type="checkbox" class="check-table-app selectHistory">
+                                <label for="@idCheck" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-principal HistoryIdIdTbl" data-title="Id Código">
+                                @Html.DisplayFor(modelItem => item.InternalId)
+                            </td>
+                            <td class="cell-app " data-title="Entidad">
+                                @Html.DisplayFor(modelItem => item.BatchEntity)
+                            </td>
+                            <td class="cell-app " data-title="Fecha de inicio">
+                                @Html.DisplayFor(modelItem => item.StartDate)
+                            </td>
+
+                            <td class="cell-app " data-title="Fecha de finalización">
+                                @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td class="cell-app" data-title="Estado">
+                                <i class='@status id-batch-info' id="@tdId"></i>
+                            </td>
+                            <td class="cell-app" data-title="Progreso">
+                                <i class='@progress'></i>
+                            </td>
+                            <td class="cell-app" data-title="">
+                            </td>
+
+                            <td class="cell-app data-info-batch" hidden>
+                                @Html.DisplayFor(modelItem => item.Information)
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Delete" class="collapse" id="DeleteHistory">
+    </form>
+
+    <!--modal nuevo batch-->
+    <div class="contenedor-newBatch collapse" style="position: absolute">
+
+        <div class="TinyModal-hire-employee" style="width: 450px;">
+            <h3 class="TituloEstandar-modal-contratar">Importar data masiva</h3>
+            <div class="cont-input-newform-col1" style="margin-bottom: 15px;">
+                <div class="contlotesmploye">
+                    <div class="cont-input-batch-separator">
+                        <label class="control-label labelModEmployeComen" style="width: 161px;">Separador de columnas</label>
+                        <input name="SeparatorOption" type="text" class="form-control SeparatorOption" style="width: 50px;text-align: center;font-weight: 900;" value="," />
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Entidad</label>
+                    <div class="cont-input-batch">
+                        <select class="form-control typeEntity" asp-items="Html.GetEnumSelectList<BatchEntity>()" style="width:75%;" name="_entity">
+                        </select>
+                        <a class="download-template style-btn-custon">
+                            <i class="fa fa-cloud-download style-icon-batch"></i>
+                            <span>Bajar plantilla</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contlotesmploye">
+                    <label class="control-label labelModEmployeComen">Archivo (.csv)</label>
+                    <div class="cont-input-batch">
+                        <input name="FromDate" type="text" class="form-control form-file-01" style="width:75%;" />
+                        <form asp-action="ReadFile" id="Form-batchHistori" class="style-fom-uploan">
+                            <input name="_file" type="file" class="form-control form-file" />
+                            <a class="load-template  trigger-upload style-btn-custon-two">
+                                <i class="fa fa-cloud-upload style-icon-batch"></i>
+                                <span style="color: #ffff;">Subir archivo</span>
+                            </a>
+                        </form>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="contbtn-tinymodal">
+                <input type="button" class="btn btn-danger btncancelar-process-batch" value="Cancelar">
+                <input type="submit" form="Form-batchHistori" value="Aceptar" class="btn btn-primary">
+            </div>
+            
+        </div>
+    </div>
+
+    @*información del proceso*@
+    <div class="cont-batch-info"></div>
+</div>
+
+<script src="~/js/BatchHistory.js" type="module"></script>
+<script src="~/js/AppInputDate.js"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+

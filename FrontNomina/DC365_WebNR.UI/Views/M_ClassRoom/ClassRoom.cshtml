@@ -1,0 +1,147 @@
+﻿
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.ClassRoom>
+
+@{
+    ViewData["Title"] = "ClassRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+}
+<link href="~/css/Department.css" rel="stylesheet" />
+
+<div class="contDasboard">
+    <input type="hidden" class="Image" />
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewClassRoom">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+
+                <li class="EditClassRoom">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit "></i>
+                        Editar
+                    </a>
+                </li>
+
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteClassRoom" class="inputTypesubmit" />
+
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Salones de cursos</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment">
+                @*<input type="text" class="form-control-Filtro buscador BuscartblClassRoom" placeholder="Filtro">*@
+                <!-- filtro-->
+                @{await Html.RenderPartialAsync("ViewFilter");}
+            </div>
+        </div>
+        <div class="scrollbar-TablePrimari">
+
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblClassRoom">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app  cell-header-app">Id Salón</td>
+                            <td class="cell-app  cell-header-app">Nombre</td>
+                            <td class="cell-app  cell-header-app">Ubicación</td>
+                            <td class="cell-app  cell-header-app">Capacidad</td>
+                            <td class="cell-app  cell-header-app">Hora de inicio</td>
+                            <td class="cell-app  cell-header-app">Hora final</td>
+                            <td class="cell-app  cell-header-app styleRowDescripTwo">Comentarios</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-ClassRoom">
+                        @{int indexCheck = 1; }
+                        @foreach (var item in Model)
+                        {
+
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectClassRoom">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal ClassRoomIdtblcr" data-title="Id Salon">
+                                    @Html.DisplayFor(modelItem => item.ClassRoomId)
+                                </td>
+                                <td class="cell-app Nametblcr" data-title="Nombre">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app CourseLocationIdtblcr" data-title="Ubicación)">
+                                    @Html.DisplayFor(modelItem => item.CourseLocationId)
+                                </td>
+
+                                <td class="cell-app MaxStudentQtyyblcr" data-title="Capacidad)">
+                                    @Html.DisplayFor(modelItem => item.MaxStudentQty)
+                                </td>
+
+                                <td class="cell-app AvailableTimeStarttblcr" data-title="Hora de inicio)">
+                                    @Html.DisplayFor(modelItem => item.AvailableTimeStart)
+                                </td>
+
+                                <td class="cell-app AvailableTimeEndtblcr" data-title="Hora final)">
+                                    @Html.DisplayFor(modelItem => item.AvailableTimeEnd)
+                                </td>
+
+                                <td class="cell-app Commenttblcr" data-title="Comentarios)">
+                                    @Html.DisplayFor(modelItem => item.Comment)
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Nuevo y editar -->
+    @{await Html.RenderPartialAsync("NewAndEditClassRoom", new DC365_WebNR.CORE.Domain.Models.ClassRoom());}
+
+
+    <form asp-action="delete" class="DeleteClassRoom collapse" id="DeleteClassRoom">
+    </form>
+
+</div>
+<script src="~/js/ClassRoom.js"></script>
+@section Scripts {
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

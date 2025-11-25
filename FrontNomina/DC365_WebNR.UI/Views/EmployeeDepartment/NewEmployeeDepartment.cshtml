@@ -1,0 +1,62 @@
+﻿@model DC365_WebNR.CORE.Domain.Models.EmployeeDepartment
+
+<h4>EmployeeDepartment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NewEmployeeDepartment">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="contlotes">
+                <label asp-for="EmployeeId" class="control-label"></label>
+                <div class="anchoimput">
+                    <input asp-for="EmployeeId" class="form-control" />
+                    <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="contlotes">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                <div class="anchoimput">
+                    <input asp-for="DepartmentId" class="form-control" />
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="contlotes">
+                <label asp-for="FromDate" class="control-label"></label>
+                <div class="anchoimput">
+                    <input asp-for="FromDate" class="form-control" />
+                    <span asp-validation-for="FromDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="contlotes">
+                <label asp-for="ToDate" class="control-label"></label>
+                <div class="anchoimput">
+                    <input asp-for="ToDate" class="form-control" />
+                    <span asp-validation-for="ToDate" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="contlotes">
+                <div class="anchoimput">
+                    <label class="switch">
+                        <input asp-for="EmployeeDepartmentStatus" /> @Html.DisplayNameFor(model => model.EmployeeDepartmentStatus)
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="contlotes">
+                <label asp-for="Comment" class="control-label"></label>
+                <div class="anchoimput">
+                    <input asp-for="Comment" class="form-control" />
+                    <span asp-validation-for="Comment" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
