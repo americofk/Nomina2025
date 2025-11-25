@@ -47,7 +47,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Taxes
             }
 
             var entity = BuildDtoHelper<Tax>.OnBuild(model, new Tax());
-            entity.InCompany = _currentUser.Company;
+            entity.DataAreaId = _currentUser.Company;
 
             _dbContext.Taxes.Add(entity);
             await _dbContext.SaveChangesAsync();

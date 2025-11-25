@@ -11,12 +11,12 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<TaxDetail> builder)
         {
-            builder.HasKey(x => new { x.InternalId, x.TaxId, x.InCompany });
+            builder.HasKey(x => new { x.InternalId, x.TaxId, x.DataAreaId });
             builder.Property(x => x.InternalId).ValueGeneratedNever();
 
             builder.HasOne<Tax>()
                 .WithMany()
-                .HasForeignKey(x => new { x.TaxId, x.InCompany })
+                .HasForeignKey(x => new { x.TaxId, x.DataAreaId })
                 .IsRequired();
         }
     }

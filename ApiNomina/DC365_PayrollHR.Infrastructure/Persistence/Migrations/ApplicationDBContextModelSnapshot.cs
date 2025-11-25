@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
+#nullable disable
+
 namespace DC365_PayrollHR.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
@@ -15,9 +17,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.4")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "9.0.2")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.HasSequence<int>("ClassRoomId")
                 .HasMin(1L)
@@ -95,32 +98,125 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                 .HasMin(1L)
                 .HasMax(999999999L);
 
+            modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.AuditLog", b =>
+                {
+                    b.Property<long>("RecId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasDefaultValueSql("NEXT VALUE FOR dbo.RecId");
+
+                    b.Property<DateTime>("ChangedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETDATE()");
+
+                    b.Property<string>("ChangedBy")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("EntityRefRecId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("FieldName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NewValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OldValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RecId");
+
+                    b.HasIndex("ChangedAt")
+                        .HasDatabaseName("IX_AuditLog_ChangedAt");
+
+                    b.HasIndex("ChangedBy")
+                        .HasDatabaseName("IX_AuditLog_ChangedBy");
+
+                    b.HasIndex("DataAreaId")
+                        .HasDatabaseName("IX_AuditLog_DataAreaId");
+
+                    b.HasIndex("EntityName", "EntityRefRecId")
+                        .HasDatabaseName("IX_AuditLog_EntityName_EntityRefRecId");
+
+                    b.ToTable("AuditLogs");
+                });
+
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.BatchHistory", b =>
                 {
                     b.Property<int>("InternalId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InternalId"));
 
                     b.Property<int>("BatchEntity")
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<string>("Information")
                         .HasColumnType("nvarchar(MAX)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsError")
                         .HasColumnType("bit");
@@ -129,11 +225,14 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -148,10 +247,37 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("CalendarDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CalendarDate");
 
@@ -181,30 +307,43 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("MaxStudentQty")
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ClassRoomId");
 
@@ -222,18 +361,31 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Alias", "CompanyId");
 
@@ -257,8 +409,22 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("CountryId")
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("CurrencyId")
                         .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -269,9 +435,19 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("LicenseKey")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -281,6 +457,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Responsible")
                         .HasColumnType("nvarchar(max)");
@@ -298,8 +477,12 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         {
                             CompanyId = "Root",
                             CompanyStatus = true,
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "",
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Empresa raiz",
+                            RecId = 0L,
                             Responsible = "Administrator"
                         });
                 });
@@ -309,6 +492,30 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("CountryId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -321,6 +528,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("NationalityName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("CountryId");
 
                     b.ToTable("Countries");
@@ -329,12 +539,20 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         new
                         {
                             CountryId = "DOM",
-                            Name = "República Dominicana"
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "República Dominicana",
+                            RecId = 0L
                         },
                         new
                         {
                             CountryId = "CH",
-                            Name = "Chile"
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Chile",
+                            RecId = 0L
                         });
                 });
 
@@ -367,10 +585,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -380,12 +609,11 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("EndDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<int>("InternalExternal")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsMatrixTraining")
                         .HasColumnType("bit");
@@ -397,10 +625,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Objetives")
@@ -413,6 +641,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("QtySessions")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
@@ -449,22 +680,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CourseId", "EmployeeId");
 
@@ -487,22 +731,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CourseId", "InstructorId");
 
@@ -534,25 +791,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Mail")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -563,6 +830,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CourseLocationId");
 
@@ -583,22 +853,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CourseId", "PositionId");
 
@@ -616,31 +899,44 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.CourseTypeId),'CT-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CourseTypeId");
 
@@ -653,10 +949,37 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("CurrencyId");
 
@@ -666,12 +989,20 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         new
                         {
                             CurrencyId = "USD",
-                            Name = "Dólares"
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Dólares",
+                            RecId = 0L
                         },
                         new
                         {
                             CurrencyId = "DOP",
-                            Name = "Pesos Dominicanos"
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Pesos Dominicanos",
+                            RecId = 0L
                         });
                 });
 
@@ -684,10 +1015,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.DeductionCodeId),'D-00000000#')");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Ctbution_IndexBase")
@@ -707,6 +1038,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("Ctbution_PayFrecuency")
                         .HasColumnType("int");
+
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Dduction_IndexBase")
                         .HasColumnType("int");
@@ -729,6 +1064,13 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<bool>("DeductionStatus")
                         .HasColumnType("bit");
 
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Department")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -736,9 +1078,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsForTaxCalc")
                         .HasColumnType("bit");
@@ -751,10 +1092,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -772,6 +1113,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
+
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
 
@@ -787,14 +1131,15 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                 {
                     b.Property<int>("InternalId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InternalId"));
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Ctbution_IndexBase")
@@ -814,6 +1159,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("Ctbution_PayFrecuency")
                         .HasColumnType("int");
+
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("Dduction_IndexBase")
                         .HasColumnType("int");
@@ -837,6 +1186,13 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Department")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -844,9 +1200,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsForTaxCalc")
                         .HasColumnType("bit");
@@ -859,10 +1214,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -879,6 +1234,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("ProjId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
@@ -902,10 +1260,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.DepartmentId),'DPT-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("DepartamentStatus")
@@ -918,15 +1287,14 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -936,6 +1304,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("QtyWorkers")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -951,9 +1322,36 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("DisabilityTypeId");
 
@@ -969,10 +1367,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.EarningCodeId),'EC-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Department")
@@ -986,12 +1395,11 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<bool>("EarningCodeStatus")
                         .HasColumnType("bit");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<int>("IndexBase")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsExtraHours")
                         .HasColumnType("bit");
@@ -1016,10 +1424,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("MultiplyAmount")
@@ -1033,6 +1441,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("ProjId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
@@ -1055,14 +1466,26 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                 {
                     b.Property<int>("InternalId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InternalId"));
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Department")
@@ -1077,12 +1500,11 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<int>("IndexBase")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsExtraHours")
                         .HasColumnType("bit");
@@ -1107,10 +1529,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("MultiplyAmount")
@@ -1124,6 +1546,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("ProjId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
@@ -1150,9 +1575,36 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("EducationLevelId");
 
@@ -1200,10 +1652,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("DependentsNumbers")
@@ -1238,9 +1701,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<bool>("HomeOffice")
                         .HasColumnType("bit");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsFixedWorkCalendar")
                         .HasColumnType("bit");
@@ -1258,10 +1720,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NSS")
@@ -1291,6 +1753,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("PersonalTreatment")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartWorkDate")
                         .HasColumnType("datetime2");
@@ -1339,10 +1804,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Home")
@@ -1350,18 +1826,17 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPrincipal")
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Province")
@@ -1373,6 +1848,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Sector")
                         .IsRequired()
@@ -1417,29 +1895,42 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Currency")
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPrincipal")
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("EmployeeId", "InternalId");
 
@@ -1462,30 +1953,43 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPrincipal")
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NumberAddress")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("EmployeeId", "InternalId");
 
@@ -1508,30 +2012,40 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("DeductionAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("FromDate")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal>("IndexDeduction")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PayFrecuency")
@@ -1545,6 +2059,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("QtyPeriodForPaid")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("StartPeriodForPaid")
                         .HasColumnType("int");
@@ -1574,10 +2091,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("EmployeeDepartmentStatus")
@@ -1586,16 +2114,18 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");
@@ -1618,10 +2148,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DocumentNumber")
@@ -1639,19 +2180,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<byte[]>("FileAttach")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsPrincipal")
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("EmployeeId", "InternalId");
 
@@ -1671,10 +2214,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EarningCodeId")
@@ -1683,10 +2237,6 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
 
                     b.Property<decimal>("IndexEarning")
                         .HasColumnType("decimal(18,2)");
@@ -1700,6 +2250,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<decimal>("IndexEarningMonthly")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsUseCalcHour")
                         .HasColumnType("bit");
 
@@ -1707,10 +2260,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PayFrecuency")
@@ -1728,6 +2281,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("StartPeriodForPaid")
                         .HasColumnType("int");
@@ -1768,27 +2324,37 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<TimeSpan>("EndHour")
                         .HasColumnType("time");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<decimal>("Indice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PayrollId")
@@ -1797,6 +2363,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(32,16)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<TimeSpan>("StartHour")
                         .HasColumnType("time");
@@ -1821,6 +2390,24 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.EmployeeHistoryId),'EH-00000000#')");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -1830,8 +2417,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsUseDGT")
                         .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("RegisterDate")
                         .HasColumnType("datetime2");
@@ -1854,10 +2454,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
@@ -1868,16 +2479,18 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("EmployeeId");
 
@@ -1896,15 +2509,25 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("LoanAmount")
                         .HasColumnType("decimal(18,2)");
@@ -1914,10 +2537,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("PaidAmount")
@@ -1935,6 +2558,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("QtyPeriodForPaid")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("StartPeriodForPaid")
                         .HasColumnType("int");
@@ -1974,15 +2600,25 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("LoanAmount")
                         .HasColumnType("decimal(18,2)");
@@ -1992,10 +2628,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("PaidAmount")
@@ -2019,6 +2655,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<DateTime>("PeriodStartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("TotalDues")
                         .HasColumnType("int");
@@ -2047,10 +2686,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("EmployeePositionStatus")
@@ -2059,16 +2709,18 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("FromDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ToDate")
                         .HasColumnType("datetime2");
@@ -2092,23 +2744,36 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
+                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
@@ -2122,7 +2787,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.HasIndex("TaxId", "InCompany");
+                    b.HasIndex("TaxId", "DataAreaId");
 
                     b.ToTable("EmployeeTaxes");
                 });
@@ -2150,22 +2815,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<TimeSpan>("WorkFrom")
                         .HasColumnType("time");
@@ -2203,25 +2881,38 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("ModifiedBy")
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PayrollProcessId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("StatusWorkControl")
                         .HasColumnType("int");
@@ -2248,10 +2939,37 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("FormatCodeId");
 
@@ -2261,12 +2979,20 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         new
                         {
                             FormatCodeId = "en-US",
-                            Name = "Estado Únidos"
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Estado Únidos",
+                            RecId = 0L
                         },
                         new
                         {
                             FormatCodeId = "es-ES",
-                            Name = "España"
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "España",
+                            RecId = 0L
                         });
                 });
 
@@ -2274,8 +3000,27 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -2285,6 +3030,19 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("EmailPassword")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("SMTP")
                         .IsRequired()
@@ -2319,25 +3077,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Mail")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -2348,6 +3116,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("Phone")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("InstructorId");
 
@@ -2363,34 +3134,47 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.JobId),'J-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("JobStatus")
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("JobId");
 
@@ -2406,10 +3190,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.LoanId),'LO-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DepartmentId")
@@ -2420,12 +3215,11 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
                     b.Property<int>("IndexBase")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LedgerAccount")
                         .HasMaxLength(30)
@@ -2435,10 +3229,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("MultiplyAmount")
@@ -2459,6 +3253,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("ProjId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
@@ -2483,6 +3280,20 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -2490,6 +3301,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsViewMenu")
                         .HasColumnType("bit");
@@ -2501,6 +3315,16 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Sort")
                         .HasColumnType("int");
@@ -2516,21 +3340,29 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         {
                             MenuId = "MENU-0057",
                             Action = "Click",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Título de configuración",
                             Icon = "fa fa-setting",
+                            IsDeleted = false,
                             IsViewMenu = false,
                             MenuName = "Configuración",
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RecId = 0L,
                             Sort = 0
                         },
                         new
                         {
                             MenuId = "MENU-0002",
                             Action = "Click",
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Listado de colaboradores",
                             Icon = "fa fa-user",
+                            IsDeleted = false,
                             IsViewMenu = false,
                             MenuFather = "MENU-0057",
                             MenuName = "Colaboradores",
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RecId = 0L,
                             Sort = 0
                         });
                 });
@@ -2544,17 +3376,27 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("PrivilegeDelete")
@@ -2565,6 +3407,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<bool>("PrivilegeView")
                         .HasColumnType("bit");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Alias", "MenuId");
 
@@ -2579,9 +3424,36 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("OccupationId");
 
@@ -2600,18 +3472,28 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DefaultPayDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsForTax")
                         .HasColumnType("bit");
@@ -2620,10 +3502,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("PayDate")
@@ -2634,6 +3516,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<DateTime>("PeriodStartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("StatusPeriod")
                         .HasColumnType("int");
@@ -2657,10 +3542,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CurrencyId")
@@ -2668,13 +3553,23 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
 
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsForHourPayroll")
                         .HasColumnType("bit");
@@ -2683,10 +3578,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -2699,6 +3594,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<bool>("PayrollStatus")
                         .HasColumnType("bit");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("ValidFrom")
                         .HasColumnType("datetime2");
@@ -2720,10 +3618,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.PayrollProcessId),'PPAY-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -2736,9 +3645,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<int>("EmployeeQuantityForPay")
                         .HasColumnType("int");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsForHourPayroll")
                         .HasColumnType("bit");
@@ -2753,10 +3661,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PayCycleId")
@@ -2784,6 +3692,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("ProjId")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TotalAmountToPay")
                         .HasColumnType("decimal(18,2)");
@@ -2835,25 +3746,38 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("ModifiedBy")
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PayrollActionType")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("InternalId", "PayrollProcessId", "EmployeeId");
 
@@ -2881,10 +3805,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DepartmentId")
@@ -2902,15 +3837,14 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PayMethod")
@@ -2918,6 +3852,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("PayrollProcessStatus")
                         .HasColumnType("int");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartWorkDate")
                         .HasColumnType("datetime2");
@@ -2952,10 +3889,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.PositionId),'POS-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DepartmentId")
@@ -2969,9 +3917,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsVacant")
                         .HasColumnType("bit");
@@ -2981,10 +3928,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NotifyPositionId")
@@ -2998,6 +3945,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<bool>("PositionStatus")
                         .HasColumnType("bit");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -3021,10 +3971,21 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Detail")
@@ -3032,16 +3993,18 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Name", "PositionId");
 
@@ -3064,29 +4027,42 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LedgerAccount")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("ProjCategoryStatus")
                         .HasColumnType("bit");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ProjCategoryId");
 
@@ -3102,25 +4078,35 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.ProjId),'PRJ-00000000#')");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LedgerAccount")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -3130,6 +4116,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<bool>("ProjStatus")
                         .HasColumnType("bit");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ProjId");
 
@@ -3142,10 +4131,37 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ProvinceId");
 
@@ -3156,8 +4172,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                 {
                     b.Property<int>("InternalId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InternalId"));
 
                     b.Property<string>("AFP")
                         .HasMaxLength(20)
@@ -3168,30 +4185,43 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<DateTime>("CreatedDateTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("DeductionCooperative")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LoanCooperative")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("SFS")
                         .HasMaxLength(20)
@@ -3212,21 +4242,28 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
-
-                    b.Property<string>("CreatedBy")
+                    b.Property<string>("DataAreaId")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasMaxLength(5)
                         .HasColumnType("nvarchar(5)");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("DepartmentId")
                         .HasMaxLength(20)
@@ -3238,6 +4275,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<int>("IndexBase")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("LedgerAccount")
                         .HasMaxLength(30)
@@ -3251,10 +4291,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("MultiplyAmount")
@@ -3275,6 +4315,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("TaxStatus")
                         .HasColumnType("bit");
 
@@ -3284,7 +4327,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<DateTime>("ValidTo")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("TaxId", "InCompany");
+                    b.HasKey("TaxId", "DataAreaId");
 
                     b.ToTable("Taxes");
                 });
@@ -3297,9 +4340,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("TaxId")
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("InCompany")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                    b.Property<string>("DataAreaId")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<decimal>("AnnualAmountHigher")
                         .HasColumnType("decimal(18,2)");
@@ -3311,28 +4354,41 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("FixedAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Percent")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("InternalId", "TaxId", "InCompany");
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
-                    b.HasIndex("TaxId", "InCompany");
+                    b.HasKey("InternalId", "TaxId", "DataAreaId");
+
+                    b.HasIndex("TaxId", "DataAreaId");
 
                     b.ToTable("TaxDetails");
                 });
@@ -3347,13 +4403,20 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(4)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateTemporaryPassword")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ElevationType")
@@ -3368,11 +4431,14 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(5)");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -3383,6 +4449,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("TemporaryPassword")
                         .HasColumnType("nvarchar(max)");
@@ -3400,14 +4469,16 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         {
                             Alias = "Admin",
                             CompanyDefaultId = "Root",
-                            CreatedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateTemporaryPassword = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ElevationType = 0,
                             Email = "fflores@dynacorp365.com",
                             FormatCodeId = "en-US",
-                            ModifiedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsDeleted = false,
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Admin",
-                            Password = "e10adc3949ba59abbe56e057f20f883e"
+                            Password = "e10adc3949ba59abbe56e057f20f883e",
+                            RecId = 0L
                         });
                 });
 
@@ -3417,10 +4488,17 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CreatedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("CreatedDateTime")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeletedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Extension")
@@ -3431,12 +4509,18 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.Property<byte[]>("Image")
                         .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("ModifiedBy")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("ModifiedDateTime")
+                    b.Property<string>("ModifiedBy")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<long>("RecId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Alias");
 
@@ -3770,7 +4854,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasOne("DC365_PayrollHR.Core.Domain.Entities.Tax", null)
                         .WithMany()
-                        .HasForeignKey("TaxId", "InCompany")
+                        .HasForeignKey("TaxId", "DataAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -3894,7 +4978,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                 {
                     b.HasOne("DC365_PayrollHR.Core.Domain.Entities.Tax", null)
                         .WithMany()
-                        .HasForeignKey("TaxId", "InCompany")
+                        .HasForeignKey("TaxId", "DataAreaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

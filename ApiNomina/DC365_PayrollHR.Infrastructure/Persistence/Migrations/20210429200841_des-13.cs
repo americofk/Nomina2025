@@ -35,9 +35,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     Topics = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
                     CourseStatus = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

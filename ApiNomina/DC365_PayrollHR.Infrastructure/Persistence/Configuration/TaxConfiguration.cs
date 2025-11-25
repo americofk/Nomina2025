@@ -11,7 +11,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<Tax> builder)
         {
-            builder.HasKey(x => new { x.TaxId, x.InCompany });
+            builder.HasKey(x => new { x.TaxId, x.DataAreaId });
             builder.Property(x => x.TaxId)
                 .HasMaxLength(20);
 

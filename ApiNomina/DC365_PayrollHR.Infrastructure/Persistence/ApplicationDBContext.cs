@@ -54,41 +54,58 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
         {
             DateTime dateTime = DateTime.Now;
 
-            //Auditoria para los usuarios
+            // Audit trail for entities
             foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> entry in ChangeTracker.Entries<AuditableEntity>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
                         entry.Entity.CreatedBy = _CurrentUserInformation.Alias;
-                        entry.Entity.CreatedDateTime = dateTime;
+                        entry.Entity.CreatedOn = dateTime;
+                        entry.Entity.IsDeleted = false;
                         break;
 
                     case EntityState.Modified:
                         entry.Entity.ModifiedBy = _CurrentUserInformation.Alias;
-                        entry.Entity.ModifiedDateTime = dateTime;
+                        entry.Entity.ModifiedOn = dateTime;
+                        break;
+
+                    case EntityState.Deleted:
+                        // Soft delete implementation (ISO 27001 compliance)
+                        entry.State = EntityState.Modified;
+                        entry.Entity.IsDeleted = true;
+                        entry.Entity.DeletedBy = _CurrentUserInformation.Alias;
+                        entry.Entity.DeletedOn = dateTime;
                         break;
                 }
             }
 
-            //Auditoria para las empresas
+            // Audit trail for company entities
             foreach (Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableCompanyEntity> entry in ChangeTracker.Entries<AuditableCompanyEntity>())
             {
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        if (string.IsNullOrEmpty(entry.Entity.InCompany))
+                        if (string.IsNullOrEmpty(entry.Entity.DataAreaId))
                         {
                             entry.Entity.CreatedBy = _CurrentUserInformation.Alias;
-                            entry.Entity.CreatedDateTime = dateTime;
-                            entry.Entity.InCompany = _CurrentUserInformation.Company;
+                            entry.Entity.CreatedOn = dateTime;
+                            entry.Entity.DataAreaId = _CurrentUserInformation.Company;
+                            entry.Entity.IsDeleted = false;
                         }
                         break;
 
                     case EntityState.Modified:
                         entry.Entity.ModifiedBy = _CurrentUserInformation.Alias;
-                        entry.Entity.ModifiedDateTime = dateTime;
-                        //entry.Entity.InCompany = _CurrentUserInformation.Company;
+                        entry.Entity.ModifiedOn = dateTime;
+                        break;
+
+                    case EntityState.Deleted:
+                        // Soft delete implementation (ISO 27001 compliance)
+                        entry.State = EntityState.Modified;
+                        entry.Entity.IsDeleted = true;
+                        entry.Entity.DeletedBy = _CurrentUserInformation.Alias;
+                        entry.Entity.DeletedOn = dateTime;
                         break;
                 }
             }
@@ -103,27 +120,42 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
 
         private ModelBuilder GlobalQueryFilter(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Project>().HasQueryFilter(b => b.InCompany == _CurrentUserInformation.Company);
-            //modelBuilder.Entity<Tax>().HasQueryFilter(b => b.InCompany == _CurrentUserInformation.Company);
+            // Global filter for company entities (DataAreaId) and soft delete (IsDeleted)
+            Expression<Func<AuditableCompanyEntity, bool>> companyFilter = x =>
+                x.DataAreaId == _CurrentUserInformation.Company && !x.IsDeleted;
 
-            //Se define el filtro a aplicar
-            Expression<Func<AuditableCompanyEntity, bool>> expressionFilter = x => x.InCompany == _CurrentUserInformation.Company;
+            // Global filter for auditable entities (IsDeleted only)
+            Expression<Func<AuditableEntity, bool>> auditableFilter = x => !x.IsDeleted;
 
-            //Se buscan todas las entidades del context
-            foreach (var item in modelBuilder.Model.GetEntityTypes())
+            // Apply filters to all entities in context
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                //Si tiene la propiedad InCompany es porque hereda de la clase AuditableCompanyEntity
-                var property = item.FindProperty("InCompany");
+                // Check if entity has DataAreaId property (inherits from AuditableCompanyEntity)
+                var dataAreaIdProperty = entityType.FindProperty("DataAreaId");
 
-                //Si la propiedad no está vacía se crea el nuevo filtro
-                if (property != null)
+                if (dataAreaIdProperty != null)
                 {
-                    var newParam = Expression.Parameter(item.ClrType);
-                    var newBody = ReplacingExpressionVisitor.Replace(expressionFilter.Parameters.First(), newParam, expressionFilter.Body);
+                    // Apply company and soft delete filter
+                    var newParam = Expression.Parameter(entityType.ClrType);
+                    var newBody = ReplacingExpressionVisitor.Replace(
+                        companyFilter.Parameters.First(), newParam, companyFilter.Body);
                     var newLambda = Expression.Lambda(newBody, newParam);
+                    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(newLambda);
+                }
+                else
+                {
+                    // Check if entity has IsDeleted property (inherits from AuditableEntity)
+                    var isDeletedProperty = entityType.FindProperty("IsDeleted");
 
-                    //Se añade el filtro de forma dinamica
-                    modelBuilder.Entity(item.ClrType).HasQueryFilter(newLambda);
+                    if (isDeletedProperty != null)
+                    {
+                        // Apply only soft delete filter
+                        var newParam = Expression.Parameter(entityType.ClrType);
+                        var newBody = ReplacingExpressionVisitor.Replace(
+                            auditableFilter.Parameters.First(), newParam, auditableFilter.Body);
+                        var newLambda = Expression.Lambda(newBody, newParam);
+                        modelBuilder.Entity(entityType.ClrType).HasQueryFilter(newLambda);
+                    }
                 }
             }
 
@@ -205,5 +237,8 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
         public DbSet<CalendarHoliday> CalendarHolidays { get; set; }
         public DbSet<GeneralConfig> GeneralConfigs { get; set; }
         public DbSet<EmployeeWorkControlCalendar> EmployeeWorkControlCalendars { get; set; }
+
+        // Audit trail for compliance (ISO 27001)
+        public DbSet<AuditLog> AuditLogs { get; set; }
     }
 }

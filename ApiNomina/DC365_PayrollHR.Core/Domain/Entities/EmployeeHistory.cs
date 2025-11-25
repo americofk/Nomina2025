@@ -1,8 +1,9 @@
-﻿using System;
+﻿using DC365_PayrollHR.Core.Domain.Common;
+using System;
 
 namespace DC365_PayrollHR.Core.Domain.Entities
 {
-    public class EmployeeHistory
+    public class EmployeeHistory : AuditableCompanyEntity
     {
         public string EmployeeHistoryId { get; set; }
         public string Type { get; set; }

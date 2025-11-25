@@ -142,9 +142,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     Dduction_LimitPeriod = table.Column<int>(type: "int", nullable: false),
                     Dduction_LimitAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -162,9 +162,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,9 +189,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     LedgerAccount = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
                     Department = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -235,9 +235,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     JobStatus = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -278,9 +278,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     IsRoyaltyPayroll = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -355,9 +355,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -431,9 +431,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     Detail = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     PositionId = table.Column<string>(type: "nvarchar(20)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

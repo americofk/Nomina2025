@@ -3126,12 +3126,12 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         {
                             Alias = "Admin",
                             CompanyDefaultId = "Root",
-                            CreatedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateTemporaryPassword = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ElevationType = 0,
                             Email = "fflores@dynacorp365.com",
                             FormatCodeId = "en-US",
-                            ModifiedDateTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Admin",
                             Password = "e10adc3949ba59abbe56e057f20f883e"
                         });

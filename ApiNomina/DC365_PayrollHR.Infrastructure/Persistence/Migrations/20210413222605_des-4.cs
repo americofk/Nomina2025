@@ -41,9 +41,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     CompanyId = table.Column<string>(type: "nvarchar(4)", nullable: false),
                     Alias = table.Column<string>(type: "nvarchar(10)", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,9 +72,9 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     PrivilegeEdit = table.Column<bool>(type: "bit", nullable: false),
                     PrivilegeDelete = table.Column<bool>(type: "bit", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {

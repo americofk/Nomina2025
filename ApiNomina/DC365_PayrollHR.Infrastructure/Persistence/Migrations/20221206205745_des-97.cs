@@ -54,10 +54,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     BreakWorkFrom = table.Column<TimeSpan>(type: "time", nullable: false),
                     BreakWorkTo = table.Column<TimeSpan>(type: "time", nullable: false),
                     CreatedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    CreatedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedBy = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
-                    ModifiedDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InCompany = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true)
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataAreaId = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: true)
                 },
                 constraints: table =>
                 {
