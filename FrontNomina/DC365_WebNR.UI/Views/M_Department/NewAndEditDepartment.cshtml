@@ -32,7 +32,18 @@
                 <h3 class="TituloFormularios">Nuevo departamento</h3>
                 <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditDepartment" asp-action="save">
 
-                    <div class="contInterNuevoConteGastos">
+                            @* Campos ocultos de auditoría *@
+                            <input type="hidden" asp-for="DataAreaId" />
+                            <input type="hidden" asp-for="RecId" />
+                            <input type="hidden" asp-for="CreatedBy" />
+                            <input type="hidden" asp-for="CreatedOn" />
+                            <input type="hidden" asp-for="ModifiedBy" />
+                            <input type="hidden" asp-for="ModifiedOn" />
+                            <input type="hidden" asp-for="IsDeleted" />
+                            <input type="hidden" asp-for="DeletedBy" />
+                            <input type="hidden" asp-for="DeletedOn" />
+
+                            <div class="contInterNuevoConteGastos">
 
                         <div class="contlotes Showid collapse">
                             <label class="control-label ancholabel">Código de departamento</label>
@@ -99,6 +110,19 @@
 
                     </div>
                 </form>
+
+                @* Panel de Información del Registro (Auditoría) *@
+                <div id="audit-info-section" style="display: none; margin-top: 20px;">
+                    <h3 class="TituloFormularios audit-title-fixed" style="cursor: pointer;" id="audit-panel-header">
+                        Información del Registro
+                        <i class="fa fa-chevron-down pull-right" id="audit-chevron"></i>
+                    </h3>
+                    <div id="audit-panel-content" style="display: block; border: 1px solid #e5e5e5; border-radius: 4px; padding: 15px; background-color: #f9f9f9;">
+                        @* Información de Auditoría ISO 27001 *@
+                        @await Html.PartialAsync("_AuditInfo", Model)
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

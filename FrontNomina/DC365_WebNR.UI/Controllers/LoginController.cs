@@ -96,24 +96,29 @@ namespace DC365_WebNR.UI.Controllers
 
                 if (responseProcess.Succeeded)
                 {
-                    HttpContext.Session.SetString("NameUser", responseProcess.Data.Name);
-                    HttpContext.Session.SetString("Alias", responseProcess.Data.Alias);
-                    HttpContext.Session.SetString("Token", responseProcess.Data.Token);
-                    HttpContext.Session.SetString("FormatCode", responseProcess.Data.FormatCode);
+                    HttpContext.Session.SetString("NameUser", responseProcess.Data.Name ?? string.Empty);
+                    HttpContext.Session.SetString("Alias", responseProcess.Data.Alias ?? string.Empty);
+                    HttpContext.Session.SetString("Token", responseProcess.Data.Token ?? string.Empty);
+                    HttpContext.Session.SetString("FormatCode", responseProcess.Data.FormatCode ?? string.Empty);
                     HttpContext.Session.SetString("Avatar", string.IsNullOrEmpty(responseProcess.Data.Avatar)?string.Empty:String.Format("data:image/jpg;base64,{0}", responseProcess.Data.Avatar));
                     HttpContext.Session.SetString("LisCompanies", JsonConvert.SerializeObject(responseProcess.Data.UserCompanies));
-                    HttpContext.Session.SetString("CodeCompanies", responseProcess.Data.DefaultCompany);
-                    HttpContext.Session.SetString("CodeDefaultCompanies", responseProcess.Data.DefaultCompany);
-                    HttpContext.Session.SetString("NameCompanies", responseProcess.Data.UserCompanies.Find(x => x.companyId == responseProcess.Data.DefaultCompany).name);
-                    HttpContext.Session.SetString("Email", responseProcess.Data.Email);
-                    HttpContext.Session.SetString("Menu", consultaMenu(responseProcess.Data.Token));
+                    HttpContext.Session.SetString("CodeCompanies", responseProcess.Data.DefaultCompany ?? string.Empty);
+                    HttpContext.Session.SetString("CodeDefaultCompanies", responseProcess.Data.DefaultCompany ?? string.Empty);
+
+                    var defaultCompany = responseProcess.Data.UserCompanies?.Find(x => x.companyId == responseProcess.Data.DefaultCompany);
+                    HttpContext.Session.SetString("NameCompanies", defaultCompany?.name ?? string.Empty);
+
+                    HttpContext.Session.SetString("Email", responseProcess.Data.Email ?? string.Empty);
+
+                    string menu = consultaMenu(responseProcess.Data.Token);
+                    HttpContext.Session.SetString("Menu", menu ?? string.Empty);
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 responseUI.Type = ErrorMsg.TypeError;
-                responseUI.Message = ErrorMsg.Error500;
+                responseUI.Message = $"Error: {ex.Message} | StackTrace: {ex.StackTrace}";
                 return (Json(responseUI));
             }
 

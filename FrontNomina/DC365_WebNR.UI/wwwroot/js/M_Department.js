@@ -67,15 +67,22 @@ const fn = {
     SettingNewAndEdit: function (type) {
         if (type == "Edit") {
             option = 2;
-            $('.TituloFormularios').text('Editar departamento');
+            $('.TituloFormularios:not(.audit-title-fixed)').text('Editar departamento');
             $('.Showid').removeClass('collapse');
         }
         else {
             option = 1;
-            $('.TituloFormularios').text('Nuevo departamento');
+            $('.TituloFormularios:not(.audit-title-fixed)').text('Nuevo departamento');
             $('.Showid').addClass('collapse');
             let form = document.getElementById("createAndEditDepartment");
             form.reset();
+
+            // Ocultar el componente de auditoría cuando es nuevo
+            if (typeof window.updateAuditInfo === 'function') {
+                setTimeout(function() {
+                    window.updateAuditInfo();
+                }, 50);
+            }
         }
     }
 };
@@ -149,6 +156,14 @@ escuchadores: {
                     $('.progreso').modal('hide');
                     if (data != null) {
                         AutomaticBinding(data, "#createAndEditDepartment");
+
+                        // Actualizar el componente de información de auditoría
+                        if (typeof window.updateAuditInfo === 'function') {
+                            setTimeout(function() {
+                                window.updateAuditInfo();
+                            }, 100);
+                        }
+
                         fn.SettingNewAndEdit("Edit");
                         fn.funtionNewDepartment("open");
                     }

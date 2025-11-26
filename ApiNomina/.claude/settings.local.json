@@ -8,7 +8,13 @@
       "Bash(dotnet ef migrations script:*)",
       "Bash(dotnet ef migrations list:*)",
       "Bash(dotnet ef database update:*)",
-      "Bash(sqlcmd:*)"
+      "Bash(sqlcmd:*)",
+      "Bash(dotnet ef dbcontext:*)",
+      "Bash(dotnet:*)",
+      "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.CORE\\Domain\\Models\" /b)",
+      "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.UI\\Views\\Shared\" /b)",
+      "Bash(taskkill:*)",
+      "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.UI\\Process\" /b)"
     ],
     "deny": [],
     "ask": []

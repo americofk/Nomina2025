@@ -1,4 +1,5 @@
 ﻿using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using DC365_WebNR.CORE.Aplication.Attributes;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
-    public class Department
+    public class Department : AuditableCompanyModel
     {
         [CustomFilter("Id Departamento")]
         public string DepartmentId { get; set; }

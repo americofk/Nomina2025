@@ -37,6 +37,12 @@ namespace DC365_WebNR.UI.Controllers
             ResponseUI responseUI = new ResponseUI();
             processDepartament = new ProcessDepartament(dataUser[0]);
 
+            // Establecer DataAreaId desde la sesión si está vacío
+            if (string.IsNullOrEmpty(Obj.DataAreaId))
+            {
+                Obj.DataAreaId = dataUser[3]; // CodeCompanies
+            }
+
             if (!ModelState.IsValid)
             {
                 responseUI.Errors = ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();

@@ -1,0 +1,190 @@
+/* ================================================
+   Estilos para componente de Auditoría ISO 27001
+   Archivo: AuditInfo.css
+   Uso: Información del Registro (Creación, Modificación, Eliminación)
+   ================================================ */
+
+/* Contenedor principal */
+.audit-info-container {
+    margin: 0;
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Panel de auditoría */
+.audit-panel {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* Título del panel */
+.audit-title {
+    background: linear-gradient(to bottom, #f9f9f9 0%, #e8e8e8 100%);
+    border-bottom: 1px solid #ccc;
+    padding: 12px 15px;
+    border-radius: 4px 4px 0 0;
+}
+
+.audit-title h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: inline-block;
+}
+
+.audit-title i {
+    margin-right: 8px;
+    color: #5a738e;
+}
+
+/* Contenido del panel */
+.audit-content {
+    padding: 20px 15px;
+}
+
+/* Grid de información de auditoría */
+.audit-info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+/* Secciones de auditoría */
+.audit-section {
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    padding: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+.audit-section:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Sección de eliminado con estilo especial */
+.audit-section.audit-deleted {
+    background-color: #fff3cd;
+    border-color: #ffc107;
+    grid-column: 1 / -1;
+}
+
+.audit-section.audit-deleted .audit-label {
+    color: #856404;
+}
+
+/* Items individuales de auditoría */
+.audit-item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.audit-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+/* Labels de auditoría */
+.audit-label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.audit-label i {
+    margin-right: 6px;
+    color: #5a738e;
+    width: 16px;
+    text-align: center;
+}
+
+/* Valores de auditoría */
+.audit-value {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    padding-left: 22px;
+    font-weight: normal;
+}
+
+/* Estilos especiales para valores de eliminación */
+.audit-value.deleted-by,
+.audit-value.deleted-date {
+    color: #856404;
+    font-weight: 600;
+}
+
+/* Responsivo para tablets */
+@media (max-width: 992px) {
+    .audit-info-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+    .audit-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .audit-section {
+        margin-bottom: 10px;
+    }
+
+    .audit-content {
+        padding: 15px 10px;
+    }
+
+    .audit-title h4 {
+        font-size: 14px;
+    }
+}
+
+/* Estilos para impresión */
+@media print {
+    .audit-info-container {
+        page-break-inside: avoid;
+    }
+
+    .audit-panel {
+        border: 1px solid #000;
+        box-shadow: none;
+    }
+
+    .audit-section:hover {
+        box-shadow: none;
+    }
+}
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.audit-info-container {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Estilos adicionales para integración con formularios existentes */
+.contNewEntyti .audit-info-container {
+    margin-top: 30px;
+}
+
+.margenFormmularios .audit-info-container {
+    margin: 20px 15px;
+}
