@@ -622,6 +622,19 @@ esuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    $(document).on('dblclick', '.tbodyTableProcessPayroll .row-app', function (e) {
+        if ($(e.target).is('input[type="checkbox"]') || $(e.target).is('label')) {
+            return;
+        }
+        const rowId = $(this).find('.PayrollProcessIdTbl').text().trim();
+        if (!rowId) { return; }
+        fn.SearchFormNewAndEdit(rowId, "edit");
+    });
+
+    // Aplicar estilo clickable a las filas
+    $('.tbodyTableProcessPayroll .row-app').addClass('row-clickable');
 }
 
 export { }

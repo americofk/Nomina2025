@@ -193,7 +193,9 @@ function AutomaticBinding(obj: object, select: string, preObj: string = "") {
             } else if (selectByAttr[0].type == "date") {
                 selectByAttr[0].value = FormatDateAutoBinding(obj[x]);
             }else if (selectByAttr[0].type == "time") {
-                selectByAttr[0].value = FormatHours(obj[x].TotalMilliseconds);
+                if (obj[x] != null && obj[x].TotalMilliseconds != null) {
+                    selectByAttr[0].value = FormatHours(obj[x].TotalMilliseconds);
+                }
             } else {
                 selectByAttr[0].value = obj[x];
 
@@ -622,6 +624,83 @@ function moredata(_maxscroll: number, _controller: string, _tbody: string, _type
             }
         });
 
+    }
+}
+
+// ============================================================================
+// Funcion para habilitar doble clic en filas de tablas ListPage
+// Uso con parametro: enableRowDoubleClick('.tbody-Table-Department', '.DepartmentIdtbl', '/departamentosactivos/getbyid', callback, 'Id')
+// Uso con URL: enableRowDoubleClick('.tbody-Table-X', '.XIdtbl', '/endpoint/{id}', callback) - {id} se reemplaza con el valor
+// ============================================================================
+function enableRowDoubleClick(
+    tbodySelector: string,
+    idCellSelector: string,
+    ajaxUrl: string,
+    onSuccessCallback: (data: any) => void,
+    idParamName: string = "Id"
+) {
+    // Delegacion de eventos para filas dinamicas
+    $(document).on('dblclick', `${tbodySelector} .row-app`, function (e) {
+        // Evitar que el doble clic en checkbox dispare la edicion
+        if ($(e.target).is('input[type="checkbox"]') || $(e.target).is('label')) {
+            return;
+        }
+
+        // Obtener el ID del registro desde la celda especificada
+        const rowId = $(this).find(idCellSelector).text().trim();
+
+        if (!rowId) {
+            console.warn('No se pudo obtener el ID del registro');
+            return;
+        }
+
+        // Mostrar indicador de carga
+        $('.progreso').modal({ backdrop: 'static', keyboard: false });
+
+        // Determinar si la URL usa placeholder {id} o parametro
+        let finalUrl = ajaxUrl;
+        let ajaxData: any = {};
+
+        if (ajaxUrl.includes('{id}')) {
+            // URL con ID en la ruta: /endpoint/{id} -> /endpoint/123
+            finalUrl = ajaxUrl.replace('{id}', rowId);
+        } else if (idParamName) {
+            // URL con parametro: /endpoint?Id=123
+            ajaxData[idParamName] = rowId;
+        }
+
+        // Llamar al endpoint para obtener los datos
+        $.ajax({
+            url: finalUrl,
+            type: "GET",
+            data: ajaxData,
+            async: true,
+            success: function (data: any) {
+                $('.progreso').modal('hide');
+                if (data != null) {
+                    onSuccessCallback(data);
+                } else {
+                    windows_message("No se encontro el registro", "error");
+                }
+            },
+            error: function (xhr) {
+                $('.progreso').modal('hide');
+                redireccionaralLogin(xhr);
+            }
+        });
+    });
+
+    // Agregar clase para indicar que las filas son clickeables
+    $(`${tbodySelector} .row-app`).addClass('row-clickable');
+
+    // Observar cambios en el DOM para aplicar clase a nuevas filas
+    const observer = new MutationObserver(function (mutations) {
+        $(`${tbodySelector} .row-app`).not('.row-clickable').addClass('row-clickable');
+    });
+
+    const targetNode = document.querySelector(tbodySelector);
+    if (targetNode) {
+        observer.observe(targetNode, { childList: true, subtree: true });
     }
 }
 

@@ -332,6 +332,23 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-Course',
+        '.CourseIdtblcur',
+        '/cursos/{id}',
+        function (data: Course) {
+            option = 2;
+            $('.Showid').removeClass('collapse');
+            $('.setiartitulo').text('Editar cursos');
+            AutomaticBinding(data, "#createAndEditCourse");
+            funtionNewCourse("open");
+            $('.optionform').removeClass('collapse');
+            $('.margenFormmularios').removeClass('ContenedorFormularios2');
+            $('.margenFormmularios').addClass('ContenedorFormularios-three');
+        }
+    );
 }
 
 

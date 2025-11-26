@@ -1,197 +1,191 @@
-﻿
+// ============================================================================
+// Archivo: login.ts
+// Proyecto: DC365_WebNR.UI
+// Descripcion:
+//   - Script TypeScript para manejo del formulario de login
+//   - Validaciones client-side y llamadas AJAX al controller
+// ============================================================================
 
-$("#formulariologin1").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
-        $('.progreso').modal({ backdrop: 'static', keyboard: false })
-        $.ajax({
+// Formulario de login principal
+$("#loginForm").submit(function (e) {
+    e.preventDefault();
 
-            url: "/Login/ValidateEmail",
-            type: "POST",
-            data: $("#formulariologin1").serialize(),
-            async: true,
-            success: function (data: ResponseUI) {
-                if (data.Type == "error") {
-                    $('.progreso').modal('hide');
-                    //Función para los errores
-                    FormatErrors(data);
-                } else {
-                    $('.progreso').modal('hide');
-                    $('.Usuario').toggleClass('UsuarioOculto');
-                    $('.Clave').toggleClass('ClaveMostrar');
-                    $('#displayName').text(`${$(".UsuarioLogin").val().toString().trim()}`);
-                    $('.displayName').val(`${$(".UsuarioLogin").val().toString().trim()}`);
-                    $('#Password').focus();
-               
-                 
-                }
+    const email = $('#email').val()?.toString().trim();
+    const password = $('#password').val()?.toString();
 
-            }, error: function (xhr) {
-                redireccionaralLogin(xhr);
-            }
-
-        });
+    // Validaciones
+    if (!email) {
+        showError('El correo electronico es requerido');
+        $('#email').addClass('is-invalid');
+        return;
     }
-});
 
-//Ir a tras en el login
-$('.btnAtras').on('click', function () {
-    $('.Usuario').toggleClass('UsuarioOculto');
-    $('.Clave').toggleClass('ClaveMostrar');
-});
-
-//ir al formulario para solicitar contraseña temporal
-$(".linkOlvidoContraseña").click(function () {
-    $('.EnviarContraseña').removeClass('collapse');
-    $('.Clave').toggleClass('ClaveMostrar');
-    $('#EmailChange_01').val($('.identity').text());
-});
-
-
-
-$("#formulariologin3").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
-        $('.progreso').modal({ backdrop: 'static', keyboard: false })
-        $.ajax({
-            url: "/Login/Requestchangepassword",
-            type: "POST",
-            data: $("#formulariologin3").serialize(),
-            //data: {
-            //    _email: $("#alias").val()
-            //},
-            async: true,
-            success: function (data: ResponseUI) {
-
-                if (data.Type == "error") {
-                    $('.progreso').modal('hide');
-                    FormatErrors(data);
-                } else {
-                    $('.progreso').modal('hide');
-                   
-                    windows_message(data.Message, data.Type);
-                    setTimeout(function () {
-                        $('.identity-01').text($('#EmailChange_01').val().toString());
-                        $('.EnviarContraseña').addClass('collapse');
-                        $('.CambiarContraseña').removeClass('collapse');
-                        $('.fade-in-lightbox').removeClass('inner');
-                        $('.fade-in-lightbox').addClass('inner-01');
-                    }, 500);
-
-
-                }
-
-            }
-        });
+    if (!isValidEmail(email)) {
+        showError('Ingrese un correo electronico valido');
+        $('#email').addClass('is-invalid');
+        return;
     }
-    
-});
 
-$(".btnFormChangePassdirecto").click(function () {
-    $('.Clave').toggleClass('ClaveMostrar');
-    $('.CambiarContraseña').removeClass('collapse');
-    $('.fade-in-lightbox').removeClass('inner');
-    $('.fade-in-lightbox').addClass('inner-01');
-    $('#EmailChange_01').val($('.identity').text());
-    $('.identity-01').text($('#EmailChange_01').val().toString());
-    ClearImputnNewPasswor();
-});
-
-$(".btnCancelarCambio").click(function () {
-
-    $('.CambiarContraseña').addClass('collapse');
-    $('.Clave').toggleClass('ClaveMostrar');
-
-    $('.fade-in-lightbox').removeClass('inner-01');
-    $('.fade-in-lightbox').addClass('inner');
-
-    $('.logo').removeClass('imagenLogo-01');
-    $('.logo').addClass('imagenLogo');
-    ClearImputnNewPasswor();
-
-});
-
-
-function ClearImputnNewPasswor() {
-    $("#EmailChange_02").val("");
-    $("#EmailChange_03").val("");
-    $("#EmailChange_04").val("");
-}
-
-$("#formulariologin4").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
-        $('.progreso').modal({ backdrop: 'static', keyboard: false })
-
-        $.ajax({
-            url: "/Login/Sendnewpassword",
-            type: "POST",
-            data: $("#formulariologin4").serialize(),
-            async: true,
-           
-            success: function (data: ResponseUI) {
-                if (data.Type == "error") {
-                    $('.progreso').modal('hide');
-                    FormatErrors(data);
-                } else {
-                    $('.progreso').modal('hide');
-                    windows_message(data.Message, data.Type);
-                    setTimeout(function () {
-                        location.reload();
-                    }, 500);
-                }
-            }
-        });
+    if (!password) {
+        showError('La contrasena es requerida');
+        $('#password').addClass('is-invalid');
+        return;
     }
-});
 
-//model Sendnewpassword
-function FuntionModelSendnewpassword() {
-    var FuntionSendnewpassword: ISendnewpassword =
-    {
-        Email: $('#displayName').text().toString(),
-        TemporaryPassword: $('#EmailChange_02').val().toString(),
-        NewPassword: $('#EmailChange_03').val().toString()
-    };
+    // Limpiar errores
+    $('#email, #password').removeClass('is-invalid');
 
-    return FuntionSendnewpassword;
-}
+    // Mostrar estado de carga
+    setLoadingState(true);
 
-$(".btnAtrasCambioClave").click(function () {
-    $('.EnviarContraseña').addClass('collapse');
-    $('.Clave').toggleClass('ClaveMostrar');
-});
-
-$("#alias").change(function (e) {
-    $("#alias").val(Mayuscula($("#alias").val().toString()));
-});
-
-$("#formulariologin2").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
-        $('.progreso').modal({ backdrop: 'static', keyboard: false })
-        $.ajax({
-            url: "/Login/ValidartePassword",
-            type: "POST",
-            data: $("#formulariologin2").serialize(),
-           
-            async: true,
-            success: function (data: ResponseUI) {
-
-                if (data.Type == "error") {
-                    $('.progreso').modal('hide');
-                    windows_message(data.Message, data.Type);
-                } else {
-
+    $.ajax({
+        url: "/Login/ValidartePassword",
+        type: "POST",
+        data: {
+            Password: password,
+            correo: email,
+            __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+        },
+        async: true,
+        success: function (data: ResponseUI) {
+            if (data.Type == "error") {
+                setLoadingState(false);
+                showError(data.Message || 'Credenciales invalidas');
+            } else {
+                showSuccess('Autenticacion exitosa. Cargando sistema...');
+                setTimeout(function () {
                     location.href = "/Dashboard/Principal";
-
-                }
-
+                }, 800);
             }
-        });
-    }
-    
-    
+        },
+        error: function (xhr) {
+            setLoadingState(false);
+            showError('Error de conexion. Intente nuevamente.');
+        }
+    });
 });
 
+// Formulario de recuperacion de contrasena
+$("#forgotPasswordForm").submit(function (e) {
+    e.preventDefault();
 
+    const email = $('#emailRecover').val()?.toString().trim();
+
+    if (!email) {
+        showError('El correo electronico es requerido');
+        $('#emailRecover').addClass('is-invalid');
+        return;
+    }
+
+    if (!isValidEmail(email)) {
+        showError('Ingrese un correo electronico valido');
+        $('#emailRecover').addClass('is-invalid');
+        return;
+    }
+
+    $('#emailRecover').removeClass('is-invalid');
+    setRecoverLoadingState(true);
+
+    $.ajax({
+        url: "/Login/Requestchangepassword",
+        type: "POST",
+        data: {
+            _email: email,
+            __RequestVerificationToken: $('#forgotPasswordForm input[name="__RequestVerificationToken"]').val()
+        },
+        async: true,
+        success: function (data: ResponseUI) {
+            setRecoverLoadingState(false);
+            if (data.Type == "error") {
+                showError(data.Message || 'Error al enviar solicitud');
+            } else {
+                showSuccess(data.Message || 'Se ha enviado una contrasena temporal a su correo');
+                setTimeout(function () {
+                    showLoginForm();
+                }, 2000);
+            }
+        },
+        error: function (xhr) {
+            setRecoverLoadingState(false);
+            showError('Error de conexion. Intente nuevamente.');
+        }
+    });
+});
+
+// Link para mostrar formulario de olvido de contrasena
+$('#linkForgotPassword').on('click', function (e) {
+    e.preventDefault();
+    showForgotPasswordForm();
+});
+
+// Link para volver al login
+$('#linkBackToLogin').on('click', function (e) {
+    e.preventDefault();
+    showLoginForm();
+});
+
+// Limpiar errores al escribir
+$('#email, #password, #emailRecover').on('input', function () {
+    $(this).removeClass('is-invalid');
+    clearAlerts();
+});
+
+// Funciones auxiliares
+function isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showError(message: string): void {
+    $('#alertContainer').html(`
+        <div class="alert alert-danger fade-in" style="margin-bottom: 15px;">
+            <i class="fa fa-exclamation-circle"></i> ${message}
+        </div>
+    `);
+}
+
+function showSuccess(message: string): void {
+    $('#alertContainer').html(`
+        <div class="alert alert-success fade-in" style="margin-bottom: 15px;">
+            <i class="fa fa-check-circle"></i> ${message}
+            <span class="spinner-border spinner-border-sm" style="float: right;"></span>
+        </div>
+    `);
+}
+
+function clearAlerts(): void {
+    $('#alertContainer').empty();
+}
+
+function setLoadingState(loading: boolean): void {
+    if (loading) {
+        $('#btnSubmit').prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Ingresando...');
+        $('#email, #password').prop('disabled', true);
+    } else {
+        $('#btnSubmit').prop('disabled', false).html('Ingresar');
+        $('#email, #password').prop('disabled', false);
+    }
+}
+
+function setRecoverLoadingState(loading: boolean): void {
+    if (loading) {
+        $('#btnRecover').prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Enviando...');
+        $('#emailRecover').prop('disabled', true);
+    } else {
+        $('#btnRecover').prop('disabled', false).html('Enviar');
+        $('#emailRecover').prop('disabled', false);
+    }
+}
+
+function showForgotPasswordForm(): void {
+    clearAlerts();
+    $('#loginForm').hide();
+    $('#forgotPasswordForm').show();
+    $('#emailRecover').val($('#email').val()?.toString() || '');
+}
+
+function showLoginForm(): void {
+    clearAlerts();
+    $('#forgotPasswordForm').hide();
+    $('#loginForm').show();
+}

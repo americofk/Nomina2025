@@ -831,7 +831,59 @@ escuchadores: {
 
     });
 
-    
+    // Habilitar doble clic en filas para editar
+    $(document).on('dblclick', '.tbody-Table-Employee .row-app', function (e) {
+        if ($(e.target).is('input[type="checkbox"]') || $(e.target).is('label')) {
+            return;
+        }
+        const rowId = $(this).find('.EmployeeIdtbl').text().trim();
+        if (!rowId) { return; }
+
+        // Obtener WorkStatus dinámicamente al momento del clic
+        const workStatus = $('#WorkStatus').val()?.toString() || '1';
+
+        $('.progreso').modal({ backdrop: 'static', keyboard: false });
+        $.ajax({
+            url: `/empleadosactivos/${rowId}/${workStatus}`,
+            type: "GET",
+            async: true,
+            success: function (data: IEmployee) {
+                $('.progreso').modal('hide');
+                if (data != null) {
+                    option = 2;
+                    $('.hire-employee-inside').show();
+                    MostrarOpciones("Edit");
+                    AutomaticBinding(data, "#createAndEditEmployee");
+
+                    if ($("#ApplyforOvertime").is(":checked")) {
+                        $(".option-extra-hour").removeClass("collapse");
+                    } else {
+                        $(".option-extra-hour").addClass("collapse");
+                    }
+
+                    if ($("#IsFixedWorkCalendar").is(":checked")) {
+                        $(".option-workcalendars").addClass("collapse");
+                        $(".cont-calendar-work").removeClass("collapse");
+                    } else {
+                        $(".option-workcalendars").removeClass("collapse");
+                        $(".cont-calendar-work").addClass("collapse");
+                    }
+
+                    SearchImageEmploye($('#EmployeeId').val().toString());
+                    funtionNewEmployee("open");
+                } else {
+                    windows_message("No se encontró el empleado", "error");
+                }
+            },
+            error: function (xhr) {
+                $('.progreso').modal('hide');
+                redireccionaralLogin(xhr);
+            }
+        });
+    });
+
+    // Aplicar estilo clickable a las filas
+    $('.tbody-Table-Employee .row-app').addClass('row-clickable');
 }
 
 

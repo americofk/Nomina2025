@@ -321,6 +321,20 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-ProjectCategory',
+        '.ProjCategoryIdtbl',
+        '/categoriaproyectoactivas/{id}',
+        function (data: IProjCategory) {
+            option = 2;
+            AutomaticBinding(data, "#createAndEditProjectCategory");
+            $('.Showid').removeClass('collapse');
+            fn.SettingNewAndEdit("Edit");
+            fn.funtionNewProjectCategory("open");
+        }
+    );
 }
 
 export { }

@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(tree:*)",
+      "Bash(mkdir:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(dotnet sln add:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(npm install:*)",
+      "Bash(dotnet clean:*)",
+      "Bash(dotnet add reference:*)",
+      "Bash(npx tsc:*)",
+      "Bash(pushd:*)",
+      "Bash(popd)",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(node -c:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

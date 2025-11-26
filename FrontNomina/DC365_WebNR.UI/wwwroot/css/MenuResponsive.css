@@ -1,0 +1,58 @@
+/* ==============================================
+   MenuResponsive.css
+   Controla el margen del contenido segun el estado del sidebar
+   ============================================== */
+
+/* Ocultar sidebar y contenido hasta que JS aplique el estado del menu */
+.sidebar,
+.contDasboard,
+.contDasboard1 {
+    visibility: hidden;
+}
+
+/* Mostrar cuando el body tenga clase menu-ready */
+body.menu-ready .sidebar,
+body.menu-ready .contDasboard,
+body.menu-ready .contDasboard1 {
+    visibility: visible;
+}
+
+/* Transiciones suaves solo despues de estar listo */
+body.menu-ready .contDasboard,
+body.menu-ready .contDasboard1,
+body.menu-ready .footerMenu,
+body.menu-ready .footerMenu1 {
+    transition: margin-left 0.3s ease;
+}
+
+/* Estado por defecto: menu expandido (230px) */
+.contDasboard,
+.contDasboard1 {
+    margin-left: 230px !important;
+}
+
+.footerMenu,
+.footerMenu1 {
+    margin-left: 230px !important;
+}
+
+/* Cuando body tiene clase menu-collapsed, contenido a 50px */
+body.menu-collapsed .contDasboard,
+body.menu-collapsed .contDasboard1 {
+    margin-left: 50px !important;
+}
+
+body.menu-collapsed .footerMenu,
+body.menu-collapsed .footerMenu1 {
+    margin-left: 50px !important;
+}
+
+/* Media queries para pantallas pequenas */
+@media (max-width: 850px) {
+    .contDasboard,
+    .contDasboard1,
+    .footerMenu,
+    .footerMenu1 {
+        margin-left: 50px !important;
+    }
+}

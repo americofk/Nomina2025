@@ -342,6 +342,19 @@ escuchadores: {
 
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-Department',
+        '.DepartmentIdtbl',
+        '/departamentosactivos/getbyid',
+        function (data: IDepartment) {
+            AutomaticBinding(data, "#createAndEditDepartment");
+            fn.SettingNewAndEdit("Edit");
+            fn.funtionNewDepartment("open");
+        },
+        'Id'
+    );
 }
 
 export { }

@@ -210,6 +210,19 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-CourseType',
+        '.CourseTypeIdtbltc',
+        '/tipocursos/getbyid',
+        function (data: ICourseType) {
+            AutomaticBinding(data, "#createAndEditTypeCourse");
+            fn.SettingNewAndEdit("Edit");
+            fn.funtionNewCorseType("open");
+        },
+        'Id'
+    );
 }
 
 export { }

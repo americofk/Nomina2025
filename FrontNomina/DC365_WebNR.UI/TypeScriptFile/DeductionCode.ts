@@ -495,6 +495,16 @@ escuchadores: {
         }
     });
 
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-deductionCode',
+        '.DeductionCodeId-dc',
+        '/codigosdeduccion/{id}',
+        function (data: IDeductionCode) {
+            AutomaticBinding(data, "#NewAndEditDeductionCode");
+            fn.SettingNewAndEdit("edit");
+        }
+    );
 }
 
 const fn= {
@@ -604,7 +614,6 @@ const fn= {
         }
 
     }
-
 }
 
 export { }

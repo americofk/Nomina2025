@@ -820,6 +820,47 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    $(document).on('dblclick', '.tbody-Table-user .row-app', function (e) {
+        if ($(e.target).is('input[type="checkbox"]') || $(e.target).is('label')) {
+            return;
+        }
+        const rowId = $(this).find('.Aliastbl').text().trim();
+        if (!rowId) { return; }
+
+        $.ajax({
+            url: `/usuarios/${rowId}`,
+            type: "GET",
+            async: true,
+            success: function (data: IUsers) {
+                $('.progreso').modal('hide');
+                if (data != null) {
+                    option = 2;
+                    fn.SearchCompaniesDropDownList(data.Alias);
+                    fn.SearchImageUser(data.Alias);
+                    fn.EditAndNewSettings("edit");
+                    AutomaticBinding(data, "#CreateAndEditUser");
+
+                    if (!data.ElevationTypeBool) {
+                        $('.contendorRolandCompaies').removeClass('collapse');
+                        fn.SearchRoltoUsers();
+                        fn.SearchCompanytoUsers();
+                    } else {
+                        $('.contendorRolandCompaies').addClass('collapse');
+                    }
+                } else {
+                    windows_message("No se encontró el usuario", "error");
+                }
+            },
+            error: function (xhr) {
+                redireccionaralLogin(xhr);
+            }
+        });
+    });
+
+    // Aplicar estilo clickable a las filas
+    $('.tbody-Table-user .row-app').addClass('row-clickable');
 }
 
 

@@ -175,4 +175,18 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-jobdisabled',
+        '.JobIdtblpos',
+        '/cargosactivos/{id}',
+        function (data: IJob) {
+            option = 2;
+            AutomaticBinding(data, "#createAndEditJobs");
+            $('.Showid').removeClass('collapse');
+            $('.seteartitulo').text('Editar cargo');
+            funtionNewJob("open");
+        }
+    );
 }

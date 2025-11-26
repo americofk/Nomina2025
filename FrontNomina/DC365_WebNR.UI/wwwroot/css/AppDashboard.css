@@ -222,7 +222,24 @@ body {
     /*margin-top: 50px;*/
     height: 85vh;
     background: #f8f9fa;
+    margin-left: 230px;
+    transition: margin-left 0.3s;
+}
+
+/* Cuando el menú está contraído */
+.sidebar-collapse ~ .contDasboard,
+.menu-collapsed .contDasboard {
     margin-left: 63px;
+}
+
+/* Clase para el body cuando el menú está contraído */
+body.menu-collapsed .contDasboard {
+    margin-left: 63px;
+}
+
+/* Clase para el body cuando el menú está expandido */
+body.menu-expanded .contDasboard {
+    margin-left: 230px;
 }
 
 .container-AppDashboard-5 {

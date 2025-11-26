@@ -136,6 +136,15 @@
     color:#3f3f3f;
 }
 
+/* Estilo para filas clickeables (doble clic para editar) */
+.row-app.row-clickable {
+    cursor: pointer;
+}
+
+.row-app.row-clickable:hover {
+    background-color: #2980b966;
+}
+
 .cell-app{
     padding:3px 12px;
     /* display: table-cell; */

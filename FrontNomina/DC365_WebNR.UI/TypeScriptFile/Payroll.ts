@@ -490,6 +490,18 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-Payroll',
+        '.PayrollIdtbl',
+        '/nomina/{id}',
+        function (data: IPayroll) {
+            AutomaticBinding(data, "#NewAndEditPayrolls");
+            fn.SearchListPayCycle($('.PayrollId').val().toString());
+            fn.SettingsNewAndEdit("edit");
+        }
+    );
 }
 
 export { }

@@ -505,5 +505,18 @@ escuchadores: {
         }
     });
 
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-EarningCode',
+        '.EarningCodeIdtbl',
+        '/codigosganancias/{id}',
+        function (data: IEarningCode) {
+            option = 2;
+            AutomaticBinding(data, "#NewAndEditEarningCode");
+            $('.seteartitulo').text('Editar código de ingreso');
+            $('.Showid').removeClass('collapse');
+            fn.funtionNewEarningCode("open");
+        }
+    );
 }
 export { }

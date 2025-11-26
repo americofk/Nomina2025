@@ -136,10 +136,13 @@
     <form asp-action="updateStatus" class="form-Enebledjob collapse" id="form-Enebledjob">
     </form>
 
-</div>
-<script src="~/js/JobsDisebled.js"></script>
-@section Scripts {
+    <!-- Formulario editar -->
+    @{await Html.RenderPartialAsync("~/Views/M_Job/NewAndEditJobs.cshtml", new DC365_WebNR.CORE.Domain.Models.Job());}
 
+</div>
+@section Scripts {
+    <script src="~/js/Jobs.js"></script>
+    <script src="~/js/JobsDisebled.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 

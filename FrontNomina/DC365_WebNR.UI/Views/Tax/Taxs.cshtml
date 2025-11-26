@@ -156,11 +156,9 @@
 
 </div>
 
-<script src="~/js/Tax.js" type="module"></script>
-<script src="~/js/AppInputDate.js"></script>
-@*<script src="~/js/TaxDetail.js" type="module"></script>*@
 @section Scripts {
-
+    <script src="~/js/Tax.js" type="module"></script>
+    <script src="~/js/AppInputDate.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="~/js/CustomValidation.js"></script>
 }

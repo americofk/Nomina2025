@@ -217,3 +217,18 @@ $("#content-scroll").scroll(function () {
         }
     }
 });
+
+// Habilitar doble clic en filas para editar
+enableRowDoubleClick(
+    '.tbody-Table-ClassRoom',
+    '.ClassRoomIdtblcr',
+    '/salonescurso/getbyid',
+    function (data: IClassRoom) {
+        option = 2;
+        AutomaticBinding(data, "#createAndEditClassRoom");
+        $('.setiartitulo').text('Editar salón de cursos');
+        $('.Showid').removeClass('collapse');
+        funtionNewClassRoom("open");
+    },
+    'Id'
+);

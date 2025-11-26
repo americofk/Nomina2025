@@ -160,10 +160,9 @@
     </form>
 
 </div>
-@*<script src="~/js/Payroll.js" type="module"></script>*@
-<script src="~/js/PayrollProcess.js" type="module"></script>
-<script src="~/js/AppInputDate.js"></script>
-@section Scripts {
 
+@section Scripts {
+    <script src="~/js/PayrollProcess.js" type="module"></script>
+    <script src="~/js/AppInputDate.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

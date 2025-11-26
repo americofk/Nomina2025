@@ -480,9 +480,21 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-Position',
+        '.PositionIdtblpos',
+        '/puestosactivos/{id}',
+        function (data: IPosition) {
+            option = 2;
+            AutomaticBinding(data, "#createAndEditPosition");
+            $('.Showid').removeClass('collapse');
+            $('.setiartitulo').text('Editar puesto');
+            fn.funtionNewPosition("open");
+        }
+    );
 }
-
-
 
 export { }
 

@@ -215,3 +215,18 @@ $("#content-scroll").scroll(function () {
         }
     }
 });
+
+// Habilitar doble clic en filas para editar
+enableRowDoubleClick(
+    '.tbody-Table-CourseLocation',
+    '.CourseLocationIdtblcl',
+    '/ubicacioncursos/getbyid',
+    function (data: ICourseLocation) {
+        option = 2;
+        AutomaticBinding(data, "#createAndEditCourseLocation");
+        $('.setiartitulo').text('Editar ubicación de curso');
+        $('.Showid').removeClass('collapse');
+        funtionNewCourseLocation("open");
+    },
+    'Id'
+);

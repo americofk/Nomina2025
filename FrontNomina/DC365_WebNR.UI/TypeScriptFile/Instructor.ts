@@ -218,3 +218,18 @@ $("#content-scroll").scroll(function () {
         }
     }
 });
+
+// Habilitar doble clic en filas para editar
+enableRowDoubleClick(
+    '.tbody-Table-Instructor',
+    '.InstructorIdtblIns',
+    '/instructor/getbyid',
+    function (data: IInstructor) {
+        option = 2;
+        AutomaticBinding(data, "#createAndEditInstructor");
+        $('.setiartitulo').text('Editar instructor de cursos');
+        $('.Showid').removeClass('collapse');
+        funtionNewInstructor("open");
+    },
+    'Id'
+);

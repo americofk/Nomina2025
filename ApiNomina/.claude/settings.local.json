@@ -14,7 +14,8 @@
       "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.CORE\\Domain\\Models\" /b)",
       "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.UI\\Views\\Shared\" /b)",
       "Bash(taskkill:*)",
-      "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.UI\\Process\" /b)"
+      "Bash(dir \"F:\\Nomina2025\\FrontNomina\\DC365_WebNR.UI\\Process\" /b)",
+      "Bash(if not exist \"F:\\claude history\" mkdir \"F:\\claude history\")"
     ],
     "deny": [],
     "ask": []

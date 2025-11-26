@@ -285,6 +285,20 @@ escuchadores: {
         }
     });
 
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-Vacants',
+        '.PositionIdtblpos',
+        '/vacantes/{id}',
+        function (data: IPosition) {
+            option = 2;
+            loadlistsSelect();
+            AutomaticBinding(data, "#createAndEditVacants");
+            $('.Showid').removeClass('collapse');
+            $('.setiartitulo').text('Editar puesto vacante');
+            funtionNewVacant("open");
+        }
+    );
 }
 
 funciones: {

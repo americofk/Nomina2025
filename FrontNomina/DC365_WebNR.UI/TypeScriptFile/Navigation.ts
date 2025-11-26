@@ -13,6 +13,67 @@ $(".close-options").click(function () {
 //Para agrandar o encoger el menu lateral
 $('.delado').on('click', function () {
     $('.sidebar').toggleClass('sidebar-collapse');
+
+    // Persistir el estado del menú en localStorage
+    const isCollapsed = $('.sidebar').hasClass('sidebar-collapse');
+    localStorage.setItem('menuCollapsed', isCollapsed ? 'true' : 'false');
+
+    // Actualizar clase en body para controlar el contenido
+    if (isCollapsed) {
+        $('body').addClass('menu-collapsed');
+    } else {
+        $('body').removeClass('menu-collapsed');
+    }
+});
+
+// Restaurar el estado del menú al cargar la página
+$(document).ready(function () {
+    const menuCollapsed = localStorage.getItem('menuCollapsed');
+
+    if (menuCollapsed === 'true') {
+        $('.sidebar').addClass('sidebar-collapse');
+        $('body').addClass('menu-collapsed');
+    } else {
+        $('.sidebar').removeClass('sidebar-collapse');
+        $('body').removeClass('menu-collapsed');
+    }
+
+    // Restaurar estado de submenús desde localStorage
+    const openMenus = JSON.parse(localStorage.getItem('openMenus') || '[]');
+    openMenus.forEach(function (menuId: string) {
+        $('#' + menuId).addClass('menu-open');
+    });
+
+    // Marcar como listo para mostrar el contenido sin pestañeo
+    $('body').addClass('menu-ready');
+});
+
+// Toggle de submenús al hacer clic en menú principal
+$('.sidebar .sidebar-menu .item .menu-btn').on('click', function (e) {
+    e.preventDefault();
+
+    const item = $(this).parent('.item');
+    const menuId = item.attr('id');
+
+    // Toggle clase menu-open
+    item.toggleClass('menu-open');
+
+    // Guardar estado en localStorage
+    let openMenus = JSON.parse(localStorage.getItem('openMenus') || '[]');
+
+    if (item.hasClass('menu-open')) {
+        // Agregar al array si no existe
+        if (openMenus.indexOf(menuId) === -1) {
+            openMenus.push(menuId);
+        }
+    } else {
+        // Quitar del array
+        openMenus = openMenus.filter(function (id: string) {
+            return id !== menuId;
+        });
+    }
+
+    localStorage.setItem('openMenus', JSON.stringify(openMenus));
 });
 
 //cerrar modulos para ir atras

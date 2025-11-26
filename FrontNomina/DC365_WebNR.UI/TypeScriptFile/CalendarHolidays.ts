@@ -234,6 +234,19 @@ escuchadores: {
             }
         }
     });
+
+    // Habilitar doble clic en filas para editar
+    enableRowDoubleClick(
+        '.tbody-Table-CalendarHoliday',
+        '.CalendarDateIdtbl',
+        '/calendarholiday/editar',
+        function (data: ICalendarHoliday) {
+            AutomaticBinding(data, "#createAndEditCalendarHoliday");
+            fn.SettingNewAndEdit("Edit");
+            fn.funtionNewHoliday("open");
+        },
+        'Id'
+    );
 }
 
 export { }

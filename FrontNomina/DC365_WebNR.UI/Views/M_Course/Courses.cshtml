@@ -175,13 +175,13 @@
     </form>
 
 </div>
-<script src="~/js/Course.js"></script>
-<script src="~/js/AppInputDate.js"></script>
-<script src="~/js/Course/CourseInstructors.js" type="module"></script>
-<script src="~/js/Course/CourseEmployees.js" type="module"></script>
-<script src="~/js/Course/CoursePosition.js" type="module"></script>
-@section Scripts {
 
+@section Scripts {
+    <script src="~/js/Course.js"></script>
+    <script src="~/js/AppInputDate.js"></script>
+    <script src="~/js/Course/CourseInstructors.js" type="module"></script>
+    <script src="~/js/Course/CourseEmployees.js" type="module"></script>
+    <script src="~/js/Course/CoursePosition.js" type="module"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
 
