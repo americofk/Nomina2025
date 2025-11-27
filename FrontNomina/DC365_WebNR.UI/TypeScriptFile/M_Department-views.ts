@@ -49,10 +49,6 @@
     if (w.GridViewsManager && token && userRecId > 0) {
         viewsManager = new w.GridViewsManager(apiBase, token, 'Department', userRecId, '');
         viewsManager.initialize().then((configs: any[]) => {
-            // Debug: mostrar vistas disponibles
-            const availableViews = viewsManager.getAvailableViews();
-            console.log('Vistas disponibles:', availableViews);
-
             // Siempre actualizar el dropdown con las vistas disponibles
             updateViewsDropdown();
 
@@ -62,14 +58,6 @@
                 applyColumnVisibility(columnsManager.getVisibleColumns());
                 updateCurrentViewName();
             }
-        }).catch((err: any) => {
-            console.error('Error en initialize:', err);
-        });
-    } else {
-        console.log('No se inicializó GridViewsManager:', {
-            hasManager: !!w.GridViewsManager,
-            hasToken: !!token,
-            userRecId
         });
     }
 

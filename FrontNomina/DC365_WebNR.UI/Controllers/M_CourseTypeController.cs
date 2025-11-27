@@ -41,7 +41,29 @@ namespace DC365_WebNR.UI.Controllers
             var model = await processCourseType.GetAllDataAsync();
             ViewBag.Filter = FilterHelper<CourseType>.GetPropertyToSearch();
 
+            // Datos para el sistema de vistas de usuario
+            ViewBag.Token = dataUser[0];
+            ViewBag.UserRecId = GetUserRecIdFromSession();
+            ViewBag.DataAreaId = dataUser[3];
+
             return View(model);
+        }
+
+        private long GetUserRecIdFromSession()
+        {
+            var alias = dataUser[8];
+            if (!string.IsNullOrEmpty(alias)) return GetConsistentHash(alias);
+            var email = dataUser[7];
+            if (!string.IsNullOrEmpty(email)) return GetConsistentHash(email);
+            return 0;
+        }
+
+        private long GetConsistentHash(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return 0;
+            long hash = 5381;
+            foreach (char c in input) hash = ((hash << 5) + hash) + c;
+            return System.Math.Abs(hash);
         }
 
         /// <summary>

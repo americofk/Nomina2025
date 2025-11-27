@@ -73,7 +73,44 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Department = await selectListsDropDownList(SelectListOptions.Department);
             ViewBag.Job = await selectListsDropDownList(SelectListOptions.Job);
 
+            // Datos para el sistema de vistas de usuario
+            ViewBag.Token = dataUser[0];
+            ViewBag.UserRecId = GetUserRecIdFromSession();
+            ViewBag.DataAreaId = dataUser[3];
+
             return View(model);
+        }
+
+        /// <summary>
+        /// Obtiene el identificador unico del usuario para el sistema de vistas.
+        /// </summary>
+        private long GetUserRecIdFromSession()
+        {
+            var alias = dataUser[8];
+            if (!string.IsNullOrEmpty(alias))
+            {
+                return GetConsistentHash(alias);
+            }
+            var email = dataUser[7];
+            if (!string.IsNullOrEmpty(email))
+            {
+                return GetConsistentHash(email);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Genera un hash numerico consistente.
+        /// </summary>
+        private long GetConsistentHash(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return 0;
+            long hash = 5381;
+            foreach (char c in input)
+            {
+                hash = ((hash << 5) + hash) + c;
+            }
+            return System.Math.Abs(hash);
         }
 
         /// <summary>

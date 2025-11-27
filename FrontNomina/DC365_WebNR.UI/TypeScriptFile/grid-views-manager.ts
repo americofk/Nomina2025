@@ -101,15 +101,12 @@ class GridViewsManager {
     private async loadAvailableViews(): Promise<void> {
         try {
             const url = `${this.apiBase}/usergridviews?entityName=${encodeURIComponent(this.entityName)}&userRefRecId=${this.userRefRecId}`;
-            console.log('Cargando vistas desde:', url);
             const response = await this.fetchJson(url);
-            console.log('Respuesta de vistas:', response);
 
             if (response?.Data) {
                 this.availableViews = response.Data;
             }
         } catch (error) {
-            console.error('Error cargando vistas:', error);
             this.availableViews = [];
         }
     }
@@ -391,8 +388,6 @@ class GridViewsManager {
             }
         } else if (w.windows_message) {
             w.windows_message(message, type);
-        } else {
-            console.log(`[${type.toUpperCase()}] ${message}`);
         }
     }
 }

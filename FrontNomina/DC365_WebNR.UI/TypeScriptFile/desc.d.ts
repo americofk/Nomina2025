@@ -1,10 +1,14 @@
 ﻿////declare var popWindow;
-declare var windows_message;
+declare var windows_message: (message: string, type: string, options?: any, buttons?: any) => void;
 declare var showhelp;
 declare var showimagehelp;
 declare var Chart;
 declare var InstaciateListener; //Plugin de fecha
 declare var SendNotification;
+declare function FormatErrors(data: any): void;
+declare function redireccionaralLogin(xhr: any): void;
+declare var isBusy: boolean;
+declare function moredata(maxscroll: number, controller: string, tbody: string): void;
 
 interface IRoles {
     Alias: string

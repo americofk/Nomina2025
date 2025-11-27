@@ -3,12 +3,16 @@
 @{
     ViewData["Title"] = "Proceso de nómina";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    var token = ViewBag.Token ?? "";
+    var userRecId = ViewBag.UserRecId ?? 0;
+    var dataAreaId = ViewBag.DataAreaId ?? "";
 }
 
 <link href="~/css/PayrollProcess.css" rel="stylesheet" />
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
-<div class="contDasboard">
+<div class="contDasboard" id="payrollprocess-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     <!--Opciones del Formulario-->
     <div class="opcioneslistpage">
@@ -56,9 +60,50 @@
         <h3 class="TituloEstandar">Procesos de nómina</h3>
 
         <div class="contenPretabla">
-            <div class="form-group-BuscadorDepartment">
-                <!-- filtro-->
-                @{await Html.RenderPartialAsync("ViewFilter");}
+            <div class="form-group-BuscadorDepartment" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <!-- filtro-->
+                    @{await Html.RenderPartialAsync("ViewFilter");}
+                </div>
+                @* Controles de vistas de usuario *@
+                <div class="grid-views-inline" style="display:flex; align-items:center; gap:8px; margin-right:29px;">
+                    <button class="btn btn-sm" id="btn-save-view-changes" title="Guardar cambios en la vista" style="display:none; padding:5px 12px; background:#337ab7; color:#fff; border:1px solid #337ab7;">
+                        <i class="fa fa-save" style="font-size:14px;"></i>
+                    </button>
+                    <button class="btn btn-default btn-sm" id="btn-manage-columns" title="Gestionar columnas" style="padding:5px 12px; background:#fff; border:1px solid #ccc;">
+                        <i class="fa fa-columns" style="font-size:14px;"></i>
+                    </button>
+                    <div class="dropdown dropdown-views-widget">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="padding:5px 12px; background:#fff; border:1px solid #ccc;">
+                            <i class="fa fa-eye" style="font-size:14px;"></i>
+                            <span id="current-view-name" style="font-size:13px; margin:0 5px;">Vista por defecto</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="padding:5px 0; border:1px solid #ccc; border-radius:0; box-shadow:none;">
+                            <li><a href="#" data-view="default">Vista por defecto</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Vistas Guardadas</li>
+                            <li id="saved-views-container"><span class="text-muted-views">Sin vistas guardadas</span></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" id="btn-new-view">Nueva Vista</a></li>
+                        </ul>
+                    </div>
+                    <style>
+                        .dropdown-views-widget { position: relative; }
+                        .dropdown-views-widget .dropdown-menu { min-width: calc(100% - 4px); width: calc(100% - 4px); left: 0; right: auto; }
+                        .dropdown-views-widget .dropdown-menu > li > a { padding: 5px 15px; font-size: 13px; color: #333; white-space: nowrap; background-color: #fff; }
+                        .dropdown-views-widget .dropdown-menu > li > a:hover,
+                        .dropdown-views-widget .dropdown-menu > li > a:focus,
+                        .dropdown-views-widget ul.dropdown-menu li a:hover { background: #337ab7 !important; background-color: #337ab7 !important; color: #fff !important; }
+                        .dropdown-views-widget .dropdown-menu .divider { margin: 5px 0; }
+                        .dropdown-views-widget .dropdown-menu .dropdown-header { padding: 5px 15px; font-size: 12px; color: #777; white-space: nowrap; }
+                        .dropdown-views-widget .text-muted-views { padding: 5px 15px; display: block; font-size: 12px; color: #999; white-space: nowrap; }
+                        .dropdown-views-widget #saved-views-container .saved-view-item { font-size: 13px; }
+                        .dropdown-views-widget #saved-views-container .saved-view-item:hover { background: #f5f5f5; }
+                        .dropdown-views-widget #saved-views-container .saved-view-item a:hover { color: #337ab7; }
+                        .dropdown-views-widget #saved-views-container .btn-set-default:hover { color: #f0ad4e !important; }
+                    </style>
+                </div>
             </div>
         </div>
 
@@ -159,8 +204,53 @@
     <form asp-action="Cancelprocess" class="collapse" id="Cancel-Payroll">
     </form>
 
-</div>
+    <!-- Modal para guardar vista -->
+    <div class="modal fade" id="modal-save-view" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="width:400px; max-width:90%; margin:60px auto;">
+            <div class="modal-content">
+                <div class="modal-header" style="background:#337ab7; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+                    <h4 class="modal-title" style="color:white; font-size:18px; font-weight:400; margin:0;">Nueva Vista</h4>
+                    <button type="button" class="close" data-dismiss="modal" style="color:white; opacity:1; font-size:24px; margin:0; padding:0;"><span>&times;</span></button>
+                </div>
+                <div class="modal-body" style="padding:15px;">
+                    <div class="form-group">
+                        <label for="view-name" style="font-size:14px; font-weight:500;">Nombre de la vista</label>
+                        <input type="text" class="form-control" id="view-name" placeholder="Ingrese nombre..." style="font-size:14px;">
+                    </div>
+                    <div class="checkbox"><label style="font-size:14px;"><input type="checkbox" id="view-is-default"> Vista por defecto</label></div>
+                    <div class="checkbox"><label style="font-size:14px;"><input type="checkbox" id="view-is-public"> Vista pública</label></div>
+                </div>
+                <div class="modal-footer" style="padding:10px 15px; border-top:1px solid #e5e5e5;">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-confirm-save-view">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal para gestionar columnas -->
+    <div class="modal fade" id="modal-manage-columns" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">Gestionar Columnas</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">Seleccione las columnas que desea mostrar. Arrastre para reordenar:</p>
+                    <div id="columns-list" class="columns-list-container"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-apply-columns">Aplicar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+</div>
+<script src="~/js/grid-columns-manager.js?@version"></script>
+<script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/M_PayrollProcess-views.js?@version"></script>
 @section Scripts {
     <script src="~/js/PayrollProcess.js" type="module"></script>
     <script src="~/js/AppInputDate.js"></script>

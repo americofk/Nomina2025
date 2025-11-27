@@ -38,7 +38,51 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.GetAllDataAsync();
             ViewBag.Filter = FilterHelper<Project>.GetPropertyToSearch();
 
+            // Datos para el sistema de vistas de usuario
+            ViewBag.Token = dataUser[0];
+            ViewBag.UserRecId = GetUserRecIdFromSession();
+            ViewBag.DataAreaId = dataUser[3];
+
             return View(model);
+        }
+
+        /// <summary>
+        /// Obtiene el identificador unico del usuario para el sistema de vistas.
+        /// Genera un hash numerico consistente basado en el Alias del usuario.
+        /// </summary>
+        /// <returns>Identificador numerico del usuario.</returns>
+        private long GetUserRecIdFromSession()
+        {
+            var alias = dataUser[8];
+            if (!string.IsNullOrEmpty(alias))
+            {
+                return GetConsistentHash(alias);
+            }
+
+            var email = dataUser[7];
+            if (!string.IsNullOrEmpty(email))
+            {
+                return GetConsistentHash(email);
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Genera un hash numerico consistente que no varia entre ejecuciones.
+        /// </summary>
+        /// <param name="input">Cadena de entrada.</param>
+        /// <returns>Hash numerico positivo.</returns>
+        private long GetConsistentHash(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return 0;
+
+            long hash = 5381;
+            foreach (char c in input)
+            {
+                hash = ((hash << 5) + hash) + c;
+            }
+            return System.Math.Abs(hash);
         }
 
         /// <summary>

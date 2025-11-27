@@ -94,7 +94,7 @@ namespace DC365_WebNR.UI.Controllers
             {
                 hash = ((hash << 5) + hash) + c;
             }
-            return Math.Abs(hash);
+            return System.Math.Abs(hash);
         }
 
         /// <summary>
