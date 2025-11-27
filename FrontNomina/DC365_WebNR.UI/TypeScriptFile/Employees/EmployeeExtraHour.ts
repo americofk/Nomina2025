@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file EmployeeExtraHour.ts
+ * @description Módulo de gestión de horas extras de empleados. Permite registrar,
+ *              editar y eliminar horas extras trabajadas por cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module HorasExtrasEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

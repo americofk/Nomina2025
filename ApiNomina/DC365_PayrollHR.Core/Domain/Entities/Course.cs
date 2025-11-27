@@ -1,3 +1,9 @@
+/// <summary>
+/// Entidad de dominio para Course.
+/// Gestiona la información y comportamiento de la entidad.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Domain.Common;
 using DC365_PayrollHR.Core.Domain.Enums;
 using System;
@@ -6,6 +12,9 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Domain.Entities
 {
+    /// <summary>
+    /// Clase para gestion de Course.
+    /// </summary>
     public class Course : AuditableCompanyEntity
     {
         /// <summary>
@@ -20,6 +29,9 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// Required / Max 20
         /// </summary>
         public string CourseTypeId { get; set; }
+        /// <summary>
+        /// Indica si.
+        /// </summary>
         public bool IsMatrixTraining { get; set; }
         /// <summary>
         /// Internal = 0, External = 1
@@ -75,6 +87,12 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// Created = 0, InProcess = 1, Closed = 2
         /// </summary>
         public CourseStatus CourseStatus { get; set; }
+
+        /// <summary>
+
+        /// Valor de texto para URLDocuments.
+
+        /// </summary>
 
         public string URLDocuments { get; set; }
 

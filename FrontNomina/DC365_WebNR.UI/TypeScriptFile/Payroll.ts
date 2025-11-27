@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file Payroll.ts
+ * @description Módulo de gestión de períodos de nómina. Permite crear, editar
+ *              y administrar los períodos de pago de la organización.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Nomina
+ */
+
+variables: {
     var option: number;
     var page = 1;
     var isBusy: boolean = false;

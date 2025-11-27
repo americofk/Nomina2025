@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Helper para gestión de menús de la aplicación.
+/// Administra la obtención, asignación y eliminación de menús para usuarios del sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -13,12 +19,23 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.ProcessHelper
 {
+    /// <summary>
+    /// Clase para gestion de Menu.
+    /// </summary>
     public class Menu : ServiceBase
     {
         public Menu(string _token)
         {
             Token = _token;
         }
+
+        /// <summary>
+
+        /// Ejecuta ResultMenuLeft de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<ResponseUI<string>> ResultMenuLeft()
         {
@@ -81,6 +98,10 @@ namespace DC365_WebNR.CORE.Aplication.ProcessHelper
         }
 
         //lista de todo el menu
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<List<MenuApp>> MenuGeneral()
         {
 
@@ -104,6 +125,11 @@ namespace DC365_WebNR.CORE.Aplication.ProcessHelper
         }
 
         //Asignar menu a un  usuario
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(List<MenuAssignedToUser> _model)
         {
             Response<object> DataApi = null;
@@ -139,6 +165,11 @@ namespace DC365_WebNR.CORE.Aplication.ProcessHelper
         }
 
         //menu asignado a un usuario
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <param name="_alias">Parametro _alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<List<MenuAssignedToUser>> MenuAssignedToUser(string _alias)
         {
             List<MenuAssignedToUser> menuAssignedToUser = new List<MenuAssignedToUser>();
@@ -171,6 +202,12 @@ namespace DC365_WebNR.CORE.Aplication.ProcessHelper
         }
 
         //eliminar roles asignadas a un usuario
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsyncFromUser(List<string> Obj, string Alias)
         {
             ResponseUI responseUI = new ResponseUI();

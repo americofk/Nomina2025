@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de User.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -13,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
 {
+    /// <summary>
+    /// Manejador para operaciones de UserQuery.
+    /// </summary>
     public class UserQueryHandler : IQueryHandler<UserResponse>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -21,6 +30,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<UserResponse>>> GetAll(PaginationFilter filter, 
                                                                            SearchFilter searchFilter, 
@@ -49,6 +72,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
 
             return new PagedResponse<IEnumerable<UserResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="condition">Parametro condition.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<UserResponse>> GetId(object condition)
         {

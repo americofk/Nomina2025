@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de usuarios del sistema.
+/// Contiene la lógica de negocio para operaciones de usuarios, roles y permisos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -14,6 +20,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services.Container
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessUser.
+    /// </summary>
     public class ProcessUser : ServiceBase
     {
 
@@ -23,6 +32,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //todos los FormatCode
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<FormatCode>> GetAllDataFormatCode(int _PageNumber = 1)
         {
             ProcessFormatCode processFormatCode = new ProcessFormatCode(Token);
@@ -30,6 +44,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //todas las empresas
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<CompanyForUser>> GetAllDataCompany(int _PageNumber = 1)
         {
             ProcessCompany companies = new ProcessCompany(Token);
@@ -37,6 +56,10 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //menu general 
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<List<MenuApp>> GetAllMenuGeneral()
         {
             Menu menu = new Menu(Token);
@@ -44,6 +67,13 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //todos los usuarios
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<User>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             List<User> _user = new List<User>();
@@ -72,6 +102,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //seleccionar un usuario
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="Id">Parametro Id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<User> GetIdDataAsync(string Id)
         {
             User _model = new User();
@@ -90,6 +125,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(User _model)
         {
             Response<User> DataApi = null;
@@ -116,6 +156,12 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string id, User _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -141,6 +187,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -164,6 +215,12 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //asignar foto al usuario
+        /// <summary>
+        /// Carga un archivo.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Uploadimageuser(IFormFile file, string Alias)
         {
             //Response<Department> DataApi = null;
@@ -195,6 +252,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         // descargar foto de usuario
+        /// <summary>
+        /// Descarga.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Downloadimageuser(string Alias)
         {
             //Response<Department> DataApi = null;

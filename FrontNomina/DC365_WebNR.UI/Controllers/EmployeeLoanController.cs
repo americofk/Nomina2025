@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de préstamos de empleados.
+/// Permite crear, editar, eliminar y consultar préstamos asignados a empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -11,12 +17,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeLoan.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("prestamosempleados")]
     public class EmployeeLoanController : ControllerBase
     {
         ProcessEmployeeLoan process;
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{employeeid}")]
         public async Task<ActionResult> Get(string employeeid)
         {
@@ -26,6 +40,14 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Culture = dataUser[5];
             return PartialView("EmployeeLoans", list);
         }
+
+        /// <summary>
+
+        /// Ejecuta EmployeeEmployeeLoans de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("FormNewEmployeeLoans")]
         public async Task<ActionResult> EmployeeEmployeeLoans()
@@ -37,6 +59,24 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Loan = await selectListsDropDownList(SelectListOptions.Loan);
             return PartialView("NewEmployeeLoans", model);
         }
+
+
+        /// <summary>
+
+
+        /// Guarda los cambios.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="operation">Parametro operation.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("guardar")]
@@ -69,6 +109,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="loanid">Parametro loanid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}/{loanid}")]
         public async Task<ActionResult> GetId(string employeeid, string loanid)
         {
@@ -83,6 +135,18 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("NewEmployeeLoans", _model);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalId">Parametro internalId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("GethistoriLoan")]
         public async Task<ActionResult> GethistoriLoan(string employeeid, int internalId)
         {
@@ -93,6 +157,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Culture = dataUser[5];
             return PartialView("GethistoriLoan", list);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid_EmployeeLoan">Parametro listid_EmployeeLoan.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]

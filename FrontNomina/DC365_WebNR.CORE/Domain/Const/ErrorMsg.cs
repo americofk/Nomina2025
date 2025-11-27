@@ -1,9 +1,18 @@
-﻿using System;
+/// <summary>
+/// Clase de constantes para mensajes de error.
+/// Define mensajes estándar de error y validación utilizados en toda la aplicación.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DC365_WebNR.CORE.Domain.Const
 {
+    /// <summary>
+    /// Clase para gestion de ErrorMsg.
+    /// </summary>
     public static class ErrorMsg
     {
         public const string Email = "Formato de correo inválido";

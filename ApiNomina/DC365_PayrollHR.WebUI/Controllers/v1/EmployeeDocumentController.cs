@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments;
+/// <summary>
+/// Controlador API para gestión de EmployeeDocument.
+/// Endpoint base: api/employeesdocuments
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.EmployeeDocuments;
@@ -16,6 +23,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeDocument.
+    /// </summary>
     [Route("api/employeedocuments")]
     [ApiController]
     [Authorize]
@@ -31,12 +41,38 @@ namespace DC365_PayrollHR.WebUI.Controllers
             _CommandHandler = commandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeDocument, View = true)]
         public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter, string employeeid)
         {
             return Ok(await _QueryHandler.GetAll(paginationFilter,searchFilter, employeeid));
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{employeeid}/{internalid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeDocument, View = true)]
@@ -45,12 +81,40 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return Ok(await _QueryHandler.GetId(new string[] { employeeid, internalid.ToString()}));
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeDocument, Edit = true)]
         public async Task<ActionResult> Post([FromBody] EmployeeDocumentRequest model)
         {
             return Ok(await _CommandHandler.Create(model));
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpDelete("{employeeid}")]
@@ -61,6 +125,24 @@ namespace DC365_PayrollHR.WebUI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPut("{internalid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeDocument, Edit = true)]
         public async Task<ActionResult> Update([FromBody] EmployeeDocumentRequest model, string internalid)
@@ -68,11 +150,43 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return Ok(await _CommandHandler.Update(internalid, model));
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="request">Parametro request.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("uploadimageuser/{employeeid}/{internalid}")]
         public async Task<ActionResult> PostDocument([FromForm] EmplDocFileRequest request, string employeeid, int internalid)
         {
             return Ok(await _CommandHandler.UploadDocument(request, employeeid, internalid));
         }
+
+
+        /// <summary>
+
+
+        /// Obtiene.
+
+
+        /// </summary>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet("downloadimageuser/{employeeid}/{internalid}")]

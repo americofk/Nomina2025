@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file Vacants.ts
+ * @description Módulo de gestión de puestos vacantes. Permite crear, editar,
+ *              eliminar y administrar vacantes disponibles en la organización.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module PuestosVacantes
+ */
+
+variables: {
     var option: number;
 
 }

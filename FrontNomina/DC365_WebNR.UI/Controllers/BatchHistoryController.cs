@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para el historial de procesamiento por lotes.
+/// Permite cargar archivos masivos, descargar plantillas y ver historial de procesos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
@@ -13,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de BatchHistory.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("historiallotes")]
@@ -24,6 +33,14 @@ namespace DC365_WebNR.UI.Controllers
         {
             webHost = _webHost;
         }
+
+        /// <summary>
+
+        /// Ejecuta BatchHistory de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> BatchHistory()
@@ -40,6 +57,16 @@ namespace DC365_WebNR.UI.Controllers
             
             return View(model);
         }
+
+        /// <summary>
+
+        /// Descarga.
+
+        /// </summary>
+
+        /// <param name="typeEntity">Parametro typeEntity.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("DownloadFile")]
         public IActionResult DownloadFile(BatchEntity typeEntity)
@@ -58,6 +85,20 @@ namespace DC365_WebNR.UI.Controllers
 
 
         }
+
+        /// <summary>
+
+        /// Ejecuta ReadFile de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="_file">Parametro _file.</param>
+
+        /// <param name="_entity">Parametro _entity.</param>
+
+        /// <param name="_optionSeparator">Parametro _optionSeparator.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]
@@ -91,6 +132,20 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta BatchHistoryFilterOrMoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> BatchHistoryFilterOrMoreData(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
@@ -104,6 +159,16 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("BatchHistoryFilterOrMoreData", model);
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="processid">Parametro processid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(List<string> processid)
@@ -116,6 +181,14 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta la operacion InfoProcess.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("InfoProcess")]
         public ActionResult InfoProcess()

@@ -1,4 +1,13 @@
-﻿//habilitar nómina
+/**
+ * @file PayrollDisabled.ts
+ * @description Módulo de gestión de nóminas inactivas. Permite eliminar,
+ *              habilitar y listar nóminas que han sido deshabilitadas.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module NominasInactivas
+ */
+
+//habilitar nómina
 $('#EnabledPayroll').on('click', function () {
     if ($(this).is(":checked")) {
         var ListId = [];

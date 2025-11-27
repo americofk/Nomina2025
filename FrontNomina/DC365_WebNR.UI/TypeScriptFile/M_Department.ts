@@ -1,4 +1,11 @@
-﻿
+/**
+ * @file M_Department.ts
+ * @description Módulo de gestión de departamentos. Permite crear, editar,
+ *              eliminar y listar departamentos de la organización.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Departamentos
+ */
 
 variables: {
     var page = 1;

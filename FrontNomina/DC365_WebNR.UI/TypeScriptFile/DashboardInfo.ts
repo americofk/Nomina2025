@@ -1,4 +1,12 @@
-﻿
+/**
+ * @file DashboardInfo.ts
+ * @description Módulo del panel de control principal. Muestra información
+ *              resumida, gráficos y estadísticas del sistema de nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Dashboard
+ */
+
 $(document).ready(function () {
     let graphicYear = $(".from_year").val().toString();
     let payrollid = $(".Payroll").val().toString();

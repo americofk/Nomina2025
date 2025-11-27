@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file EmployeeAssist.ts
+ * @description Módulo de gestión de asistencias de empleados. Permite registrar,
+ *              editar y eliminar registros de asistencia de cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module AsistenciasEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

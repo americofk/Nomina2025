@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file Jobs.ts
+ * @description Módulo de gestión de cargos activos. Permite crear, editar,
+ *              eliminar, inhabilitar y listar cargos de la organización.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Cargos
+ */
+
+variables: {
     var option: number;
 }
 

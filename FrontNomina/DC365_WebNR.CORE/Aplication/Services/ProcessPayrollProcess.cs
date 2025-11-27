@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para el procesamiento de nóminas.
+/// Contiene la lógica para ejecutar, calcular y gestionar procesos de nómina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Proceso para ProcessPayrollProcess.
+    /// </summary>
     public class ProcessPayrollProcess : ServiceBase
     {
         public ProcessPayrollProcess(string _token)
@@ -18,6 +27,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<PayrollProcess>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             List<PayrollProcess> payrollsProcess = new List<PayrollProcess>();
@@ -46,6 +62,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI<PayrollProcess>> PostDataAsync(PayrollProcess _model)
         {
             Response<PayrollProcess> DataApi = null;
@@ -81,6 +102,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI<PayrollProcess>> PutDataAsync(string id, PayrollProcess _model)
         {
             ResponseUI<PayrollProcess> responseUI = new ResponseUI<PayrollProcess>();
@@ -114,6 +141,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -136,6 +168,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //seleccionar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<PayrollProcess> GetIdDataAsync(string id)
         {
             PayrollProcess _model = new PayrollProcess();
@@ -155,6 +192,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //procesar nómina
+        /// <summary>
+        /// Procesa.
+        /// </summary>
+        /// <param name="_processpayrollid">Parametro _processpayrollid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI<List<PayrollProcessDetail>>> Process(string _processpayrollid)
         {
             Response<List<PayrollProcessDetail>> DataApi = null;
@@ -191,6 +233,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //calcular nómina
+        /// <summary>
+        /// Ejecuta CalcProcess de forma asincrona.
+        /// </summary>
+        /// <param name="_processpayrollid">Parametro _processpayrollid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> CalcProcess(string _processpayrollid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -214,6 +261,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //procesar nómina
+        /// <summary>
+        /// Procesa.
+        /// </summary>
+        /// <param name="_processpayrollid">Parametro _processpayrollid.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI<List<PayrollProcessDetail>>> ProcessDetail(string _processpayrollid, string PropertyName = "", string PropertyValue = "")
         {
             Response<List<PayrollProcessDetail>> DataApi = null;
@@ -250,6 +304,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //pagar nómina
+        /// <summary>
+        /// Ejecuta PayPayroll de forma asincrona.
+        /// </summary>
+        /// <param name="_processpayrollid">Parametro _processpayrollid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PayPayroll(string _processpayrollid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -273,6 +332,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //Cancelar nómina
+        /// <summary>
+        /// Verifica si puede.
+        /// </summary>
+        /// <param name="_processpayrollid">Parametro _processpayrollid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> CancelPayroll(string _processpayrollid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -295,6 +359,14 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista de periodos de nomina
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="payrollid">Parametro payrollid.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<PayrollProcess>> GetListPayrollProcess(string payrollid, string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             List<PayrollProcess> payrollsProcess = new List<PayrollProcess>();

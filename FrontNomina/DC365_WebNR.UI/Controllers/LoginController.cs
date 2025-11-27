@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para la autenticación y gestión de sesiones de usuario.
+/// Permite iniciar sesión, cerrar sesión, validar credenciales y recuperar contraseñas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -16,9 +22,19 @@ using Newtonsoft.Json;
 namespace DC365_WebNR.UI.Controllers
 {
    
+    /// <summary>
+   
+    /// Controlador para gestion de Login.
+   
+    /// </summary>
+   
     public class LoginController : Controller
     {
         Login _login = new Login();
+        /// <summary>
+        /// Ejecuta la operacion Index.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet]
         public IActionResult Index()
         {
@@ -36,6 +52,18 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Registra en el log.
+
+
+        /// </summary>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout()
@@ -45,6 +73,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //validar correo
+        /// <summary>
+        /// Valida los datos.
+        /// </summary>
+        /// <param name="_email">Parametro _email.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> ValidateEmail(string _email)
@@ -64,6 +97,12 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //valida clave de usuario 
+        /// <summary>
+        /// Ejecuta ValidartePassword de forma asincrona.
+        /// </summary>
+        /// <param name="Password">Parametro Password.</param>
+        /// <param name="correo">Parametro correo.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> ValidartePassword(string Password, string correo)
@@ -127,6 +166,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion consultaMenu.
+
+        /// </summary>
+
+        /// <param name="token">Parametro token.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public string consultaMenu(string token)
         {
             Menu menuLeft = new Menu(token);
@@ -136,6 +185,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //solicitar contraseña provicional
+        /// <summary>
+        /// Ejecuta Requestchangepassword de forma asincrona.
+        /// </summary>
+        /// <param name="_email">Parametro _email.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Requestchangepassword(string _email)
@@ -151,6 +205,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //solicitar cambio de  contraseña 
+        /// <summary>
+        /// Envia.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Sendnewpassword(Sendnewpassword Obj)

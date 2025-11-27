@@ -1,9 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DC365_PayrollHR.Core.Domain.Consts
 {
+    /// <summary>
+    /// Clase para gestion de MenuConst.
+    /// </summary>
     public static class MenuConst
     {
         public const string DepartmentEnabled = "MENU-0002";

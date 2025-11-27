@@ -1,3 +1,9 @@
+/// <summary>
+/// Entidad de dominio para Position.
+/// Gestiona la información y comportamiento de la entidad.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Domain.Common;
 using System;
 using System.Collections.Generic;
@@ -19,6 +25,12 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// </summary>
         public string PositionName { get; set; }
 
+        /// <summary>
+
+        /// Indica si.
+
+        /// </summary>
+
         public bool IsVacant { get; set; } = false;
 
         /// <summary>
@@ -37,6 +49,12 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// </summary>
         //Foreign key for job
         public string NotifyPositionId { get; set; }
+
+        /// <summary>
+
+        /// Estado.
+
+        /// </summary>
 
         public bool PositionStatus { get; set; } = true;
         /// <summary>

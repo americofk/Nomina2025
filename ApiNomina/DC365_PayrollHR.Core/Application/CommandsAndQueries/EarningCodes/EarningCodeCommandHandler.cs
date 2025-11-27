@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de EarningCode.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Domain.Entities;
@@ -21,6 +27,12 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
         public Task<Response<bool>> DeleteVersion(string id, int internalid);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de EarningCodeCommand.
+
+    /// </summary>
+
     public class EarningCodeCommandHandler : IEarningCodeCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -29,6 +41,16 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
         {
             _dbContext = _dbcontext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="_model">Parametro _model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(EarningCodeRequest _model)
         {
@@ -52,6 +74,20 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
                 Message = "Registro creado correctamente"
             };
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="isVersion">Parametro isVersion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Update(string id, EarningCodeRequest model, bool isVersion = false)
         {
@@ -172,6 +208,16 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
             return new Response<object>(true) { Message = Message };
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<bool>> Delete(List<string> ids)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -212,6 +258,18 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
                 };
             }
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<bool>> DeleteVersion(string id, int internalid)
         {
@@ -290,6 +348,18 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
 
             return new Response<bool>(true) { Message = "Registros elimando con éxito" };
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="status">Parametro status.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> UpdateStatus(string id, bool status)
         {

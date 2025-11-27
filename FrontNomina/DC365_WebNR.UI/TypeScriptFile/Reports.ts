@@ -1,4 +1,12 @@
-﻿
+/**
+ * @file Reports.ts
+ * @description Módulo de generación de reportes. Permite generar, visualizar
+ *              y exportar reportes de nómina y otros informes del sistema.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Reportes
+ */
+
 //Arreglo de funciones
 const fn = {
     SearchListPayrollProcess: function (_payrollId: string) {

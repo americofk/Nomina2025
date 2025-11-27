@@ -1,3 +1,9 @@
+/// <summary>
+/// Configuración de Entity Framework para Sequence.
+/// Define el mapeo de la entidad a la base de datos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -5,8 +11,15 @@ using System.Text;
 
 namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
 {
+    /// <summary>
+    /// Configuracion de entidad Sequence.
+    /// </summary>
     public static class SequenceConfiguration
     {
+        /// <summary>
+        /// Configura.
+        /// </summary>
+        /// <param name="modelBuilder">Parametro modelBuilder.</param>
         public static void ConfigureSequences(ModelBuilder modelBuilder)
         {
             modelBuilder.HasSequence<int>("PayrollId")

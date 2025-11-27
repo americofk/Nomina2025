@@ -1,4 +1,13 @@
-﻿$(document).ready(function () {
+/**
+ * @file Project.ts
+ * @description Módulo de gestión de proyectos. Permite crear, editar,
+ *              eliminar y administrar proyectos para asignación de costos.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Proyectos
+ */
+
+$(document).ready(function () {
     //tabla customers
     $(".Buscador-Project").keyup(function () {
         var _this = this;

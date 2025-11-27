@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de DGTTxt.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Reports;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
 {
+    /// <summary>
+    /// Manejador para operaciones de IDGTTxtQuery.
+    /// </summary>
     public interface IDGTTxtQueryHandler
     {
         public Task<Response<object>> CreateDGT3(int year, int month);
@@ -20,6 +29,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
         public Task<Response<object>> CreateTSS(int year, int month, string payrollid, string typetss);
         public Task<Response<object>> CreatePayroll(string payrollprocessid, string payrollid);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de DGTTxtQuery.
+
+    /// </summary>
 
     public class DGTTxtQueryHandler : IDGTTxtQueryHandler
     {
@@ -77,6 +92,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
                     return "X";
             }
         }
+
+
+        /// <summary>
+
+
+        /// Crea un nuevo registro.
+
+
+        /// </summary>
+
+
+        /// <param name="year">Parametro year.</param>
+
+
+        /// <param name="month">Parametro month.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> CreateDGT3(int year, int month)
@@ -187,6 +220,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
                 RegisterQty = FillStringHelper.Fill(AlignDirection.Left, (2 + dgt3details.Count()).ToString(), 6, '0'),                 
             });
         }
+        
+        
+        /// <summary>
+        
+        
+        /// Crea un nuevo registro.
+        
+        
+        /// </summary>
+        
+        
+        /// <param name="year">Parametro year.</param>
+        
+        
+        /// <param name="month">Parametro month.</param>
+        
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         
         public async Task<Response<object>> CreateDGT4(int year, int month)
@@ -314,6 +365,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
         }
 
 
+        /// <summary>
+
+
+        /// Crea un nuevo registro.
+
+
+        /// </summary>
+
+
+        /// <param name="year">Parametro year.</param>
+
+
+        /// <param name="month">Parametro month.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> CreateDGT5(int year, int month)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();
@@ -411,6 +480,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
                 RegisterQty = FillStringHelper.Fill(AlignDirection.Left, (2 + dgt5details.Count()).ToString(), 6, '0'),
             });
         }
+        
+        /// <summary>
+        
+        /// Crea un nuevo registro.
+        
+        /// </summary>
+        
+        /// <param name="year">Parametro year.</param>
+        
+        /// <param name="month">Parametro month.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         public async Task<Response<object>> CreateDGT2(int year, int month)
         {
@@ -512,6 +593,22 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
             });
         }
 
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="month">Parametro month.</param>
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+        /// <param name="typetss">Parametro typetss.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> CreateTSS(int year, int month, string payrollid, string typetss)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();
@@ -600,6 +697,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT
                 RegisterQty = FillStringHelper.Fill(AlignDirection.Left, (2 + tssdetails.Count()).ToString(), 6, '0'),
             });
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> CreatePayroll(string payrollprocessid, string payrollid)
         {

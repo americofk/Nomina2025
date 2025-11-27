@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de CompanyToUser.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.CompanyAssignedToUsers;
@@ -12,12 +18,21 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CompanyAssignedToUsers
 {
+    /// <summary>
+    /// Manejador para operaciones de ICompanyToUserCommand.
+    /// </summary>
     public interface ICompanyToUserCommandHandler
     {
         public Task<Response<object>> CreateAll(List<CompanyToUserRequest> request);
 
         public Task<Response<bool>> DeleteByAlias(List<string> ids, string alias);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de CompanyToUserCommand.
+
+    /// </summary>
 
     public class CompanyToUserCommandHandler : ICompanyToUserCommandHandler
     {
@@ -27,6 +42,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CompanyAssignedToU
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="request">Parametro request.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> CreateAll(List<CompanyToUserRequest> request)
         {
@@ -76,6 +101,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CompanyAssignedToU
                 };
             }
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <param name="alias">Parametro alias.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<bool>> DeleteByAlias(List<string> ids, string alias)
         {

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models;
+/// <summary>
+/// Servicio para la gestión de empresas.
+/// Administra la información y configuración de las empresas registradas en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessCompany.
+    /// </summary>
     public class ProcessCompany: ServiceBase
     {
 
@@ -19,6 +28,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //todas las empresas
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<CompanyForUser>> GetAllDataAsync(int _PageNumber = 1)
         {
             List<CompanyForUser> _companies = new List<CompanyForUser>();
@@ -45,6 +59,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Asignar empresas a un  usuario
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(List<CompanyForUser> _model)
         {
             Response<object> DataApi = null;
@@ -80,6 +99,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Empresas por usuario
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<List<CompanyForUser>> GetAllDataAsyncToUser(string Alias)
         {
             List<CompanyForUser> _companies = new List<CompanyForUser>();
@@ -98,6 +122,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar empresas asignadas a un usuario
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsyncFromUser(List<string> Obj, string Alias)
         {
             ResponseUI responseUI = new ResponseUI();

@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de ImportBatchData.
+/// Gestiona la importación masiva de datos mediante procesamiento por lotes.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Batchs;
@@ -18,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
 {
+    /// <summary>
+    /// Manejador para operaciones de IImportBatchDataCommand.
+    /// </summary>
     public interface IImportBatchDataCommandHandler : IDeleteCommandHandler
     {
         public Task<Response<object>> Create(List<BatchEmployeeRequest> models, string partialRoute, string[] session);
@@ -34,6 +43,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         public Task<Response<object>> Create(List<BatchEmployeeWorkCalendarRequest> models, string partialRoute, string[] session);
         public Task<Response<object>> Create(List<BatchEmployeeWorkControlCalendarRequest> models, string partialRoute, string[] session);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de ImportBatchDataCommand.
+
+    /// </summary>
 
     public class ImportBatchDataCommandHandler : IImportBatchDataCommandHandler
     {
@@ -81,6 +96,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Empleados prospectos o contratados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -214,6 +236,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Direcciones de empleados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchAddressEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -341,6 +370,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Contactos de empleados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchContactInfoEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -453,6 +489,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Bancos de empleados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchBankAccountEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -565,6 +608,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Documentos de empleados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchDocumentEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -678,6 +728,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Códigos de impuesto
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchTaxEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -797,6 +854,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Horas Extras
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchExtraHoursEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -951,6 +1015,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Códigos de ganancia
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchEarningCodeEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -1104,6 +1175,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Prestamos
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchLoanEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -1238,6 +1316,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Deducciones
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchDeductionCodeEmployeeRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -1369,6 +1454,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Cursos
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchCourseRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -1470,6 +1562,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<bool>> Delete(List<string> ids)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -1504,6 +1611,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
         }
 
         //Calendario de trabajo para empleados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchEmployeeWorkCalendarRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;
@@ -1652,6 +1766,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
 
 
         //Control de asistencia para empleados
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="models">Parametro models.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> Create(List<BatchEmployeeWorkControlCalendarRequest> models, string partialRoute, string[] session)
         {
             bool isError = false;

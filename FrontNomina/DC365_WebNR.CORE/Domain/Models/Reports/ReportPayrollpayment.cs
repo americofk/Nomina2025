@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Modelo de datos para reporte de pagos de nómina.
+/// Define la estructura de datos para reportes de pagos procesados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 
 namespace DC365_WebNR.CORE.Domain.Models.Reports
@@ -28,7 +34,7 @@ namespace DC365_WebNR.CORE.Domain.Models.Reports
         public string LoanCooperative { get; set; }
         public string BankAccount { get; set; }
 
-        //Actualización abono de cooperativa
+        //Actualizaci�n abono de cooperativa
         public string DeductionCooperative { get; set; }
         public string EmployeeEmail { get; set; }
     }

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.INFRASTRUCTURE.Services
 {
+    /// <summary>
+    /// Clase para gestion de ServiceConnect.
+    /// </summary>
     public class ServiceConnect
     {
+        /// <summary>
+        /// Ejecuta connectservice de forma asincrona.
+        /// </summary>
+        /// <param name="token">Parametro token.</param>
+        /// <param name="url">Parametro url.</param>
+        /// <param name="body">Parametro body.</param>
+        /// <param name="method">Parametro method.</param>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static async Task<HttpResponseMessage> connectservice(string token, string url, object body, HttpMethod method, IFormFile file = null)
         {
             HttpClient client = new HttpClient();
@@ -53,6 +65,18 @@ namespace DC365_WebNR.INFRASTRUCTURE.Services
 
             return await client.SendAsync(message);
         }
+        
+        /// <summary>
+        
+        /// Ejecuta connect de forma asincrona.
+        
+        /// </summary>
+        
+        /// <param name="token">Parametro token.</param>
+        
+        /// <param name="url">Parametro url.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         public static async Task<Stream> connect(string token, string url)
         {

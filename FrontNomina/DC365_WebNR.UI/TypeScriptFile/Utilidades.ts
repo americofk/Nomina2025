@@ -1,11 +1,25 @@
-﻿variables: {
+/**
+ * @file Utilidades.ts
+ * @description Funciones utilitarias generales para la aplicación de nómina.
+ *              Incluye helpers para manejo de formularios, validaciones,
+ *              formateo de datos y comunicación con el servidor.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Utilidades
+ */
+
+variables: {
     var page = 1;
     var isBusy: boolean = false;
     var isempty: boolean = false;
 }
 var configuracionNumeros = $("#FormatCodeIdOptions").val().toString();
 
-// funcion para convertir en mayuscula
+/**
+ * Convierte una cadena de texto a mayúsculas
+ * @param {string} campo - Texto a convertir
+ * @returns {string} Texto en mayúsculas
+ */
 function Mayuscula(campo: string): string {
     var CampoMayuscula: string = campo.toUpperCase();
     return CampoMayuscula;

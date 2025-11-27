@@ -1,4 +1,13 @@
-﻿escuchadores: {
+/**
+ * @file EmployeeHistories.ts
+ * @description Módulo de gestión de historial de empleados. Permite visualizar
+ *              y administrar el historial de cambios y movimientos del empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module HistorialEmpleados
+ */
+
+escuchadores: {
     //eliminar historial
     $("#Delete-employee-history").submit(function (e) {
         if ($(this).valid()) {

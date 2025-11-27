@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de CourseEmployee.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -13,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseEmployees
 {
+    /// <summary>
+    /// Manejador para operaciones de CourseEmployeeQuery.
+    /// </summary>
     public class CourseEmployeeQueryHandler : IQueryHandler<CourseEmployeeResponse>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -23,6 +32,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseEmployees
         }
 
         //Queryfilter = courseid
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="filter">Parametro filter.</param>
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<PagedResponse<IEnumerable<CourseEmployeeResponse>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryfilter = null)
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
@@ -79,6 +95,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseEmployees
 
 
         //Condition 0 = Courseid, 1 = EmployeeId
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="condition">Parametro condition.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<CourseEmployeeResponse>> GetId(object condition)
         {
             string[] filter = (string[])condition;

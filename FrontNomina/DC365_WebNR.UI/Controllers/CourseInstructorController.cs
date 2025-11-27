@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de instructores asignados a cursos.
+/// Permite asignar, editar, eliminar instructores de cursos de capacitación.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -10,12 +16,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de CourseInstructor.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("cursosinstructores")]
     public class CourseInstructorController : ControllerBase
     {
         ProcessCourseInstructor process;
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="courseid">Parametro courseid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{courseid}")]
         public async Task<ActionResult> Get(string courseid)
         {
@@ -26,6 +40,14 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("ListCourseInstructors", list);
         }
 
+        /// <summary>
+
+        /// Ejecuta NewCourseInstructors de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormCouseInstructors")]
         public async Task<ActionResult> NewCourseInstructors()
         {
@@ -35,6 +57,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewCourseInstructors", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -66,6 +100,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="courseid">Parametro courseid.</param>
+
+        /// <param name="instructorId">Parametro instructorId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{courseid}/{instructorId}")]
         public async Task<ActionResult> GetId(string courseid, string instructorId)
         {
@@ -77,6 +123,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.InstructorId = await selectListsDropDownList(SelectListOptions.InstructorId);
             return PartialView("NewCourseInstructors", _model);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid_CourseInstructors">Parametro listid_CourseInstructors.</param>
+
+        /// <param name="courseid">Parametro courseid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]

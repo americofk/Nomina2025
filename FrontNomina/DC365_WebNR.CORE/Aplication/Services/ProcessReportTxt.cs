@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models;
+/// <summary>
+/// Servicio para la gestión de reportes de texto.
+/// Administra la generación de reportes en formato de texto plano.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Reports;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -12,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessReportTxt.
+    /// </summary>
     public class ProcessReportTxt: ServiceBase
     {
         private const string Endpoint = "reportstxt";
@@ -21,6 +30,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista txt dgt2
+        /// <summary>
+        /// Ejecuta TXT_DGT2 de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<MemoryStream> TXT_DGT2(int year, int month)
         {
             TXTModelDGT2 _model = new TXTModelDGT2();
@@ -62,6 +77,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Lista txt dgt3
+        /// <summary>
+        /// Ejecuta TXT_DGT3 de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<MemoryStream> TXT_DGT3(int year, int month)
         {
             TXTModelDGT3 _model = new TXTModelDGT3();
@@ -103,6 +124,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Lista txt dgt4
+        /// <summary>
+        /// Ejecuta TXT_DGT4 de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<MemoryStream> TXT_DGT4(int year, int month)
         {
             TXTModelDGT4 _model = new TXTModelDGT4();
@@ -144,6 +171,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Lista txt dgt5
+        /// <summary>
+        /// Ejecuta TXT_DGT5 de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<MemoryStream> TXT_DGT5(int year, int month)
         {
             TXTModelDGT5 _model = new TXTModelDGT5();
@@ -185,6 +218,14 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista txt TSS
+        /// <summary>
+        /// Ejecuta TXT_TSS de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <param name="payrollid">Parametro payrollid.</param>
+        /// <param name="typetss">Parametro typetss.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<MemoryStream> TXT_TSS(int year, int month, string payrollid, string typetss)
         {
             TXTModelTSS _model = new TXTModelTSS();
@@ -226,6 +267,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Txt payroll
+        /// <summary>
+        /// Ejecuta TXT_Payroll de forma asincrona.
+        /// </summary>
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+        /// <param name="payrollid">Parametro payrollid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<MemoryStream> TXT_Payroll(string payrollprocessid, string payrollid)
         {
             TXTModelPayrollBP _model = new TXTModelPayrollBP();

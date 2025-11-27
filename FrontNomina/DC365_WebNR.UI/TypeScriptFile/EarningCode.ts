@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file EarningCode.ts
+ * @description Módulo de gestión de códigos de ganancia. Permite crear, editar,
+ *              eliminar y administrar los conceptos de ingresos en nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CodigosGanancia
+ */
+
+variables: {
     var option: number;
 }
 

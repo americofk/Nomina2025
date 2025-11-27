@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Modelo de datos para representar ubicaciones de cursos.
+/// Define los lugares donde se imparten las capacitaciones y su información de contacto.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +13,9 @@ using DC365_WebNR.CORE.Aplication.Attributes;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
+    /// <summary>
+    /// Clase para gestion de CourseLocation.
+    /// </summary>
     public class CourseLocation
     {
         /// <summary>

@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file WorkCalendarEmployee.ts
+ * @description Módulo de gestión de calendarios laborales por empleado. Permite asignar,
+ *              editar y eliminar horarios de trabajo para cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CalendarioLaboralEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de códigos de deducción de empleados.
+/// Administra las deducciones aplicadas a cada empleado en la nómina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEmployeeDeductionCode.
+    /// </summary>
     public class ProcessEmployeeDeductionCode: ServiceBase
     {
         public ProcessEmployeeDeductionCode(string _token)
@@ -18,6 +27,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
             Token = _token;
         }
         //lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EmployeeDeductionCode>> GetAllDataAsync(string employeeid, int _PageNumber = 1)
         {
             List<EmployeeDeductionCode> _model = new List<EmployeeDeductionCode>();
@@ -47,6 +62,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(EmployeeDeductionCode _model)
         {
             Response<EmployeeDeductionCode> DataApi = null;
@@ -72,6 +92,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="InternalId">Parametro InternalId.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string InternalId, EmployeeDeductionCode _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -95,6 +121,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj, string employeeid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -139,6 +171,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //buscar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="internalId">Parametro internalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<EmployeeDeductionCode> GetDataAsync(string employeeid, string internalId)
         {
             EmployeeDeductionCode _model = new EmployeeDeductionCode();

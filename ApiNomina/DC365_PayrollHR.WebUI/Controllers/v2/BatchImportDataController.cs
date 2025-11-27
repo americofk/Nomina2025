@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs;
+/// <summary>
+/// Controlador API para gestión de BatchImportData.
+/// Endpoint base: api/v2/batchimportdata
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -16,6 +23,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de BatchImportData.
+    /// </summary>
     [Route("api/v2.0/importbatch")]
     [ApiController]
     [Authorize]
@@ -42,11 +52,32 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
 
         [HttpGet]
         //[AuthorizePrivilege(MenuId = MenuConst.EmployeeEnabled, View = true)]
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ActionResult> GetEnabled([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
             var objectresult = await _QueryHandler.GetAll(paginationFilter, searchFilter);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpDelete]
@@ -56,6 +87,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.Delete(ids);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Crea o procesa.
+
+
+        /// </summary>
+
+
+        /// <param name="models">Parametro models.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("employees")]
@@ -80,6 +126,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
         
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
+        
         [HttpPost("employeeaddress")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -98,6 +154,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
                 return StatusCode(202, new Response<string>() { Message = $"Se ha iniciado el proceso", StatusHttp = 202 });
             }
         }
+
+
+        /// <summary>
+
+
+        /// Crea o procesa.
+
+
+        /// </summary>
+
+
+        /// <param name="models">Parametro models.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("employeecontactinfo")]
@@ -119,6 +190,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         }
 
 
+        /// <summary>
+
+
+        /// Crea o procesa.
+
+
+        /// </summary>
+
+
+        /// <param name="models">Parametro models.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPost("employeebankaccount")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -136,6 +222,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
                 return StatusCode(202, new Response<string>() { Message = $"Se ha iniciado el proceso", StatusHttp = 202 });
             }
         }
+        
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpPost("employeedocument")]
         [RequestSizeLimit(30000000)]
@@ -155,6 +251,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
         
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
+        
         [HttpPost("employeetax")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -173,6 +279,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="models">Parametro models.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("employeeextrahours")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -190,6 +306,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
                 return StatusCode(202, new Response<string>() { Message = $"Se ha iniciado el proceso", StatusHttp = 202 });
             }
         }
+        
+        
+        /// <summary>
+        
+        
+        /// Crea o procesa.
+        
+        
+        /// </summary>
+        
+        
+        /// <param name="models">Parametro models.</param>
+        
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         
         [HttpPost("employeeearningcodes")]
@@ -211,6 +342,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
         
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
+        
         [HttpPost("employeeloans")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -228,6 +369,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
                 return StatusCode(202, new Response<string>() { Message = $"Se ha iniciado el proceso", StatusHttp = 202 });
             }
         }
+        
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpPost("employeedeductions")]
         [RequestSizeLimit(30000000)]
@@ -247,6 +398,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
         
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
+        
         [HttpPost("courses")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -265,6 +426,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
         
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
+        
         [HttpPost("employeeworkcalendars")]
         [RequestSizeLimit(30000000)]
         [AuthorizePrivilege(MenuId = MenuConst.BatchHistory, Edit = true)]
@@ -282,6 +453,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
                 return StatusCode(202, new Response<string>() { Message = $"Se ha iniciado el proceso", StatusHttp = 202 });
             }
         }
+        
+        /// <summary>
+        
+        /// Crea o procesa.
+        
+        /// </summary>
+        
+        /// <param name="models">Parametro models.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpPost("employeeworkcontrolcalendars")]
         [RequestSizeLimit(30000000)]

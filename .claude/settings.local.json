@@ -19,7 +19,17 @@
       "Bash(popd)",
       "Bash(fi)",
       "Bash(done)",
-      "Bash(node -c:*)"
+      "Bash(node -c:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File add-documentation.ps1)",
+      "Bash(powershell:*)",
+      "Bash(xargs:*)",
+      "Bash(python add_documentation.py:*)",
+      "Bash(cat:*)",
+      "Bash(dotnet ef migrations add:*)",
+      "Bash(dotnet add package:*)",
+      "Bash(dotnet ef database update --context ApplicationDBContext)",
+      "Bash(python:*)",
+      "Bash(findstr /V \"bin\\|obj\"\")"
     ],
     "deny": [],
     "ask": []

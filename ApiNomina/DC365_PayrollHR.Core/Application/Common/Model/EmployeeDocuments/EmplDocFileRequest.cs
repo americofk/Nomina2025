@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para EmplDocFile.
+/// Define los parámetros necesarios para crear o modificar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -8,9 +14,25 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.EmployeeDocuments
 {
+    /// <summary>
+    /// Modelo de solicitud para EmplDocFile.
+    /// </summary>
     public class EmplDocFileRequest : GenericValidation<EmplDocFileRequest>, IValidatableObject
     {
+        /// <summary>
+        /// Archivo.
+        /// </summary>
         public IFormFile File { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

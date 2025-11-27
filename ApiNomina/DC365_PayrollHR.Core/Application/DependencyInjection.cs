@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries;
+using DC365_PayrollHR.Core.Application.CommandsAndQueries;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.CalendarHolidays;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.ClassRooms;
@@ -87,8 +87,16 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DC365_PayrollHR.Core.Application
 {
+    /// <summary>
+    /// Clase para gestion de DependencyInjection.
+    /// </summary>
     public static class DependencyInjection
     {
+        /// <summary>
+        /// Agrega un nuevo registro.
+        /// </summary>
+        /// <param name="services">Parametro services.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
             services.AddScoped<ILoginCommandHandler, LoginCommandHandler>();

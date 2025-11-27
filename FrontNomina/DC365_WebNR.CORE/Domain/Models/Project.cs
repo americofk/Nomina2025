@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Modelo de datos para representar proyectos.
+/// Define los proyectos utilizados para organización y contabilidad de gastos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -7,15 +13,27 @@ using DC365_WebNR.CORE.Domain.Const;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
+    /// <summary>
+    /// Clase para gestion de Project.
+    /// </summary>
     public class Project
     {
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         [CustomFilter("Id Proyecto")]
         public string ProjId { get; set; }
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         [Required(ErrorMessage = "Nombre" + ErrorMsg.Emptym)]
 
         [CustomFilter("Nombre")]
 
         public string Name { get; set; }
+        /// <summary>
+        /// Valor de texto para LedgerAccount.
+        /// </summary>
         [CustomFilter("Cuenta contable")]
 
         public string LedgerAccount { get; set; }

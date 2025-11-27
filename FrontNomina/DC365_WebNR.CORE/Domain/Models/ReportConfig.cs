@@ -1,4 +1,10 @@
-锘縰sing System;
+/// <summary>
+/// Modelo de datos para configuraci贸n de reportes.
+/// Contiene la configuraci贸n de conceptos utilizados en reportes de n贸mina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -14,7 +20,7 @@ namespace DC365_WebNR.CORE.Domain.Models
 
         public string LoanCooperative { get; set; }
 
-        //Actualizaci贸n abono de cooperativa
+        //Actualizaci髇 abono de cooperativa
         public string DeductionCooperative { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Interface;
+using DC365_PayrollHR.Core.Application.Common.Interface;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Services
 {
+    /// <summary>
+    /// Clase para gestion de CurrentUserInformation.
+    /// </summary>
     public class CurrentUserInformation : ICurrentUserInformation
     {
         private readonly IHttpContextAccessor _httpContextAccessor;

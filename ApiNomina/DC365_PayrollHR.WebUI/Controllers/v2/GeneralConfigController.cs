@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.GeneralConfigs;
+/// <summary>
+/// Controlador API para gestión de GeneralConfig.
+/// Endpoint base: api/v2/generalconfigs
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.GeneralConfigs;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.GeneralConfigs;
@@ -15,6 +22,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de GeneralConfig.
+    /// </summary>
     [Route("api/v2.0/generalconfigs")]
     [Authorize]
     [ApiController]
@@ -30,6 +40,14 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _commandHandler = commandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet]
         [AuthorizePrivilege(MenuId = MenuConst.GeneralConfig, View = true)]
         public async Task<ActionResult> Get()
@@ -37,6 +55,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _QueryHandler.GetId("");
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="_model">Parametro _model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] GeneralConfigRequest _model)

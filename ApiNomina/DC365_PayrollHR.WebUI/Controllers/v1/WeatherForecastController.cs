@@ -1,4 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+/// <summary>
+/// Controlador API para gestión de WeatherForecast.
+/// Endpoint base: api/weatherforecast
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -9,6 +16,9 @@ namespace DC365_PayrollHR.WebUI.Controllers.v1
 {
     [ApiController]
     [Route("[controller]")]
+    /// <summary>
+    /// Controlador para gestion de WeatherForecast.
+    /// </summary>
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -22,6 +32,14 @@ namespace DC365_PayrollHR.WebUI.Controllers.v1
         {
             _logger = logger;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()

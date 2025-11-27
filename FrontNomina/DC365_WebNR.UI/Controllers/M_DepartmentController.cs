@@ -1,4 +1,11 @@
-﻿using System.Collections.Generic;
+﻿/// <summary>
+/// Controlador para la gestión de departamentos activos.
+/// Permite crear, editar, eliminar y listar departamentos de la organización.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DC365_WebNR.CORE.Aplication.Services.Container;
@@ -9,12 +16,26 @@ using Microsoft.AspNetCore.Mvc;
 namespace DC365_WebNR.UI.Controllers
 {
 
+    /// <summary>
+
+    /// Controlador para gestion de M_Department.
+
+    /// </summary>
+
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("departamentosactivos")]
     public class M_DepartmentController : ControllerBase
     {
         ProcessDepartament processDepartament;
+
+        /// <summary>
+
+        /// Ejecuta Departments de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> Departments()
@@ -26,8 +47,64 @@ namespace DC365_WebNR.UI.Controllers
             var model = await processDepartament.GetAllDataAsync();
             ViewBag.Filter = FilterHelper<Department>.GetPropertyToSearch();
 
+            // Datos para el sistema de vistas de usuario
+            ViewBag.Token = dataUser[0];
+            ViewBag.UserRecId = GetUserRecIdFromSession();
+            ViewBag.DataAreaId = dataUser[3];
+
             return View(model);
         }
+
+        /// <summary>
+        /// Obtiene el identificador unico del usuario para el sistema de vistas.
+        /// Genera un hash numerico consistente basado en el Alias del usuario.
+        /// </summary>
+        /// <returns>Identificador numerico del usuario.</returns>
+        private long GetUserRecIdFromSession()
+        {
+            // Usar el Alias como identificador principal (es único y no cambia)
+            var alias = dataUser[8];
+            if (!string.IsNullOrEmpty(alias))
+            {
+                return GetConsistentHash(alias);
+            }
+
+            // Fallback al email
+            var email = dataUser[7];
+            if (!string.IsNullOrEmpty(email))
+            {
+                return GetConsistentHash(email);
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Genera un hash numerico consistente que no varia entre ejecuciones.
+        /// </summary>
+        /// <param name="input">Cadena de entrada.</param>
+        /// <returns>Hash numerico positivo.</returns>
+        private long GetConsistentHash(string input)
+        {
+            if (string.IsNullOrEmpty(input)) return 0;
+
+            // Algoritmo de hash consistente (no depende de la sesión de .NET)
+            long hash = 5381;
+            foreach (char c in input)
+            {
+                hash = ((hash << 5) + hash) + c;
+            }
+            return Math.Abs(hash);
+        }
+
+        /// <summary>
+        /// Guarda los cambios.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]
@@ -68,6 +145,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ListIdDepartment">Parametro ListIdDepartment.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> delete(List<string> ListIdDepartment)
@@ -81,6 +168,20 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta Departament_Filter_OrMore_Data de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Departament_Filter_OrMore_Data(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
@@ -92,6 +193,21 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("Departament_Filter_OrMore_Data", model);
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="DepartmentId">Parametro DepartmentId.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("actualizarestatus")]
@@ -109,6 +225,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("getbyid")]
         public async Task<JsonResult> getbyid(string Id)

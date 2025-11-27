@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de EmployeeLoan.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -14,6 +20,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
 {
+    /// <summary>
+    /// Manejador para operaciones de EmployeeLoanQuery.
+    /// </summary>
     public class EmployeeLoanQueryHandler : IQueryHandler<EmployeeLoanResponse>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -22,6 +31,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<EmployeeLoanResponse>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryfilter = null)
         {
@@ -67,6 +90,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
             a.PayrollName = payroll.Name;
             return a;
         }
+
+
+        /// <summary>
+
+
+        /// Obtiene.
+
+
+        /// </summary>
+
+
+        /// <param name="condition">Parametro condition.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<EmployeeLoanResponse>> GetId(object condition)

@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeesAddress;
+/// <summary>
+/// Controlador API para gestión de EmployeeAddress.
+/// Endpoint base: api/employeesaddresses
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeesAddress;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -18,6 +25,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeAddress.
+    /// </summary>
     [Route("api/employeeaddress")]
     [ApiController]
     [Authorize]
@@ -34,6 +44,20 @@ namespace DC365_PayrollHR.WebUI.Controllers
             _CommandHandler = commandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeAddress, View = true)]
         public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter, string employeeid)
@@ -41,6 +65,24 @@ namespace DC365_PayrollHR.WebUI.Controllers
             var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, employeeid);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+        
+        
+        /// <summary>
+        
+        
+        /// Obtiene.
+        
+        
+        /// </summary>
+        
+        
+        /// <param name="employeeid">Parametro employeeid.</param>
+        
+        
+        /// <param name="internalid">Parametro internalid.</param>
+        
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         
         [HttpGet("{employeeid}/{internalid}")]
@@ -51,6 +93,16 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeAddress, Edit = true)]
         public async Task<ActionResult> Post([FromBody] EmployeeAddressRequest model)
@@ -60,6 +112,24 @@ namespace DC365_PayrollHR.WebUI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpDelete("{employeeid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeAddress, Delete = true)]
         public async Task<ActionResult> Delete([FromBody] List<string> ids, string employeeid)
@@ -67,6 +137,24 @@ namespace DC365_PayrollHR.WebUI.Controllers
             var objectresult = await _CommandHandler.DeleteByEmployeeId(ids, employeeid);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPut("{internalid}")]

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para el procesamiento de nóminas.
+/// Permite crear, procesar, calcular, pagar y cancelar procesos de nómina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -13,12 +19,23 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de PayrollProcess.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("procesonomina")]
     public class PayrollProcessController : ControllerBase
     {
         ProcessPayrollProcess process;
+
+        /// <summary>
+
+        /// Ejecuta PayrollsProcess de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> PayrollsProcess()
@@ -33,6 +50,20 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta PayrollProcess_Filter_OrMore_Data de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> PayrollProcess_Filter_OrMore_Data(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
@@ -45,6 +76,21 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("PayrollProcess_Filter_OrMore_Data", model);
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta NewAndEditPayrollProcess de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet("ObtenerFormNuevo")]
@@ -75,6 +121,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewAndEditPayrollProcess", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]
@@ -114,6 +172,16 @@ namespace DC365_WebNR.UI.Controllers
             //return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid_payrollprocess">Parametro listid_payrollprocess.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(List<string> listid_payrollprocess)
@@ -126,6 +194,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta Payrollprocess de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PayrollProcessId">Parametro PayrollProcessId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("procesar")]
         [ValidateAntiForgeryToken]
@@ -147,6 +225,16 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("DetailEmployeesPayrollProcess", responseUI.Obj);
         }
 
+        /// <summary>
+
+        /// Ejecuta Calcprocess de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PayrollProcessId">Parametro PayrollProcessId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("calcular")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Calcprocess(string PayrollProcessId)
@@ -159,6 +247,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{payrollprocessid}/{employeeid}")]
         public async Task<ActionResult> Getnovelties(string payrollprocessid, string employeeid)
         {
@@ -169,6 +269,16 @@ namespace DC365_WebNR.UI.Controllers
             var list = await processOne.GetAllDataAsync(payrollprocessid, employeeid);
             return PartialView("ListPayrollProcessDetail", list);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{payrollprocessid}")]
         public async Task<ActionResult> GetDetailProcessPayroll(string payrollprocessid)
@@ -185,6 +295,16 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("DetailEmployeesPayrollProcess", responseUI.Obj);
         }
 
+        /// <summary>
+
+        /// Ejecuta Payprocess de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PayrollProcessId">Parametro PayrollProcessId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("pagar")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Payprocess(string PayrollProcessId)
@@ -196,6 +316,16 @@ namespace DC365_WebNR.UI.Controllers
             responseUI = await process.PayPayroll(PayrollProcessId);
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Verifica si puede.
+
+        /// </summary>
+
+        /// <param name="PayrollProcessId">Parametro PayrollProcessId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("cancelar")]
         [ValidateAntiForgeryToken]

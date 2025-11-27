@@ -1,12 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Filter
 {
+    /// <summary>
+    /// Filtro para Pagination.
+    /// </summary>
     public class PaginationFilter
     {
+        /// <summary>
+        /// Numero.
+        /// </summary>
         public int PageNumber { get; set; }
+        /// <summary>
+        /// Valor numerico para PageSize.
+        /// </summary>
         public int PageSize { get; set; }
         //public int TotalRecord { get; set; }
         public PaginationFilter()

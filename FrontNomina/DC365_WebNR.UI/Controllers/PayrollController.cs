@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de nóminas activas.
+/// Permite crear, editar, eliminar e inhabilitar configuraciones de nómina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Aplication.Services.Container;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
@@ -12,12 +18,19 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de Payroll.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("nomina")]
     public class PayrollController : ControllerBase
     {
         ProcessPayroll process;
+        /// <summary>
+        /// Ejecuta Payrolls de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet]
         public async Task<IActionResult> Payrolls()
         {
@@ -31,6 +44,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return View(model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="Obj">Parametro Obj.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -63,6 +88,21 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="IdPayroll">Parametro IdPayroll.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> delete(List<string> IdPayroll)
@@ -76,6 +116,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{id}")]
         public async Task<JsonResult> GetId(string Id)
         {
@@ -87,6 +137,21 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model));
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollIdOp">Parametro payrollIdOp.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("actualizarestatus")]
@@ -103,6 +168,20 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta Payroll_Filter_Or_MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Payroll_Filter_Or_MoreData(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para configuración general del sistema.
+/// Gestiona parámetros y configuraciones globales de la aplicación.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Clase para gestion de GeneralConfig.
+    /// </summary>
     public class  GeneralConfig: ServiceBase
     {
         public GeneralConfig(string _token)
@@ -19,6 +28,10 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //obtener datos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<GeneralConfigResponse> GetAllDataAsync()
         {
             GeneralConfigResponse _model = new GeneralConfigResponse();
@@ -45,6 +58,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(GeneralConfigRequest _model)
         {
             Response<GeneralConfigRequest> DataApi = null;

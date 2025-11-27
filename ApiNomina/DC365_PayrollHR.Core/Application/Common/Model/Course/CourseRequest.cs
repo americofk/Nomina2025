@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para Course.
+/// Define los parámetros necesarios para crear o modificar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using DC365_PayrollHR.Core.Domain.Enums;
 using System;
@@ -7,29 +13,102 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.Course
 {
+    /// <summary>
+    /// Modelo de solicitud para Course.
+    /// </summary>
     public class CourseRequest: GenericValidation<CourseRequest>, IValidatableObject
     {
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         public string CourseName { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string CourseTypeId { get; set; }
+        /// <summary>
+        /// Indica si.
+        /// </summary>
         public bool IsMatrixTraining { get; set; }
+        /// <summary>
+        /// Valor numerico para InternalExternal.
+        /// </summary>
         public InternalExternal InternalExternal { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string CourseParentId { get; set; }
         //public string CourseLocationId { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string ClassRoomId { get; set; }
+        /// <summary>
+        /// Hora.
+        /// </summary>
         public DateTime StartDateTime { get; set; }
+        /// <summary>
+        /// Hora.
+        /// </summary>
         public DateTime EndDateTime { get; set; }
+        /// <summary>
+        /// Valor numerico para MinStudents.
+        /// </summary>
         public int MinStudents { get; set; }
+        /// <summary>
+        /// Valor numerico para MaxStudents.
+        /// </summary>
         public int MaxStudents { get; set; }
+        /// <summary>
+        /// Valor numerico para Periodicity.
+        /// </summary>
         public int Periodicity { get; set; }
+        /// <summary>
+        /// Valor numerico para QtySessions.
+        /// </summary>
         public int QtySessions { get; set; } = 1;
 
+        /// <summary>
+
+        /// Descripcion.
+
+        /// </summary>
+
         public string Description { get; set; }
+        /// <summary>
+        /// Valor de texto para Objetives.
+        /// </summary>
         public string Objetives { get; set; }
+        /// <summary>
+        /// Valor de texto para Topics.
+        /// </summary>
         public string Topics { get; set; }
+
+        /// <summary>
+
+        /// Estado.
+
+        /// </summary>
 
         public CourseStatus CourseStatus { get; set; } = 0;
 
+        /// <summary>
+
+        /// Valor de texto para URLDocuments.
+
+        /// </summary>
+
         public string URLDocuments { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

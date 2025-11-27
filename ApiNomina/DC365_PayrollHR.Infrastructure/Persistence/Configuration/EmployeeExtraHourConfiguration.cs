@@ -1,3 +1,9 @@
+/// <summary>
+/// Configuración de Entity Framework para EmployeeExtraHour.
+/// Define el mapeo de la entidad a la base de datos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Domain.Consts;
 using DC365_PayrollHR.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -8,8 +14,15 @@ using System.Text;
 
 namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
 {
+    /// <summary>
+    /// Configuracion de entidad EmployeeExtraHour.
+    /// </summary>
     public class EmployeeExtraHourConfiguration : IEntityTypeConfiguration<EmployeeExtraHour>
     {
+        /// <summary>
+        /// Configura.
+        /// </summary>
+        /// <param name="builder">Parametro builder.</param>
         public void Configure(EntityTypeBuilder<EmployeeExtraHour> builder)
         {
             builder.HasKey(x => new { x.EmployeeId, x.EarningCodeId, x.WorkedDay });

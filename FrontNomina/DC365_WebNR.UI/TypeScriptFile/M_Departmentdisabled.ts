@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file M_Departmentdisabled.ts
+ * @description Módulo de gestión de departamentos inactivos. Permite eliminar,
+ *              habilitar y listar departamentos que han sido deshabilitados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module DepartamentosInactivos
+ */
+
+variables: {
     var page = 1;
     var isBusy: boolean = false;
     var isempty: boolean = false;

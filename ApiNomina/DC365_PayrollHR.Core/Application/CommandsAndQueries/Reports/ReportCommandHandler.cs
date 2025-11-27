@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Interface;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de Report.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Reports;
 using DC365_PayrollHR.Core.Domain.Consts;
@@ -15,10 +21,19 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 {
+    /// <summary>
+    /// Manejador para operaciones de IReportCommand.
+    /// </summary>
     public interface IReportCommandHandler
     {
         public Task<Response<object>> SendEmail(string payrollProcessId, string employeeid, string departmentid, string[] session, string partialRoute);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de ReportCommand.
+
+    /// </summary>
 
     public class ReportCommandHandler : IReportCommandHandler
     {
@@ -30,6 +45,33 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
             _NewDbContext = newDbContext;
             _serviceScopeFactory = serviceScopeFactory;
         }
+
+
+        /// <summary>
+
+
+        /// Envia.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollProcessId">Parametro payrollProcessId.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <param name="departmentid">Parametro departmentid.</param>
+
+
+        /// <param name="session">Parametro session.</param>
+
+
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> SendEmail(string payrollProcessId, string employeeid, string departmentid, string[] session, string partialRoute)
@@ -154,6 +196,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de recibo de pago de nómina
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <param name="payrollProcessId">Parametro payrollProcessId.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="departmentid">Parametro departmentid.</param>
+        /// <param name="session">Parametro session.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<ReportPayrollPaymentResponse>> PayrollPaymentReport(string payrollProcessId, string employeeid, string departmentid, string[] session)
         {
             List<ReportPayrollPaymentResponse> report = new List<ReportPayrollPaymentResponse>();

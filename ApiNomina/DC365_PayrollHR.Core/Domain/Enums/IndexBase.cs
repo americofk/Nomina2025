@@ -1,9 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DC365_PayrollHR.Core.Domain.Enums
 {
+    /// <summary>
+    /// Clase base para IndexBase.
+    /// </summary>
     public enum IndexBase
     {
         Hour = 0, //Hora

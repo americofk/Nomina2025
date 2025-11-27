@@ -1,4 +1,13 @@
-﻿$(".NewBatch").on("click", function () {
+/**
+ * @file BatchHistory.ts
+ * @description Módulo de historial de lotes de procesamiento. Permite visualizar
+ *              y gestionar el historial de procesos batch ejecutados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module HistorialLotes
+ */
+
+$(".NewBatch").on("click", function () {
     $('.contenedor-newBatch').removeClass("collapse");
 });
 

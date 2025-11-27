@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de Login.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -18,12 +24,21 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
 {
+    /// <summary>
+    /// Manejador para operaciones de ILoginCommand.
+    /// </summary>
     public interface ILoginCommandHandler
     {
         public Task<Response<object>> Login(LoginRequest _model);
         public Task<Response<object>> RequestChangePassword(string identificator);
         public Task<Response<object>> SendNewPassword(UserChangePasswordRequest model);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de LoginCommand.
+
+    /// </summary>
 
     public class LoginCommandHandler: ILoginCommandHandler
     {
@@ -40,6 +55,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
             _emailServices = emailServices;
             _queryHandler = queryHandler;
         }
+
+        /// <summary>
+
+        /// Registra en el log.
+
+        /// </summary>
+
+        /// <param name="_model">Parametro _model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Login(LoginRequest _model)
         {
@@ -154,6 +179,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
             return new Response<object>(true);
         }
 
+        /// <summary>
+
+        /// Ejecuta RequestChangePassword de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="identificator">Parametro identificator.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> RequestChangePassword(string identificator)
         {
             var user = await dbContext.Users.Where(x => x.Alias == identificator || x.Email == identificator).FirstOrDefaultAsync();
@@ -186,6 +221,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
             
             return new Response<object>(true) { Message = emailResponse.Substring(4) , StatusHttp = httpStatus };
         }
+
+        /// <summary>
+
+        /// Envia.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> SendNewPassword(UserChangePasswordRequest model)
         {

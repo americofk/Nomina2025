@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión del detalle de impuestos.
+/// Permite crear, editar, eliminar y consultar detalles de configuración de impuestos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -13,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de TaxDetail.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("detalleimpuestos")]
@@ -20,6 +29,16 @@ namespace DC365_WebNR.UI.Controllers
     {
 
         ProcessTaxDetail process;
+
+        /// <summary>
+
+        /// Ejecuta TaxDetails de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="Taxid">Parametro Taxid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{Taxid}")]
         public async Task<IActionResult> TaxDetails(string Taxid)
@@ -31,6 +50,16 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.GetAllDataAsync(Taxid);
             return PartialView("TaxDetails", model);
         }
+
+        /// <summary>
+
+        /// Ejecuta NewAndEditTaxDetail de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="TaxDetailid">Parametro TaxDetailid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("ObtenerFormNuevo")]
         public async Task<IActionResult> NewAndEditTaxDetail([FromQuery] string TaxDetailid)
@@ -57,6 +86,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewAndEditTaxDetail", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]
@@ -87,6 +128,24 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="TaxDetailid">Parametro TaxDetailid.</param>
+
+
+        /// <param name="Taxid">Parametro Taxid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("eliminar")]

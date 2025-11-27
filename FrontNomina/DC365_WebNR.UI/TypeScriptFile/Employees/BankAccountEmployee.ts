@@ -1,4 +1,12 @@
-﻿
+/**
+ * @file BankAccountEmployee.ts
+ * @description Módulo de gestión de cuentas bancarias de empleados. Permite agregar,
+ *              editar y eliminar cuentas bancarias para depósito de nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CuentasBancariasEmpleados
+ */
+
 variables: {
     interface IDomElement_Modal {
         form: string

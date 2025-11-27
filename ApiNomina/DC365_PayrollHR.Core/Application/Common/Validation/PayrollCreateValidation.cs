@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Model;
+using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Domain.Enums;
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,16 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Validation
 {
+    /// <summary>
+    /// Clase para gestion de PayrollCreateValidation.
+    /// </summary>
     public class PayrollCreateValidation : IValidatableObject
     {
+        /// <summary>
+        /// Valida los datos.
+        /// </summary>
+        /// <param name="validationContext">Parametro validationContext.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             PayrollRequest model = (PayrollRequest)validationContext.ObjectInstance;

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de horarios de trabajo de empleados.
+/// Permite crear, editar, eliminar y consultar calendarios de trabajo.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.UI.Process;
@@ -11,12 +17,25 @@ using System;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeWorkCalendar.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("horarioempleado")]
     public class EmployeeWorkCalendarController : ControllerBase
     {
         ProcessEmployeeWorkCalendar process;
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{employeeid}")]
         public async Task<ActionResult> Get(string employeeid)
@@ -30,6 +49,14 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("ListEmployeeWorkCalendar", list);
         }
 
+        /// <summary>
+
+        /// Ejecuta EmployeeWorkCalendar de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormNewEmployeeWorkCalendar")]
         public async Task<ActionResult> EmployeeWorkCalendar()
         {
@@ -37,6 +64,18 @@ namespace DC365_WebNR.UI.Controllers
             EmployeeWorkCalendar model = new EmployeeWorkCalendar();
             return PartialView("NewEmployeeWorkCalendar", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -69,6 +108,12 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //[HttpGet("{employeeid}/{internalId}")]
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="internalId">Parametro internalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("ListCalendar")]
         public async Task<ActionResult> GetId(string employeeid, string internalId)
         {
@@ -79,6 +124,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewEmployeeWorkCalendar", _model);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]

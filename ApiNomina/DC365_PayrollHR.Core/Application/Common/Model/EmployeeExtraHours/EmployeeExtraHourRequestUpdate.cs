@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para actualización de EmployeeExtraHour.
+/// Define los parámetros necesarios para actualizar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using System;
 using System.Collections.Generic;
@@ -6,19 +12,64 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.EmployeeExtraHours
 {
+    /// <summary>
+    /// Clase para gestion de EmployeeExtraHourRequestUpdate.
+    /// </summary>
     public class EmployeeExtraHourRequestUpdate : GenericValidation<EmployeeExtraHourRequestUpdate>, IValidatableObject
     {
+        /// <summary>
+        /// Fecha de WorkedDay.
+        /// </summary>
         public DateTime WorkedDay { get; set; }
+        /// <summary>
+        /// Obtiene o establece StartHour.
+        /// </summary>
         public TimeSpan StartHour { get; set; }
+        /// <summary>
+        /// Obtiene o establece EndHour.
+        /// </summary>
         public TimeSpan EndHour { get; set; }
+        /// <summary>
+        /// Valor numerico para Quantity.
+        /// </summary>
         public decimal Quantity { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string PayrollId { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string EarningCodeId { get; set; }
+
+        /// <summary>
+
+        /// Valor de texto para Comment.
+
+        /// </summary>
 
         public string Comment { get; set; }
 
         //Actualización, campo para indicar la fecha de uso de horas extra
+        /// <summary>
+        /// Fecha.
+        /// </summary>
         public DateTime CalcPayrollDate { get; set; }
+
+
+        /// <summary>
+
+
+        /// Valida los datos.
+
+
+        /// </summary>
+
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

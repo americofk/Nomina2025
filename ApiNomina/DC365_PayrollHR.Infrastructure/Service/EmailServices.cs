@@ -1,3 +1,9 @@
+/// <summary>
+/// Componente de infraestructura para EmailServices.
+/// Implementa servicios de soporte para el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Interface;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Infrastructure.Service
 {
+    /// <summary>
+    /// Clase para gestion de EmailServices.
+    /// </summary>
     public class EmailServices : IEmailServices
     {
         private readonly IApplicationDbContext _dbContext;
@@ -30,6 +39,20 @@ namespace DC365_PayrollHR.Infrastructure.Service
              $"Que tenga muy buen dia! <br> <br>" +
              $"Dynacorp 365 Team";
         }
+
+        /// <summary>
+
+        /// Envia.
+
+        /// </summary>
+
+        /// <param name="email">Parametro email.</param>
+
+        /// <param name="temporaryPassword">Parametro temporaryPassword.</param>
+
+        /// <param name="username">Parametro username.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<string> SendEmail(string email, string temporaryPassword, string username)
         {
@@ -64,6 +87,20 @@ namespace DC365_PayrollHR.Infrastructure.Service
                 return "404 Error al enviar el correo con la contraseña temporal, comuniquese con los administradores o intentelo más tarde.";
             }
         }
+
+        /// <summary>
+
+        /// Envia.
+
+        /// </summary>
+
+        /// <param name="email">Parametro email.</param>
+
+        /// <param name="bodyemail">Parametro bodyemail.</param>
+
+        /// <param name="reportdate">Parametro reportdate.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<string> SendEmailFile(string email, string bodyemail, DateTime reportdate)
         {

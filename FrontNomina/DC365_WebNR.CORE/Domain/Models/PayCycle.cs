@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models.Enums;
+/// <summary>
+/// Modelo de datos para representar ciclos de pago.
+/// Define los períodos y fechas de pago de las nóminas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,7 +26,7 @@ namespace DC365_WebNR.CORE.Domain.Models
         public decimal AmountPaidPerPeriod { get; set; }
         public StatusPeriod StatusPeriod { get; set; }
 
-        //propiedad de navegación
+        //propiedad de navegaci�n
         public string PayrollId { get; set; }
         //public Payroll Payroll { get; set; }
 
@@ -28,7 +34,7 @@ namespace DC365_WebNR.CORE.Domain.Models
 
         public PayFrecuency PayFrecuency { get; set; }
 
-        //Modificación para calcular el tss
+        //Modificaci�n para calcular el tss
         public bool IsForTss { get; set; }
     }
 }

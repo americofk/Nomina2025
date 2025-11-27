@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para la gestión de empleados.
+/// Permite crear, editar, eliminar y administrar toda la información de empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +22,9 @@ using Newtonsoft.Json.Converters;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_Employee.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("empleadosactivos")]
@@ -23,6 +32,18 @@ namespace DC365_WebNR.UI.Controllers
     {
         
         ProcessEmployee processEmployee;
+
+        /// <summary>
+
+        /// Ejecuta Employees de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="workStatus">Parametro workStatus.</param>
+
+        /// <param name="IdEmployee">Parametro IdEmployee.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> Employees([FromQuery] WorkStatus workStatus, string IdEmployee="")
@@ -64,6 +85,22 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta Employee_Filter_OrMore_Data de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <param name="type">Parametro type.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Employee_Filter_OrMore_Data(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1, string type = "")
         {
@@ -77,6 +114,18 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("Employee_Filter_OrMore_Data", model);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <param name="type">Parametro type.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{id}/{type}")]
         public async Task<JsonResult> GetId(string Id,string type)
         {
@@ -87,6 +136,18 @@ namespace DC365_WebNR.UI.Controllers
             _model = await processEmployee.GetIdDataAsync(Id, type);
             return (Json(_model));
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="Obj">Parametro Obj.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -118,6 +179,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ObjEmployees">Parametro ObjEmployees.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> Delete(List<string> ObjEmployees)
@@ -130,6 +201,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Carga un archivo.
+
+        /// </summary>
+
+        /// <param name="file">Parametro file.</param>
+
+        /// <param name="IdEmpleyee">Parametro IdEmpleyee.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("cargarimagen")]
         [ValidateAntiForgeryToken]
@@ -144,6 +227,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(result));
         }
 
+        /// <summary>
+
+        /// Descarga.
+
+        /// </summary>
+
+        /// <param name="IdEmployee">Parametro IdEmployee.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("descargarimagen/{IdEmployee}")]
         public async Task<JsonResult> DownloadImage(string IdEmployee)
         {
@@ -154,6 +247,20 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(result));
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="idEmployeeDesh">Parametro idEmployeeDesh.</param>
+
+        /// <param name="optionDesh">Parametro optionDesh.</param>
+
+        /// <param name="_isforDgt">Parametro _isforDgt.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("actualizarestatus")]
         [AutoValidateAntiforgeryToken]
@@ -167,6 +274,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Contrata al empleado.
+
+        /// </summary>
+
+        /// <param name="hireEmployee">Parametro hireEmployee.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("hireemployee")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> HireEmployee(HireEmployee hireEmployee)
@@ -179,6 +296,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta DissmisEmployee de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="dissmisemployee">Parametro dissmisemployee.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("dissmisemployee")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> DissmisEmployee(HireEmployee dissmisemployee)
@@ -190,6 +317,14 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta EmployeesDisabled de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("inactivo")]
         public async Task<IActionResult> EmployeesDisabled()
@@ -212,6 +347,14 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta FormHireEmployee de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormHireEmployee")]
         public async Task<ActionResult> FormHireEmployee()
         {
@@ -219,6 +362,14 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Position =  await selectListsDropDownList(SelectListOptions.PositionVacant);
             return PartialView("ModalContratar");
         }
+        
+        /// <summary>
+        
+        /// Ejecuta la operacion FormdissmisEmployee.
+        
+        /// </summary>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpGet("FormdissmisEmployee")]
         public ActionResult FormdissmisEmployee()

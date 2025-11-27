@@ -1,4 +1,11 @@
-﻿
+/**
+ * @file User.ts
+ * @description Módulo de gestión de usuarios del sistema. Permite crear, editar,
+ *              eliminar usuarios y administrar roles y permisos de acceso.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Usuarios
+ */
 
 variables: {
     var defaultimage: string = "/Images/Dashboard/default_perfil.png";

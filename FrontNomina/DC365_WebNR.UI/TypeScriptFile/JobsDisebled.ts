@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file JobsDisebled.ts
+ * @description Módulo de gestión de cargos inactivos. Permite eliminar,
+ *              habilitar y listar cargos que han sido deshabilitados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CargosInactivos
+ */
+
+variables: {
     var option: number;
 }
 

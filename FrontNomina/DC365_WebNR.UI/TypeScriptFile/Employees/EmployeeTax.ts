@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file EmployeeTax.ts
+ * @description Módulo de gestión de impuestos por empleado. Permite asignar,
+ *              editar y eliminar configuraciones de impuestos para cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module ImpuestosEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

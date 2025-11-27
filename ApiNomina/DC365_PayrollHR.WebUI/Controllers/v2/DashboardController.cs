@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo;
+/// <summary>
+/// Controlador API para gestión de Dashboard.
+/// Endpoint base: api/v2/dashboard
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo;
 using DC365_PayrollHR.Core.Domain.Enums;
 using DC365_PayrollHR.WebUI.Attributes;
 using DC365_PayrollHR.WebUI.Filters;
@@ -12,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de Dashboard.
+    /// </summary>
     [Route("api/v2.0/dashboard")]
     [Authorize]
     [ApiController]
@@ -26,6 +36,14 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _infoQueryHandler = infoQueryHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("cardinformation")]
         public async Task<ActionResult> Get()
         {
@@ -33,6 +51,18 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
 
             return StatusCode(objectresult.StatusHttp, objectresult);
         }        
+        
+        /// <summary>
+        
+        /// Obtiene.
+        
+        /// </summary>
+        
+        /// <param name="year">Parametro year.</param>
+        
+        /// <param name="payrollid">Parametro payrollid.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpGet("graphicinformation")]
         public async Task<ActionResult> GetGraphics([FromQuery] int year, [FromQuery] string payrollid)

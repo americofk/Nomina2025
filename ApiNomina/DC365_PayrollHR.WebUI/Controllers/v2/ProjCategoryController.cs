@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.ProjCategories;
+/// <summary>
+/// Controlador API para gestión de ProjCategory.
+/// Endpoint base: api/v2/projcategories
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.ProjCategories;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.ProjCategories;
@@ -17,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de ProjCategory.
+    /// </summary>
     [Route("api/v2.0/projcategories")]
     [ApiController]
     [Authorize]
@@ -32,6 +42,18 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _QueryHandler = queryHandler;
             _CommandHandler = commandHandler;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryEnabled, View = true)]
@@ -50,6 +72,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
 
         //}
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="projcategoryid">Parametro projcategoryid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("enabled/{projcategoryid}")]
         [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryEnabled, View = true)]
         public async Task<ActionResult> GetById(string projcategoryid)
@@ -57,6 +89,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _QueryHandler.GetId(projcategoryid);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Crea o procesa.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("enabled")]
@@ -68,6 +115,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpDelete("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryEnabled, Delete = true)]
         public async Task<ActionResult> Delete([FromBody] List<string> ids)
@@ -75,6 +137,24 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.Delete(ids);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPut("enabled/{id}")]
@@ -85,6 +165,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             return StatusCode(objectresult.StatusHttp, objectresult);
 
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPut("enabled/updatestatus/{id}")]
@@ -103,6 +198,66 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
 
 
 
+        /// <summary>
+
+
+
+
+
+
+
+
+
+        /// Obtiene.
+
+
+
+
+
+
+
+
+
+        /// </summary>
+
+
+
+
+
+
+
+
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+
+
+
+
+
+
+
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+
+
+
+
+
+
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
+
+
+
+
+
+
+
         [HttpGet("disabled")]
         [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryDisabled, View = true)]
         public async Task<ActionResult> GetDisabled([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
@@ -111,6 +266,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpDelete("disabled")]
         [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryDisabled, Delete = true)]
         public async Task<ActionResult> DeleteDisabled([FromBody] List<string> ids)
@@ -118,6 +283,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.Delete(ids);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPut("disabled/updatestatus/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryDisabled, Edit = true)]

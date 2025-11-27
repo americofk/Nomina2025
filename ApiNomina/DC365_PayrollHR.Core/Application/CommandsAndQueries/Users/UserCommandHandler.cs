@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de User.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -27,6 +33,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
         public Task<Response<object>> ChangeCompanyUsed(string companyid);        
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de UserCommand.
+
+    /// </summary>
+
     public class UserCommandHandler : IUserCommandHandler
     {
         private readonly AppSettings _configuration;
@@ -41,6 +53,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
             _configuration = configuration.Value;
             _queryHandler = queryHandler;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(UserRequest model)
         {
@@ -70,6 +92,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
             };
         }
 
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> Update(string id, UserRequestUpdate model)
         {
             var response = await _dbContext.Users.Where(x => x.Alias == id).FirstOrDefaultAsync();
@@ -94,6 +128,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
 
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> UpdateOptions(string id, UserOptionsRequestUpdate model)
         {
             var response = await _dbContext.Users.Where(x => x.Alias == id).FirstOrDefaultAsync();
@@ -117,6 +163,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
+
+        /// <summary>
+
+        /// Carga un archivo.
+
+        /// </summary>
+
+        /// <param name="request">Parametro request.</param>
+
+        /// <param name="alias">Parametro alias.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async  Task<Response<object>> UploadUserImage(UserImageRequest request, string alias)
         {
@@ -144,6 +202,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
             };
         }
 
+        /// <summary>
+
+        /// Descarga.
+
+        /// </summary>
+
+        /// <param name="alias">Parametro alias.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> DownloadUserImage(string alias)
         {
             var image = await _dbContext.UserImages.Where(x => x.Alias == alias).FirstOrDefaultAsync();
@@ -157,6 +225,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
 
             return new Response<object>(string64);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<bool>> Delete(List<string> ids)
         {
@@ -272,6 +350,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
 
             return null;
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta ChangeCompanyUsed de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="companyid">Parametro companyid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> ChangeCompanyUsed(string companyid)

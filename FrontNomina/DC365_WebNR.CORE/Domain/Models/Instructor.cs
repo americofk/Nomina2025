@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Modelo de datos para representar instructores de cursos.
+/// Contiene la información de los instructores que imparten capacitaciones.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +14,9 @@ using DC365_WebNR.CORE.Aplication.Attributes;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
+    /// <summary>
+    /// Clase para gestion de Instructor.
+    /// </summary>
     public class Instructor: IValidatableObject
     {
         /// <summary>
@@ -50,6 +59,16 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// </summary>
         [MaxLength(100)]
         public string Comment { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

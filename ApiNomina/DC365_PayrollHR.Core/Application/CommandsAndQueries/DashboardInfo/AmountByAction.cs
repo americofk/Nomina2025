@@ -1,12 +1,21 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
 {
+    /// <summary>
+    /// Clase para gestion de AmountByAction.
+    /// </summary>
     public class AmountByAction
     {
+        /// <summary>
+        /// Valor de texto para Keys.
+        /// </summary>
         public List<string> Keys { get; set; }
+        /// <summary>
+        /// Valor numerico para Values.
+        /// </summary>
         public List<decimal> Values { get; set; }
     }
 }

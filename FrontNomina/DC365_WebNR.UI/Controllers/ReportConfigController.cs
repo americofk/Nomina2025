@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la configuración de reportes.
+/// Permite configurar parámetros específicos para la generación de reportes.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -8,12 +14,23 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de ReportConfig.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("configuracionreportes")]
     public class ReportConfigController : ControllerBase
     {
         ProcessReportConfig process;
+
+        /// <summary>
+
+        /// Ejecuta ReportsConfig de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> ReportsConfig()
@@ -34,6 +51,16 @@ namespace DC365_WebNR.UI.Controllers
             else
                 return View(model.First());
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]

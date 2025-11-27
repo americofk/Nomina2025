@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de ciclos de pago.
+/// Administra los períodos y ciclos de pago de nómina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessPayCycle.
+    /// </summary>
     public class ProcessPayCycle: ServiceBase
     {
         public ProcessPayCycle( string _token)
@@ -19,6 +28,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="Payrollid">Parametro Payrollid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <param name="PageSize">Parametro PageSize.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<PayCycle>> GetAllDataAsync(string Payrollid,int _PageNumber = 1, int PageSize=20)
         {
             List<PayCycle> courseType = new List<PayCycle>();
@@ -45,6 +61,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="PayrollId">Parametro PayrollId.</param>
+        /// <param name="PayCycleQty">Parametro PayCycleQty.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI<List<PayCycle>>> PostDataAsync(string PayrollId, int PayCycleQty)
         {
             Response<List<PayCycle>> DataApi = null;
@@ -78,6 +100,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="_PayrollId">Parametro _PayrollId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj, string _PayrollId)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -101,6 +129,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //marcar para impuesto
+        /// <summary>
+        /// Ejecuta MaxForTaxAsync de forma asincrona.
+        /// </summary>
+        /// <param name="model">Parametro model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> MaxForTaxAsync(PayCycleIsForTaxRequest model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -123,6 +156,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //marcar para TSS
+        /// <summary>
+        /// Ejecuta MaxForTssAsync de forma asincrona.
+        /// </summary>
+        /// <param name="model">Parametro model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> MaxForTssAsync(PayCycleIsForTssRequest model)
         {
             ResponseUI responseUI = new ResponseUI();

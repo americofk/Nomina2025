@@ -1,4 +1,13 @@
-﻿$(document).ready(function () {
+/**
+ * @file ProjCategoryDisabled.ts
+ * @description Módulo de gestión de categorías de proyectos inactivas. Permite eliminar,
+ *              habilitar y listar categorías que han sido deshabilitadas.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CategoriasProyectosInactivas
+ */
+
+$(document).ready(function () {
     //tabla customers
     $(".Buscador-ProjectCategory").keyup(function () {
         var _this = this;

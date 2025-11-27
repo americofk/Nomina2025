@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models;
+/// <summary>
+/// Servicio para la gestión de monedas.
+/// Administra el catálogo de monedas utilizadas en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
 using System;
@@ -9,6 +15,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessCurrencies.
+    /// </summary>
     public class ProcessCurrencies: ServiceBase
     {
         public ProcessCurrencies(string _token)
@@ -17,6 +26,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //lista de direcciones de un empleado
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<Currency>> GetAllDataAsync(int _PageNumber = 1)
         {
             List<Currency> _model = new List<Currency>();

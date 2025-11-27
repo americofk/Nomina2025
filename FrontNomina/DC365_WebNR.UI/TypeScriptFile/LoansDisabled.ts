@@ -1,6 +1,14 @@
-﻿
+/**
+ * @file LoansDisabled.ts
+ * @description Módulo de gestión de préstamos inactivos. Permite eliminar,
+ *              habilitar y listar préstamos que han sido deshabilitados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module PrestamosInactivos
+ */
+
 esuchadores: {
-    
+
     //Eliminar
     $("#DeleteLoan-disable").submit(function (e) {
         if ($(this).valid()) {

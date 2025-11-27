@@ -1,4 +1,12 @@
-﻿
+/**
+ * @file Instructor.ts
+ * @description Módulo de gestión de instructores de cursos. Permite crear, editar,
+ *              eliminar y listar instructores para capacitaciones.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Instructores
+ */
+
 var option: number;
 //cerrar nuevo instructor
 $('.OpCloseform').on('click', function () {

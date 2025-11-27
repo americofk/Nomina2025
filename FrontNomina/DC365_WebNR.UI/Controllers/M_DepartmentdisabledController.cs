@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para la gestión de departamentos inactivos.
+/// Permite visualizar, reactivar y eliminar departamentos inhabilitados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,12 +17,19 @@ using Newtonsoft.Json;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_Departmentdisabled.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("departamentosinactivos")]
     public class M_DepartmentdisabledController : ControllerBase
     {
         ProcessDepartamentDisabled processDepartament;
+        /// <summary>
+        /// Ejecuta Departmentdisabled de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet()]
         public async Task<IActionResult> Departmentdisabled()
         {
@@ -28,6 +41,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return View();
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ListIdDepartmentDisabled">Parametro ListIdDepartmentDisabled.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
@@ -41,6 +64,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="DepartmentId">Parametro DepartmentId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("actualizarestatus")]
         public async Task<JsonResult> updateStatus(List<string> DepartmentId)
@@ -56,6 +89,20 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta DepartamentDisabled_Filter_OrMore_Data de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> DepartamentDisabled_Filter_OrMore_Data(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)

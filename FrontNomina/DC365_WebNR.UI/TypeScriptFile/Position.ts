@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file Position.ts
+ * @description Módulo de gestión de puestos. Permite crear, editar,
+ *              eliminar y listar puestos de trabajo en la organización.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Puestos
+ */
+
+variables: {
     var option: number;
 }
 const fn = {

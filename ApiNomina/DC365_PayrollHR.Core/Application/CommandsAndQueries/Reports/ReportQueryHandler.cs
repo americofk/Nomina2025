@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Interface;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de Report.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Reports;
 using DC365_PayrollHR.Core.Domain.Entities;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 {
+    /// <summary>
+    /// Manejador para operaciones de IReportQuery.
+    /// </summary>
     public interface IReportQueryHandler
     {
         public Task<PagedResponse<IEnumerable<ReportPayrollPaymentResponse>>> PayrollPaymentReport(string payrollProcessId, string employeeid, string departmentid);
@@ -26,6 +35,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         public Task<Response<DGT12Response>> DGT12Report(int year, int month);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de ReportQuery.
+
+    /// </summary>
+
     public class ReportQueryHandler : IReportQueryHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -40,6 +55,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
 
         //Reporte de recibo de pago de nómina
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <param name="payrollProcessId">Parametro payrollProcessId.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="departmentid">Parametro departmentid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<PagedResponse<IEnumerable<ReportPayrollPaymentResponse>>> PayrollPaymentReport(string payrollProcessId, string employeeid, string departmentid)
         {
             List<ReportPayrollPaymentResponse> report = new List<ReportPayrollPaymentResponse>();
@@ -163,6 +185,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
 
         //Reporte de resumen de pago de nómina
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <param name="payrollProcessId">Parametro payrollProcessId.</param>
+        /// <param name="departmentid">Parametro departmentid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<PagedResponse<IEnumerable<ReportResumePayrollResponse>>> ResumePaymentReport(string payrollProcessId, string departmentid)
         {
             Department department;
@@ -294,6 +322,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
 
         //Reporte de procesos de nómina
+        /// <summary>
+        /// Ejecuta PayrollProcessReport de forma asincrona.
+        /// </summary>
+        /// <param name="payrollProcessId">Parametro payrollProcessId.</param>
+        /// <param name="departmentId">Parametro departmentId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<ReportPayrollProcessResponse>> PayrollProcessReport(string payrollProcessId, string departmentId)
         {
             ReportPayrollProcessResponse report = null;
@@ -462,6 +496,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
 
         //Reporte global de empleados
+        /// <summary>
+        /// Ejecuta EmployeeReport de forma asincrona.
+        /// </summary>
+        /// <param name="departmentId">Parametro departmentId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<ReportEmployeeResponse>> EmployeeReport(string departmentId)
         {
             ReportEmployeeResponse report = null;
@@ -549,6 +588,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de dgt4
+        /// <summary>
+        /// Ejecuta DGT4Report de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<DGT4Response>> DGT4Report(int year, int month)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();
@@ -639,6 +684,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de dgt2
+        /// <summary>
+        /// Ejecuta DGT2Report de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<DGT2Response>> DGT2Report(int year, int month)
         {
             Func<Employee, string> EmployeeName = (e) =>
@@ -705,6 +756,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de dgt3
+        /// <summary>
+        /// Ejecuta DGT3Report de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<DGT3Response>> DGT3Report(int year, int month)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();
@@ -786,6 +843,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de dgt5
+        /// <summary>
+        /// Ejecuta DGT5Report de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<DGT5Response>> DGT5Report(int year, int month)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();
@@ -850,6 +913,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de dgt9
+        /// <summary>
+        /// Ejecuta DGT9Report de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<DGT9Response>> DGT9Report(int year, int month)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();
@@ -914,6 +983,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte de dgt12
+        /// <summary>
+        /// Ejecuta DGT12Report de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<DGT12Response>> DGT12Report(int year, int month)
         {
             Func<DocumentType, string> TypeDocument = (e) =>
@@ -985,6 +1060,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         }
 
         //Reporte tss
+        /// <summary>
+        /// Ejecuta TSSReport de forma asincrona.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <param name="payrollid">Parametro payrollid.</param>
+        /// <param name="typetss">Parametro typetss.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<ReportTSSFileResponse>> TSSReport(int year, int month, string payrollid, string typetss)
         {
             var company = await _dbContext.Companies.Where(x => x.CompanyId == _CurrentUserInformation.Company).FirstOrDefaultAsync();

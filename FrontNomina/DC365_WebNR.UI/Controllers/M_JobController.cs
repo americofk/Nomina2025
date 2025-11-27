@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+/// <summary>
+/// Controlador para la gestión de cargos activos.
+/// Permite crear, editar, eliminar e inhabilitar cargos de la organización.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DC365_WebNR.CORE.Aplication.Services;
@@ -10,12 +16,23 @@ using Newtonsoft.Json;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_Job.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("cargosactivos")]
     public class M_JobController : ControllerBase
     {
         ProcessJob processJob;
+
+        /// <summary>
+
+        /// Ejecuta Jobs de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> Jobs()
@@ -30,6 +47,20 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta Job_Filter_OrMore_Data de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Job_Filter_OrMore_Data(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
@@ -41,6 +72,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("Job_Filter_OrMore_Data", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="Obj">Parametro Obj.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -72,6 +115,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="IdJobs">Parametro IdJobs.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> delete(List<string> IdJobs)
@@ -84,6 +137,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="JobIdpos">Parametro JobIdpos.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("actualizarestatus")]
         [AutoValidateAntiforgeryToken]
@@ -100,6 +163,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{id}")]
         public async Task<JsonResult> GetId(string Id)

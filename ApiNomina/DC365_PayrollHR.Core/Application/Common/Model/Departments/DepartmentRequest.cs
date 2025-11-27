@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para Department.
+/// Define los parámetros necesarios para crear o modificar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using System;
 using System.Collections.Generic;
@@ -6,17 +12,48 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.Departments
 {
+    /// <summary>
+    /// Modelo de solicitud para Department.
+    /// </summary>
     public class DepartmentRequest: GenericValidation<DepartmentRequest>, IValidatableObject
     {
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Valor numerico para QtyWorkers.
+        /// </summary>
         public int QtyWorkers { get; set; }
 
         //Foreign key for employee
         //public string ResponsibleId { get; set; }
 
+        /// <summary>
+
+        /// Fecha.
+
+        /// </summary>
+
         public DateTime StartDate { get; set; }
+        /// <summary>
+        /// Fecha.
+        /// </summary>
         public DateTime EndDate { get; set; }
+        /// <summary>
+        /// Descripcion.
+        /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

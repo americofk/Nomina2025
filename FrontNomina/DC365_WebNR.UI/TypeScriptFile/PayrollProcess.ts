@@ -1,5 +1,11 @@
-﻿
-
+/**
+ * @file PayrollProcess.ts
+ * @description Módulo de procesamiento de nómina. Permite ejecutar, consultar
+ *              y administrar los procesos de cálculo de nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module ProcesoNomina
+ */
 
 variables: {
     var paycycles;

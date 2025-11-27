@@ -1,4 +1,11 @@
-﻿
+/**
+ * @file ProjectDisabled.ts
+ * @description Módulo de gestión de proyectos inactivos. Permite eliminar,
+ *              habilitar y listar proyectos que han sido deshabilitados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module ProyectosInactivos
+ */
 
 //eliminar
 $("#delete-Project").submit(function (e) {

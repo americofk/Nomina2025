@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de Employee.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
@@ -32,6 +38,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
         public Task<Response<object>> DismissEmployee(EmployeeRequestDismiss model);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de EmployeeCommand.
+
+    /// </summary>
+
     public class EmployeeCommandHandler : IEmployeeCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -46,6 +58,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
             _queryHandler = queryHandler;
             _currentUser = currentUser;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(EmployeeRequest model)
         {
@@ -86,6 +108,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<bool>> Delete(List<string> ids)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -121,6 +158,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> Update(string id, EmployeeRequest model)
         {
             var response = await _dbContext.Employees.Where(x => x.EmployeeId == id).FirstOrDefaultAsync();
@@ -141,6 +196,27 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="status">Parametro status.</param>
+
+
+        /// <param name="isForDGT">Parametro isForDGT.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> UpdateStatus(string id, bool status, bool isForDGT)
@@ -178,6 +254,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
 
             //return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
+
+
+        /// <summary>
+
+
+        /// Carga un archivo.
+
+
+        /// </summary>
+
+
+        /// <param name="request">Parametro request.</param>
+
+
+        /// <param name="employee">Parametro employee.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> UploadImage(EmployeeImageRequest request, string employee)
@@ -240,6 +334,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
         }
 
 
+        /// <summary>
+
+
+        /// Descarga.
+
+
+        /// </summary>
+
+
+        /// <param name="employee">Parametro employee.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> DownloadImage(string employee)
         {
             var image = await _dbContext.EmployeeImages.Where(x => x.EmployeeId == employee).FirstOrDefaultAsync();
@@ -256,6 +365,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
 
 
         //Sección de contratar y despedir empleados
+
+        /// <summary>
+
+        /// Agrega un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> AddEmployeetoJob(EmployeePositionRequest model)
         {
@@ -299,6 +418,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
 
             return new Response<object>(true) { Message = "Empleado contratado con éxito." };
         }
+
+        /// <summary>
+
+        /// Da de baja al empleado.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> DismissEmployee(EmployeeRequestDismiss model)
         {

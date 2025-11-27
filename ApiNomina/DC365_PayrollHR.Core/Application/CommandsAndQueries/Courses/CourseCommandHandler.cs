@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de Course.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Course;
@@ -20,6 +26,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
 
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de CourseCommand.
+
+    /// </summary>
+
     public class CourseCommandHandler : ICourseCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -28,6 +40,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(CourseRequest model)
         {
@@ -82,6 +104,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<bool>> Delete(List<string> ids)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -116,6 +153,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
                 };
             }
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Update(string id, CourseRequest model)

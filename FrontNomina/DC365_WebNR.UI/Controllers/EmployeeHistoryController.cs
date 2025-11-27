@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para el historial de empleados.
+/// Permite consultar, actualizar y eliminar registros históricos de empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -13,12 +19,27 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeHistory.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("historialempleado")]
     public class EmployeeHistoryController : ControllerBase
     {
         ProcessEmployeeHistory process;
+
+        /// <summary>
+
+        /// Ejecuta EmployeeHistory de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="name">Parametro name.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<IActionResult> EmployeeHistory(string employeeid, string name)
@@ -33,6 +54,18 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid">Parametro listid.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(List<EmployeeHistoryDeleteRequest> listid, string employeeid)
@@ -46,12 +79,32 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion FormUpdateEmployeeHistory.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormUpdateEmployeeHistory")]
         public ActionResult FormUpdateEmployeeHistory()
         {
             GetdataUser();
             return PartialView("ModalUpdateEmployeeHistory");
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="request">Parametro request.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("UpdateEmployeeHistory")]
         [ValidateAntiForgeryToken]
@@ -64,6 +117,16 @@ namespace DC365_WebNR.UI.Controllers
             responseUI = await process.PutDataAsync(employeeid, request);
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta MarkForDgt de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("marcarparadgt")]
         [ValidateAntiForgeryToken]

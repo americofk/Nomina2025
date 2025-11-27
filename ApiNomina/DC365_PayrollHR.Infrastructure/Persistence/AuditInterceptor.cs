@@ -1,3 +1,9 @@
+/// <summary>
+/// Interceptor para AuditInterceptor.
+/// Intercepta operaciones para agregar funcionalidad transversal.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Domain.Common;
 using DC365_PayrollHR.Core.Domain.Entities;
@@ -34,6 +40,18 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
             _currentUserInformation = currentUserInformation;
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion SavingChanges.
+
+        /// </summary>
+
+        /// <param name="eventData">Parametro eventData.</param>
+
+        /// <param name="result">Parametro result.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public override InterceptionResult<int> SavingChanges(
             DbContextEventData eventData,
             InterceptionResult<int> result)
@@ -45,6 +63,20 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
 
             return base.SavingChanges(eventData, result);
         }
+
+        /// <summary>
+
+        /// Ejecuta la operacion SavingChangesAsync.
+
+        /// </summary>
+
+        /// <param name="eventData">Parametro eventData.</param>
+
+        /// <param name="result">Parametro result.</param>
+
+        /// <param name="cancellationToken">Parametro cancellationToken.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
@@ -59,6 +91,18 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
             return await base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="eventData">Parametro eventData.</param>
+
+        /// <param name="result">Parametro result.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
         {
             if (eventData.Context != null && _pendingAudits.Any())
@@ -68,6 +112,20 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
 
             return base.SavedChanges(eventData, result);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="eventData">Parametro eventData.</param>
+
+        /// <param name="result">Parametro result.</param>
+
+        /// <param name="cancellationToken">Parametro cancellationToken.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public override async ValueTask<int> SavedChangesAsync(
             SaveChangesCompletedEventData eventData,
@@ -265,11 +323,29 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
         /// </summary>
         private class AuditEntry
         {
+            /// <summary>
+            /// Obtiene o establece EntityEntry.
+            /// </summary>
             public EntityEntry EntityEntry { get; set; }
+            /// <summary>
+            /// Nombre.
+            /// </summary>
             public string EntityName { get; set; }
+            /// <summary>
+            /// Valor de texto para ChangedBy.
+            /// </summary>
             public string ChangedBy { get; set; }
+            /// <summary>
+            /// Fecha de ChangedAt.
+            /// </summary>
             public DateTime ChangedAt { get; set; }
+            /// <summary>
+            /// Identificador.
+            /// </summary>
             public string DataAreaId { get; set; }
+            /// <summary>
+            /// Coleccion de Changes.
+            /// </summary>
             public List<PropertyChange> Changes { get; set; } = new List<PropertyChange>();
         }
 
@@ -278,8 +354,17 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
         /// </summary>
         private class PropertyChange
         {
+            /// <summary>
+            /// Nombre.
+            /// </summary>
             public string PropertyName { get; set; }
+            /// <summary>
+            /// Valor de texto para OldValue.
+            /// </summary>
             public string OldValue { get; set; }
+            /// <summary>
+            /// Valor de texto para NewValue.
+            /// </summary>
             public string NewValue { get; set; }
         }
     }

@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para Employee.
+/// Define los parámetros necesarios para crear o modificar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using DC365_PayrollHR.Core.Domain.Enums;
 using System;
@@ -7,48 +13,177 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.Employees
 {
+    /// <summary>
+    /// Modelo de solicitud para Employee.
+    /// </summary>
     public class EmployeeRequest : GenericValidation<EmployeeRequest>, IValidatableObject
     {
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         public string Name { get; set; }
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         public string LastName { get; set; }
+        /// <summary>
+        /// Valor de texto para PersonalTreatment.
+        /// </summary>
         public string PersonalTreatment { get; set; }
+        /// <summary>
+        /// Fecha.
+        /// </summary>
         public DateTime BirthDate { get; set; }
+        /// <summary>
+        /// Obtiene o establece Gender.
+        /// </summary>
         public Gender Gender { get; set; }
+        /// <summary>
+        /// Valor numerico para Age.
+        /// </summary>
         public int Age { get; set; }
+        /// <summary>
+        /// Valor numerico para DependentsNumbers.
+        /// </summary>
         public int DependentsNumbers { get; set; }
+        /// <summary>
+        /// Estado.
+        /// </summary>
         public MaritalStatus MaritalStatus { get; set; }
+        /// <summary>
+        /// Valor de texto para NSS.
+        /// </summary>
         public string NSS { get; set; }
+        /// <summary>
+        /// Valor de texto para ARS.
+        /// </summary>
         public string ARS { get; set; }
+        /// <summary>
+        /// Valor de texto para AFP.
+        /// </summary>
         public string AFP { get; set; }
+        /// <summary>
+        /// Fecha.
+        /// </summary>
         public DateTime AdmissionDate { get; set; }
+        /// <summary>
+        /// Pais.
+        /// </summary>
         public string Country { get; set; }
+        /// <summary>
+        /// Tipo.
+        /// </summary>
         public EmployeeType EmployeeType { get; set; }
 
+        /// <summary>
+
+        /// Indica el estado de HomeOffice.
+
+        /// </summary>
+
         public bool HomeOffice { get; set; }
+        /// <summary>
+        /// Indica el estado de OwnCar.
+        /// </summary>
         public bool OwnCar { get; set; }
+        /// <summary>
+        /// Indica si tiene.
+        /// </summary>
         public bool HasDisability { get; set; }
 
+        /// <summary>
+
+        /// Obtiene o establece WorkFrom.
+
+        /// </summary>
+
         public TimeSpan WorkFrom { get; set; }
+        /// <summary>
+        /// Obtiene o establece WorkTo.
+        /// </summary>
         public TimeSpan WorkTo { get; set; }
+        /// <summary>
+        /// Obtiene o establece BreakWorkFrom.
+        /// </summary>
         public TimeSpan BreakWorkFrom { get; set; }
+        /// <summary>
+        /// Obtiene o establece BreakWorkTo.
+        /// </summary>
         public TimeSpan BreakWorkTo { get; set; }
 
         //public DateTime StartWorkDate { get; set; }
         //public DateTime EndWorkDate { get; set; }
 
+        /// <summary>
+
+        /// Obtiene o establece PayMethod.
+
+        /// </summary>
+
         public PayMethod PayMethod { get; set; }
 
+        /// <summary>
+
+        /// Identificador.
+
+        /// </summary>
+
         public string OccupationId { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string EducationLevelId { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string DisabilityTypeId { get; set; }
 
+        /// <summary>
+
+        /// Valor de texto para Nationality.
+
+        /// </summary>
+
         public string Nationality { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string LocationId { get; set; }
+
+        /// <summary>
+
+        /// Indica el estado de ApplyforOvertime.
+
+        /// </summary>
 
         public bool ApplyforOvertime { get; set; }
 
 
+        /// <summary>
+
+
+        /// Indica si.
+
+
+        /// </summary>
+
+
         public bool IsFixedWorkCalendar { get; set; }
+
+        
+        /// <summary>
+
+        
+        /// Valida los datos.
+
+        
+        /// </summary>
+
+        
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        
+        /// <returns>Resultado de la operacion.</returns>
 
         
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

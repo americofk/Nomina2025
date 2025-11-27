@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file TaxDetail.ts
+ * @description Módulo de gestión de detalles de impuestos. Permite crear, editar
+ *              y administrar las configuraciones específicas de cada impuesto.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module DetalleImpuestos
+ */
+
+variables: {
 
     var option: number;
 }

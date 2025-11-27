@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de empleados.
+/// Contiene la lógica de negocio para operaciones CRUD y gestión de empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
@@ -15,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEmployee.
+    /// </summary>
     public class ProcessEmployee : ServiceBase
     {
 
@@ -24,6 +33,15 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //todos los empleados
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="type">Parametro type.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <param name="PageSize">Parametro PageSize.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<Employee>> GetAllDataAsync(string type = "", string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=20)
         {
             List<Employee> _model = new List<Employee>();
@@ -64,6 +82,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(Employee _model)
         {
             Response<Employee> DataApi = null;
@@ -91,6 +114,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string id, Employee _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -137,6 +166,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -181,6 +215,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //seleccionar un empleado
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="Id">Parametro Id.</param>
+        /// <param name="type">Parametro type.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Employee> GetIdDataAsync(string Id, string type)
         {
             Employee _model = new Employee();
@@ -215,6 +255,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //cargar foto al empleado
+        /// <summary>
+        /// Carga un archivo.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Uploadimage(IFormFile file, string id)
         {
             //Response<Department> DataApi = null;
@@ -279,6 +325,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         // descargar foto de empleado
+        /// <summary>
+        /// Descarga.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Downloadimage(string id)
         {
             //Response<Department> DataApi = null;
@@ -336,6 +387,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //habilitar o deshabilitar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="option">Parametro option.</param>
+        /// <param name="_isforDgt">Parametro _isforDgt.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatus(string id, int option,bool _isforDgt)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -380,6 +438,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Contratar empleado
+        /// <summary>
+        /// Contrata al empleado.
+        /// </summary>
+        /// <param name="hireEmployee">Parametro hireEmployee.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> HireEmployee(HireEmployee hireEmployee)
         {
 
@@ -404,6 +467,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Desvincular empleado
+        /// <summary>
+        /// Ejecuta DissmisEmployee de forma asincrona.
+        /// </summary>
+        /// <param name="_dissmisemployee">Parametro _dissmisemployee.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DissmisEmployee(HireEmployee _dissmisemployee)
         {
 

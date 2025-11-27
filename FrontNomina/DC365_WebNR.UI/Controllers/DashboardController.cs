@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para el panel principal (Dashboard) de la aplicación.
+/// Muestra información general, gráficos y permite configurar opciones del usuario.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,11 +24,18 @@ using Newtonsoft.Json;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de Dashboard.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     public class DashboardController : ControllerBase
     {
         ProcessUserOptions processUserOptions;
+        /// <summary>
+        /// Ejecuta Principal de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IActionResult> Principal()
         {
             GetdataUser();
@@ -32,6 +45,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Payroll = await selectListsDropDownList(SelectListOptions.Payroll);
             return View();
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="FormatCodeIdOptions">Parametro FormatCodeIdOptions.</param>
+
+        /// <param name="CompanyDefaultIdoptions">Parametro CompanyDefaultIdoptions.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,6 +80,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="companyidChange">Parametro companyidChange.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> SaveChangeCompanyForm(string companyidChange)
@@ -71,6 +106,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Carga un archivo.
+
+        /// </summary>
+
+        /// <param name="file">Parametro file.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> UploadImage(IFormFile file)
@@ -85,6 +130,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(result));
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta la operacion Help.
+
+
+        /// </summary>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet]
@@ -110,6 +167,14 @@ namespace DC365_WebNR.UI.Controllers
         //    return File(responseUI, "text/plain", "archivo.txt");
         //}
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet]
         public async Task<JsonResult> GetCardInformation()
         {
@@ -120,6 +185,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return Json(responseUI);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<JsonResult> GetGraphicsInformation([FromQuery] int year, string payrollid)

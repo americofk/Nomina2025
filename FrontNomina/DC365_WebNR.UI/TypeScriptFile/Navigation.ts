@@ -1,4 +1,13 @@
-﻿//------ click en el usuario al final de la cabecera ---------
+/**
+ * @file Navigation.ts
+ * @description Módulo de navegación del sistema. Maneja el menú lateral,
+ *              opciones de usuario y navegación entre módulos.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Navegacion
+ */
+
+//------ click en el usuario al final de la cabecera ---------
 $('.div2usuario').on('click', function () {
     /* $('.datosusuario').toggleClass('Abrir');*/
     var sidebar = document.getElementsByClassName("sidebar-options");

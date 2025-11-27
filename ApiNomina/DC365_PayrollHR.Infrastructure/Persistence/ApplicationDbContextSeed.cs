@@ -1,3 +1,9 @@
+/// <summary>
+/// Contexto de base de datos para ApplicationDbContextSeed.
+/// Gestiona la conexión y operaciones con la base de datos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Domain.Consts;
 using DC365_PayrollHR.Core.Domain.Entities;
@@ -8,8 +14,15 @@ using System.Text;
 
 namespace DC365_PayrollHR.Infrastructure.Persistence
 {
+    /// <summary>
+    /// Clase para gestion de ApplicationDbContextSeed.
+    /// </summary>
     public static class ApplicationDbContextSeed
     {
+        /// <summary>
+        /// Ejecuta la operacion Seed.
+        /// </summary>
+        /// <param name="modelBuilder">Parametro modelBuilder.</param>
         public static void Seed(ModelBuilder modelBuilder)
         {
             //Insertar data en la tabla de menu

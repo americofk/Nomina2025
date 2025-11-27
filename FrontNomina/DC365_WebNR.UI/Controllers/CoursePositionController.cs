@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de puestos requeridos por cursos.
+/// Permite asignar, editar, eliminar puestos asociados a cursos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -10,12 +16,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de CoursePosition.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("cursospuestos")]
     public class CoursePositionController : ControllerBase
     {
         ProcessCoursePosition process;
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="courseid">Parametro courseid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{courseid}")]
         public async Task<ActionResult> Get(string courseid)
         {
@@ -26,6 +40,14 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("ListCoursePosition", list);
         }
 
+        /// <summary>
+
+        /// Ejecuta NewCoursePosition de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormCoursePosition")]
         public async Task<ActionResult> NewCoursePosition()
         {
@@ -35,6 +57,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewCoursePosition", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -66,6 +100,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="courseid">Parametro courseid.</param>
+
+        /// <param name="positionId">Parametro positionId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{courseid}/{positionId}")]
         public async Task<ActionResult> GetId(string courseid, string positionId)
         {
@@ -78,6 +124,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewCoursePosition", _model);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid_CoursePosition">Parametro listid_CoursePosition.</param>
+
+        /// <param name="courseid">Parametro courseid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]

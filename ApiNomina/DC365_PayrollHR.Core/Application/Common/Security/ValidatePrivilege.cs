@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Interface;
+using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries
 {
+    /// <summary>
+    /// Clase para gestion de ValidatePrivilege.
+    /// </summary>
     public class ValidatePrivilege : IValidatePrivilege
     {
         private readonly IApplicationDbContext _dbContext;
@@ -18,6 +21,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="Alias">Parametro Alias.</param>
+
+        /// <param name="MenuId">Parametro MenuId.</param>
+
+        /// <param name="View">Parametro View.</param>
+
+        /// <param name="Delete">Parametro Delete.</param>
+
+        /// <param name="Edit">Parametro Edit.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<bool> ValidateAction(string Alias, string MenuId, bool View, bool Delete, bool Edit)
         {

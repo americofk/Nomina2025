@@ -1,4 +1,13 @@
-﻿//guardar información
+/**
+ * @file GeneralConfig.ts
+ * @description Módulo de configuración general del sistema. Permite administrar
+ *              parámetros globales y opciones de configuración de la aplicación.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module ConfiguracionGeneral
+ */
+
+//guardar información
 $("#SaveGeneralConfig").submit(function (e) {
     if ($(this).valid()) {
         e.preventDefault();

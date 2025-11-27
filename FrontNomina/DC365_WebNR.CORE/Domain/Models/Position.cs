@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Modelo de datos para representar puestos o posiciones laborales.
+/// Define las características y configuración de los puestos dentro de la organización.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -28,6 +34,12 @@ namespace DC365_WebNR.CORE.Domain.Models
 
         public string PositionName { get; set; }
 
+        /// <summary>
+
+        /// Indica si.
+
+        /// </summary>
+
         public bool IsVacant { get; set; } = true;
 
         /// <summary>
@@ -51,6 +63,12 @@ namespace DC365_WebNR.CORE.Domain.Models
         //Foreign key for job
         public string NotifyPositionId { get; set; }
 
+        /// <summary>
+
+        /// Estado.
+
+        /// </summary>
+
         public bool PositionStatus { get; set; } = true;
         /// <summary>
         /// Required
@@ -70,6 +88,16 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// 
         [CustomFilter("Descripción")]
         public string Description { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

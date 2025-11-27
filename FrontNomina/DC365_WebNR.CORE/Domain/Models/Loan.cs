@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Attributes;
+/// <summary>
+/// Modelo de datos para representar tipos de préstamos.
+/// Define las categorías y configuraciones de préstamos disponibles en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Attributes;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
@@ -10,7 +16,7 @@ namespace DC365_WebNR.CORE.Domain.Models
 {
     public class Loan: IValidatableObject
     {
-        [CustomFilter("Id Préstamo")]
+        [CustomFilter("Id Pr�stamo")]
         public string LoanId { get; set; }
 
         [Required(ErrorMessage = "Nombre" + ErrorMsg.Emptym)]

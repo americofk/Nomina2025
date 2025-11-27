@@ -9,8 +9,15 @@ using Microsoft.Extensions.Logging;
 
 namespace DC365_WebNR.UI
 {
+    /// <summary>
+    /// Clase para gestion de Program.
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Ejecuta la operacion Main.
+        /// </summary>
+        /// <param name="args">Parametro args.</param>
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

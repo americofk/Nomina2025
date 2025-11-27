@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -13,8 +13,16 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Services
 {
+    /// <summary>
+    /// Clase para gestion de APIKeyAuthentication.
+    /// </summary>
     public static class APIKeyAuthentication
     {
+        /// <summary>
+        /// Ejecuta la operacion UseAPIKeyAuthentication.
+        /// </summary>
+        /// <param name="app">Parametro app.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static IApplicationBuilder UseAPIKeyAuthentication(this IApplicationBuilder app)
         {
             app.UseMiddleware<APIKeyAuthenticationMiddleware>();
@@ -22,6 +30,12 @@ namespace DC365_PayrollHR.WebUI.Services
         }
 
     }
+
+    /// <summary>
+
+    /// Middleware para APIKeyAuthentication.
+
+    /// </summary>
 
     public class APIKeyAuthenticationMiddleware
     {
@@ -33,6 +47,14 @@ namespace DC365_PayrollHR.WebUI.Services
             _next = next;
             _Configuration = configuration;
         }
+
+        /// <summary>
+
+        /// Ejecuta la operacion InvokeAsync.
+
+        /// </summary>
+
+        /// <param name="context">Parametro context.</param>
 
         public async Task InvokeAsync(HttpContext context)
         {

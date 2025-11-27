@@ -1,4 +1,13 @@
-﻿//guardar información
+/**
+ * @file ReportConfig.ts
+ * @description Módulo de configuración de reportes. Permite personalizar
+ *              y configurar los parámetros de los reportes del sistema.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module ConfiguracionReportes
+ */
+
+//guardar información
 $("#FormReportConfig").submit(function (e) {
     if ($(this).valid()) {
         e.preventDefault();

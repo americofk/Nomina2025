@@ -1,4 +1,13 @@
-﻿import { format } from "jquery";
+/**
+ * @file CourseInstructors.ts
+ * @description Módulo de gestión de instructores en cursos. Permite asignar,
+ *              editar y eliminar instructores asignados a cada curso.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module InstructoresCursos
+ */
+
+import { format } from "jquery";
 
 variables: {
     interface IDomElement_Modal {

@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de LicenseValidation.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using Microsoft.Extensions.Options;
@@ -12,11 +18,20 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations
 {
+    /// <summary>
+    /// Manejador para operaciones de ILicenseValidationQuery.
+    /// </summary>
     public interface ILicenseValidationQueryHandler
     {
         public Task<Response<object>> ValidateLicense(string licensekey);
         public Task<Response<object>> ValidateNroControl(string licensekey, int currentControlNum);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de LicenseValidationQuery.
+
+    /// </summary>
 
     public class LicenseValidationQueryHandler : ILicenseValidationQueryHandler
     {
@@ -30,6 +45,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations
             _ConnectThirdServices = connectThirdServices;
             _configuration = configuration.Value;
         }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="licensekey">Parametro licensekey.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> ValidateLicense(string licensekey)
         {
@@ -60,6 +85,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.LicenseValidations
 
             return new Response<object>(true);
         }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="licensekey">Parametro licensekey.</param>
+
+        /// <param name="currentControlNum">Parametro currentControlNum.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> ValidateNroControl(string licensekey, int currentControlNum)
         {

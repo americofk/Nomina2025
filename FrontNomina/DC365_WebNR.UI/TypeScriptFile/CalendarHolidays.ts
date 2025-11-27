@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file CalendarHolidays.ts
+ * @description Módulo de gestión de calendario de días festivos. Permite crear, editar,
+ *              eliminar y administrar los días festivos del calendario laboral.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CalendarioFestivos
+ */
+
+variables: {
     var page = 1;
     var isBusy: boolean = false;
     var option: number;

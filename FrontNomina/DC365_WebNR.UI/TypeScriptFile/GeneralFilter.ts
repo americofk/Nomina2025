@@ -1,4 +1,17 @@
-﻿function optionFilterFunction(that) {
+/**
+ * @file GeneralFilter.ts
+ * @description Módulo de filtros generales. Proporciona funciones para filtrar
+ *              datos en las tablas según diferentes criterios y tipos de datos.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module FiltrosGenerales
+ */
+
+/**
+ * Configura el tipo de filtro según la opción seleccionada
+ * @param {HTMLElement} that - Elemento select con la opción de filtro
+ */
+function optionFilterFunction(that) {
     let typeFilter = $(that).val().toString().substring(0, 2);
 
     //Fecha

@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para eliminación de EmployeeExtraHour.
+/// Define los parámetros necesarios para eliminar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using System;
 using System.Collections.Generic;
@@ -6,10 +12,29 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.EmployeeExtraHours
 {
+    /// <summary>
+    /// Clase para gestion de EmployeeExtraHourRequestDelete.
+    /// </summary>
     public class EmployeeExtraHourRequestDelete : GenericValidation<EmployeeExtraHourRequestDelete>, IValidatableObject
     {
+        /// <summary>
+        /// Fecha de WorkedDay.
+        /// </summary>
         public DateTime WorkedDay { get; set; }
+        /// <summary>
+        /// Identificador.
+        /// </summary>
         public string EarningCodeId { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

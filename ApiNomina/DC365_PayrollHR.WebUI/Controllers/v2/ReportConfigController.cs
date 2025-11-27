@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports;
+/// <summary>
+/// Controlador API para gestión de ReportConfig.
+/// Endpoint base: api/v2/reportconfigs
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Reports;
@@ -17,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de ReportConfig.
+    /// </summary>
     [Route("api/v2.0/reportconfig")]
     [Authorize]
     [ApiController]
@@ -33,6 +43,14 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _CommandHandler = CommandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet]
         [AuthorizePrivilege(MenuId = MenuConst.ReportConfig, View = true)]
         public async Task<ActionResult<PagedResponse<ReportConfig>>> Get()
@@ -40,6 +58,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _QueryHandler.GetAll(null, null);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="_model">Parametro _model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost]
         [AuthorizePrivilege(MenuId = MenuConst.ReportConfig, Edit = true)]

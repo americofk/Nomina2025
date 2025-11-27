@@ -1,9 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DC365_WebNR.INFRASTRUCTURE.Services
 {
+    /// <summary>
+    /// Clase para gestion de UrlsServices.
+    /// </summary>
     public class UrlsServices
     {
         #region Url
@@ -11,6 +14,16 @@ namespace DC365_WebNR.INFRASTRUCTURE.Services
 
 
         #endregion
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="_type">Parametro _type.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public string GetUrl(string _type)
         {

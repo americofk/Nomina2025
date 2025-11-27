@@ -1,4 +1,13 @@
-﻿$(document).ready(function () {
+/**
+ * @file ProjCategory.ts
+ * @description Módulo de gestión de categorías de proyectos. Permite crear, editar,
+ *              eliminar y administrar las categorías para clasificar proyectos.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CategoriasProyectos
+ */
+
+$(document).ready(function () {
     //tabla customers
     $(".Buscador-ProjectCategory").keyup(function () {
         var _this = this;

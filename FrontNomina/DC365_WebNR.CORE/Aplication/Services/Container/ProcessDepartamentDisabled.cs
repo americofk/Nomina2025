@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de departamentos inactivos.
+/// Administra departamentos que han sido deshabilitados en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services.Container
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessDepartamentDisabled.
+    /// </summary>
     public class ProcessDepartamentDisabled: ServiceBase
     {
         List<Department> departments;
@@ -20,6 +29,12 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string id, Department _model)
         {
             //Response<Department> DataApi = null;
@@ -44,6 +59,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             //Response<Department> DataApi = null;
@@ -67,6 +87,13 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<Department>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             departments = new List<Department>();
@@ -95,6 +122,11 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         }
 
         //Habilitar departamento
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatusDepartment(string id)
         {
             //Response<Department> DataApi = null;

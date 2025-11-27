@@ -1,3 +1,9 @@
+/// <summary>
+/// Configuración de Entity Framework para AuditLog.
+/// Define el mapeo de la entidad a la base de datos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 using DC365_PayrollHR.Core.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -9,6 +15,10 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
     /// </summary>
     public class AuditLogConfiguration : IEntityTypeConfiguration<AuditLog>
     {
+        /// <summary>
+        /// Configura.
+        /// </summary>
+        /// <param name="builder">Parametro builder.</param>
         public void Configure(EntityTypeBuilder<AuditLog> builder)
         {
             // Primary key configuration using global SEQUENCE

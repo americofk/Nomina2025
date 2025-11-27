@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de empleados en cursos.
+/// Administra la asignación y seguimiento de empleados inscritos en cursos de capacitación.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessCourseEmployees.
+    /// </summary>
     public class ProcessCourseEmployees: ServiceBase
     {
         private const string Endpoint = "courseemployees";
@@ -20,6 +29,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="courseid">Parametro courseid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<CourseEmployees>> GetAllDataAsync(string courseid, int _PageNumber = 1)
         {
             List<CourseEmployees> _model = new List<CourseEmployees>();
@@ -45,6 +60,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(CourseEmployees _model)
         {
             Response<CourseEmployees> DataApi = null;
@@ -70,6 +90,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="CourseId">Parametro CourseId.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string CourseId, CourseEmployees _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -117,6 +143,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="courseid">Parametro courseid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj, string courseid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -161,6 +193,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //buscar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="courseid">Parametro courseid.</param>
+        /// <param name="internalId">Parametro internalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<CourseEmployees> GetDataAsync(string courseid, string internalId)
         {
             CourseEmployees _model = new CourseEmployees();

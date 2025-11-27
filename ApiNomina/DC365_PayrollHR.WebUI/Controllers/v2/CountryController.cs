@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Controlador API para gestión de Country.
+/// Endpoint base: api/v2/countries
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Domain.Entities;
 using DC365_PayrollHR.Core.Domain.Enums;
@@ -14,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de Country.
+    /// </summary>
     [Route("api/v2.0/countries")]
     [ApiController]
     [Authorize]
@@ -27,6 +37,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         {
             _QueryHandler = queryHandler;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet]
         public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter)

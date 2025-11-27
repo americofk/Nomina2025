@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Domain.Enums;
+/// <summary>
+/// Controlador API para gestión de LicenseValidation.
+/// Endpoint base: api/v2/licensevalidation
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Domain.Enums;
 using DC365_PayrollHR.WebUI.Attributes;
 using DC365_PayrollHR.WebUI.Filters;
 using Microsoft.AspNetCore.Authorization;
@@ -6,6 +13,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de LicenseValidation.
+    /// </summary>
     [Route("api/v2.0/licensevalidations")]
     [ApiController]
     [Authorize]

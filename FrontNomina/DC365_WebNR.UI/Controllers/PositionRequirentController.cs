@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para la gestión de requisitos de puestos.
+/// Permite crear, editar, eliminar y consultar requisitos para puestos de trabajo.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,12 +21,20 @@ using Newtonsoft.Json;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de PositionRequirent.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("requisitospuestos")]
     public class PositionRequirentController : ControllerBase
     {
         ProcessPositionRequirement process;
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="positionid">Parametro positionid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{positionid}")]
         public async Task<ActionResult> Get(string positionid)
         {
@@ -30,6 +44,18 @@ namespace DC365_WebNR.UI.Controllers
             var PositionRequirement = await process.GetAllDataAsync(positionid);
             return PartialView("PositionRequirent", PositionRequirement);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="PositionRequirement">Parametro PositionRequirement.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         public async Task<JsonResult> Save(PositionRequirement PositionRequirement, string operacion)
@@ -60,6 +86,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ListPositionRequirement">Parametro ListPositionRequirement.</param>
+
+        /// <param name="positionid">Parametro positionid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         public async Task<JsonResult> delete(List<string> ListPositionRequirement, string positionid)
         {
@@ -72,12 +110,32 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion NewRequiremen.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("formularioNewRequirement")]
         public ActionResult NewRequiremen()
         {
             PositionRequirement Requirement = new PositionRequirement();
             return PartialView("NewPositionRequirent", Requirement);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="positionid">Parametro positionid.</param>
+
+        /// <param name="internalId">Parametro internalId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{positionid}/{internalId}")]
         public async Task<ActionResult> GetId(string positionid, string internalId)

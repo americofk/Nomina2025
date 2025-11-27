@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Modelo de datos para representar cargos o funciones laborales.
+/// Define las diferentes responsabilidades y roles dentro de la organización.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
 
@@ -26,8 +32,8 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// Max 200
         /// </summary>
         [MaxLength(200)]
-        [Required(ErrorMessage = "Descripción" + ErrorMsg.Emptym)]
-        [CustomFilter("Descripción")]
+        [Required(ErrorMessage = "Descripci�n" + ErrorMsg.Emptym)]
+        [CustomFilter("Descripci�n")]
         public string Description { get; set; }
 
         public bool JobStatus { get; set; } = true;

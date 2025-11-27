@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de Position.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Positions;
@@ -21,6 +27,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
         public Task<Response<object>> Create(PositionRequest model, bool isVacant = false);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de PositionCommand.
+
+    /// </summary>
+
     public class PositionCommandHandler : IPositionCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -29,6 +41,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="isVacant">Parametro isVacant.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(PositionRequest model, bool isVacant)
         {
@@ -91,6 +115,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
             return null;
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<bool>> Delete(List<string> ids)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -126,6 +160,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> Update(string id, PositionRequest model)
         {
             var response = await _dbContext.Positions.Where(x => x.PositionId == id).FirstOrDefaultAsync();
@@ -148,6 +200,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="status">Parametro status.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> UpdateStatus(string id, bool status)
         {
             var response = await _dbContext.Positions.Where(x => x.PositionId == id).FirstOrDefaultAsync();
@@ -167,6 +237,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="isVacants">Parametro isVacants.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> UpdateVacants(string id, bool isVacants)
         {

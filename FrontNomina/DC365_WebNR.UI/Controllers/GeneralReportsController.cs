@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Controlador para la generación de reportes generales.
+/// Incluye reportes de nómina, TSS, DGT y exportación a diferentes formatos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
@@ -18,12 +24,31 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de GeneralReports.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("reportes")]
     public class GeneralReportsController : ControllerBase
     {
         ProcessReports process;
+
+        /// <summary>
+
+        /// Ejecuta PayrollPayments de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+
+        /// <param name="employeeId">Parametro employeeId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("pagosdenomina")]
         public async Task<IActionResult> PayrollPayments([FromQuery] string payrollprocessid, [FromQuery] bool hidefilter,[FromQuery] string deparmentId,[FromQuery] string employeeId)
@@ -40,6 +65,20 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta EmailPayrollPayments de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+
+        /// <param name="employeeId">Parametro employeeId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("email/pagosdenomina")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> EmailPayrollPayments([FromQuery] string payrollprocessid, [FromQuery] string deparmentId, [FromQuery] string employeeId)
@@ -52,6 +91,27 @@ namespace DC365_WebNR.UI.Controllers
             responseUI = await process.EnvioCorreoPagosNomina(payrollprocessid, deparmentId, employeeId);
             return Json(responseUI);
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta PayrollPaymentsSummary de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet("resumenpagosdenomina")]
@@ -68,6 +128,18 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.ResumenPagosNomina(payrollprocessid, deparmentId);
             return View(model);
         }
+
+        /// <summary>
+
+        /// Exporta los datos.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("ExportarPayroll")]
         public async Task<IActionResult> ExportarPayrollPaymentsSummary([FromQuery] string payrollprocessid, [FromQuery] string deparmentId)
@@ -124,6 +196,27 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Ejecuta PayrollReport de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpGet("reportenomina")]
         public async Task<IActionResult> PayrollReport([FromQuery] string payrollprocessid, [FromQuery] bool hidefilter, [FromQuery] string deparmentId)
 
@@ -139,6 +232,33 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.GetAllDataPayrollReport(payrollprocessid, deparmentId);
             return View(model);
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta TSSReport de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+
+        /// <param name="year">Parametro year.</param>
+
+
+        /// <param name="month">Parametro month.</param>
+
+
+        /// <param name="typetss">Parametro typetss.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet("tss")]
@@ -157,6 +277,18 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta AllEmployeeReport de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("reporteempleados")]
         public async Task<IActionResult> AllEmployeeReport([FromQuery] bool hidefilter, [FromQuery] string deparmentId)
         {
@@ -174,6 +306,27 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Ejecuta DGT4Report de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="year">Parametro year.</param>
+
+
+        /// <param name="month">Parametro month.</param>
+
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpGet("dgt4")]
         public async Task<IActionResult> DGT4Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
         {
@@ -188,6 +341,27 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Ejecuta DGT2Report de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="year">Parametro year.</param>
+
+
+        /// <param name="month">Parametro month.</param>
+
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpGet("dgt2")]
         public async Task<IActionResult> DGT2Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
         {
@@ -200,6 +374,20 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.GetAllDataDGT2Report(year, month);
             return View(model);
         }
+
+        /// <summary>
+
+        /// Ejecuta DGT3Report de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="month">Parametro month.</param>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("dgt3")]
         public async Task<IActionResult> DGT3Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
@@ -217,6 +405,24 @@ namespace DC365_WebNR.UI.Controllers
             }
             return View(model);
         }
+        
+        /// <summary>
+        
+        /// Ejecuta Txt de forma asincrona.
+        
+        /// </summary>
+        
+        /// <param name="year">Parametro year.</param>
+        
+        /// <param name="month">Parametro month.</param>
+        
+        /// <param name="payrollid">Parametro payrollid.</param>
+        
+        /// <param name="typetss">Parametro typetss.</param>
+        
+        /// <param name="typeDTG">Parametro typeDTG.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpGet("Txt")]
         public async Task<IActionResult> Txt([FromQuery] int year, [FromQuery] int month, [FromQuery] string payrollid, [FromQuery] string typetss, TypeDTG typeDTG)
@@ -258,6 +464,20 @@ namespace DC365_WebNR.UI.Controllers
             return File(responseUI, "text/plain", $"{typeDTG.ToString()}{DateTime.Now.ToString("ddMMyyyy")}.txt");
         }
 
+        /// <summary>
+
+        /// Ejecuta DGT5Report de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="month">Parametro month.</param>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("dgt5")]
         public async Task<IActionResult> DGT5Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
         {
@@ -269,6 +489,20 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.GetAllDataDGT5Report(year, month);
             return View(model);
         }
+
+        /// <summary>
+
+        /// Ejecuta DGT9Report de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="month">Parametro month.</param>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("dgt9")]
         public async Task<IActionResult> DGT9Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
@@ -282,6 +516,20 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Ejecuta DGT11Report de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="month">Parametro month.</param>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("dgt11")]
         public async Task<IActionResult> DGT11Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
         {
@@ -293,6 +541,20 @@ namespace DC365_WebNR.UI.Controllers
             var model = await process.GetAllDataDGT11Report(year, month);
             return View(model);
         }
+
+        /// <summary>
+
+        /// Ejecuta DGT12Report de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="year">Parametro year.</param>
+
+        /// <param name="month">Parametro month.</param>
+
+        /// <param name="hidefilter">Parametro hidefilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("dgt12")]
         public async Task<IActionResult> DGT12Report([FromQuery] int year, [FromQuery] int month, [FromQuery] bool hidefilter)
@@ -311,6 +573,16 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="payrollId">Parametro payrollId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{payrollId}")]
         public async Task<JsonResult> GetId(string payrollId)
         {
@@ -321,6 +593,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model));
         }
+        
+        /// <summary>
+        
+        /// Obtiene.
+        
+        /// </summary>
+        
+        /// <param name="processid">Parametro processid.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         [HttpGet("payrollprocessid/{processid}")]
         public async Task<JsonResult> GetEmployee(string processid)
@@ -333,6 +615,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(_model.Obj));
         }
         
+        /// <summary>
+        
+        /// Obtiene.
+        
+        /// </summary>
+        
+        /// <param name="processid">Parametro processid.</param>
+        
+        /// <param name="propertyValue">Parametro propertyValue.</param>
+        
+        /// <returns>Resultado de la operacion.</returns>
+        
         [HttpGet("payrollprocessid/{processid}/{propertyValue}")]
         public async Task<JsonResult> GetEmployeeDepartment(string processid,string propertyValue)
         {
@@ -343,6 +637,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model.Obj));
         }
+
+        /// <summary>
+
+        /// Ejecuta TxtPayroll de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("txtpayroll")]
         public async Task<IActionResult> TxtPayroll([FromQuery] string payrollprocessid, [FromQuery] string payrollid)

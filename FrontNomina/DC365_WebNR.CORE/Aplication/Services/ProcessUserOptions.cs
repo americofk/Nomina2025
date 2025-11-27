@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de opciones de usuario.
+/// Contiene la lógica de negocio para configurar y administrar las opciones y preferencias de usuarios.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessUserOptions.
+    /// </summary>
     public class ProcessUserOptions: ServiceBase
     {
         public ProcessUserOptions(string _token)
@@ -22,6 +31,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
         private const string Endpoint = "users/options/changecompany";
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string id, UserOptions _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -45,6 +60,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
     
         //asignar foto al usuario
+        /// <summary>
+        /// Carga un archivo.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Uploadimageuser(IFormFile file, string Alias)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -76,6 +97,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         // descargar foto de usuario
+        /// <summary>
+        /// Descarga.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Downloadimageuser(string Alias)
         {
             //Response<Department> DataApi = null;
@@ -100,6 +126,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Cambiar de empresa
+        /// <summary>
+        /// Ejecuta ChangeCompany de forma asincrona.
+        /// </summary>
+        /// <param name="companyid">Parametro companyid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI<ChangeCompany>> ChangeCompany(string companyid)
         {
             ResponseUI<ChangeCompany> responseUI = new ResponseUI<ChangeCompany>();

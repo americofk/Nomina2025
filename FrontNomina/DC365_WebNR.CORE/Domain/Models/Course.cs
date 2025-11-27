@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Modelo de datos para representar cursos de capacitación.
+/// Incluye información sobre fechas, participantes, instructores y configuración del curso.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -9,6 +15,9 @@ using DC365_WebNR.CORE.Aplication.Attributes;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
+    /// <summary>
+    /// Clase para gestion de Course.
+    /// </summary>
     public class Course 
     {
         /// <summary>
@@ -33,8 +42,17 @@ namespace DC365_WebNR.CORE.Domain.Models
         [Required(ErrorMessage = "Tipo de curso" + ErrorMsg.Emptym)]
         
         public string CourseTypeId { get; set; }
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         [CustomFilter("Tipo de curso")]
         public string CourseTypeName { get; set; }
+
+        /// <summary>
+
+        /// Indica si.
+
+        /// </summary>
 
         public bool IsMatrixTraining { get; set; }
         /// <summary>
@@ -52,6 +70,12 @@ namespace DC365_WebNR.CORE.Domain.Models
         [MaxLength(20)]
         [Required(ErrorMessage = "Aula o salón" + ErrorMsg.Emptym)]
         public string ClassRoomId { get; set; }
+
+        /// <summary>
+
+        /// Nombre.
+
+        /// </summary>
 
         public string ClassRoomName { get; set; }
         /// <summary>
@@ -109,6 +133,12 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// Created = 0, InProcess = 1, Closed = 2
         /// </summary>
         public CourseStatus CourseStatus { get; set; }
+
+        /// <summary>
+
+        /// Indica el estado de MatrixTraining.
+
+        /// </summary>
 
         public bool MatrixTraining { get; set; }
 

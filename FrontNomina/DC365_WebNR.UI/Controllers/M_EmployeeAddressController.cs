@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de direcciones de empleados.
+/// Permite crear, editar, eliminar y listar direcciones de residencia de empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Aplication.Services.Container;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
@@ -15,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_EmployeeAddress.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("direccionempleados")]
@@ -23,6 +32,11 @@ namespace DC365_WebNR.UI.Controllers
         ProcessEmployeeAddress processEmployeeAddress;
 
         //[HttpGet("buscardirecciones")]
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{employeeid}")]
         public async Task<ActionResult> Get(string employeeid)
         {
@@ -32,6 +46,24 @@ namespace DC365_WebNR.UI.Controllers
             var PositionRequirement = await processEmployeeAddress.GetAllDataAsync(employeeid);
             return PartialView("ListEmployeeAddress", PositionRequirement);
         }
+
+
+        /// <summary>
+
+
+        /// Guarda los cambios.
+
+
+        /// </summary>
+
+
+        /// <param name="Obj">Parametro Obj.</param>
+
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("guardar")]
@@ -65,6 +97,24 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ListIdAddress">Parametro ListIdAddress.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> Delete(List<string> ListIdAddress, string employeeid)
@@ -78,6 +128,14 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta NewAddresEmployee de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("formularioNewAddres")]
         public async Task<ActionResult> NewAddresEmployee()
         {
@@ -86,6 +144,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Provinces = await selectListsDropDownList(SelectListOptions.Province);
             return PartialView("NewAddresEmployee", employee);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalId">Parametro internalId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{employeeid}/{internalId}")]
         public async Task<ActionResult> GetId(string employeeid, string internalId)

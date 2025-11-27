@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de EmployeeDocument.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.EmployeeDocuments;
@@ -22,6 +28,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
         public Task<Response<object>> DownloadDocument(string employeeid, int internalid);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de EmployeeDocumentCommand.
+
+    /// </summary>
+
     public class EmployeeDocumentCommandHandler : IEmployeeDocumentCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -30,6 +42,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(EmployeeDocumentRequest model)
         {
@@ -68,6 +90,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<bool>> DeleteByEmployee(List<string> ids, string employeeid)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -101,6 +141,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
                 };
             }
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Update(string id, EmployeeDocumentRequest model)
@@ -141,6 +199,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
 
+        /// <summary>
+
+        /// Carga un archivo.
+
+        /// </summary>
+
+        /// <param name="request">Parametro request.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> UploadDocument(EmplDocFileRequest request, string employeeid, int internalid)
         {
             byte[] data;
@@ -173,6 +245,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
                 Message = "Archivo cargado correctamente"
             };
         }
+
+        /// <summary>
+
+        /// Descarga.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> DownloadDocument(string employeeid, int internalid)
         {

@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file Loans.ts
+ * @description Módulo de gestión de préstamos. Permite crear, editar,
+ *              eliminar y administrar préstamos a empleados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Prestamos
+ */
+
+variables: {
 
     var option: number;
 }

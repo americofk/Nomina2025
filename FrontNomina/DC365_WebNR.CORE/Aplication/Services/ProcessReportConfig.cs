@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de configuración de reportes.
+/// Administra las configuraciones y parámetros de los reportes del sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessReportConfig.
+    /// </summary>
     public class ProcessReportConfig : ServiceBase
     {
         public ProcessReportConfig(string _token)
@@ -19,6 +28,10 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<ReportConfig>> GetAllDataAsync()
         {
             List<ReportConfig> _model = new List<ReportConfig>();
@@ -45,6 +58,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(ReportConfig _model)
         {
             Response<ReportConfig> DataApi = null;

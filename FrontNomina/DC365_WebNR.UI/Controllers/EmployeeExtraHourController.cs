@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de horas extras de empleados.
+/// Permite crear, editar, eliminar y listar horas extras trabajadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -9,12 +15,25 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeExtraHour.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("horasextrasempleado")]
     public class EmployeeExtraHourController : ControllerBase
     {
         ProcessEmployeeExtraHour process;
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{employeeid}")]
         public async Task<ActionResult> Get(string employeeid)
@@ -26,6 +45,22 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("EmployeeExtraHour", list);
         }
+
+        /// <summary>
+
+        /// Ejecuta Employee_ExtraHour_Filter_Or_MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Employee_ExtraHour_Filter_Or_MoreData(string employeeid, string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
@@ -40,6 +75,18 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Ejecuta EmployeeExtraHour de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpGet("FormNewEmployeeExtraHour")]
         public async Task<ActionResult> EmployeeExtraHour()
         {
@@ -49,6 +96,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.EarningCodehours = await selectListsDropDownList(SelectListOptions.EarningCodehours);
             return PartialView("NewEmployeeExtraHour", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -80,6 +139,20 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="earningcode">Parametro earningcode.</param>
+
+        /// <param name="workedday">Parametro workedday.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}/{earningcode}/{workedday}")]
         public async Task<ActionResult> GetId(string employeeid, string earningcode, string workedday)
         {
@@ -93,6 +166,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewEmployeeExtraHour", _model);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]

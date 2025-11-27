@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions;
+/// <summary>
+/// Controlador API para gestión de EmployeePosition.
+/// Endpoint base: api/v2/employeespositions
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.EmployeePositions;
@@ -17,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeePosition.
+    /// </summary>
     [Route("api/v2.0/employeepositions")]
     [ApiController]
     [Authorize]
@@ -33,6 +43,20 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _CommandHandler = commandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeePosition, View = true)]
         public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter, string employeeid)
@@ -42,6 +66,18 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
 
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="positionid">Parametro positionid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}/{positionid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeePosition, View = true)]
         public async Task<ActionResult> GetById(string employeeid, string positionid)
@@ -50,6 +86,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeePosition, Edit = true)]
         public async Task<ActionResult> Post([FromBody] EmployeePositionRequest model)
@@ -57,6 +103,24 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.Create(model);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpDelete("{employeeid}")]
@@ -68,6 +132,24 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPut("{employeeid}")]
         [AuthorizePrivilege(MenuId = MenuConst.EmployeePosition, Edit = true)]
         public async Task<ActionResult> Update([FromBody] EmployeePositionRequestUpdate model, string employeeid)
@@ -75,6 +157,21 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.Update(employeeid, model);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPut("updatestatus")]

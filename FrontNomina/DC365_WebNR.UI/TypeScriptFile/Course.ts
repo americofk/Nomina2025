@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file Course.ts
+ * @description Módulo de gestión de cursos. Permite crear, editar,
+ *              eliminar y administrar cursos de capacitación.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Cursos
+ */
+
+variables: {
     var option: number;
 }
 

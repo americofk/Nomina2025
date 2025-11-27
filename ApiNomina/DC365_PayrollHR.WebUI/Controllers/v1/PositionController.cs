@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions;
+/// <summary>
+/// Controlador API para gestión de Position.
+/// Endpoint base: api/positions
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.Positions;
@@ -15,6 +22,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de Position.
+    /// </summary>
     [Route("api/positions")]
     [ApiController]
     [Authorize]
@@ -30,12 +40,34 @@ namespace DC365_PayrollHR.WebUI.Controllers
             _CommandHandler = commandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionEnabled, View = true)]
         public async Task<ActionResult> GetEnabled([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
             return Ok(await _QueryHandler.GetAll(paginationFilter, searchFilter,  new bool[] { true, false }));
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("enabled/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionEnabled, View = true)]
@@ -44,12 +76,34 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return Ok(await _QueryHandler.GetId(id));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("disabled")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionDisabled, View = true)]
         public async Task<ActionResult> GetDisabled([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
             return Ok(await _QueryHandler.GetAll(paginationFilter,searchFilter, new bool[] { false, false }));
         }
+
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionEnabled, Edit = true)]
@@ -59,6 +113,21 @@ namespace DC365_PayrollHR.WebUI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpDelete("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionEnabled, Delete = true)]
         public async Task<ActionResult> DeleteEnabled([FromBody] List<string> ids)
@@ -66,12 +135,40 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return Ok(await _CommandHandler.Delete(ids));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpDelete("disabled")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionDisabled, Delete = true)]
         public async Task<ActionResult> DeleteDisabled([FromBody] List<string> ids)
         {
             return Ok(await _CommandHandler.Delete(ids));
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPut("enabled/{id}")]
@@ -82,12 +179,42 @@ namespace DC365_PayrollHR.WebUI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="status">Parametro status.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpPut("enabled/updatestatus/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionEnabled, Edit = true)]
         public async Task<ActionResult> UpdateStatusEnabled(string id, bool status)
         {
             return Ok(await _CommandHandler.UpdateStatus(id, status));
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="status">Parametro status.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPut("disabled/updatestatus/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionDisabled, Edit = true)]
@@ -98,12 +225,34 @@ namespace DC365_PayrollHR.WebUI.Controllers
 
         #region Vacants
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("vacants")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionVacant, View = true)]
         public async Task<ActionResult> GetVacants([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
             return Ok(await _QueryHandler.GetAll(paginationFilter,searchFilter, new bool[] { true, true }));
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("vacants/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionVacant, View = true)]
@@ -112,12 +261,34 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return Ok(await _QueryHandler.GetId(id));
         }
 
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="isVacants">Parametro isVacants.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPut("vacants/updatetovacants/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionVacant, Edit = true)]
         public async Task<ActionResult> UpdateToVacant(string id, bool isVacants)
         {
             return Ok(await _CommandHandler.UpdateVacants(id, isVacants));
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpDelete("vacants")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionVacant, Delete = true)]
@@ -126,12 +297,34 @@ namespace DC365_PayrollHR.WebUI.Controllers
             return Ok(await _CommandHandler.Delete(ids));
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("vacants")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionVacant, Edit = true)]
         public async Task<ActionResult> PostVacants([FromBody] PositionRequest model)
         {
             return Ok(await _CommandHandler.Create(model, true));
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPut("vacants/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.PositionVacant, Edit = true)]

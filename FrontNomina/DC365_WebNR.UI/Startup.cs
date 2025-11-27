@@ -12,6 +12,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace DC365_WebNR.UI
 {
+    /// <summary>
+    /// Clase para gestion de Startup.
+    /// </summary>
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -19,9 +22,19 @@ namespace DC365_WebNR.UI
             Configuration = configuration;
         }
 
+        /// <summary>
+
+        /// Obtiene o establece Configuration.
+
+        /// </summary>
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configura.
+        /// </summary>
+        /// <param name="services">Parametro services.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSession(options =>
@@ -43,6 +56,11 @@ namespace DC365_WebNR.UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configura.
+        /// </summary>
+        /// <param name="app">Parametro app.</param>
+        /// <param name="env">Parametro env.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())

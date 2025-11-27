@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file PositionRequirent.ts
+ * @description Módulo de gestión de requisitos de puestos. Permite crear, editar
+ *              y administrar los requisitos necesarios para cada puesto vacante.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module RequisitosPuestos
+ */
+
+variables: {
     var idpositionforRequirement: string;
     var optionreq: number;
 }

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de códigos de ingreso inactivos.
+/// Administra códigos de ingreso que han sido deshabilitados en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEarningCodeDisabled.
+    /// </summary>
     public class ProcessEarningCodeDisabled: ServiceBase
     {
         public ProcessEarningCodeDisabled(string _token)
@@ -18,6 +27,15 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //todos los codigos de ganancia
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <param name="_IsVersion">Parametro _IsVersion.</param>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EarningCode>> GetAllDataAsync(int _PageNumber = 1, bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "")
         {
             List<EarningCode> _model = new List<EarningCode>();
@@ -45,6 +63,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //Inhabilitar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatus(string id)
         {
             //Response<Department> DataApi = null;

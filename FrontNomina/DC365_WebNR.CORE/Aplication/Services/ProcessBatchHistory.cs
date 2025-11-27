@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de historial de lotes.
+/// Administra el registro histórico de procesos por lotes ejecutados en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
@@ -16,6 +22,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessBatchHistory.
+    /// </summary>
     public class ProcessBatchHistory : ServiceBase
     {
         private const string Endpoint = "importbatch/";
@@ -27,6 +36,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <param name="_entity">Parametro _entity.</param>
+        /// <param name="_optionSeparator">Parametro _optionSeparator.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(IFormFile file, BatchEntity _entity,string _optionSeparator)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -86,6 +102,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar Employee batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployee(IFormFile file)
         {
             Response<Employee> DataApi = null;
@@ -189,6 +210,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //guardar Employee adress batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeaddress(IFormFile file)
         {
             Response<EmployeeAddressBatch> DataApi = null;
@@ -253,6 +279,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar Employee contactInfo batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeContactInfo(IFormFile file)
         {
             Response<EmployeeContactInfoBatch> DataApi = null;
@@ -314,6 +345,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar Employee Document batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeDocument(IFormFile file)
         {
             Response<EmployeeDocumentBatch> DataApi = null;
@@ -376,6 +412,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee bankaccount batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeebankaccount(IFormFile file)
         {
             Response<EmployeebankaccountBatch> DataApi = null;
@@ -438,6 +479,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee extrahours batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeextrahours(IFormFile file)
         {
             Response<EmployeeextrahoursBatch> DataApi = null;
@@ -503,6 +549,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //save Employee Taxt batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeTax(IFormFile file)
         {
             Response<EmployeeTaxBatch> DataApi = null;
@@ -564,6 +615,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee Earningcodes batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeearningcodes(IFormFile file)
         {
             Response<EmployeeearningcodesBatch> DataApi = null;
@@ -629,6 +685,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee Loans batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeloans(IFormFile file)
         {
             Response<EmployeeloansBatch> DataApi = null;
@@ -696,6 +757,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee deductions batch
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeedeductions(IFormFile file)
         {
             Response<EmployeedeductionsBatch> DataApi = null;
@@ -760,6 +826,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee Work calendars
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeWorkCalendars(IFormFile file)
         {
             Response<BatchEmployeeWorkCalendarRequest> DataApi = null;
@@ -824,6 +895,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //save Employee Work control calendars
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsyncEmployeeWorkControlCalendar(IFormFile file)
         {
             Response<BatchEmployeeWorkControlCalendarRequest> DataApi = null;
@@ -888,6 +964,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<BatchHistory>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             List<BatchHistory> courseType = new List<BatchHistory>();
@@ -914,6 +997,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();

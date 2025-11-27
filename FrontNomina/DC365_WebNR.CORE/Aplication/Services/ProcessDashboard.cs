@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models;
+/// <summary>
+/// Servicio para la gestión del panel de control.
+/// Proporciona datos y métricas para el dashboard del sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessDashboard.
+    /// </summary>
     public class ProcessDashboard: ServiceBase
     {
         private const string Endpoint = "reportstxt";
@@ -19,40 +28,131 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
         }
 
+        /// <summary>
+
+        /// Clase para gestion de DashboardGraphicsInfo.
+
+        /// </summary>
+
         public class DashboardGraphicsInfo
         {
+            /// <summary>
+            /// Empleado.
+            /// </summary>
             public EmployeeByDepartments EmployeeByDepartments { get; set; }
+            /// <summary>
+            /// Obtiene o establece DtbutionCtbutionByYear.
+            /// </summary>
             public DeductionsContributionsByYear DtbutionCtbutionByYear { get; set; }
+            /// <summary>
+            /// Obtiene o establece AmountByAction.
+            /// </summary>
             public AmountByAction AmountByAction { get; set; }   
+            /// <summary>
+            /// Monto.
+            /// </summary>
             public TrimestralPayrollAmount TrimestralPayrollAmount { get; set; }
         }
 
+        /// <summary>
+
+        /// Clase para gestion de AmountByAction.
+
+        /// </summary>
+
         public class AmountByAction
         {
+            /// <summary>
+            /// Valor de texto para Keys.
+            /// </summary>
             public List<string> Keys { get; set; }
+            /// <summary>
+            /// Valor numerico para Values.
+            /// </summary>
             public List<decimal> Values { get; set; }
         }
 
+        /// <summary>
+
+        /// Clase para gestion de EmployeeByDepartments.
+
+        /// </summary>
+
         public class EmployeeByDepartments
         {
+            /// <summary>
+            /// Valor de texto para Keys.
+            /// </summary>
             public List<string> Keys { get; set; }
+            /// <summary>
+            /// Valor numerico para Values.
+            /// </summary>
             public List<int> Values { get; set; }
         }
 
+        /// <summary>
+
+        /// Clase para gestion de DeductionsContributionsByYear.
+
+        /// </summary>
+
         public class DeductionsContributionsByYear
         {
+            /// <summary>
+            /// Valor de texto para Keys.
+            /// </summary>
             public List<string> Keys { get; set; }
+            /// <summary>
+            /// Valor numerico para CtbutionValues.
+            /// </summary>
             public List<decimal> CtbutionValues { get; set; }
+            /// <summary>
+            /// Valor numerico para DtbutionValues.
+            /// </summary>
             public List<decimal> DtbutionValues { get; set; }
         }
 
+        /// <summary>
+
+        /// Clase para gestion de TrimestralPayrollAmount.
+
+        /// </summary>
+
         public class TrimestralPayrollAmount
         {
+            /// <summary>
+            /// Valor de texto para Keys.
+            /// </summary>
             public List<string> Keys { get; set; }
+            /// <summary>
+            /// Valor numerico para FirtBar.
+            /// </summary>
             public List<decimal> FirtBar { get; set; }
+            /// <summary>
+            /// Valor numerico para SecondBar.
+            /// </summary>
             public List<decimal> SecondBar { get; set; }
+            /// <summary>
+            /// Valor numerico para ThirtBar.
+            /// </summary>
             public List<decimal> ThirtBar { get; set; }
         }
+
+
+
+        /// <summary>
+
+
+
+        /// Obtiene.
+
+
+
+        /// </summary>
+
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
 
@@ -65,6 +165,14 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
             return Api;
         }
+        
+        /// <summary>
+        
+        /// Obtiene.
+        
+        /// </summary>
+        
+        /// <returns>Resultado de la operacion.</returns>
         
         public async Task<DashboardCardInfo> GetCardInformation()
         {
@@ -86,6 +194,18 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
             return _model;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="_year">Parametro _year.</param>
+
+        /// <param name="_payrollid">Parametro _payrollid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<DashboardGraphicsInfo> GetGraphicsInformation(int _year,string _payrollid)
         {

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de documentos de empleados.
+/// Permite cargar, descargar, editar y eliminar documentos adjuntos a empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.UI.Process;
@@ -11,12 +17,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeDocument.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("documentosempleados")]
     public class EmployeeDocumentController : ControllerBase
     {
         ProcessEmployeeDocument process;
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{employeeid}")]
         public async Task<ActionResult> Get(string employeeid)
         {
@@ -28,12 +42,32 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("ListEmployeeDocument", list);
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion EmployeeDepartment.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormNewEmployeeDocument")]
         public ActionResult EmployeeDepartment()
         {
             EmployeeDocument model = new EmployeeDocument();
             return PartialView("NewEmployeeDocument", model);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid_Document">Parametro listid_Document.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
@@ -47,6 +81,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -78,6 +124,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalId">Parametro internalId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}/{internalId}")]
         public async Task<ActionResult> GetId(string employeeid, string internalId)
         {
@@ -89,6 +147,24 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("NewEmployeeDocument", _model);
         }
+
+
+        /// <summary>
+
+
+        /// Descarga.
+
+
+        /// </summary>
+
+
+        /// <param name="IdEmployee">Parametro IdEmployee.</param>
+
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet("descargardocumento")]
@@ -107,6 +183,27 @@ namespace DC365_WebNR.UI.Controllers
 
             return RedirectToAction("Index", "Error");
         }
+
+
+        /// <summary>
+
+
+        /// Carga un archivo.
+
+
+        /// </summary>
+
+
+        /// <param name="file">Parametro file.</param>
+
+
+        /// <param name="IdEmpleyee">Parametro IdEmpleyee.</param>
+
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("cargardocumento")]

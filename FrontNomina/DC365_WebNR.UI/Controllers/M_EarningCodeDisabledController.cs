@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para la gestión de códigos de ganancia inactivos.
+/// Permite visualizar y reactivar códigos de ganancia inhabilitados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,12 +18,19 @@ using Newtonsoft.Json;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_EarningCodeDisabled.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("codigosgananciainactivos")]
     public class M_EarningCodeDisabledController : ControllerBase
     {
         ProcessEarningCodeDisabled process;
+        /// <summary>
+        /// Ejecuta EarningCodeDisabled de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet]
         public async Task<IActionResult> EarningCodeDisabled()
         {
@@ -28,6 +41,26 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Filter = FilterHelper<EarningCode>.GetPropertyToSearch();
             return View(model);
         }
+
+        
+
+        /// <summary>
+
+        
+
+        /// Actualiza un registro existente.
+
+        
+
+        /// </summary>
+
+        
+
+        /// <param name="EarCodeId">Parametro EarCodeId.</param>
+
+        
+
+        /// <returns>Resultado de la operacion.</returns>
 
         
 
@@ -46,6 +79,20 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta EarningCodes_Disabled_CodeFilter_Or_MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> EarningCodes_Disabled_CodeFilter_Or_MoreData(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)

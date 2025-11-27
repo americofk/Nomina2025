@@ -1,3 +1,9 @@
+/// <summary>
+/// Interfaz para QueryHandler.
+/// Define el contrato de operaciones disponibles.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using System;
@@ -13,6 +19,12 @@ namespace DC365_PayrollHR.Core.Application.Common.Interface
 
     //    public Task<Response<T>> GetId(object condition);
     //}
+
+    /// <summary>
+
+    /// Manejador para operaciones de IQuery.
+
+    /// </summary>
 
     public interface IQueryHandler<T>
     {

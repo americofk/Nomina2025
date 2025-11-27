@@ -1,4 +1,13 @@
-﻿import { format } from "jquery";
+/**
+ * @file ContactsInfoEmployee.ts
+ * @description Módulo de gestión de información de contacto de empleados. Permite agregar,
+ *              editar y eliminar contactos de emergencia y referencias personales.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module ContactosEmpleados
+ */
+
+import { format } from "jquery";
 
 variables: {
     interface IDomElement_Modal {

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de préstamos de empleados.
+/// Administra los préstamos otorgados a empleados y sus pagos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEmployeeLoan.
+    /// </summary>
     public class ProcessEmployeeLoan: ServiceBase
     {
         public ProcessEmployeeLoan(string _token)
@@ -19,6 +28,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EmployeeLoan>> GetAllDataAsync(string employeeid, int _PageNumber = 1)
         {
             List<EmployeeLoan> _model = new List<EmployeeLoan>();
@@ -46,6 +61,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //lista historial de prestamos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="parentinternalid">Parametro parentinternalid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EmployeeLoanHistoryResponse>> GetHistoryLoan(string employeeid, int parentinternalid, int _PageNumber = 1)
         {
             List<EmployeeLoanHistoryResponse> _model = new List<EmployeeLoanHistoryResponse>();
@@ -72,6 +94,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(EmployeeLoan _model)
         {
             Response<EmployeeLoan> DataApi = null;
@@ -119,6 +146,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="EmployeeId">Parametro EmployeeId.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string EmployeeId, EmployeeLoan _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -144,6 +177,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj, string employeeid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -188,6 +227,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //buscar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="internalId">Parametro internalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<EmployeeLoan> GetDataAsync(string employeeid, string internalId)
         {
             EmployeeLoan _model = new EmployeeLoan();

@@ -1,21 +1,48 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Filter
 {
+    /// <summary>
+    /// Filtro para Search.
+    /// </summary>
     public class SearchFilter
     {
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         public string PropertyName { get; set; }
+        /// <summary>
+        /// Valor de texto para PropertyValue.
+        /// </summary>
         public string PropertyValue { get; set; }
     }
 
+    /// <summary>
+
+    /// Filtro para Search.
+
+    /// </summary>
+
     public class SearchFilter<T>
     {
+        /// <summary>
+        /// Nombre.
+        /// </summary>
         public string PropertyName { get; set; }
+        /// <summary>
+        /// Valor de texto para PropertyValue.
+        /// </summary>
         public string PropertyValue { get; set; }
+        /// <summary>
+        /// Obtiene o establece ObjectPropertyValue.
+        /// </summary>
         public object ObjectPropertyValue { get; set; }
+        /// <summary>
+        /// Tipo.
+        /// </summary>
         public Type PropertyType { get; set; }
         private bool SuccessConvert { get; set; } = false;
 
@@ -44,6 +71,14 @@ namespace DC365_PayrollHR.Core.Application.Common.Filter
                 this.SuccessConvert = true;
             }
         }
+
+        /// <summary>
+
+        /// Verifica si.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public bool IsValid()
         {

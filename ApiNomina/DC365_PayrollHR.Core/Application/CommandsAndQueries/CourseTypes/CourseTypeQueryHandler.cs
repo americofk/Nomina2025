@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de CourseType.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -12,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseTypes
 {
+    /// <summary>
+    /// Manejador para operaciones de CourseTypeQuery.
+    /// </summary>
     public class CourseTypeQueryHandler : IQueryHandler<CourseType>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -20,6 +29,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseTypes
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<CourseType>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryfilter = null)
         {
@@ -44,6 +67,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseTypes
 
             return new PagedResponse<IEnumerable<CourseType>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="condition">Parametro condition.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<CourseType>> GetId(object condition)
         {

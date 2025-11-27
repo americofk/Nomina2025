@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+/// <summary>
+/// Controlador para la gestión de códigos de ganancia activos.
+/// Permite crear, editar, eliminar e inhabilitar códigos de ganancia y sus versiones.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DC365_WebNR.CORE.Aplication.Services;
@@ -15,12 +21,21 @@ using Newtonsoft.Json.Converters;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_EarningCode.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("codigosganancias")]
     public class M_EarningCodeController : ControllerBase
     {
         ProcessEarningCodes earningCode;
+        /// <summary>
+        /// Ejecuta EarningCode de forma asincrona.
+        /// </summary>
+        /// <param name="version">Parametro version.</param>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet]
         public async Task<IActionResult> EarningCode([FromQuery] bool version = false, [FromQuery] string id = "")
         {
@@ -36,6 +51,16 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{id}")]
         public async Task<JsonResult> GetId(string Id)
         {
@@ -48,6 +73,20 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model));
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="Obj">Parametro Obj.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <param name="isversion">Parametro isversion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -79,6 +118,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="EarningCodeId">Parametro EarningCodeId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> Delete(List<string> EarningCodeId)
@@ -92,6 +141,16 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="EarCodeId">Parametro EarCodeId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("actualizarestatus")]
         [ValidateAntiForgeryToken]
@@ -109,6 +168,24 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta EarningCodes_CodeFilter_Or_MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <param name="IsVersion">Parametro IsVersion.</param>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> EarningCodes_CodeFilter_Or_MoreData(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1, bool IsVersion = false, string Id = "")
         {
@@ -120,6 +197,24 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("EarningCodes_CodeFilter_Or_MoreData", model);
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="EarningCodeId">Parametro EarningCodeId.</param>
+
+
+        /// <param name="EarningCodeInternalId">Parametro EarningCodeInternalId.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("eliminarVersion")]

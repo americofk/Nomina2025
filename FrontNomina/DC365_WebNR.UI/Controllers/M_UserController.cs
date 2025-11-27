@@ -1,4 +1,10 @@
-﻿using System;
+/// <summary>
+/// Controlador para la gestión de usuarios del sistema.
+/// Permite crear, editar, eliminar usuarios y administrar roles y permisos.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,12 +22,22 @@ using Newtonsoft.Json;
 namespace DC365_WebNR.UI.Controllers
 {
     
+    /// <summary>
+    
+    /// Controlador para gestion de M_User.
+    
+    /// </summary>
+    
     [UserAttribute]
     [Route("usuarios")]
     [TypeFilter(typeof(LicenseFilter))]
     public class M_UserController : ControllerBase
     {
         ProcessUser processUser;
+        /// <summary>
+        /// Ejecuta Users de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet]
         public async Task<IActionResult> Users()
         {
@@ -36,6 +52,16 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{id}")]
         public async Task<JsonResult> GetId(string Id)
         {
@@ -47,6 +73,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Empresas asignadas al usuario
+        /// <summary>
+        /// Busca.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("BuscarEmpresasUsuario")]
         public async Task<ActionResult> SearchUserCompanies(string Alias)
         {
@@ -59,6 +90,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Roles asignados al usuario
+        /// <summary>
+        /// Busca.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("BuscarRolUsuario")]
         public async Task<ActionResult> SearchUserRol(string Alias)
         {
@@ -73,6 +109,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Empresas asignadas al usuario en formato lista
+        /// <summary>
+        /// Busca.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("BuscarListaEmpresa")]
         public async Task<JsonResult> SearchListUserCompanies(string Alias)
         {
@@ -86,6 +127,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //imagen perfil
+        /// <summary>
+        /// Descarga.
+        /// </summary>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("descargarimagen")]
         public async Task<JsonResult> DownloadImage(string Alias)
         {
@@ -98,6 +144,10 @@ namespace DC365_WebNR.UI.Controllers
 
 
         //Modal empresas
+        /// <summary>
+        /// Ejecuta ModalCompanies de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("modalempresas")]
         public async Task<ActionResult> ModalCompanies()
         {
@@ -109,6 +159,10 @@ namespace DC365_WebNR.UI.Controllers
         }
         
         //Modal roles
+        /// <summary>
+        /// Ejecuta ModalRoles de forma asincrona.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("modalroles")]
         public async Task<ActionResult> ModalRoles()
         {
@@ -121,6 +175,12 @@ namespace DC365_WebNR.UI.Controllers
 
 
         //Guardar - editar usuario
+        /// <summary>
+        /// Guarda los cambios.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="operacion">Parametro operacion.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Save(User Obj, string operacion)
@@ -152,6 +212,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Eliminar usuario
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="users">Parametro users.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> Delete(List<string> users)
@@ -166,6 +231,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Asignar rol
+        /// <summary>
+        /// Guarda los cambios.
+        /// </summary>
+        /// <param name="roles">Parametro roles.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("guardarRol")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> SaveRol(List<MenuAssignedToUser> roles)
@@ -189,6 +259,11 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Asignar empresa
+        /// <summary>
+        /// Guarda los cambios.
+        /// </summary>
+        /// <param name="companies">Parametro companies.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("guardarEmpresas")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> SaveCompanies(List<CompanyForUser> companies)
@@ -212,6 +287,12 @@ namespace DC365_WebNR.UI.Controllers
         }
        
         //Eliminar empresa
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="companies">Parametro companies.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("eliminarEmpresasAsignadas")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> DeleteCompaniesfromUser(List<string> companies, string Alias)
@@ -226,6 +307,12 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Eliminar rol
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="roles">Parametro roles.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("eliminarRolesAsignadas")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> DeleteRolfromUser(List<string> roles, string Alias)
@@ -240,6 +327,12 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         //Subir imagen
+        /// <summary>
+        /// Carga un archivo.
+        /// </summary>
+        /// <param name="file">Parametro file.</param>
+        /// <param name="Alias">Parametro Alias.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("cargarimagen")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> UploadImage(IFormFile file , string Alias)
@@ -251,11 +344,40 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(result));
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion Help.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("ayuda")]
         public ActionResult Help()
         {
             return PartialView("Help");
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta User_Filte_Or_MoreData de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpGet("FilterOrMoreData")]

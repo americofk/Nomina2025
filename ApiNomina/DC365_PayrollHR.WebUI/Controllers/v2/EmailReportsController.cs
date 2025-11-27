@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports;
+/// <summary>
+/// Controlador API para gestión de EmailReports.
+/// Endpoint base: api/v2/emailreports
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Domain.Consts;
@@ -12,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de EmailReports.
+    /// </summary>
     [Route("api/v2.0/emailreports")]
     [ApiController]
     [Authorize]
@@ -29,6 +39,20 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _hostingEnvironment = hostingEnvironment;
             _currentUserInformation = currentUserInformation;
         }
+
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="departmentid">Parametro departmentid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("payrollpayment")]
         [AuthorizePrivilege(MenuId = MenuConst.PayrollPaymentReport, View = true)]

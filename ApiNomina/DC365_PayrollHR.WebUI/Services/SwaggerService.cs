@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
@@ -10,8 +10,16 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Services
 {
+    /// <summary>
+    /// Servicio para gestion de Swagger.
+    /// </summary>
     public static class SwaggerService
     {
+        /// <summary>
+        /// Agrega un nuevo registro.
+        /// </summary>
+        /// <param name="services">Parametro services.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
         {
             services.AddSwaggerGen(options =>
@@ -47,6 +55,16 @@ namespace DC365_PayrollHR.WebUI.Services
 
             return services;
         }
+
+        /// <summary>
+
+        /// Ejecuta la operacion UseSwaggerDocumentation.
+
+        /// </summary>
+
+        /// <param name="app">Parametro app.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app)
         {

@@ -1,4 +1,12 @@
-﻿
+/**
+ * @file Tax.ts
+ * @description Módulo de gestión de impuestos. Permite crear, editar,
+ *              eliminar y configurar impuestos aplicables a la nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Impuestos
+ */
+
 variables: {
 
     var option: number;

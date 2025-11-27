@@ -1,3 +1,9 @@
+/// <summary>
+/// Componente de infraestructura para DependencyInjection.
+/// Implementa servicios de soporte para el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Infrastructure.Persistence;
 using DC365_PayrollHR.Infrastructure.Service;
@@ -7,8 +13,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DC365_PayrollHR.Infrastructure
 {
+    /// <summary>
+    /// Clase para gestion de DependencyInjection.
+    /// </summary>
     public static class DependencyInjection
     {
+        /// <summary>
+        /// Agrega un nuevo registro.
+        /// </summary>
+        /// <param name="services">Parametro services.</param>
+        /// <param name="configuration">Parametro configuration.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             // Register audit interceptor for ISO 27001 compliance

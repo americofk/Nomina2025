@@ -1,10 +1,11 @@
-// ============================================================================
-// Archivo: login.ts
-// Proyecto: DC365_WebNR.UI
-// Descripcion:
-//   - Script TypeScript para manejo del formulario de login
-//   - Validaciones client-side y llamadas AJAX al controller
-// ============================================================================
+/**
+ * @file login.ts
+ * @description Módulo de autenticación de usuarios. Maneja el formulario de login,
+ *              validaciones del lado cliente y comunicación con el servidor.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Login
+ */
 
 // Formulario de login principal
 $("#loginForm").submit(function (e) {

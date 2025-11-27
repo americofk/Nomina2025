@@ -1,4 +1,11 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Clase base para todos los controladores de la aplicación.
+/// Proporciona funcionalidades comunes como gestión de sesión de usuario,
+/// obtención de datos de layout y generación de listas desplegables.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Aplication.Services.Container;
 using DC365_WebNR.CORE.Domain.Models;
@@ -18,10 +25,25 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Clase base para ControllerBase.
+    /// </summary>
     [TypeFilter(typeof(LicenseFilter))]
     public class ControllerBase : Controller
     {
+        /// <summary>
+        /// Usuario.
+        /// </summary>
         public List<string> dataUser { get; set; }
+
+
+        /// <summary>
+
+
+        /// Obtiene.
+
+
+        /// </summary>
 
 
         public void GetdataUser()
@@ -40,6 +62,12 @@ namespace DC365_WebNR.UI.Controllers
             dataUser.Add(HttpContext.Session.GetString("Menu"));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
         protected async Task GetLayoutDefauld()
         {
             ViewBag.NombreUsuario = dataUser[1];
@@ -55,6 +83,14 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.companyDefault = await selectListsDropDownList(SelectListOptions.Company);
         }
 
+        /// <summary>
+
+        /// Ejecuta la operacion consultaMenu.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public string consultaMenu()
         {
             Menu menuLeft = new Menu(dataUser[0]);
@@ -62,6 +98,24 @@ namespace DC365_WebNR.UI.Controllers
 
             return menu.Obj;
         }
+
+
+        /// <summary>
+
+
+        /// Selecciona.
+
+
+        /// </summary>
+
+
+        /// <param name="_options">Parametro _options.</param>
+
+
+        /// <param name="parms">Parametro parms.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<List<SelectListItem>> selectListsDropDownList(SelectListOptions _options, object parms = null)
@@ -474,6 +528,18 @@ namespace DC365_WebNR.UI.Controllers
         }
 
 
+        /// <summary>
+
+
+        /// Ejecuta CountriesDownList de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpGet("paises")]
         public async Task<JsonResult> CountriesDownList()
         {
@@ -482,6 +548,14 @@ namespace DC365_WebNR.UI.Controllers
             var list = await countries.GetAllDataAsync();
             return Json(list);
         }
+
+        /// <summary>
+
+        /// Ejecuta DepartmentDropDownList de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("departamento")]
         public async Task<JsonResult> DepartmentDropDownList()
@@ -492,6 +566,14 @@ namespace DC365_WebNR.UI.Controllers
             return Json(list);
         }
 
+        /// <summary>
+
+        /// Ejecuta Listdepartamentos de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("Buscardepartamentos")]
         public async Task<JsonResult> Listdepartamentos()
         {
@@ -501,6 +583,16 @@ namespace DC365_WebNR.UI.Controllers
             return Json(list);
         }
 
+        /// <summary>
+
+        /// Ejecuta PaycyleDropDownList de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("ciclospago/{payrollid}")]
         public async Task<JsonResult> PaycyleDropDownList(string payrollid)
         {
@@ -509,6 +601,24 @@ namespace DC365_WebNR.UI.Controllers
             var list = await process.GetAllDataAsync(payrollid);
             return Json(list);
         }
+
+        /// <summary>
+
+        /// Ejecuta PaycyleDropDownList de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="payrollid">Parametro payrollid.</param>
+
+        /// <param name="payCycleId">Parametro payCycleId.</param>
+
+        /// <param name="typePayroll">Parametro typePayroll.</param>
+
+        /// <param name="qtyPeriodForPaid">Parametro qtyPeriodForPaid.</param>
+
+        /// <param name="totalDues">Parametro totalDues.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("ciclospago/{payrollid}/{payCycleId}/{typePayroll}/{qtyPeriodForPaid}/{totalDues}")]
         public async Task<JsonResult> PaycyleDropDownList(string payrollid, int payCycleId, PayFrecuency typePayroll, int qtyPeriodForPaid, int totalDues)

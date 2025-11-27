@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file DocumentEmployee.ts
+ * @description Módulo de gestión de documentos de empleados. Permite cargar,
+ *              visualizar y eliminar documentos asociados a cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module DocumentosEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

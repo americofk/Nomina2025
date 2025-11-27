@@ -1,4 +1,11 @@
-﻿
+/**
+ * @file CourseType.ts
+ * @description Módulo de gestión de tipos de cursos. Permite crear, editar,
+ *              eliminar y categorizar los tipos de capacitaciones.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module TiposCursos
+ */
 
 variables: {
     var option: number;

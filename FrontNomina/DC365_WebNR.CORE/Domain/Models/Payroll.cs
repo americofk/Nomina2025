@@ -1,4 +1,10 @@
-锘縰sing System;
+/// <summary>
+/// Modelo de datos para representar n贸minas.
+/// Define la configuraci贸n y par谩metros de las diferentes n贸minas del sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -10,9 +16,9 @@ namespace DC365_WebNR.CORE.Domain.Models
 {
     public class Payroll: IValidatableObject
     {
-        [CustomFilter("Id N贸mina")]
+        [CustomFilter("Id N髆ina")]
         public string PayrollId { get; set; }
-        [Required(ErrorMessage = "Nombre de n贸mina" + ErrorMsg.Emptym)]
+        [Required(ErrorMessage = "Nombre de n髆ina" + ErrorMsg.Emptym)]
         [CustomFilter("Nombre")]
         public string Name { get; set; }
         public PayFrecuency PayFrecuency { get; set; }
@@ -24,7 +30,7 @@ namespace DC365_WebNR.CORE.Domain.Models
 
         [DataType(DataType.Date)]
         public DateTime ValidTo { get; set; }
-        [CustomFilter("Descripci贸n")]
+        [CustomFilter("Descripci髇")]
         public string Description { get; set; }
         public bool IsRoyaltyPayroll { get; set; }
         [Required(ErrorMessage = "Moneda" + ErrorMsg.Emptyf)]

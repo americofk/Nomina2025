@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+/// <summary>
+/// Model binder para conversión de valores decimales con soporte multi-cultural.
+/// Maneja la conversión de cadenas a decimales considerando formatos es-ES y en-US.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System;
 using System.Collections.Generic;
@@ -8,8 +14,15 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.ModelBinders
 {
+    /// <summary>
+    /// Enlazador de modelos para DecimalModel.
+    /// </summary>
     public class DecimalModelBinder : IModelBinder
     {
+        /// <summary>
+        /// Ejecuta la operacion BindModelAsync.
+        /// </summary>
+        /// <param name="bindingContext">Parametro bindingContext.</param>
         public Task BindModelAsync(ModelBindingContext bindingContext)
         {
             if (bindingContext == null)

@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Model.Reports;
+using DC365_PayrollHR.Core.Application.Common.Model.Reports;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,8 +6,17 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Domain.Consts
 {
+    /// <summary>
+    /// Clase para gestion de EmailReportEmployeeTemplate.
+    /// </summary>
     public static class EmailReportEmployeeTemplate
     {
+        /// <summary>
+        /// Ejecuta la operacion Template.
+        /// </summary>
+        /// <param name="model">Parametro model.</param>
+        /// <param name="partialRoute">Parametro partialRoute.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static string Template(ReportPayrollPaymentResponse model, string partialRoute)
         {
             string path = Path.Combine(partialRoute, @$"Resources\EmployeeTemplate.txt");

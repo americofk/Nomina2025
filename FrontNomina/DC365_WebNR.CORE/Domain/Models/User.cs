@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models.Enums;
+/// <summary>
+/// Modelo de datos para representar usuarios del sistema.
+/// Define la información de acceso y permisos de los usuarios de la aplicación.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -46,12 +52,12 @@ namespace DC365_WebNR.CORE.Domain.Models
             List<ValidationResult> Error = new List<ValidationResult>();
             if (string.IsNullOrEmpty(Name))
             {
-                Error.Add(new ValidationResult("Nombre no puede estar vacío"));
+                Error.Add(new ValidationResult("Nombre no puede estar vac�o"));
             }
 
             if (string.IsNullOrEmpty(Alias))
             {
-                Error.Add(new ValidationResult("Alias no puede estar vacío"));
+                Error.Add(new ValidationResult("Alias no puede estar vac�o"));
             }
           
             

@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de historial de empleados.
+/// Administra el registro histórico de cambios y eventos de los empleados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -10,12 +16,31 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEmployeeHistory.
+    /// </summary>
     public class ProcessEmployeeHistory: ServiceBase
     {
         public ProcessEmployeeHistory(string _token)
         {
             Token = _token;
         }
+       
+        /// <summary>
+       
+        /// Obtiene.
+       
+        /// </summary>
+       
+        /// <param name="employeeid">Parametro employeeid.</param>
+       
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+       
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+       
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+       
+        /// <returns>Resultado de la operacion.</returns>
        
         public async Task<IEnumerable<EmployeeHistoryResponse>> GetAllDataAsync(string employeeid , string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
@@ -44,6 +69,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar cargo
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<EmployeeHistoryDeleteRequest> Obj, string employeeid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -88,6 +119,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string employeeid, EmployeeHistoryUpdateRequest _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -110,6 +147,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //marcar para dgt
+        /// <summary>
+        /// Ejecuta MaxForDgtAsync de forma asincrona.
+        /// </summary>
+        /// <param name="model">Parametro model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> MaxForDgtAsync(EmployeeHistoryIsForDGTRequest model)
         {
             ResponseUI responseUI = new ResponseUI();

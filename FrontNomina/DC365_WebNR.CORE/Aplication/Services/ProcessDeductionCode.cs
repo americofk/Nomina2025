@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de códigos de deducción.
+/// Administra los códigos utilizados para deducciones en nómina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -10,6 +16,9 @@ using System.Text;
 using System.Threading.Tasks;
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessDeductionCode.
+    /// </summary>
     public class ProcessDeductionCode: ServiceBase
     {
         public ProcessDeductionCode(string _token)
@@ -18,6 +27,16 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_IsVersion">Parametro _IsVersion.</param>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <param name="PageSize">Parametro PageSize.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<DeductionCode>> GetAllDataAsync(bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=20)
         {
             List<DeductionCode> courseType = new List<DeductionCode>();
@@ -44,6 +63,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(DeductionCode _model)
         {
             Response<DeductionCode> DataApi = null;
@@ -78,6 +102,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <param name="isVersion">Parametro isVersion.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string id, DeductionCode _model, bool isVersion)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -110,6 +141,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -152,6 +188,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar version
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="DeductionCodeId">Parametro DeductionCodeId.</param>
+        /// <param name="DeductionCodeInternalId">Parametro DeductionCodeInternalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteVersionDataAsync(string DeductionCodeId, int DeductionCodeInternalId)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -174,6 +216,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //seleccionar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_IsVersion">Parametro _IsVersion.</param>
+        /// <param name="internalid">Parametro internalid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<DeductionCode> GetIdDataAsync(string id, bool _IsVersion = false, string internalid = "")
         {
             DeductionCode _model = new DeductionCode();
@@ -193,6 +242,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Inhabilitar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatus(string id)
         {
             //Response<Department> DataApi = null;

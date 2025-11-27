@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Modelo de datos para representar vacantes laborales.
+/// Define las posiciones disponibles y pendientes de ocupar en la organización.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using System;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
@@ -6,6 +12,9 @@ using DC365_WebNR.CORE.Aplication.Attributes;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
+    /// <summary>
+    /// Clase para gestion de Vacants.
+    /// </summary>
     public class Vacants
     {
         /// <summary>
@@ -22,6 +31,12 @@ namespace DC365_WebNR.CORE.Domain.Models
         [Required(ErrorMessage = "Nombre" + ErrorMsg.Emptym)]
 
         public string PositionName { get; set; }
+
+        /// <summary>
+
+        /// Indica si.
+
+        /// </summary>
 
         public bool IsVacant { get; set; } = true;
 
@@ -43,6 +58,12 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// </summary>
         //Foreign key for job
         public string NotifyPositionId { get; set; }
+
+        /// <summary>
+
+        /// Estado.
+
+        /// </summary>
 
         public bool PositionStatus { get; set; } = true;
         /// <summary>

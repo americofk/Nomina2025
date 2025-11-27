@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de MenuApp.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Domain.Entities;
@@ -12,10 +18,19 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
 {
+    /// <summary>
+    /// Manejador para operaciones de IMenuAppQuery.
+    /// </summary>
     public interface IMenuAppQueryHandler : IQueryAllWithoutSearchHandler<MenuApp>
     {
         public Task<Response<IEnumerable<MenuApp>>> GetRoles();
     };
+
+    /// <summary>
+
+    /// Manejador para operaciones de MenuAppQuery.
+
+    /// </summary>
 
     public class MenuAppQueryHandler : IMenuAppQueryHandler
     {
@@ -27,6 +42,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
             _dbContext = applicationDbContext;
             _currentUserInformation = currentUserInformation;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="queryFilter">Parametro queryFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<MenuApp>>> GetAll(PaginationFilter filter, object queryFilter = null)
         {
@@ -82,6 +109,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
 
             return new PagedResponse<IEnumerable<MenuApp>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<IEnumerable<MenuApp>>> GetRoles()
         {

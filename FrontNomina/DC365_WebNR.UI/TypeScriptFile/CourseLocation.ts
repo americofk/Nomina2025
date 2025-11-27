@@ -1,4 +1,13 @@
-﻿var option: number;
+/**
+ * @file CourseLocation.ts
+ * @description Módulo de gestión de ubicaciones de cursos. Permite crear, editar,
+ *              eliminar y listar las ubicaciones donde se imparten capacitaciones.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module UbicacionCursos
+ */
+
+var option: number;
 //cerrar nueva ubicacion de curso
 $('.OpCloseform').on('click', function () {
     funtionNewCourseLocation("close");

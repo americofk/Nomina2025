@@ -1,12 +1,27 @@
-﻿using System;
+/// <summary>
+/// Helper para exportación de datos a Excel/CSV.
+/// Proporciona funcionalidad para convertir colecciones de objetos en formato CSV.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
 namespace DC365_WebNR.CORE.Aplication.ProcessHelper
 {
+    /// <summary>
+    /// Clase para gestion de ExportarExcel.
+    /// </summary>
     public class ExportarExcel<T>
     {
+        /// <summary>
+        /// Crea un nuevo registro.
+        /// </summary>
+        /// <param name="_ListFormt">Parametro _ListFormt.</param>
+        /// <param name="_header">Parametro _header.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public string CreateCSV(List<T> _ListFormt, string[] _header)
         {
             PropertyInfo[] properties = null;

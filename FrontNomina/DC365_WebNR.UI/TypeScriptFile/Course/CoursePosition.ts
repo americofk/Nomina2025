@@ -1,4 +1,13 @@
-﻿import { format } from "jquery";
+/**
+ * @file CoursePosition.ts
+ * @description Módulo de gestión de puestos en cursos. Permite asignar,
+ *              editar y eliminar puestos asociados a cada curso.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module PuestosCursos
+ */
+
+import { format } from "jquery";
 
 variables: {
     interface IDomElement_Modal {

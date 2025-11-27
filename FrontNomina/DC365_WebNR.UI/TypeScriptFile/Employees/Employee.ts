@@ -1,4 +1,13 @@
-﻿$(document).ready(function () {
+/**
+ * @file Employee.ts
+ * @description Módulo principal de gestión de empleados. Permite crear, editar,
+ *              eliminar y administrar toda la información de los empleados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module Empleados
+ */
+
+$(document).ready(function () {
     if ($('.idemployee-process-payrol').val().toString() != "") {
         $.ajax({
 

@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de Job.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Jobs;
@@ -20,6 +26,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
         public Task<Response<object>> UpdateStatus(string id, bool status);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de JobCommand.
+
+    /// </summary>
+
     public class JobCommandHandler : IJobCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -28,6 +40,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
         {
             _dbContext = applicationDbContext;
         }
+
+
+        /// <summary>
+
+
+        /// Crea un nuevo registro.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Create(JobRequest model)
@@ -42,6 +69,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
                 Message = "Registro creado correctamente"
             };
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<bool>> Delete(List<string> ids)
@@ -86,6 +128,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
         }
 
 
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> Update(string id, JobRequest model)
         {
             var response = await _dbContext.Jobs.Where(x => x.JobId == id).FirstOrDefaultAsync();
@@ -106,6 +166,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="status">Parametro status.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> UpdateStatus(string id, bool status)

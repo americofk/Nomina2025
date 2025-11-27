@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+/// <summary>
+/// Controlador para la gestión de códigos de deducción activos.
+/// Permite crear, editar, eliminar e inhabilitar códigos de deducción y sus versiones.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DC365_WebNR.CORE.Aplication.Services;
@@ -9,12 +15,21 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de M_DeductionCode.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("codigosdeduccion")]
     public class M_DeductionCodeController : ControllerBase
     {
         ProcessDeductionCode deductionCode;
+        /// <summary>
+        /// Ejecuta DeductionCode de forma asincrona.
+        /// </summary>
+        /// <param name="version">Parametro version.</param>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet]
         public async Task<IActionResult> DeductionCode([FromQuery] bool version = false, [FromQuery] string id = "")
         {
@@ -32,6 +47,20 @@ namespace DC365_WebNR.UI.Controllers
             return View(model);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <param name="version">Parametro version.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{id}")]
         public async Task<JsonResult> GetId(string Id, [FromQuery] bool version = false, [FromQuery] string internalid = "")
         {
@@ -44,6 +73,20 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model));
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="Obj">Parametro Obj.</param>
+
+        /// <param name="operacion">Parametro operacion.</param>
+
+        /// <param name="isversion">Parametro isversion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -76,6 +119,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="DeductionCodeId">Parametro DeductionCodeId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> Delete(List<string> DeductionCodeId)
@@ -87,6 +140,21 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="DeductionCodeIddc">Parametro DeductionCodeIddc.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPost("actualizarestatus")]
@@ -105,6 +173,24 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta Deduction_CodeFilter_Or_MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <param name="IsVersion">Parametro IsVersion.</param>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Deduction_CodeFilter_Or_MoreData(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1, bool IsVersion = false, string Id = "")
         {
@@ -116,6 +202,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("Deduction_CodeFilter_Or_MoreData", model);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="DeductionCodeId">Parametro DeductionCodeId.</param>
+
+        /// <param name="DeductionCodeInternalId">Parametro DeductionCodeInternalId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("eliminarVersion")]
         [AutoValidateAntiforgeryToken]

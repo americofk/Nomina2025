@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de PayrollProcess.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.Helpers;
@@ -25,6 +31,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         public Task<Response<object>> CancelPayroll(string payrollprocessid);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de PayrollProcessCommand.
+
+    /// </summary>
+
     public class PayrollProcessCommandHandler : IPayrollProcessCommandHandler
     {
         private int cont;
@@ -40,6 +52,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         {
             _dbContext = applicationDbContext;
         }
+
+
+        /// <summary>
+
+
+        /// Crea un nuevo registro.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Create(PayrollProcessRequest model)
@@ -111,6 +138,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             };
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<bool>> Delete(List<string> ids)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -148,6 +185,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 };
             }
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Update(string id, PayrollProcessRequest model)
         {
@@ -214,6 +263,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         }
 
         //Sección de procesos 
+        /// <summary>
+        /// Procesa.
+        /// </summary>
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Response<object>> ProcessPayroll(string payrollprocessid)
         {
             var a = await ClearProcessDetails(payrollprocessid);
@@ -371,6 +425,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         }
 
 
+        /// <summary>
+
+
+        /// Ejecuta CalcProcessPayroll de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<object>> CalcProcessPayroll(string payrollprocessid)
         {
             var a = await ClearProcessActions(payrollprocessid);
@@ -512,6 +581,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 };
             }
         }
+
+
+        /// <summary>
+
+
+        /// Ejecuta PayPayroll de forma asincrona.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> PayPayroll(string payrollprocessid)
@@ -659,6 +743,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
+
+
+        /// <summary>
+
+
+        /// Verifica si puede.
+
+
+        /// </summary>
+
+
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> CancelPayroll(string payrollprocessid)

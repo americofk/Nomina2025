@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file PositionDisabled.ts
+ * @description Módulo de gestión de puestos inactivos. Permite eliminar,
+ *              habilitar y listar puestos que han sido deshabilitados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module PuestosInactivos
+ */
+
+variables: {
     var option: number;
 }
 

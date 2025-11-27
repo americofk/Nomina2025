@@ -1,4 +1,4 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Model;
+using DC365_PayrollHR.Core.Application.Common.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
@@ -9,8 +9,15 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Filters
 {
+    /// <summary>
+    /// Filtro para CustomException.
+    /// </summary>
     public class CustomExceptionFilter : IExceptionFilter
     {
+        /// <summary>
+        /// Ejecuta la operacion OnException.
+        /// </summary>
+        /// <param name="context">Parametro context.</param>
         public void OnException(ExceptionContext context)
         {
             context.Result = new JsonResult(new Response<string>()

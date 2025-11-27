@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models;
+/// <summary>
+/// Servicio para la gestión de aulas.
+/// Administra las aulas y espacios destinados a capacitación y formación.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessClassRoom.
+    /// </summary>
     public class ProcessClassRoom: ServiceBase
     {
         public ProcessClassRoom(string _token)
@@ -18,6 +27,14 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <param name="PageSize">Parametro PageSize.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<ClassRoom>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=20)
         {
             List<ClassRoom> courseType = new List<ClassRoom>();
@@ -47,6 +64,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(ClassRoom _model)
         {
             Response<ClassRoom> DataApi = null;
@@ -93,6 +115,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string id, ClassRoom _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -125,6 +153,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -164,6 +197,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //seleccionar un salon de curso
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ClassRoom> Getbyid(string id)
         {
             ClassRoom _model = new ClassRoom();

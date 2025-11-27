@@ -1,4 +1,13 @@
-﻿import { format } from "jquery";
+/**
+ * @file CourseEmployees.ts
+ * @description Módulo de gestión de empleados en cursos. Permite asignar,
+ *              editar y eliminar empleados inscritos en cada curso.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module EmpleadosCursos
+ */
+
+import { format } from "jquery";
 
 variables: {
     interface IDomElement_Modal {

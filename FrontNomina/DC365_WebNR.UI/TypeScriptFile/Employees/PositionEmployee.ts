@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file PositionEmployee.ts
+ * @description Módulo de gestión de puestos por empleado. Permite asignar,
+ *              editar y eliminar asignaciones de puestos para cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module PuestosEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

@@ -1,0 +1,113 @@
+@* Controles para gestión de vistas de usuario *@
+<li class="li-separador">
+    <a class="btn2 btn-app" style="border: 1px solid #fff;"></a>
+</li>
+<li class="dropdown">
+    <a class="btn2 btn-app dropdown-toggle" data-toggle="dropdown" href="#">
+        <i class="fa fa-eye"></i>
+        <span id="current-view-name">Vista por defecto</span>
+        <i class="fa fa-caret-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-views">
+        <li><a href="#" data-view="default"><i class="fa fa-th-list"></i> Vista por defecto</a></li>
+        <li class="divider"></li>
+        <li class="dropdown-header">Vistas Guardadas</li>
+        <div id="saved-views-container"></div>
+        <li class="divider"></li>
+        <li><a href="#" id="btn-new-view"><i class="fa fa-plus"></i> Nueva Vista</a></li>
+        <li><a href="#" id="btn-save-as-view"><i class="fa fa-copy"></i> Guardar Como...</a></li>
+        <li><a href="#" id="btn-save-view-changes" style="display:none;"><i class="fa fa-save"></i> Guardar Cambios</a></li>
+    </ul>
+</li>
+<li>
+    <a class="btn2 btn-app" id="btn-manage-columns" title="Gestionar columnas">
+        <i class="fa fa-columns"></i>
+        Columnas
+    </a>
+</li>
+
+@* Modal para guardar nueva vista *@
+<div class="modal fade" id="modal-save-view" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-save"></i> Guardar Vista</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="view-name">Nombre de la vista</label>
+                    <input type="text" class="form-control" id="view-name" placeholder="Mi vista personalizada">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="view-is-default"> Establecer como predeterminada
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="view-is-public"> Vista pública (visible para otros usuarios)
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn-confirm-save-view">
+                    <i class="fa fa-save"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Modal para guardar como... *@
+<div class="modal fade" id="modal-save-as-view" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title"><i class="fa fa-copy"></i> Guardar Como</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="view-name-saveas">Nombre de la nueva vista</label>
+                    <input type="text" class="form-control" id="view-name-saveas" placeholder="Copia de mi vista">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="view-is-default-saveas"> Establecer como predeterminada
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="view-is-public-saveas"> Vista pública
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn-confirm-save-as">
+                    <i class="fa fa-save"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dropdown-menu-views {
+        min-width: 220px;
+    }
+    .dropdown-menu-views .dropdown-header {
+        font-weight: bold;
+        color: #333;
+    }
+    #saved-views-container li {
+        position: relative;
+    }
+    #saved-views-container .btn-set-default {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+    }
+</style>

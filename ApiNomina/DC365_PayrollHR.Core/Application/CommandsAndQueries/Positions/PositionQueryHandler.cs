@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de Position.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -12,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
 {
+    /// <summary>
+    /// Manejador para operaciones de PositionQuery.
+    /// </summary>
     public class PositionQueryHandler : IQueryHandler<Position>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -22,6 +31,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
         }
 
         //queryFilter is array 0 = PositonStatus, 1 = IsVacants
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="filter">Parametro filter.</param>
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<PagedResponse<IEnumerable<Position>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryfilter = null)
         {
             bool[] filters = (bool[])queryfilter;
@@ -48,6 +64,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
 
             return new PagedResponse<IEnumerable<Position>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="condition">Parametro condition.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<Position>> GetId(object condition)
         {

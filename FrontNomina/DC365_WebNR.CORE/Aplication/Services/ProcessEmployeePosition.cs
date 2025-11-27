@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de posiciones de empleados.
+/// Administra la asignación de empleados a puestos de trabajo en la organización.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEmployeePosition.
+    /// </summary>
     public class ProcessEmployeePosition: ServiceBase
     {
         public ProcessEmployeePosition(string _token)
@@ -19,6 +28,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EmployeePositionResponse>> GetAllDataAsync(string employeeid, int _PageNumber = 1)
         {
             List<EmployeePositionResponse> _model = new List<EmployeePositionResponse>();
@@ -48,6 +63,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(EmployeePosition _model)
         {
             Response<EmployeePosition> DataApi = null;
@@ -73,6 +93,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="InternalId">Parametro InternalId.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string InternalId, EmployeePosition _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -96,6 +122,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj, string employeeid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -118,6 +150,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //buscar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="internalId">Parametro internalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<EmployeePosition> GetDataAsync(string employeeid, string internalId)
         {
             EmployeePosition _model = new EmployeePosition();
@@ -138,6 +176,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //Caducar puesto
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="model">Parametro model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatus(EmployeePositionStatusRequest model)
         {
             ResponseUI responseUI = new ResponseUI();

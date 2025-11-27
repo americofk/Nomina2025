@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Html;
+/// <summary>
+/// Helper para generación de elementos de carga (loaders).
+/// Crea HTML personalizado para mostrar indicadores de carga en la interfaz de usuario.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -7,8 +13,16 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Process
 {
+    /// <summary>
+    /// Clase auxiliar para Loader.
+    /// </summary>
     public static class LoaderHelper
     {
+        /// <summary>
+        /// Ejecuta la operacion HtmlLoader.
+        /// </summary>
+        /// <param name="helper">Parametro helper.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public static IHtmlContent HtmlLoader(this IHtmlHelper helper)
         {
             var menulit = string.Empty;

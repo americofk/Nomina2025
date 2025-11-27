@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file EarningCodeDisabled.ts
+ * @description Módulo de gestión de códigos de ganancia inactivos. Permite eliminar,
+ *              habilitar y listar códigos de ganancia que han sido deshabilitados.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CodigosGananciaInactivos
+ */
+
+variables: {
     var option: number;
 }
 

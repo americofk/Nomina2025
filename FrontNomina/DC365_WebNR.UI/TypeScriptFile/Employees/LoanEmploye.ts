@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file LoanEmploye.ts
+ * @description Módulo de gestión de préstamos por empleado. Permite asignar,
+ *              editar y eliminar préstamos para cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module PrestamosEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

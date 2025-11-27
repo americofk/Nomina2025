@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Models;
+/// <summary>
+/// Servicio para la gestión de catálogos.
+/// Administra los catálogos generales utilizados en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
 using System;
@@ -10,6 +16,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessCatalog.
+    /// </summary>
     public class ProcessCatalog: ServiceBase
     {
         public ProcessCatalog(string _token)
@@ -18,6 +27,10 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista de nivel de educación
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EducationLevel>> GetAllDataEducationlevels()
         {
             List<EducationLevel> educationLevel = new List<EducationLevel>();
@@ -44,6 +57,10 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista de ocupación
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<Occupation>> GetAllDataOccupations()
         {
             List<Occupation> occupation = new List<Occupation>();
@@ -70,6 +87,10 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista de Tipo de discapacidad
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<DisabilityType>> GetAllDataDisabilitytypes()
         {
             List<DisabilityType> disabilityType = new List<DisabilityType>();

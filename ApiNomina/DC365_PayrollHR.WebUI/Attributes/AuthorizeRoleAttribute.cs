@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Model;
+/// <summary>
+/// Atributo para validación de roles.
+/// Permite controlar el acceso a las acciones de los controladores basándose en el rol del usuario.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Domain.Enums;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -9,9 +16,23 @@ using System.Security.Claims;
 
 namespace DC365_PayrollHR.WebUI.Attributes
 {
+    /// <summary>
+    /// Atributo personalizado para AuthorizeRole.
+    /// </summary>
     public class AuthorizeRoleAttribute: ActionFilterAttribute
     {
+        /// <summary>
+        /// Valor numerico para ElevationTypeRequired.
+        /// </summary>
         public AdminType ElevationTypeRequired { get; set; } = AdminType.User;
+
+        /// <summary>
+
+        /// Ejecuta la operacion OnActionExecuting.
+
+        /// </summary>
+
+        /// <param name="context">Parametro context.</param>
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {

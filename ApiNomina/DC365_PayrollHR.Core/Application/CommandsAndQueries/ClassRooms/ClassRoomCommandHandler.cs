@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de ClassRoom.
+/// Gestiona la administración de salones de clase para capacitaciones.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.ClassRooms;
@@ -19,6 +25,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ClassRooms
     {
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de ClassRoomCommand.
+
+    /// </summary>
+
     public class ClassRoomCommandHandler : IClassRoomCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -27,6 +39,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ClassRooms
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(ClassRoomRequest model)
         {
@@ -40,6 +62,21 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ClassRooms
                 Message = "Registro creado correctamente"
             };
         }
+
+
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<bool>> Delete(List<string> ids)
@@ -75,6 +112,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ClassRooms
                 };
             }
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Update(string id, ClassRoomRequest model)

@@ -1,3 +1,9 @@
+/// <summary>
+/// Modelo de solicitud para TaxDetail.
+/// Define los parámetros necesarios para crear o modificar registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
 ﻿using DC365_PayrollHR.Core.Application.Common.Validation;
 using System;
 using System.Collections.Generic;
@@ -6,21 +12,64 @@ using System.Text;
 
 namespace DC365_PayrollHR.Core.Application.Common.Model.TaxDetails
 {
+    /// <summary>
+    /// Modelo de solicitud para TaxDetail.
+    /// </summary>
     public class TaxDetailRequest: GenericValidation<TaxDetailRequest>, IValidatableObject
     {
         //Salario anual superior a 
+        /// <summary>
+        /// Valor numerico para AnnualAmountHigher.
+        /// </summary>
         public decimal AnnualAmountHigher { get; set; }
 
         //Salario anual no excede 
+        /// <summary>
+        /// Valor numerico para AnnualAmountNotExceed.
+        /// </summary>
         public decimal AnnualAmountNotExceed { get; set; }
+
+        /// <summary>
+
+        /// Porcentaje.
+
+        /// </summary>
 
         public decimal Percent { get; set; }
 
+        /// <summary>
+
+        /// Monto.
+
+        /// </summary>
+
         public decimal FixedAmount { get; set; }
+
+        /// <summary>
+
+        /// Valor numerico para ApplicableScale.
+
+        /// </summary>
 
         public decimal ApplicableScale { get; set; }
 
+        /// <summary>
+
+        /// Identificador.
+
+        /// </summary>
+
         public string TaxId { get; set; }
+
+        /// <summary>
+
+        /// Valida los datos.
+
+        /// </summary>
+
+        /// <param name="validationContext">Parametro validationContext.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

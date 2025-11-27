@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de reportes.
+/// Administra la generación y procesamiento de reportes del sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Reports;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessReports.
+    /// </summary>
     public class ProcessReports: ServiceBase
     {
         private const string Endpoint = "reports";
@@ -20,6 +29,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista Pagos Nomina
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+        /// <param name="employeeId">Parametro employeeId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<ReportPayrollpayment>> PagosNomina(string payrollprocessid,string deparmentId, string employeeId)
         {
             List<ReportPayrollpayment> _model = new List<ReportPayrollpayment>();
@@ -46,6 +62,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Envio de correo 
+        /// <summary>
+        /// Ejecuta EnvioCorreoPagosNomina de forma asincrona.
+        /// </summary>
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+        /// <param name="employeeId">Parametro employeeId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> EnvioCorreoPagosNomina(string payrollprocessid, string deparmentId, string employeeId)
         {
             Response<string> DataApi = null;
@@ -71,6 +94,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Reporte de empleados
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportEmployeeResponse> GetAllEmployeeReport(string deparmentId)
         {
             ReportEmployeeResponse _model = new ReportEmployeeResponse();
@@ -99,6 +127,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Reporte nómina
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportPayrollProcess> GetAllDataPayrollReport (string payrollprocessid, string deparmentId)
         {
             ReportPayrollProcess _model = new ReportPayrollProcess();
@@ -127,6 +161,14 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Reporte tss
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="payrollid">Parametro payrollid.</param>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <param name="typetss">Parametro typetss.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportTSSFileResponse> GetAllDataTssReport(string payrollid, int year, int month, string typetss)
         {
             ReportTSSFileResponse _model = new ReportTSSFileResponse();
@@ -155,6 +197,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Reporte nómina DGT4
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT4> GetAllDataDGT4Report(int year, int month)
         {
             ReportDGT4 _model = new ReportDGT4();
@@ -183,6 +231,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Reporte nómina DGT2
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT2> GetAllDataDGT2Report(int year, int month)
         {
             ReportDGT2 _model = new ReportDGT2();
@@ -211,6 +265,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Reporte nómina DGT3
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT3> GetAllDataDGT3Report(int year, int month)
         {
             ReportDGT3 _model = new ReportDGT3();
@@ -239,6 +299,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Reporte nómina DGT5
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT5> GetAllDataDGT5Report(int year, int month)
         {
             ReportDGT5 _model = new ReportDGT5();
@@ -267,6 +333,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Reporte nómina DGT9
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT9> GetAllDataDGT9Report(int year, int month)
         {
             ReportDGT9 _model = new ReportDGT9();
@@ -295,6 +367,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
         
         //Reporte nómina DGT11
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT11> GetAllDataDGT11Report(int year, int month)
         {
             ReportDGT11 _model = new ReportDGT11();
@@ -322,6 +400,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
             return _model;
         }
         //Reporte nómina DGT12
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="year">Parametro year.</param>
+        /// <param name="month">Parametro month.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ReportDGT12> GetAllDataDGT12Report(int year, int month)
         {
             ReportDGT12 _model = new ReportDGT12();
@@ -351,6 +435,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
 
         //Lista Resumen Pagos Nomina
+        /// <summary>
+        /// Obtiene una coleccion de datos.
+        /// </summary>
+        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
+        /// <param name="deparmentId">Parametro deparmentId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<ReportResumePayrollResponse>> ResumenPagosNomina(string payrollprocessid, string deparmentId)
         {
             List<ReportResumePayrollResponse> _model = new List<ReportResumePayrollResponse>();

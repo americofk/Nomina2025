@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de Payroll.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -13,6 +19,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
 {
+    /// <summary>
+    /// Manejador para operaciones de PayrollQuery.
+    /// </summary>
     public class PayrollQueryHandler : IQueryHandler<PayrollResponse>
     {
         private readonly IApplicationDbContext dbContext;
@@ -23,6 +32,27 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
             dbContext = _applicationDbContext;
             _queryHandler = queryHandler;
         }
+
+
+        /// <summary>
+
+
+        /// Obtiene.
+
+
+        /// </summary>
+
+
+        /// <param name="filter">Parametro filter.</param>
+
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+
+        /// <param name="queryFilter">Parametro queryFilter.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<PagedResponse<IEnumerable<PayrollResponse>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryFilter = null)
@@ -50,6 +80,16 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
 
             return new PagedResponse<IEnumerable<PayrollResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="condition">Parametro condition.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<PayrollResponse>> GetId(object condition)
         {

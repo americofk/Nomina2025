@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+/// <summary>
+/// Atributo personalizado para validación de autenticación de usuario.
+/// Verifica que el usuario esté autenticado antes de ejecutar acciones del controlador.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
@@ -9,9 +15,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Process
 {
+    /// <summary>
+    /// Atributo personalizado para User.
+    /// </summary>
     [AttributeUsage(AttributeTargets.All)]
     public class UserAttribute : ActionFilterAttribute
     {
+
+        /// <summary>
+
+        /// Ejecuta la operacion OnActionExecuting.
+
+        /// </summary>
+
+        /// <param name="context">Parametro context.</param>
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {            

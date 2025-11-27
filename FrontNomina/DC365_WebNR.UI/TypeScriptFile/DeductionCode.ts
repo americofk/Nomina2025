@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file DeductionCode.ts
+ * @description Módulo de gestión de códigos de deducción. Permite crear, editar,
+ *              eliminar y administrar los conceptos de deducciones en nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CodigosDeduccion
+ */
+
+variables: {
     var option: number;
 }
 

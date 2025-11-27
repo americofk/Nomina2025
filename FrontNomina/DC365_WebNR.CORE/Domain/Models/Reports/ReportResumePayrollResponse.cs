@@ -1,4 +1,10 @@
-锘縰sing DC365_WebNR.CORE.Domain.Models.Enums;
+/// <summary>
+/// Modelo de respuesta para resumen de n贸mina.
+/// Contiene datos consolidados y totalizados de procesos de n贸mina.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,7 +36,7 @@ namespace DC365_WebNR.CORE.Domain.Models.Reports
 
         public decimal LoanCooperative { get; set; }
 
-        //Actualizaci贸n abono de cooperativa
+        //Actualizaci髇 abono de cooperativa
         public decimal DeductionCooperative { get; set; }
     }
 
@@ -62,7 +68,7 @@ namespace DC365_WebNR.CORE.Domain.Models.Reports
 
         public string LoanCooperative { get; set; }
 
-        //Actualizaci贸n abono de cooperativa
+        //Actualizaci髇 abono de cooperativa
         public string DeductionCooperative { get; set; }
     }
 

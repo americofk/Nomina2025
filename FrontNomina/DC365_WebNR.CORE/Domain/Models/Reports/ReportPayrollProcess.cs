@@ -1,4 +1,10 @@
-锘縰sing System;
+/// <summary>
+/// Modelo de datos para reporte de procesos de n贸mina.
+/// Define la estructura de datos para reportes de procesos de n贸mina ejecutados.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -34,7 +40,7 @@ namespace DC365_WebNR.CORE.Domain.Models.Reports
         public decimal TotalDiscount { get; set; }
 
 
-        //Actualizaci贸n abono de cooperativa
+        //Actualizaci髇 abono de cooperativa
         public string LoanCooperative { get; set; }
         public string DeductionCooperative { get; set; }
 
@@ -62,7 +68,7 @@ namespace DC365_WebNR.CORE.Domain.Models.Reports
 
         public decimal TotalAmount { get; set; }
 
-        //Actualizaci贸n abono de cooperativa
+        //Actualizaci髇 abono de cooperativa
         public string LoanCooperative { get; set; }
         public string DeductionCooperative { get; set; }
     }
@@ -89,7 +95,7 @@ namespace DC365_WebNR.CORE.Domain.Models.Reports
 
         public string LoanCooperative { get; set; }
 
-        //Actualizaci贸n abono de cooperativa
+        //Actualizaci髇 abono de cooperativa
         public string DeductionCooperative { get; set; }
     }
 }

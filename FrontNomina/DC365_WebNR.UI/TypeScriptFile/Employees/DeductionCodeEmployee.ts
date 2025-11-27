@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file DeductionCodeEmployee.ts
+ * @description Módulo de gestión de códigos de deducción por empleado. Permite asignar,
+ *              editar y eliminar deducciones específicas para cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module DeduccionesEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

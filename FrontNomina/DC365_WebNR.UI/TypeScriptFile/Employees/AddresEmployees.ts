@@ -1,4 +1,13 @@
-﻿//var idpositionforRequirement: string;
+/**
+ * @file AddresEmployees.ts
+ * @description Módulo de gestión de direcciones de empleados. Permite agregar,
+ *              editar y eliminar direcciones asociadas a cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module DireccionesEmpleados
+ */
+
+//var idpositionforRequirement: string;
 var optionAddres: number;
 
 funciones: {

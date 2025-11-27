@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de EmployeeWorkControlCalendar.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.EmployeeWorkControlCalendars;
@@ -20,6 +26,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeWorkContro
 
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de EmployeeWorkControlCalendarCommand.
+
+    /// </summary>
+
     public class EmployeeWorkControlCalendarCommandHandler : IEmployeeWorkControlCalendarCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -28,6 +40,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeWorkContro
         {
             _dbContext = dbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(EmployeeWorkControlCalendarRequest model)
         {
@@ -66,6 +88,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeWorkContro
             };
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <param name="parentid">Parametro parentid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<bool>> DeleteByParent(List<EmployeeWorkControlCalendarDeleteRequest> ids, string parentid)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -101,6 +135,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeWorkContro
                 };
             }
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Update(string id, EmployeeWorkControlCalendarRequest model)
         {

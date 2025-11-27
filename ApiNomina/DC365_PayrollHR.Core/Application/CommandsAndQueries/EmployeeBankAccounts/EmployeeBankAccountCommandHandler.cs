@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Helper;
+/// <summary>
+/// Manejador de comandos para operaciones CRUD de EmployeeBankAccount.
+/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.EmployeeBankAccounts;
@@ -19,6 +25,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeBankAccoun
         public Task<Response<bool>> DeleteByEmployee(List<string> ids, string employeeid);
     }
 
+    /// <summary>
+
+    /// Manejador para operaciones de EmployeeBankAccountCommand.
+
+    /// </summary>
+
     public class EmployeeBankAccountCommandHandler : IEmployeeBankAccountCommandHandler
     {
         private readonly IApplicationDbContext _dbContext;
@@ -27,6 +39,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeBankAccoun
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Crea un nuevo registro.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Create(EmployeeBankAccountRequest model)
         {
@@ -64,6 +86,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeBankAccoun
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         public async Task<Response<bool>> DeleteByEmployee(List<string> ids, string employeeid)
         {
             using var transaction = _dbContext.Database.BeginTransaction();
@@ -98,6 +138,24 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeBankAccoun
                 };
             }
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Update(string id, EmployeeBankAccountRequest model)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -6,8 +6,14 @@ using System.Text;
 
 namespace DC365_WebNR.CORE.Domain.Models.Enums
 {
+    /// <summary>
+    /// Clase para gestion de GlobalsEnum.
+    /// </summary>
     public class GlobalsEnum
     {
+        /// <summary>
+        /// Enumeracion de valores para PayFrecuency.
+        /// </summary>
         public enum PayFrecuency
         {
             Diario = 0,
@@ -21,6 +27,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
             Anual = 8
         }
     }
+    /// <summary>
+    /// Enumeracion de valores para EmployeeAction.
+    /// </summary>
     public enum EmployeeAction
     {
         Ninguno = 0,
@@ -40,6 +49,15 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     }
 
 
+    /// <summary>
+
+
+    /// Enumeracion de valores para StatusPeriod.
+
+
+    /// </summary>
+
+
     public enum StatusPeriod
     {
         [Display(Name = "Abierto")]
@@ -52,12 +70,24 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Registered = 3
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para AdminType.
+
+    /// </summary>
+
     public enum AdminType
     {
         LocalAdmin = 0,
         GlobalAdmin = 1,
         User = 2
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para CourseStatus.
+
+    /// </summary>
 
     public enum CourseStatus
     {
@@ -66,6 +96,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Closed = 2
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para InternalExternal.
+
+    /// </summary>
+
     public enum InternalExternal
     {
         [Display(Name = "Interno")]
@@ -73,6 +109,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Externo")]
         External = 1,
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para Gender.
+
+    /// </summary>
 
     public enum Gender
     {
@@ -83,6 +125,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "No especificado")]
         NonSpecific = 2
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para MaritalStatus.
+
+    /// </summary>
 
     public enum MaritalStatus
     {
@@ -98,6 +146,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Separated = 4
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para EmployeeType.
+
+    /// </summary>
+
     public enum EmployeeType
     {
         [Display(Name = "Empleado")]
@@ -107,6 +161,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         //[Display(Name = "Pendiente por suspender")]
         //PendingSuspend = 2
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para ContactType.
+
+    /// </summary>
 
     public enum ContactType
     {
@@ -122,6 +182,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Otro")]
         Otro = 3
     }
+
+    /// <summary>
+
+    /// Clase base para IndexBase.
+
+    /// </summary>
 
     public enum IndexBase
     {
@@ -145,6 +211,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         EarningHours = 8 // Horas de trabajo
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para WorkStatus.
+
+    /// </summary>
+
     public enum WorkStatus
     {
         Candidate = 0,
@@ -152,6 +224,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Employ = 2,
         Disable = 3
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para IndexBaseTwo.
+
+    /// </summary>
 
     public enum IndexBaseTwo
     {
@@ -162,6 +240,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para PayrollAction.
+
+    /// </summary>
+
     public enum PayrollAction
     {
         [Display(Name = "Deducción")]
@@ -171,6 +255,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Ambos")]
         Both = 2
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para PayFrecuency.
+
+    /// </summary>
 
     public enum PayFrecuency
     {
@@ -194,6 +284,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Yearly = 8
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para AccountType.
+
+    /// </summary>
+
     public enum AccountType
     {
         [Display(Name = "Ahorro")]
@@ -201,6 +297,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Corriente")]
         Corriente = 1
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para DocumentType.
+
+    /// </summary>
 
     public enum DocumentType
     {
@@ -213,6 +315,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Licencia de conducir")]
         DriverLicence = 3
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para PayrollProcessStatus.
+
+    /// </summary>
 
     public enum PayrollProcessStatus
     {
@@ -234,6 +342,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Cancelada")]
         Canceled = 5
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para SelectListOptions.
+
+    /// </summary>
 
     public enum SelectListOptions
     {
@@ -267,6 +381,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para StatusExtraHour.
+
+    /// </summary>
+
     public enum StatusExtraHour
     {
         [Display(Name = "Abierta")]
@@ -274,6 +394,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Pagada")]
         Pagada = 1
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para PayMethod.
+
+    /// </summary>
 
     public enum PayMethod
     {
@@ -283,6 +409,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Transferencia")]
         Transfer = 1,
     }
+    /// <summary>
+    /// Enumeracion de valores para TypeDTG.
+    /// </summary>
     public enum TypeDTG
     {
 
@@ -294,6 +423,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Dgt12 = 5,
         TSS = 6
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para PayrollActionType.
+
+    /// </summary>
 
     public enum PayrollActionType
     {
@@ -313,6 +448,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         ExtraHours = 6
     }
 
+    /// <summary>
+
+    /// Enumeracion de valores para IndexBaseDeduction.
+
+    /// </summary>
+
     public enum IndexBaseDeduction
     {
         [Display(Name = "Monto fijo")]
@@ -321,6 +462,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         EarningPercent = 7,
 
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para BatchEntity.
+
+    /// </summary>
 
     public enum BatchEntity
     {
@@ -360,6 +507,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Control asistencia de empleados")]
         EmployeeWorkControlCalendar = 11,
     }
+
+    /// <summary>
+
+    /// Enumeracion de valores para StatusWorkControl.
+
+    /// </summary>
 
     public enum StatusWorkControl
     {

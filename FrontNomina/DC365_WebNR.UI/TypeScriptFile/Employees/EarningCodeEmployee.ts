@@ -1,4 +1,13 @@
-﻿variables: {
+/**
+ * @file EarningCodeEmployee.ts
+ * @description Módulo de gestión de códigos de ganancia por empleado. Permite asignar,
+ *              editar y eliminar ganancias específicas para cada empleado.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module GananciasEmpleados
+ */
+
+variables: {
     interface IDomElement_Modal {
         form: string
         url_buscar_form: string // buscar formulario

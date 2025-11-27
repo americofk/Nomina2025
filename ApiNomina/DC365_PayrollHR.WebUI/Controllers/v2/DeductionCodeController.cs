@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Controlador API para gestión de DeductionCode.
+/// Endpoint base: api/v2/deductioncodes
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.StoreServices.DeductionCodes;
@@ -15,6 +22,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de DeductionCode.
+    /// </summary>
     [Route("api/v2.0/deductioncodes")]
     [ApiController]
     public class DeductionCodeController : ControllerBase
@@ -32,6 +42,22 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _queryVersionHandler = queryVersionHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="versions">Parametro versions.</param>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, View = true)]
         public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter, [FromQuery] bool versions = false, [FromQuery] string id = "")
@@ -47,6 +73,20 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
                 return StatusCode(objectresult.StatusHttp, objectresult);
             }
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="versions">Parametro versions.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("enabled/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, View = true)]
@@ -65,6 +105,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             
         }
 
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="_model">Parametro _model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, Edit = true)]
         public async Task<ActionResult<Response<object>>> Post([FromBody] DeductionCodeRequest _model)
@@ -72,6 +122,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _commandHandler.Create(_model);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpDelete("enabled")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, Delete = true)]
@@ -81,6 +141,20 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="isVersion">Parametro isVersion.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPut("enabled/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, Edit = true)]
         public async Task<ActionResult> Update([FromBody] DeductionCodeRequest model, string id, [FromQuery] bool isVersion = false)
@@ -88,6 +162,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _commandHandler.Update(id, model, isVersion);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPut("enabled/updatestatus/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, Edit = true)]
@@ -98,6 +182,12 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         }
 
         //Eliminar versiones
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="internalid">Parametro internalid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpDelete("version/{id}/{internalid}")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, Delete = true)]
         public async Task<ActionResult> Delete(string id, int internalid)
@@ -105,6 +195,46 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _commandHandler.DeleteVersion(id, internalid);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+
+
+        /// <summary>
+
+
+
+
+        /// Obtiene.
+
+
+
+
+        /// </summary>
+
+
+
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+
+
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+
+
+
+        /// <param name="versions">Parametro versions.</param>
+
+
+
+
+        /// <param name="id">Parametro id.</param>
+
+
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
 
@@ -125,6 +255,20 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <param name="versions">Parametro versions.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("disabled/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, View = true)]
         public async Task<ActionResult> GetDisabledById(string id, [FromQuery] bool versions = false, [FromQuery] string internalid = "")
@@ -141,6 +285,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             }
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="ids">Parametro ids.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpDelete("disabled")]
         [AuthorizePrivilege(MenuId = MenuConst.EarningCodeEnabled, Delete = true)]
         public async Task<ActionResult> DeleteDisabled([FromBody] List<string> ids)
@@ -148,6 +302,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _commandHandler.Delete(ids);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Actualiza un registro existente.
+
+        /// </summary>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPut("disabled/updatestatus/{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.DeductionCodeEnabled, Edit = true)]

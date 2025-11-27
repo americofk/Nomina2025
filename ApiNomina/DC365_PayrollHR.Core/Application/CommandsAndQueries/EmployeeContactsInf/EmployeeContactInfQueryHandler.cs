@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de EmployeeContactInf.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -12,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeContactsInf
 {
+    /// <summary>
+    /// Manejador para operaciones de EmployeeContactInfQuery.
+    /// </summary>
     public class EmployeeContactInfQueryHandler : IQueryHandler<EmployeeContactInf>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -20,6 +29,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeContactsIn
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<EmployeeContactInf>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryfilter = null)
         {
@@ -46,6 +69,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeContactsIn
 
             return new PagedResponse<IEnumerable<EmployeeContactInf>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="condition">Parametro condition.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<EmployeeContactInf>> GetId(object condition)
         {

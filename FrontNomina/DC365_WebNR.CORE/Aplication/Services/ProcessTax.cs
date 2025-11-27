@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de impuestos.
+/// Administra el catálogo de impuestos y tasas fiscales del sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -12,6 +18,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessTax.
+    /// </summary>
     public class ProcessTax: ServiceBase
     {
         public ProcessTax(string _token)
@@ -20,6 +29,13 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<Tax>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             List<Tax> _model = new List<Tax>();
@@ -47,6 +63,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(Tax _model)
         {
             Response<Tax> DataApi = null;
@@ -73,6 +94,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="_id">Parametro _id.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string _id, Tax _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -96,6 +123,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -119,6 +151,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //buscar por id 
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_projid">Parametro _projid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<Tax> GetDataAsync(string _projid)
         {
             Tax _model = new Tax();
@@ -138,6 +175,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
         
         //Inhabilitar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatus(string id)
         {
             //Response<Department> DataApi = null;

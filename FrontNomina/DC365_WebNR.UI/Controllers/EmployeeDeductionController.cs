@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de deducciones asignadas a empleados.
+/// Permite crear, editar, eliminar y listar códigos de deducción por empleado.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using DC365_WebNR.UI.Process;
@@ -11,12 +17,20 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de EmployeeDeduction.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("codigosdeduccionesempleados")]
     public class EmployeeDeductionController : ControllerBase
     {
         ProcessEmployeeDeductionCode process;
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpGet("{employeeid}")]
         public async Task<ActionResult> Get(string employeeid)
         {
@@ -29,6 +43,14 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("ListEmployeeDeductionCode", list);
         }
 
+        /// <summary>
+
+        /// Ejecuta EmployeeDeductionCode de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("FormNewEmployeeDeductionCode")]
         public async Task<ActionResult> EmployeeDeductionCode()
         {
@@ -39,6 +61,18 @@ namespace DC365_WebNR.UI.Controllers
             EmployeeDeductionCode model = new EmployeeDeductionCode();
             return PartialView("NewEmployeeDeductionCode", model);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <param name="operation">Parametro operation.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [AutoValidateAntiforgeryToken]
@@ -70,6 +104,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <param name="internalId">Parametro internalId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{employeeid}/{internalId}")]
         public async Task<ActionResult> GetId(string employeeid, string internalId)
         {
@@ -85,6 +131,18 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("NewEmployeeDeductionCode", _model);
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="listid_DeductionCode">Parametro listid_DeductionCode.</param>
+
+        /// <param name="employeeid">Parametro employeeid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [AutoValidateAntiforgeryToken]
         public async Task<JsonResult> Delete(List<string> listid_DeductionCode, string employeeid)
@@ -97,6 +155,14 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+
+        /// <summary>
+
+        /// Ejecuta ListDeductionCode de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("Buscarcodigosdeducciones")]
         public async Task<JsonResult> ListDeductionCode()

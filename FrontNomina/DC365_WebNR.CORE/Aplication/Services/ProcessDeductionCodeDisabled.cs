@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la gestión de códigos de deducción inactivos.
+/// Administra códigos de deducción que han sido deshabilitados en el sistema.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessDeductionCodeDisabled.
+    /// </summary>
     public class ProcessDeductionCodeDisabled : ServiceBase
     {
         public ProcessDeductionCodeDisabled(string _token)
@@ -20,6 +29,15 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Seleccionar todos
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="_IsVersion">Parametro _IsVersion.</param>
+        /// <param name="id">Parametro id.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<DeductionCode>> GetAllDataAsync(bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
             List<DeductionCode> courseType = new List<DeductionCode>();
@@ -47,6 +65,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<string> Obj)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -89,6 +112,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //habilitar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="id">Parametro id.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> UpdateStatus(string id)
         {
             //Response<Department> DataApi = null;

@@ -1,4 +1,11 @@
-﻿using DC365_PayrollHR.Core.Application.CommandsAndQueries.TaxDetails;
+/// <summary>
+/// Controlador API para gestión de TaxDetail.
+/// Endpoint base: api/v2/taxdetails
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.TaxDetails;
 using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.TaxDetails;
@@ -17,6 +24,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.WebUI.Controllers.v2
 {
+    /// <summary>
+    /// Controlador para gestion de TaxDetail.
+    /// </summary>
     [Route("api/v2.0/taxdetails")]
     [ApiController]
     [Authorize]
@@ -33,6 +43,20 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             _CommandHandler = commandHandler;
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="paginationFilter">Parametro paginationFilter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{id}")]
         [AuthorizePrivilege(MenuId = MenuConst.TaxEnabled, View = true)]
         public async Task<ActionResult> Get([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter, string id)
@@ -41,6 +65,18 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="taxid">Parametro taxid.</param>
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("{taxid}/{internalid}")]
         [AuthorizePrivilege(MenuId = MenuConst.TaxEnabled, View = true)]
         public async Task<ActionResult> GetById(string taxid, int internalid)
@@ -48,6 +84,16 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _QueryHandler.GetId(new string[]{taxid, internalid.ToString()});
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+
+        /// Crea o procesa.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost]
         [AuthorizePrivilege(MenuId = MenuConst.TaxEnabled, Edit = true)]
@@ -58,6 +104,24 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         }
 
 
+        /// <summary>
+
+
+        /// Elimina un registro.
+
+
+        /// </summary>
+
+
+        /// <param name="ids">Parametro ids.</param>
+
+
+        /// <param name="taxid">Parametro taxid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
+
+
         [HttpDelete("{taxid}")]
         [AuthorizePrivilege(MenuId = MenuConst.TaxEnabled, Delete = true)]
         public async Task<ActionResult> Delete([FromBody] List<string> ids, string taxid)
@@ -65,6 +129,24 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.DeleteByParent(ids, taxid);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+
+        /// <summary>
+
+
+        /// Actualiza un registro existente.
+
+
+        /// </summary>
+
+
+        /// <param name="model">Parametro model.</param>
+
+
+        /// <param name="internalid">Parametro internalid.</param>
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
         [HttpPut("{internalid}")]

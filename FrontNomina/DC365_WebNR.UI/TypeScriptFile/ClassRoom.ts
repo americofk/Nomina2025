@@ -1,4 +1,13 @@
-﻿var option: number;
+/**
+ * @file ClassRoom.ts
+ * @description Módulo de gestión de salones de cursos. Permite crear, editar,
+ *              eliminar y administrar aulas para capacitaciones.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module SalonesCursos
+ */
+
+var option: number;
 //cerrar nuevo salon de curso
 $('.OpCloseform').on('click', function () {
     funtionNewClassRoom("close");

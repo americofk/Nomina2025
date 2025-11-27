@@ -1,4 +1,13 @@
-﻿escuchadores: {
+/**
+ * @file PayCycle.ts
+ * @description Módulo de gestión de ciclos de pago. Permite crear, editar
+ *              y administrar los períodos de pago de la nómina.
+ * @author Equipo de Desarrollo
+ * @date 2025
+ * @module CiclosPago
+ */
+
+escuchadores: {
 
     //save PayCycle
     $("#SavePayCycle").submit(function (e) {

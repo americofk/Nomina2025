@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Interface;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de DashboardInfo.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
 using DC365_PayrollHR.Core.Application.Common.Model.DashboardInfo;
 using DC365_PayrollHR.Core.Domain.Enums;
@@ -11,11 +17,20 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
 {
+    /// <summary>
+    /// Manejador para operaciones de IDashboardInfoQuery.
+    /// </summary>
     public interface IDashboardInfoQueryHandler
     {
         public Task<Response<object>> GetCount();
         public Task<Response<object>> GetGraphics(int _year, string _payrollid);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de DashboardInfoQuery.
+
+    /// </summary>
 
     public class DashboardInfoQueryHandler : IDashboardInfoQueryHandler
     {
@@ -27,6 +42,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
         {
             dbContext = _dbcontext;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> GetCount()
         {
@@ -56,6 +79,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
             return new Response<object>(cardInfo);            
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="_year">Parametro _year.</param>
+
+        /// <param name="_payrollid">Parametro _payrollid.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<object>> GetGraphics(int _year, string _payrollid)
         {
             year = _year;
@@ -74,6 +109,34 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
                 TrimestralPayrollAmount = trimestralpayrollamount
             });
         }
+
+
+
+
+
+
+        /// <summary>
+
+
+
+
+
+
+        /// Ejecuta EmployeeByDepartment de forma asincrona.
+
+
+
+
+
+
+        /// </summary>
+
+
+
+
+
+
+        /// <returns>Resultado de la operacion.</returns>
 
 
 
@@ -110,6 +173,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
 
             return new EmployeeByDepartments() { Keys = key, Values = value };
         }
+
+        /// <summary>
+
+        /// Ejecuta DtbutionCtbutionByYear de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<DeductionsContributionsByYear> DtbutionCtbutionByYear()
         {
@@ -177,6 +248,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
             return new DeductionsContributionsByYear() { Keys = key, DtbutionValues = Dtbutionvalue, CtbutionValues = Ctbutionvalue };
         }
 
+        /// <summary>
+
+        /// Ejecuta ActionsAmount de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<AmountByAction> ActionsAmount()
         {
             List<string> key = new List<string>();
@@ -204,6 +283,14 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
 
             return new AmountByAction() { Keys = key, Values = Value};
         }
+
+        /// <summary>
+
+        /// Ejecuta PayrollAmountTrimestral de forma asincrona.
+
+        /// </summary>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<TrimestralPayrollAmount> PayrollAmountTrimestral()
         {

@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de CompanyToUser.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -15,6 +21,9 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CompanyAssignedToUsers
 {
+    /// <summary>
+    /// Manejador para operaciones de CompanyToUserQuery.
+    /// </summary>
     public class CompanyToUserQueryHandler : IQueryAllHandler<CompanyToUserResponse>
     {
         private readonly IApplicationDbContext _dbContext;
@@ -23,6 +32,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CompanyAssignedToU
         {
             _dbContext = applicationDbContext;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="queryFilter">Parametro queryFilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<CompanyToUserResponse>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryFilter = null)
         {

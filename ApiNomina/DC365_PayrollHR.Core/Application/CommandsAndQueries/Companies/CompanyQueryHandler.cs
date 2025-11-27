@@ -1,4 +1,10 @@
-﻿using DC365_PayrollHR.Core.Application.Common.Filter;
+/// <summary>
+/// Manejador de consultas para obtenciÃ³n de datos de Company.
+/// Facilita la recuperaciÃ³n de informaciÃ³n mediante consultas optimizadas.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_PayrollHR.Core.Application.Common.Filter;
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -14,10 +20,19 @@ using System.Threading.Tasks;
 
 namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Companies
 {
+    /// <summary>
+    /// Manejador para operaciones de ICompanyQuery.
+    /// </summary>
     public interface ICompanyQueryHandler: IQueryHandler<CompanyResponse>
     {
         public Task<PagedResponse<IEnumerable<CompanyResponse>>> GetAll(PaginationFilter filter);
     }
+
+    /// <summary>
+
+    /// Manejador para operaciones de CompanyQuery.
+
+    /// </summary>
 
     public class CompanyQueryHandler : ICompanyQueryHandler
     {
@@ -29,6 +44,20 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Companies
             _dbContext = applicationDbContext;
             _currentUserInformation = currentUserInformation;
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <param name="searchFilter">Parametro searchFilter.</param>
+
+        /// <param name="queryfilter">Parametro queryfilter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<CompanyResponse>>> GetAll(PaginationFilter filter, SearchFilter searchFilter, object queryfilter = null)
         {
@@ -69,6 +98,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Companies
             return new PagedResponse<IEnumerable<CompanyResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
         }
 
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="condition">Parametro condition.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         public async Task<Response<CompanyResponse>> GetId(object condition)
         {
             var response = await _dbContext.Companies
@@ -82,6 +121,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Companies
 
             return new Response<CompanyResponse>(response);
         }
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="filter">Parametro filter.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<PagedResponse<IEnumerable<CompanyResponse>>> GetAll(PaginationFilter filter)
         {

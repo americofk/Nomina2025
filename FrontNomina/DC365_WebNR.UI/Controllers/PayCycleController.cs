@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.Services;
+/// <summary>
+/// Controlador para la gestión de ciclos de pago.
+/// Permite crear, eliminar y marcar ciclos para impuestos y TSS.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.Services;
 using DC365_WebNR.CORE.Aplication.Services.Container;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
@@ -12,12 +18,25 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.UI.Controllers
 {
+    /// <summary>
+    /// Controlador para gestion de PayCycle.
+    /// </summary>
     [UserAttribute]
     [TypeFilter(typeof(LicenseFilter))]
     [Route("ciclopagos")]
     public class PayCycleController : ControllerBase
     {
         ProcessPayCycle process;
+
+        /// <summary>
+
+        /// Obtiene.
+
+        /// </summary>
+
+        /// <param name="payrollId">Parametro payrollId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("{payrollId}")]
         public async Task<ActionResult> Get(string payrollId)
@@ -31,6 +50,18 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("ListPayCycle", list);
         }
+
+        /// <summary>
+
+        /// Guarda los cambios.
+
+        /// </summary>
+
+        /// <param name="PayrollId">Parametro PayrollId.</param>
+
+        /// <param name="PayCycleQty">Parametro PayCycleQty.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpPost("guardar")]
         [ValidateAntiForgeryToken]
@@ -53,6 +84,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Elimina un registro.
+
+        /// </summary>
+
+        /// <param name="IdPayCycle">Parametro IdPayCycle.</param>
+
+        /// <param name="_PayrollId">Parametro _PayrollId.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("eliminar")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> delete(List<string> IdPayCycle, string _PayrollId)
@@ -66,6 +109,16 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta MarkForTax de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="model">Parametro model.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpPost("marcarimpuesto")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> MarkForTax(PayCycleIsForTaxRequest model)
@@ -78,6 +131,11 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(responseUI));
         }
+        /// <summary>
+        /// Ejecuta MarkForTss de forma asincrona.
+        /// </summary>
+        /// <param name="model">Parametro model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         [HttpPost("marcartss")]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> MarkForTss(PayCycleIsForTssRequest model)
@@ -91,6 +149,18 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(responseUI));
         }
 
+        /// <summary>
+
+        /// Ejecuta MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="pagenumber">Parametro pagenumber.</param>
+
+        /// <param name="id">Parametro id.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
+
         [HttpGet("moredata")]
         public async Task<ActionResult> MoreData(int pagenumber,string id)
         {
@@ -101,6 +171,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.Culture = dataUser[5];
             return PartialView("ListPayCycle", list);
         }
+
+        /// <summary>
+
+        /// Ejecuta ListPayCycle_Filter_Or_MoreData de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="Id">Parametro Id.</param>
+
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> ListPayCycle_Filter_Or_MoreData(string Id,int _PageNumber = 1)

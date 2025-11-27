@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Domain.Const;
+/// <summary>
+/// Servicio para la autenticación de usuarios.
+/// Contiene la lógica de validación de credenciales y gestión de sesiones.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
 using Newtonsoft.Json;
@@ -11,9 +17,22 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Clase para gestion de Login.
+    /// </summary>
     public class Login : ServiceBase
     {
         private const string Endpoint = "login";
+
+        /// <summary>
+
+        /// Ejecuta ValidaEmailUser de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="_validateLogin">Parametro _validateLogin.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<ResponseUI> ValidaEmailUser(ValidateLogin _validateLogin)
         {
@@ -33,6 +52,16 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
             return responseUI;
         }
+
+        /// <summary>
+
+        /// Ejecuta ValidaLogin de forma asincrona.
+
+        /// </summary>
+
+        /// <param name="_validateLogin">Parametro _validateLogin.</param>
+
+        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<object> ValidaLogin(ValidateLogin _validateLogin)
         {
@@ -67,6 +96,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //solicitar clave provicional
+        /// <summary>
+        /// Ejecuta Requestchangepassword de forma asincrona.
+        /// </summary>
+        /// <param name="Email">Parametro Email.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Requestchangepassword(string Email)
         {
             Response<bool> responseProcess;
@@ -95,6 +129,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //Solicitar cambio de contraseña
+        /// <summary>
+        /// Envia.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> Sendnewpassword(Sendnewpassword Obj)
         {
             Response<bool> responseProcess;

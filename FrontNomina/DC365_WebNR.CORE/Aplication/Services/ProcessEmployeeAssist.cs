@@ -1,4 +1,10 @@
-﻿using DC365_WebNR.CORE.Aplication.ProcessHelper;
+/// <summary>
+/// Servicio para la gestión de asistencias de empleados.
+/// Administra el registro y control de asistencias del personal.
+/// </summary>
+/// <author>Equipo de Desarrollo</author>
+/// <date>2025</date>
+using DC365_WebNR.CORE.Aplication.ProcessHelper;
 using DC365_WebNR.CORE.Domain.Const;
 using DC365_WebNR.CORE.Domain.Models;
 using DC365_WebNR.INFRASTRUCTURE.Services;
@@ -11,6 +17,9 @@ using System.Threading.Tasks;
 
 namespace DC365_WebNR.CORE.Aplication.Services
 {
+    /// <summary>
+    /// Servicio de proceso para ProcessEmployeeAssist.
+    /// </summary>
     public class ProcessEmployeeAssist: ServiceBase
     {
         private const string Endpoint = "employeeworkcontrolcalendars";
@@ -20,6 +29,14 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //lista
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="_PageNumber">Parametro _PageNumber.</param>
+        /// <param name="PropertyName">Parametro PropertyName.</param>
+        /// <param name="PropertyValue">Parametro PropertyValue.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<IEnumerable<EmployeeWorkControlCalendarResponse>> GetAllDataAsync(string employeeid, int _PageNumber = 1, string PropertyName = "", string PropertyValue = "")
         {
             List<EmployeeWorkControlCalendarResponse> _model = new List<EmployeeWorkControlCalendarResponse>();
@@ -48,6 +65,11 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //guardar
+        /// <summary>
+        /// Crea o procesa.
+        /// </summary>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PostDataAsync(EmployeeWorkControlCalendarRequest _model)
         {
             Response<EmployeeWorkControlCalendarResponse> DataApi = null;
@@ -72,6 +94,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //editar
+        /// <summary>
+        /// Actualiza un registro existente.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="_model">Parametro _model.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> PutDataAsync(string employeeid, EmployeeWorkControlCalendarRequest _model)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -95,6 +123,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //eliminar
+        /// <summary>
+        /// Elimina un registro.
+        /// </summary>
+        /// <param name="Obj">Parametro Obj.</param>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<ResponseUI> DeleteDataAsync(List<EmployeeWorkCalendarDeleteRequest> Obj, string employeeid)
         {
             ResponseUI responseUI = new ResponseUI();
@@ -128,6 +162,12 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         //buscar por id
+        /// <summary>
+        /// Obtiene.
+        /// </summary>
+        /// <param name="employeeid">Parametro employeeid.</param>
+        /// <param name="internalId">Parametro internalId.</param>
+        /// <returns>Resultado de la operacion.</returns>
         public async Task<EmployeeWorkControlCalendarResponse> GetDataAsync(string employeeid, string internalId)
         {
             EmployeeWorkControlCalendarResponse _model = new EmployeeWorkControlCalendarResponse();
