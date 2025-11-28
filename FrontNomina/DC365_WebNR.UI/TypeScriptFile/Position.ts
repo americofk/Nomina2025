@@ -35,7 +35,7 @@ const fn = {
         ListJobs();
     },
 
-    CreateAndEditPosition: function () {
+    CreateAndEditPosition: function (shouldClose: boolean) {
         $.ajax({
             url: "/puestosactivos/guardar",
             type: "POST",
@@ -58,11 +58,12 @@ const fn = {
                             $('#NotifyPositionId').replaceWith($('#NotifyPositionId', newDomOne));
                         });
 
-                    let form = document.getElementById("createAndEditPosition") as HTMLFormElement;
-                    form.reset();
-                    fn.funtionNewPosition("close");
                     windows_message(data.Message, data.Type);
-
+                    if (shouldClose) {
+                        let form = document.getElementById("createAndEditPosition") as HTMLFormElement;
+                        form.reset();
+                        fn.funtionNewPosition("close");
+                    }
                 }
 
 
@@ -72,6 +73,9 @@ const fn = {
         });
     }
 }
+
+// Variable para controlar si debe cerrar después de guardar
+var shouldCloseAfterSave = false;
 escuchadores: {
     //save position
     $("#createAndEditPosition").submit(function (e) {
@@ -83,13 +87,21 @@ escuchadores: {
                     $('#NotifyPositionId').focus();
 
                 } else {
-                    fn.CreateAndEditPosition();
+                    fn.CreateAndEditPosition(shouldCloseAfterSave);
+                    shouldCloseAfterSave = false;
                 }
             } else {
-                fn.CreateAndEditPosition();
+                fn.CreateAndEditPosition(shouldCloseAfterSave);
+                shouldCloseAfterSave = false;
             }
 
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditPosition").submit();
     });
 
 

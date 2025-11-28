@@ -117,6 +117,9 @@ escuchadores: {
         fn.funtionNewDepartment("open");
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     //save departamento
     $("#createAndEditDepartment").submit(function (e) {
         if ($(this).valid()) {
@@ -137,15 +140,22 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tblDepartment').replaceWith($('.tblDepartment', newDom));
                             });
-                        //let form = document.getElementById("createAndEditDepartment") as HTMLFormElement;
-                        //form.reset();
-                        fn.funtionNewDepartment("close");
+                        if (shouldCloseAfterSave) {
+                            fn.funtionNewDepartment("close");
+                            shouldCloseAfterSave = false;
+                        }
                     }
                 }, error: function (xhr) {
                     redireccionaralLogin(xhr);
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditDepartment").submit();
     });
 
     //funcion para editar departamento

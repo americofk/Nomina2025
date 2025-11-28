@@ -142,7 +142,7 @@ escuchadores: {
     //Crear nuevo  curso
     $('.NewCourse').on('click', function () {
         option = 1;
-       
+
         let form = document.getElementById("createAndEditCourse") as HTMLFormElement;
         form.reset();
         $('.Showid').addClass('collapse');
@@ -151,6 +151,9 @@ escuchadores: {
       /*  loadlists();*/
         funtionNewCourse("open");
     });
+
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
 
     //save Course
     $("#createAndEditCourse").submit(function (e) {
@@ -176,11 +179,13 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tblCourse').replaceWith($('.tblCourse', newDom));
                             });
-                        let form = document.getElementById("createAndEditCourse") as HTMLFormElement;
-                        form.reset();
-                        funtionNewCourse("close");
                         windows_message(data.Message, data.Type);
-
+                        if (shouldCloseAfterSave) {
+                            let form = document.getElementById("createAndEditCourse") as HTMLFormElement;
+                            form.reset();
+                            funtionNewCourse("close");
+                            shouldCloseAfterSave = false;
+                        }
                     }
 
 
@@ -189,6 +194,12 @@ escuchadores: {
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditCourse").submit();
     });
 
     //eliminar

@@ -28,6 +28,9 @@ escuchadores: {
         funtionNewJob("open");
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     //save cargo
     $("#createAndEditJobs").submit(function (e) {
         if ($(this).valid()) {
@@ -53,10 +56,13 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tblCargosActivos').replaceWith($('.tblCargosActivos', newDom));
                             });
-                        let form = document.getElementById("createAndEditJobs") as HTMLFormElement;
-                        form.reset();
-                        funtionNewJob("close");
-
+                        windows_message(data.Message, data.Type);
+                        if (shouldCloseAfterSave) {
+                            let form = document.getElementById("createAndEditJobs") as HTMLFormElement;
+                            form.reset();
+                            funtionNewJob("close");
+                            shouldCloseAfterSave = false;
+                        }
                     }
 
 
@@ -65,6 +71,12 @@ escuchadores: {
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditJobs").submit();
     });
 
     //eliminar cargo

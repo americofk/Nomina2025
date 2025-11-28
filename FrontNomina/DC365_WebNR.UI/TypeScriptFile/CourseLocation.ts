@@ -40,6 +40,9 @@ $('.NewCourseLocation').on('click', function () {
     funtionNewCourseLocation("open");
 });
 
+// Variable para controlar si debe cerrar después de guardar
+var shouldCloseAfterSave = false;
+
 //save ubicacion de curso
 $("#createAndEditCourseLocation").submit(function (e) {
     if ($(this).valid()) {
@@ -65,8 +68,11 @@ $("#createAndEditCourseLocation").submit(function (e) {
                             var newDom = $(r);
                             $('.tblCourseLocation').replaceWith($('.tblCourseLocation', newDom));
                         });
-                    funtionNewCourseLocation("close");
                     windows_message(data.Message, data.Type);
+                    if (shouldCloseAfterSave) {
+                        funtionNewCourseLocation("close");
+                        shouldCloseAfterSave = false;
+                    }
                 }
 
 
@@ -75,6 +81,12 @@ $("#createAndEditCourseLocation").submit(function (e) {
             }
         });
     }
+});
+
+// Guardar y cerrar
+$('.btnSaveAndClose').on('click', function () {
+    shouldCloseAfterSave = true;
+    $("#createAndEditCourseLocation").submit();
 });
 
 //funcion para editar ubicacion de curso

@@ -147,6 +147,9 @@ escuchadores: {
         fn.funtionNewProjectCategory("open");
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     //save
     $("#createAndEditProjectCategory").submit(function (e) {
         if ($(this).valid()) {
@@ -172,9 +175,11 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tbl-ProjectCategory').replaceWith($('.tbl-ProjectCategory', newDom));
                             });
-                        fn.funtionNewProjectCategory("close");
                         windows_message(data.Message, data.Type);
-
+                        if (shouldCloseAfterSave) {
+                            fn.funtionNewProjectCategory("close");
+                            shouldCloseAfterSave = false;
+                        }
                     }
 
 
@@ -183,6 +188,12 @@ escuchadores: {
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditProjectCategory").submit();
     });
 
     //editar

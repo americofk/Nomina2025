@@ -152,6 +152,9 @@ escuchadores: {
 
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     //save vacants
     $("#createAndEditVacants").submit(function (e) {
         if ($(this).valid()) {
@@ -180,11 +183,13 @@ escuchadores: {
                                     var newDom = $(r);
                                     $('.tblCargosVcantes').replaceWith($('.tblCargosVcantes', newDom));
                                 });
-                            let form = document.getElementById("createAndEditVacants") as HTMLFormElement;
-                            form.reset();
-                            funtionNewVacant("close");
                             windows_message(data.Message, data.Type);
-
+                            if (shouldCloseAfterSave) {
+                                let form = document.getElementById("createAndEditVacants") as HTMLFormElement;
+                                form.reset();
+                                funtionNewVacant("close");
+                                shouldCloseAfterSave = false;
+                            }
                         }
 
 
@@ -195,6 +200,12 @@ escuchadores: {
             }
 
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditVacants").submit();
     });
 
     //Crear nueva vacante

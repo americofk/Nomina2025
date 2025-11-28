@@ -40,6 +40,9 @@ $('.NewClassRoom').on('click', function () {
     funtionNewClassRoom("open");
 });
 
+// Variable para controlar si debe cerrar después de guardar
+var shouldCloseAfterSave = false;
+
 //save salon de curso
 $("#createAndEditClassRoom").submit(function (e) {
     if ($(this).valid()) {
@@ -66,8 +69,11 @@ $("#createAndEditClassRoom").submit(function (e) {
                             $('.tblClassRoom').replaceWith($('.tblClassRoom', newDom));
 
                         });
-                    funtionNewClassRoom("close");
                     windows_message(data.Message, data.Type);
+                    if (shouldCloseAfterSave) {
+                        funtionNewClassRoom("close");
+                        shouldCloseAfterSave = false;
+                    }
                 }
 
             }, error: function (xhr) {
@@ -75,6 +81,12 @@ $("#createAndEditClassRoom").submit(function (e) {
             }
         });
     }
+});
+
+// Guardar y cerrar
+$('.btnSaveAndClose').on('click', function () {
+    shouldCloseAfterSave = true;
+    $("#createAndEditClassRoom").submit();
 });
 
 //funcion para editar salon de curso

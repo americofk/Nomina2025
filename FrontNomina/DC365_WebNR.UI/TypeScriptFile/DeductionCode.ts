@@ -11,6 +11,9 @@ variables: {
     var option: number;
 }
 
+// Variable para controlar si debe cerrar después de guardar
+var shouldCloseAfterSave = false;
+
 escuchadores: {
     //eliminar
     $("#DeleteDeductionCode").submit(function (e) {
@@ -92,20 +95,28 @@ escuchadores: {
     $("#NewAndEditDeductionCode").submit(function (e) {
         if ($(this).valid()) {
             e.preventDefault();
+            let closeAfter = shouldCloseAfterSave;
+            shouldCloseAfterSave = false;
             if (option == 2) {
                 windows_message("¿Desea crear una nueva versión de código de descuento?", "confirm", {
                     onOk: function () {
-                        fn.SaveDeductionCode(true);
+                        fn.SaveDeductionCode(true, closeAfter);
                     },
                     onCancel: function () {
-                        fn.SaveDeductionCode(false);
+                        fn.SaveDeductionCode(false, closeAfter);
                     }
 
                 }, { Ok: "Si", Cancel: "No" });
             } else {
-                fn.SaveDeductionCode(false);
+                fn.SaveDeductionCode(false, closeAfter);
             }
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#NewAndEditDeductionCode").submit();
     });
 
 
@@ -532,7 +543,7 @@ const fn= {
         }
     },
 
-    SaveDeductionCode: function (_isversion: boolean) {
+    SaveDeductionCode: function (_isversion: boolean, shouldClose: boolean) {
         $('.progreso').modal({ backdrop: 'static', keyboard: false })
         $.ajax({
             url: "/codigosdeduccion/guardar",
@@ -555,10 +566,11 @@ const fn= {
                             var newDom = $(r);
                             $('.tblDeductionCode').replaceWith($('.tblDeductionCode', newDom));
                         });
-                    let form = document.getElementById("NewAndEditDeductionCode") as HTMLFormElement;
-                    form.reset();
-                    fn.funtionNewDeductionCode("close");
-
+                    if (shouldClose) {
+                        let form = document.getElementById("NewAndEditDeductionCode") as HTMLFormElement;
+                        form.reset();
+                        fn.funtionNewDeductionCode("close");
+                    }
                 }
 
 

@@ -56,6 +56,9 @@ escuchadores: {
         fn.funtionNewCorseType("open");
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     //save tipo de curso
     $("#createAndEditTypeCourse").submit(function (e) {
         if ($(this).valid()) {
@@ -80,16 +83,25 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tblCourseType').replaceWith($('.tblCourseType', newDom));
                             });
-                        let form = document.getElementById("createAndEditTypeCourse") as HTMLFormElement;
-                        form.reset();
                         $('.progreso').modal('hide');
-                        fn.funtionNewCorseType("close");
+                        if (shouldCloseAfterSave) {
+                            let form = document.getElementById("createAndEditTypeCourse") as HTMLFormElement;
+                            form.reset();
+                            fn.funtionNewCorseType("close");
+                            shouldCloseAfterSave = false;
+                        }
                     }
                 }, error: function (xhr) {
                     redireccionaralLogin(xhr);
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditTypeCourse").submit();
     });
 
     //funcion para editar tipos de curso

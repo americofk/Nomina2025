@@ -61,6 +61,10 @@ const fn = {
         fn.SettingNewAndEdit(viewmode);
 
         InstaciateListener();
+
+        // Variable para controlar si debe cerrar después de guardar
+        var shouldCloseAfterSave = false;
+
         //guardar información
         $("#FormNewAndEdiTax").submit(function (e) {
             if ($(this).valid()) {
@@ -81,12 +85,23 @@ const fn = {
 
                             //Refrescamos la tabla con la información guardada
                             fn.RefreshTable();
+
+                            if (shouldCloseAfterSave) {
+                                fn.OpenCloseNewAndEdit("close");
+                                shouldCloseAfterSave = false;
+                            }
                         }
                     }, error: function (xhr) {
                         redireccionaralLogin(xhr);
                     }
                 });
             }
+        });
+
+        // Guardar y cerrar
+        $(".btnSaveAndClose").on('click', function () {
+            shouldCloseAfterSave = true;
+            $("#FormNewAndEdiTax").submit();
         });
 
         $(".NewTaxDetail").on("click", function () {

@@ -65,6 +65,9 @@ const fn = {
             fn.OpenCloseNewAndEdit("close");
         });
 
+        // Variable para controlar si debe cerrar después de guardar
+        var shouldCloseAfterSave = false;
+
         //guardar información
         $("#FormNewAndEditPayrollsProcess").submit(function (e) {
             if ($(this).valid()) {
@@ -82,14 +85,19 @@ const fn = {
                             }
                             else {
                                 windows_message(data.Message, data.Type);
-                                if (data.Obj == "") {
-                                    fn.SearchFormNewAndEdit($("#PayrollProcessId").val().toString(), "edit");
-                                } else {
-                                    fn.SearchFormNewAndEdit(<string>data.Obj, "edit");
-                                }
-
                                 //Refrescamos la tabla con la información guardada
                                 fn.RefreshTable();
+
+                                if (shouldCloseAfterSave) {
+                                    fn.OpenCloseNewAndEdit("close");
+                                    shouldCloseAfterSave = false;
+                                } else {
+                                    if (data.Obj == "") {
+                                        fn.SearchFormNewAndEdit($("#PayrollProcessId").val().toString(), "edit");
+                                    } else {
+                                        fn.SearchFormNewAndEdit(<string>data.Obj, "edit");
+                                    }
+                                }
                             }
                         }, error: function (xhr) {
                             redireccionaralLogin(xhr);
@@ -101,6 +109,12 @@ const fn = {
                 }
 
             }
+        });
+
+        // Guardar y cerrar
+        $(".btnSaveAndClose").on('click', function () {
+            shouldCloseAfterSave = true;
+            $("#FormNewAndEditPayrollsProcess").submit();
         });
 
         //Mostrar contenedor

@@ -54,6 +54,9 @@ const fn = {
             fn.OpenCloseNewAndEdit("close");
         });
 
+        // Variable para controlar si debe cerrar después de guardar
+        var shouldCloseAfterSave = false;
+
         //guardar información
         $("#FormNewAndEditLoan").submit(function (e) {
             if ($(this).valid()) {
@@ -70,16 +73,25 @@ const fn = {
                         }
                         else {
                             windows_message(data.Message, data.Type);
-                            fn.OpenCloseNewAndEdit("close");
-
                             //Refrescamos la tabla con la información guardada
                             fn.RefreshTable();
+
+                            if (shouldCloseAfterSave) {
+                                fn.OpenCloseNewAndEdit("close");
+                                shouldCloseAfterSave = false;
+                            }
                         }
                     }, error: function (xhr) {
                         redireccionaralLogin(xhr);
                     }
                 });
             }
+        });
+
+        // Guardar y cerrar
+        $(".btnSaveAndClose").on('click', function () {
+            shouldCloseAfterSave = true;
+            $("#FormNewAndEditLoan").submit();
         });
 
         //Mostrar contenedor

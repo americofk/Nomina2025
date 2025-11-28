@@ -26,7 +26,7 @@ const fn = {
             $('.opcioneslistpageForm').addClass('collapse');
         }
     },
-    SaveEarningCode: function (_isversion: boolean) {
+    SaveEarningCode: function (_isversion: boolean, shouldClose: boolean) {
         $('.progreso').modal({ backdrop: 'static', keyboard: false })
         $.ajax({
             url: "/codigosganancias/guardar",
@@ -49,9 +49,10 @@ const fn = {
                             $('.tblEarningCode').replaceWith($('.tblEarningCode', newDom));
                         });
 
-                    fn.funtionNewEarningCode("close");
                     windows_message(data.Message, data.Type);
-
+                    if (shouldClose) {
+                        fn.funtionNewEarningCode("close");
+                    }
                 }
 
 
@@ -61,6 +62,9 @@ const fn = {
         });
     }
 }
+
+// Variable para controlar si debe cerrar después de guardar
+var shouldCloseAfterSave = false;
 
 escuchadores: {
     //eliminar
@@ -148,20 +152,28 @@ escuchadores: {
     $("#NewAndEditEarningCode").submit(function (e) {
         if ($(this).valid()) {
             e.preventDefault();
+            let closeAfter = shouldCloseAfterSave;
+            shouldCloseAfterSave = false;
             if (option==2) {
                 windows_message("¿Desea crear una nueva versión de código de ingreso?", "confirm", {
                     onOk: function () {
-                        fn.SaveEarningCode(true);
+                        fn.SaveEarningCode(true, closeAfter);
                     },
                     onCancel: function () {
-                        fn.SaveEarningCode(false);
+                        fn.SaveEarningCode(false, closeAfter);
                     }
 
                 }, { Ok: "Si", Cancel: "No" });
             } else {
-                fn.SaveEarningCode(false);
+                fn.SaveEarningCode(false, closeAfter);
             }
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#NewAndEditEarningCode").submit();
     });
 
     //editar

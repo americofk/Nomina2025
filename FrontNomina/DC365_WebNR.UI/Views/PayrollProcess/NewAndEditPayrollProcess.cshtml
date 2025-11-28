@@ -22,11 +22,16 @@
             @{
                 if (Model.PayrollProcessStatus != PayrollProcessStatus.Paid && Model.PayrollProcessStatus != PayrollProcessStatus.Closed && Model.PayrollProcessStatus != PayrollProcessStatus.Canceled)
                 {
+                    <li class="btnSaveAndClose">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-check-square-o"></i>
+                            Guardar y Cerrar
+                        </a>
+                    </li>
                     <li>
                         <a class="btn2 btn-app">
                             <i class="fa fa-save"></i>
                             <input type="submit" value="Guardar" form="FormNewAndEditPayrollsProcess" class="btn2" />
-
                         </a>
                     </li>
                 }

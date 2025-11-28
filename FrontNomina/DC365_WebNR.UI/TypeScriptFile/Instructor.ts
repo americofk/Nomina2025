@@ -40,6 +40,9 @@ $('.NewInstructor').on('click', function () {
     funtionNewInstructor("open");
 });
 
+// Variable para controlar si debe cerrar después de guardar
+var shouldCloseAfterSave = false;
+
 //save tipo instrutor
 $("#createAndEditInstructor").submit(function (e) {
     if ($(this).valid()) {
@@ -65,10 +68,13 @@ $("#createAndEditInstructor").submit(function (e) {
                             var newDom = $(r);
                             $('.tblInstructor').replaceWith($('.tblInstructor', newDom));
                         });
-                    let form = document.getElementById("createAndEditInstructor") as HTMLFormElement;
-                    form.reset();
                     $('.progreso').modal('hide');
-                    funtionNewInstructor("close");
+                    if (shouldCloseAfterSave) {
+                        let form = document.getElementById("createAndEditInstructor") as HTMLFormElement;
+                        form.reset();
+                        funtionNewInstructor("close");
+                        shouldCloseAfterSave = false;
+                    }
                 }
 
             }, error: function (xhr) {
@@ -76,6 +82,12 @@ $("#createAndEditInstructor").submit(function (e) {
             }
         });
     }
+});
+
+// Guardar y cerrar
+$('.btnSaveAndClose').on('click', function () {
+    shouldCloseAfterSave = true;
+    $("#createAndEditInstructor").submit();
 });
 
 //funcion para editar instructor

@@ -260,6 +260,9 @@ escuchadores: {
         fn.funtionNewAndEditUsers("close");
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     $('#CreateAndEditUser').submit(function (e) {
         if ($(this).valid()) {
             e.preventDefault();
@@ -275,28 +278,40 @@ escuchadores: {
                     if (data.Type == "error") {
                         FormatErrors(data);
                     } else {
-                        option = 2;
-                        fn.EditAndNewSettings("edit");
-
-                        if (!$('.ElevationType').is(":checked")) {
-                            $('.contendorRolandCompaies').removeClass('collapse');
-                            fn.SearchRoltoUsers();
-                            fn.SearchCompanytoUsers();
-                        } else {
-                            $('.contendorRolandCompaies').addClass('collapse');
-                        }
                         $.get(location.href)
                             .done(function (r) {
                                 var newDom = $(r);
                                 $('.tblUser').replaceWith($('.tblUser', newDom));
                             });
                         windows_message(data.Message, data.Type);
+
+                        if (shouldCloseAfterSave) {
+                            fn.funtionNewAndEditUsers("close");
+                            shouldCloseAfterSave = false;
+                        } else {
+                            option = 2;
+                            fn.EditAndNewSettings("edit");
+
+                            if (!$('.ElevationType').is(":checked")) {
+                                $('.contendorRolandCompaies').removeClass('collapse');
+                                fn.SearchRoltoUsers();
+                                fn.SearchCompanytoUsers();
+                            } else {
+                                $('.contendorRolandCompaies').addClass('collapse');
+                            }
+                        }
                     }
                 }, error: function (xhr) {
                     redireccionaralLogin(xhr);
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#CreateAndEditUser").submit();
     });
 
     // mostrar modal de todas las empresas

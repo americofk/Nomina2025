@@ -289,6 +289,9 @@ escuchadores: {
         fn.SettingsNewAndEdit("new");
     });
 
+    // Variable para controlar si debe cerrar después de guardar
+    var shouldCloseAfterSave = false;
+
     //save
     $("#NewAndEditPayrolls").submit(function (e) {
         if ($(this).valid()) {
@@ -317,14 +320,15 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tblPayrolls').replaceWith($('.tblPayrolls', newDom));
                             });
-                        if (option == 1) {
-                            $('.PayrollId').val(a.PayrollId);
-
-                            fn.SettingsNewAndEdit("edit");
-                        }
-
                         windows_message(data.Message, data.Type);
 
+                        if (shouldCloseAfterSave) {
+                            fn.funtionNewPayroll("close");
+                            shouldCloseAfterSave = false;
+                        } else if (option == 1) {
+                            $('.PayrollId').val(a.PayrollId);
+                            fn.SettingsNewAndEdit("edit");
+                        }
                     }
 
 
@@ -333,6 +337,12 @@ escuchadores: {
                 }
             });
         }
+    });
+
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#NewAndEditPayrolls").submit();
     });
 
     //editar
