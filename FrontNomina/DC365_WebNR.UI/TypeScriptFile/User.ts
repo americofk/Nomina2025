@@ -267,6 +267,12 @@ escuchadores: {
         if ($(this).valid()) {
             e.preventDefault();
 
+            // Asignar DataAreaId desde el contenedor de la página
+            var dataAreaId = $('#user-page').data('dataarea');
+            if (dataAreaId) {
+                $('#DataAreaId').val(dataAreaId);
+            }
+
             $('.progreso').modal({ backdrop: 'static', keyboard: false });
             $.ajax({
                 url: "/usuarios/guardar",
@@ -426,29 +432,42 @@ escuchadores: {
 
                     //Opción para alternar entre los roles de ver, editar y eliminar, según se marquen
                     //**********************************************
+                    // Función para actualizar el estado del checkbox de la fila
+                    function updateRowSelection(row) {
+                        let hasAnyChecked = row.find(".idCheckver").is(":checked") ||
+                                           row.find(".idCheckeditar").is(":checked") ||
+                                           row.find(".idCheckeliminar").is(":checked");
+                        row.find(".selectAsigRol").prop('checked', hasAnyChecked);
+                    }
+
                     $('.clickCheckver').on('click', function () {
+                        let row = $(this).closest('tr');
                         let estado = $(this).find(".idCheckver").is(":checked");
                         if (estado) {
-                            $(this).parent().parent().find(".idCheckeditar").prop('checked', !estado)
-                            $(this).parent().parent().find(".idCheckeliminar").prop('checked', !estado)
+                            row.find(".idCheckeditar").prop('checked', false);
+                            row.find(".idCheckeliminar").prop('checked', false);
                         }
+                        updateRowSelection(row);
                     });
 
                     $('.clickCheckeditar').on('click', function () {
+                        let row = $(this).closest('tr');
                         let estado = $(this).find(".idCheckeditar").is(":checked");
                         if (estado) {
-                            $(this).parent().parent().find(".idCheckver").prop('checked', !estado)
-                            $(this).parent().parent().find(".idCheckeliminar").prop('checked', !estado)
+                            row.find(".idCheckver").prop('checked', false);
+                            row.find(".idCheckeliminar").prop('checked', false);
                         }
-
+                        updateRowSelection(row);
                     });
 
                     $('.clickCheckeliminar').on('click', function () {
+                        let row = $(this).closest('tr');
                         let estado = $(this).find(".idCheckeliminar").is(":checked");
                         if (estado) {
-                            $(this).parent().parent().find(".idCheckver").prop('checked', !estado)
-                            $(this).parent().parent().find(".idCheckeditar").prop('checked', !estado)
+                            row.find(".idCheckver").prop('checked', false);
+                            row.find(".idCheckeditar").prop('checked', false);
                         }
+                        updateRowSelection(row);
                     });
                     //*************************************************
 

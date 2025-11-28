@@ -17,6 +17,11 @@ namespace DC365_WebNR.CORE.Domain.Models
 {
     public class User : AuditableCompanyModel, IValidatableObject
     {
+        /// <summary>
+        /// Sobrescribe DataAreaId para quitar el [Required] ya que User no pertenece a una empresa específica
+        /// </summary>
+        public new string DataAreaId { get; set; }
+
         [Required(ErrorMessage = "Alias" + ErrorMsg.Emptym)]
         [CustomFilter("Alias")]
         public string Alias { get; set; }

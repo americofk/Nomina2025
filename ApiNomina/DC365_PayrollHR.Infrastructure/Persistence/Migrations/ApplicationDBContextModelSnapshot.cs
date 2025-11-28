@@ -177,7 +177,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                     b.HasIndex("EntityName", "EntityRefRecId")
                         .HasDatabaseName("IX_AuditLog_EntityName_EntityRefRecId");
 
-                    b.ToTable("AuditLogs");
+                    b.ToTable("AuditLogs", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.BatchHistory", b =>
@@ -239,7 +239,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("InternalId");
 
-                    b.ToTable("BatchHistories");
+                    b.ToTable("BatchHistories", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CalendarHoliday", b =>
@@ -281,7 +281,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("CalendarDate");
 
-                    b.ToTable("CalendarHolidays");
+                    b.ToTable("CalendarHolidays", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.ClassRoom", b =>
@@ -349,7 +349,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("CourseLocationId");
 
-                    b.ToTable("ClassRooms");
+                    b.ToTable("ClassRooms", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CompaniesAssignedToUser", b =>
@@ -391,7 +391,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("CompaniesAssignedToUsers");
+                    b.ToTable("CompaniesAssignedToUsers", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Company", b =>
@@ -470,7 +470,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("CurrencyId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
 
                     b.HasData(
                         new
@@ -533,7 +533,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("CountryId");
 
-                    b.ToTable("Countries");
+                    b.ToTable("Countries", (string)null);
 
                     b.HasData(
                         new
@@ -663,7 +663,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("CourseTypeId");
 
-                    b.ToTable("Courses");
+                    b.ToTable("Courses", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CourseEmployee", b =>
@@ -714,7 +714,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("CourseEmployees");
+                    b.ToTable("CourseEmployees", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CourseInstructor", b =>
@@ -765,7 +765,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("InstructorId");
 
-                    b.ToTable("CourseInstructors");
+                    b.ToTable("CourseInstructors", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CourseLocation", b =>
@@ -836,7 +836,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("CourseLocationId");
 
-                    b.ToTable("CourseLocations");
+                    b.ToTable("CourseLocations", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CoursePosition", b =>
@@ -887,7 +887,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PositionId");
 
-                    b.ToTable("CoursePositions");
+                    b.ToTable("CoursePositions", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.CourseType", b =>
@@ -940,7 +940,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("CourseTypeId");
 
-                    b.ToTable("CourseTypes");
+                    b.ToTable("CourseTypes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Currency", b =>
@@ -983,7 +983,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("CurrencyId");
 
-                    b.ToTable("Currencies");
+                    b.ToTable("Currencies", (string)null);
 
                     b.HasData(
                         new
@@ -1124,7 +1124,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("DeductionCodeId");
 
-                    b.ToTable("DeductionCodes");
+                    b.ToTable("DeductionCodes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.DeductionCodeVersion", b =>
@@ -1248,7 +1248,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("DeductionCodeId");
 
-                    b.ToTable("DeductionCodeVersions");
+                    b.ToTable("DeductionCodeVersions", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Department", b =>
@@ -1313,7 +1313,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("DepartmentId");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.DisabilityType", b =>
@@ -1355,7 +1355,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("DisabilityTypeId");
 
-                    b.ToTable("DisabilityTypes");
+                    b.ToTable("DisabilityTypes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EarningCode", b =>
@@ -1459,7 +1459,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EarningCodeId");
 
-                    b.ToTable("EarningCodes");
+                    b.ToTable("EarningCodes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EarningCodeVersion", b =>
@@ -1566,7 +1566,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EarningCodeId");
 
-                    b.ToTable("EarningCodeVersions");
+                    b.ToTable("EarningCodeVersions", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EducationLevel", b =>
@@ -1608,7 +1608,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EducationLevelId");
 
-                    b.ToTable("EducationLevels");
+                    b.ToTable("EducationLevels", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Employee", b =>
@@ -1779,7 +1779,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("OccupationId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeAddress", b =>
@@ -1866,7 +1866,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("EmployeesAddress");
+                    b.ToTable("EmployeesAddress", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeBankAccount", b =>
@@ -1934,7 +1934,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId", "InternalId");
 
-                    b.ToTable("EmployeeBankAccounts");
+                    b.ToTable("EmployeeBankAccounts", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeContactInf", b =>
@@ -1993,7 +1993,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId", "InternalId");
 
-                    b.ToTable("EmployeeContactsInf");
+                    b.ToTable("EmployeeContactsInf", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeDeductionCode", b =>
@@ -2075,7 +2075,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("EmployeeDeductionCodes");
+                    b.ToTable("EmployeeDeductionCodes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeDepartment", b =>
@@ -2132,7 +2132,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId", "DepartmentId");
 
-                    b.ToTable("EmployeeDepartments");
+                    b.ToTable("EmployeeDepartments", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeDocument", b =>
@@ -2198,7 +2198,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId", "InternalId");
 
-                    b.ToTable("EmployeeDocuments");
+                    b.ToTable("EmployeeDocuments", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeEarningCode", b =>
@@ -2299,7 +2299,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("EmployeeEarningCodes");
+                    b.ToTable("EmployeeEarningCodes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeExtraHour", b =>
@@ -2379,7 +2379,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("EmployeeExtraHours");
+                    b.ToTable("EmployeeExtraHours", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeHistory", b =>
@@ -2445,7 +2445,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeeHistories");
+                    b.ToTable("EmployeeHistories", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeImage", b =>
@@ -2494,7 +2494,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.ToTable("EmployeeImages");
+                    b.ToTable("EmployeeImages", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeLoan", b =>
@@ -2582,7 +2582,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("EmployeeLoans");
+                    b.ToTable("EmployeeLoans", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeLoanHistory", b =>
@@ -2670,7 +2670,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("EmployeeLoanHistories");
+                    b.ToTable("EmployeeLoanHistories", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeePosition", b =>
@@ -2729,7 +2729,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeePositions");
+                    b.ToTable("EmployeePositions", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeTax", b =>
@@ -2789,7 +2789,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("TaxId", "DataAreaId");
 
-                    b.ToTable("EmployeeTaxes");
+                    b.ToTable("EmployeeTaxes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeWorkCalendar", b =>
@@ -2855,7 +2855,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeeWorkCalendars");
+                    b.ToTable("EmployeeWorkCalendars", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EmployeeWorkControlCalendar", b =>
@@ -2930,7 +2930,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("EmployeeWorkControlCalendars");
+                    b.ToTable("EmployeeWorkControlCalendars", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.FormatCode", b =>
@@ -2973,7 +2973,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("FormatCodeId");
 
-                    b.ToTable("FormatCodes");
+                    b.ToTable("FormatCodes", (string)null);
 
                     b.HasData(
                         new
@@ -3056,7 +3056,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GeneralConfigs");
+                    b.ToTable("GeneralConfigs", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Instructor", b =>
@@ -3122,7 +3122,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("InstructorId");
 
-                    b.ToTable("Instructors");
+                    b.ToTable("Instructors", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Job", b =>
@@ -3178,7 +3178,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("JobId");
 
-                    b.ToTable("Jobs");
+                    b.ToTable("Jobs", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Loan", b =>
@@ -3265,7 +3265,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("LoanId");
 
-                    b.ToTable("Loans");
+                    b.ToTable("Loans", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.MenuApp", b =>
@@ -3333,7 +3333,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("MenuFather");
 
-                    b.ToTable("MenusApp");
+                    b.ToTable("MenusApp", (string)null);
 
                     b.HasData(
                         new
@@ -3415,7 +3415,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("MenuId");
 
-                    b.ToTable("MenuAssignedToUsers");
+                    b.ToTable("MenuAssignedToUsers", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Occupation", b =>
@@ -3457,7 +3457,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("OccupationId");
 
-                    b.ToTable("Occupations");
+                    b.ToTable("Occupations", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.PayCycle", b =>
@@ -3527,7 +3527,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("PayCycles");
+                    b.ToTable("PayCycles", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Payroll", b =>
@@ -3606,7 +3606,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("PayrollId");
 
-                    b.ToTable("Payrolls");
+                    b.ToTable("Payrolls", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.PayrollProcess", b =>
@@ -3709,7 +3709,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollId");
 
-                    b.ToTable("PayrollsProcess");
+                    b.ToTable("PayrollsProcess", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.PayrollProcessAction", b =>
@@ -3785,7 +3785,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PayrollProcessId");
 
-                    b.ToTable("PayrollProcessActions");
+                    b.ToTable("PayrollProcessActions", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.PayrollProcessDetail", b =>
@@ -3877,7 +3877,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("PayrollProcessDetails");
+                    b.ToTable("PayrollProcessDetails", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Position", b =>
@@ -3958,7 +3958,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("JobId");
 
-                    b.ToTable("Positions");
+                    b.ToTable("Positions", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.PositionRequirement", b =>
@@ -4010,7 +4010,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("PositionId");
 
-                    b.ToTable("PositionRequirements");
+                    b.ToTable("PositionRequirements", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.ProjCategory", b =>
@@ -4066,7 +4066,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("ProjCategoryId");
 
-                    b.ToTable("ProjCategories");
+                    b.ToTable("ProjCategories", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Project", b =>
@@ -4122,7 +4122,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("ProjId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Province", b =>
@@ -4165,7 +4165,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("ProvinceId");
 
-                    b.ToTable("Provinces");
+                    b.ToTable("Provinces", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.ReportConfig", b =>
@@ -4233,7 +4233,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("InternalId");
 
-                    b.ToTable("ReportsConfig");
+                    b.ToTable("ReportsConfig", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Tax", b =>
@@ -4329,7 +4329,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("TaxId", "DataAreaId");
 
-                    b.ToTable("Taxes");
+                    b.ToTable("Taxes", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.TaxDetail", b =>
@@ -4390,7 +4390,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("TaxId", "DataAreaId");
 
-                    b.ToTable("TaxDetails");
+                    b.ToTable("TaxDetails", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.User", b =>
@@ -4462,7 +4462,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasIndex("FormatCodeId");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -4644,7 +4644,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.HasKey("Alias");
 
-                    b.ToTable("UserImages");
+                    b.ToTable("UserImages", (string)null);
                 });
 
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.ClassRoom", b =>

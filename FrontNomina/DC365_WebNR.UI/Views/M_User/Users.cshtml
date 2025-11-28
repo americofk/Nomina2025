@@ -181,7 +181,7 @@
     </div>
 
     <!-- nuevo usuario -->
-    @{await Html.RenderPartialAsync("NewAndEditUser", new DC365_WebNR.CORE.Domain.Models.User());}
+    @{await Html.RenderPartialAsync("NewAndEditUser", new DC365_WebNR.CORE.Domain.Models.User() { DataAreaId = dataAreaId.ToString() });}
 
     <!-- modal asignacion de empresas al usuario -->
     <div class="modal ModCompanies" tabindex="-1" role="dialog" aria-hidden="true"></div>

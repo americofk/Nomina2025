@@ -73,10 +73,19 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenuAssignedToUser
                         throw new Exception($"El rol asignado no existe - Id {model.MenuId}");
                     }
 
-                    var menutouser = await _dbContext.MenuAssignedToUsers.Where(x => x.MenuId == model.MenuId && x.Alias == model.Alias).FirstOrDefaultAsync();
+                    // IgnoreQueryFilters para encontrar registros soft-deleted y reactivarlos
+                    var menutouser = await _dbContext.MenuAssignedToUsers
+                        .IgnoreQueryFilters()
+                        .Where(x => x.MenuId == model.MenuId && x.Alias == model.Alias)
+                        .FirstOrDefaultAsync();
+
                     if (menutouser != null)
                     {
                         var entity = BuildDtoHelper<MenuAssignedToUser>.OnBuild(model, menutouser);
+                        // Reactivar si estaba eliminado
+                        entity.IsDeleted = false;
+                        entity.DeletedBy = null;
+                        entity.DeletedOn = null;
 
                         _dbContext.MenuAssignedToUsers.Update(entity);
                         await _dbContext.SaveChangesAsync();
