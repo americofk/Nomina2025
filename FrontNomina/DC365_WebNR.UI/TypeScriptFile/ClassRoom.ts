@@ -241,3 +241,5 @@ enableRowDoubleClick(
     },
     'Id'
 );
+
+initAuditListPage('.selectClassRoom', '.ClassRoomIdtblcr', '/salonescurso/getbyid', 'Id');

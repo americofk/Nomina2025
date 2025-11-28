@@ -346,4 +346,7 @@ escuchadores: {
     );
 }
 
+// Inicializar modal de auditoría
+initAuditListPage('.select-ProjectCategory', '.ProjCategoryIdtbl', '/categoriaproyectoactivas/getbyid', 'ProjCategoryId');
+
 export { }

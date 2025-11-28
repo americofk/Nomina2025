@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using DC365_WebNR.CORE.Aplication.Attributes;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 
 namespace DC365_WebNR.CORE.Domain.Models
@@ -18,7 +19,7 @@ namespace DC365_WebNR.CORE.Domain.Models
     /// <summary>
     /// Clase para gestion de Course.
     /// </summary>
-    public class Course 
+    public class Course : AuditableCompanyModel
     {
         /// <summary>
         /// Automatic

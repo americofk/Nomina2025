@@ -1,5 +1,34 @@
 ﻿@model DC365_WebNR.CORE.Domain.Models.Vacants
 
+@* Opciones de vista parcial *@
+<div class="opcioneslistpageForm collapse">
+    <div class="menuoptions-flex">
+        <ul class="menuoptions">
+            <li>
+                <a class="btn2 btn-app">
+                    <img src="~/images/Dashboard/Guardar.png" class="Iconos_opciones">
+                    <input type="submit" value="Guardar" form="createAndEditVacants" class="btn2" />
+                </a>
+            </li>
+        </ul>
+
+        <ul class="menuoptions">
+            <li class="AuditInfoForm Showid collapse">
+                <a class="btn2 btn-app" title="Información de auditoría">
+                    <i class="fa fa-info-circle"></i>
+                </a>
+            </li>
+            <li class="OpCloseform">
+                <div class="ContOpciones-Pagina contOpciones">
+                    <div class="opciones-Pagina">
+                        <img src="~/images/Dashboard/Cerrar.png" class="Iconos_opciones-Pagina">
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
 <div class="collapse contNewEntyti">
     <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
         <div class="x_panel">
@@ -7,6 +36,14 @@
                 <h3 class="TituloFormularios setiartitulo">Nueva vacante</h3>
 
                 <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditVacants" asp-action="Save">
+                    @* Campos ocultos de auditoría *@
+                    <input type="hidden" asp-for="DataAreaId" />
+                    <input type="hidden" asp-for="RecId" />
+                    <input type="hidden" asp-for="CreatedBy" />
+                    <input type="hidden" asp-for="CreatedOn" />
+                    <input type="hidden" asp-for="ModifiedBy" />
+                    <input type="hidden" asp-for="ModifiedOn" />
+
                     <div class="contInterNuevoConteGastos">
 
                         <div class="contlotes Showid collapse">

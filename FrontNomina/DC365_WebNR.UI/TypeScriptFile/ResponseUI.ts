@@ -14,12 +14,12 @@ interface ResponseUI {
     Message: string
     Type: string
     IdType: string
-    Errors: Array<String>
+    Errors: Array<string>
 }
 
 interface ResponseUIGeneric {
     Message: string
     Type: string
-    Errors: Array<String>
+    Errors: Array<string>
     Obj: any
 }

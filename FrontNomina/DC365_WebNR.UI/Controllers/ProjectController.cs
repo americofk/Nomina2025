@@ -176,6 +176,23 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="ProjId">Identificador del proyecto.</param>
+        /// <returns>Datos del proyecto en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string ProjId)
+        {
+            GetdataUser();
+            Project _model = new Project();
+            process = new ProcessProject(dataUser[0]);
+
+            _model = await process.GetDataAsync(ProjId);
+
+            return (Json(_model));
+        }
+
+        /// <summary>
 
         /// Actualiza un registro existente.
 

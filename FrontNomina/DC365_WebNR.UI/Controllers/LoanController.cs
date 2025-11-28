@@ -246,5 +246,22 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("LoansFilter", model);
         }
+
+        /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="loanid">Identificador del préstamo.</param>
+        /// <returns>Datos del préstamo en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string loanid)
+        {
+            GetdataUser();
+            Loan _model = new Loan();
+            process = new ProcessLoan(dataUser[0]);
+
+            _model = await process.GetDataAsync(loanid);
+
+            return (Json(_model));
+        }
     }
 }

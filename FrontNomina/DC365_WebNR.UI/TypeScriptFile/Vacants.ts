@@ -308,6 +308,9 @@ escuchadores: {
             funtionNewVacant("open");
         }
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectPosition', '.PositionIdtblpos', '/vacantes/getbyid', 'Id');
 }
 
 funciones: {

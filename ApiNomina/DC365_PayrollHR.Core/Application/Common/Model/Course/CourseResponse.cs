@@ -16,6 +16,32 @@ namespace DC365_PayrollHR.Core.Application.Common.Model.Course
     /// </summary>
     public class CourseResponse
     {
+        // Campos de auditoría ISO 27001
+        /// <summary>
+        /// Identificador único del registro.
+        /// </summary>
+        public long RecId { get; set; }
+        /// <summary>
+        /// Identificador de la empresa.
+        /// </summary>
+        public string DataAreaId { get; set; }
+        /// <summary>
+        /// Usuario que creó el registro.
+        /// </summary>
+        public string CreatedBy { get; set; }
+        /// <summary>
+        /// Fecha de creación del registro.
+        /// </summary>
+        public DateTime CreatedOn { get; set; }
+        /// <summary>
+        /// Usuario que modificó el registro.
+        /// </summary>
+        public string ModifiedBy { get; set; }
+        /// <summary>
+        /// Fecha de última modificación.
+        /// </summary>
+        public DateTime ModifiedOn { get; set; }
+
         /// <summary>
         /// Identificador.
         /// </summary>

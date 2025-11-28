@@ -175,6 +175,23 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene un empleado por Id (para auditoría).
+        /// </summary>
+        /// <param name="Id">Parametro Id.</param>
+        /// <param name="type">Tipo de empleado.</param>
+        /// <returns>Resultado de la operacion.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string Id, string type = "Empleados")
+        {
+            GetdataUser();
+            Employee _model = new Employee();
+            processEmployee = new ProcessEmployee(dataUser[0]);
+
+            _model = await processEmployee.GetIdDataAsync(Id, type);
+            return (Json(_model));
+        }
+
+        /// <summary>
 
         /// Guarda los cambios.
 

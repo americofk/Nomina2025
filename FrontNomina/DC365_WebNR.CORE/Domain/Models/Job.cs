@@ -7,6 +7,7 @@
 using DC365_WebNR.CORE.Domain.Const;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 
 namespace DC365_WebNR.CORE.Domain.Models
@@ -14,7 +15,7 @@ namespace DC365_WebNR.CORE.Domain.Models
     /// <summary>
     /// Cargo
     /// </summary>
-    public class Job
+    public class Job : AuditableCompanyModel
     {
         /// <summary>
         /// Automatico
@@ -32,8 +33,8 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// Max 200
         /// </summary>
         [MaxLength(200)]
-        [Required(ErrorMessage = "Descripción" + ErrorMsg.Emptym)]
-        [CustomFilter("Descripción")]
+        [Required(ErrorMessage = "Descripciï¿½n" + ErrorMsg.Emptym)]
+        [CustomFilter("Descripciï¿½n")]
         public string Description { get; set; }
 
         public bool JobStatus { get; set; } = true;

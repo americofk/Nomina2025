@@ -253,5 +253,22 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("TaxFilterOrMoreData", model);
         }
+
+        /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="taxid">Identificador del impuesto.</param>
+        /// <returns>Datos del impuesto en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string taxid)
+        {
+            GetdataUser();
+            Tax _model = new Tax();
+            process = new ProcessTax(dataUser[0]);
+
+            _model = await process.GetDataAsync(taxid);
+
+            return (Json(_model));
+        }
     }
 }

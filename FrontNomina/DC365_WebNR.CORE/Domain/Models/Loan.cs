@@ -6,6 +6,7 @@
 /// <date>2025</date>
 using DC365_WebNR.CORE.Aplication.Attributes;
 using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models.Common;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ using System.Text;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
-    public class Loan: IValidatableObject
+    public class Loan : AuditableCompanyModel, IValidatableObject
     {
-        [CustomFilter("Id Préstamo")]
+        [CustomFilter("Id Prï¿½stamo")]
         public string LoanId { get; set; }
 
         [Required(ErrorMessage = "Nombre" + ErrorMsg.Emptym)]

@@ -511,6 +511,9 @@ escuchadores: {
             fn.SettingsNewAndEdit("edit");
         }
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectPayroll', '.PayrollIdtbl', '/nomina/getbyid', 'PayrollId');
 }
 
 export { }

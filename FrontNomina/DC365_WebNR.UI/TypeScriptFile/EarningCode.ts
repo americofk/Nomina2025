@@ -527,5 +527,8 @@ escuchadores: {
             fn.funtionNewEarningCode("open");
         }
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectEarningCode', '.EarningCodeIdtbl', '/codigosganancias/getbyid', 'EarningCodeId');
 }
 export { }

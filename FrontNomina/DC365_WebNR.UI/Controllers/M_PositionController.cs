@@ -270,6 +270,23 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene un puesto por Id (para auditoría).
+        /// </summary>
+        /// <param name="Id">Parametro Id.</param>
+        /// <returns>Resultado de la operacion.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string Id)
+        {
+            GetdataUser();
+            Position _model = new Position();
+            processPosition = new ProcessPosition(dataUser[0]);
+
+            _model = await processPosition.GetIdDataAsync(Id);
+
+            return (Json(_model));
+        }
+
+        /// <summary>
 
         /// Verifica si.
 

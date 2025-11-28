@@ -362,6 +362,9 @@ escuchadores: {
         },
         'Id'
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectDepartment', '.DepartmentIdtbl', '/departamentosactivos/getbyid', 'Id');
 }
 
 export { }

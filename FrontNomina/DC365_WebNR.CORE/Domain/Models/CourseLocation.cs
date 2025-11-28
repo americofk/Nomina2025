@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 
 namespace DC365_WebNR.CORE.Domain.Models
@@ -16,7 +17,7 @@ namespace DC365_WebNR.CORE.Domain.Models
     /// <summary>
     /// Clase para gestion de CourseLocation.
     /// </summary>
-    public class CourseLocation
+    public class CourseLocation : AuditableCompanyModel
     {
         /// <summary>
         /// Automatic

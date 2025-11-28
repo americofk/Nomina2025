@@ -108,6 +108,11 @@ const fn = {
 
         fn.SettingNewAndEdit(viewmode);
 
+        // Registrar evento de auditoría para el formulario cargado dinámicamente
+        $(".AuditInfoForm").off('click').on('click', function() {
+            showAuditModalFromForm();
+        });
+
         //Toggle
         $("#toggle-totals").click(function () {
             let value = $(this).attr("data-value").toString();
@@ -641,6 +646,9 @@ esuchadores: {
 
     // Aplicar estilo clickable a las filas
     $('.tbodyTableProcessPayroll .row-app').addClass('row-clickable');
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectPayrollProcess', '.PayrollProcessIdTbl', '/procesonomina/getbyid', 'Id');
 }
 
 export { }

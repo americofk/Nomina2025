@@ -202,6 +202,23 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="ProjCategoryId">Identificador de la categoría de proyecto.</param>
+        /// <returns>Datos de la categoría de proyecto en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string ProjCategoryId)
+        {
+            GetdataUser();
+            ProjCategory _model = new ProjCategory();
+            process = new ProcessProjCategory(dataUser[0]);
+
+            _model = await process.GetDataAsync(ProjCategoryId);
+
+            return (Json(_model));
+        }
+
+        /// <summary>
 
         /// Ejecuta ProjCategoryFilteOrMoreData de forma asincrona.
 

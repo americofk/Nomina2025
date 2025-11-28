@@ -11,10 +11,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using DC365_WebNR.CORE.Aplication.Attributes;
 using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
-    public class User: IValidatableObject
+    public class User : AuditableCompanyModel, IValidatableObject
     {
         [Required(ErrorMessage = "Alias" + ErrorMsg.Emptym)]
         [CustomFilter("Alias")]
@@ -52,12 +53,12 @@ namespace DC365_WebNR.CORE.Domain.Models
             List<ValidationResult> Error = new List<ValidationResult>();
             if (string.IsNullOrEmpty(Name))
             {
-                Error.Add(new ValidationResult("Nombre no puede estar vacío"));
+                Error.Add(new ValidationResult("Nombre no puede estar vacï¿½o"));
             }
 
             if (string.IsNullOrEmpty(Alias))
             {
-                Error.Add(new ValidationResult("Alias no puede estar vacío"));
+                Error.Add(new ValidationResult("Alias no puede estar vacï¿½o"));
             }
           
             

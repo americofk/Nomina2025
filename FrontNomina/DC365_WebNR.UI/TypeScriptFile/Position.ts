@@ -503,6 +503,9 @@ escuchadores: {
             fn.funtionNewPosition("open");
         }
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectPosition', '.PositionIdtblpos', '/puestosactivos/getbyid', 'Id');
 }
 
 export { }

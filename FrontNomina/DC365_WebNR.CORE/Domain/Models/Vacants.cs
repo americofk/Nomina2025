@@ -8,6 +8,7 @@ using DC365_WebNR.CORE.Domain.Const;
 using System;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 
 namespace DC365_WebNR.CORE.Domain.Models
@@ -15,7 +16,7 @@ namespace DC365_WebNR.CORE.Domain.Models
     /// <summary>
     /// Clase para gestion de Vacants.
     /// </summary>
-    public class Vacants
+    public class Vacants : AuditableCompanyModel
     {
         /// <summary>
         /// Automatico

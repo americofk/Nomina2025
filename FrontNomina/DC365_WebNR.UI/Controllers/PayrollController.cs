@@ -182,6 +182,23 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(_model));
         }
 
+        /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="PayrollId">Identificador de la nómina.</param>
+        /// <returns>Datos de la nómina en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string PayrollId)
+        {
+            GetdataUser();
+            Payroll _model = new Payroll();
+            process = new ProcessPayroll(dataUser[0]);
+
+            _model = await process.GetIdDataAsync(PayrollId);
+
+            return (Json(_model));
+        }
+
 
         /// <summary>
 

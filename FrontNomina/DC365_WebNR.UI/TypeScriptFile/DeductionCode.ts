@@ -625,4 +625,7 @@ const fn= {
     }
 }
 
+// Inicializar modal de auditoría
+initAuditListPage('.selectDeductionCode', '.DeductionCodeId-dc', '/codigosdeduccion/getbyid', 'DeductionCodeId');
+
 export { }

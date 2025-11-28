@@ -10,15 +10,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using DC365_WebNR.CORE.Aplication.Attributes;
 using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models.Common;
 using static DC365_WebNR.CORE.Domain.Models.Enums.GlobalsEnum;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
-    public class Payroll: IValidatableObject
+    public class Payroll : AuditableCompanyModel, IValidatableObject
     {
-        [CustomFilter("Id Nómina")]
+        [CustomFilter("Id Nï¿½mina")]
         public string PayrollId { get; set; }
-        [Required(ErrorMessage = "Nombre de nómina" + ErrorMsg.Emptym)]
+        [Required(ErrorMessage = "Nombre de nï¿½mina" + ErrorMsg.Emptym)]
         [CustomFilter("Nombre")]
         public string Name { get; set; }
         public PayFrecuency PayFrecuency { get; set; }
@@ -30,7 +31,7 @@ namespace DC365_WebNR.CORE.Domain.Models
 
         [DataType(DataType.Date)]
         public DateTime ValidTo { get; set; }
-        [CustomFilter("Descripción")]
+        [CustomFilter("Descripciï¿½n")]
         public string Description { get; set; }
         public bool IsRoyaltyPayroll { get; set; }
         [Required(ErrorMessage = "Moneda" + ErrorMsg.Emptyf)]

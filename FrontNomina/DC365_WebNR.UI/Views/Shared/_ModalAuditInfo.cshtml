@@ -1,0 +1,59 @@
+@* Modal de información de auditoría reutilizable *@
+<style>
+    #modal-audit-info {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    #modal-audit-info.show {
+        opacity: 1;
+    }
+    #modal-audit-info .modal-audit-content {
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+    #modal-audit-info.show .modal-audit-content {
+        transform: scale(1);
+    }
+</style>
+<div class="modal" id="modal-audit-info" tabindex="-1" role="dialog" style="display:none; align-items:center; justify-content:center;">
+    <div class="modal-audit-content" style="background:white; width:420px; max-width:95%; border-radius:4px; border:1px solid #ccc; box-shadow:0 2px 10px rgba(0,0,0,0.2);">
+        <div class="HeaderModal">
+            <h4 class="TituloModal"><i class="fa fa-info-circle"></i> Información de Auditoría</h4>
+        </div>
+        <div style="padding:10px 15px;">
+            <div style="display:flex; gap:10px; margin-bottom:8px;">
+                <div style="flex:1;">
+                    <label style="font-size:12px; color:#666; margin-bottom:2px;">Empresa</label>
+                    <input type="text" class="form-control" id="audit-dataareaid" readonly style="height:30px; font-size:13px;" />
+                </div>
+                <div style="flex:1;">
+                    <label style="font-size:12px; color:#666; margin-bottom:2px;">RecId</label>
+                    <input type="text" class="form-control" id="audit-recid" readonly style="height:30px; font-size:13px;" />
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-bottom:8px;">
+                <div style="flex:1;">
+                    <label style="font-size:12px; color:#666; margin-bottom:2px;">Creado por</label>
+                    <input type="text" class="form-control" id="audit-createdby" readonly style="height:30px; font-size:13px;" />
+                </div>
+                <div style="flex:1;">
+                    <label style="font-size:12px; color:#666; margin-bottom:2px;">Fecha de creación</label>
+                    <input type="text" class="form-control" id="audit-createdon" readonly style="height:30px; font-size:13px;" />
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-bottom:8px;">
+                <div style="flex:1;">
+                    <label style="font-size:12px; color:#666; margin-bottom:2px;">Modificado por</label>
+                    <input type="text" class="form-control" id="audit-modifiedby" readonly style="height:30px; font-size:13px;" />
+                </div>
+                <div style="flex:1;">
+                    <label style="font-size:12px; color:#666; margin-bottom:2px;">Fecha de modificación</label>
+                    <input type="text" class="form-control" id="audit-modifiedon" readonly style="height:30px; font-size:13px;" />
+                </div>
+            </div>
+        </div>
+        <div class="modalfooter" style="padding:8px 15px;">
+            <button type="button" class="btn btn-default close-modal-audit" style="padding:4px 12px;">Cerrar</button>
+        </div>
+    </div>
+</div>

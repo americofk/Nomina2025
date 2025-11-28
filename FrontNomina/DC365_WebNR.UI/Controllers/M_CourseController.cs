@@ -248,6 +248,23 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model));
         }
+
+        /// <summary>
+        /// Obtiene un curso por Id (para auditoría).
+        /// </summary>
+        /// <param name="Id">Parametro Id.</param>
+        /// <returns>Resultado de la operacion.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string Id)
+        {
+            GetdataUser();
+            Course _model = new Course();
+            processCourse = new ProcessCourse(dataUser[0]);
+
+            _model = await processCourse.GetIdDataAsync(Id);
+
+            return (Json(_model));
+        }
     }
 
 }

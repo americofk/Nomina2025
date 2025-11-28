@@ -10,13 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
     /// <summary>
     /// Clase para gestion de ClassRoom.
     /// </summary>
-    public class ClassRoom: IValidatableObject
+    public class ClassRoom : AuditableCompanyModel, IValidatableObject
     {
         /// <summary>
         /// Automatic

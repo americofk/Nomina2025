@@ -120,6 +120,23 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="EarningCodeId">Identificador del código de ganancia.</param>
+        /// <returns>Datos del código de ganancia en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string EarningCodeId)
+        {
+            GetdataUser();
+            EarningCode _model = new EarningCode();
+            earningCode = new ProcessEarningCodes(dataUser[0]);
+
+            _model = await earningCode.GetIdDataAsync(EarningCodeId);
+
+            return (Json(_model));
+        }
+
+        /// <summary>
 
         /// Guarda los cambios.
 

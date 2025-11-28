@@ -11,6 +11,14 @@
                 <h3 class="TituloFormularios setiartitulo">Nuevo puesto</h3>
 
                 <form class="height-custon contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="createAndEditPosition" asp-action="Save">
+                    @* Campos ocultos de auditoría *@
+                    <input type="hidden" asp-for="DataAreaId" />
+                    <input type="hidden" asp-for="RecId" />
+                    <input type="hidden" asp-for="CreatedBy" />
+                    <input type="hidden" asp-for="CreatedOn" />
+                    <input type="hidden" asp-for="ModifiedBy" />
+                    <input type="hidden" asp-for="ModifiedOn" />
+
                     <div class="contInterNuevoConteGastos">
                         <div class="contlotes Showid collapse">
                             <label class="control-label ancholabel">Id.Puesto</label>

@@ -9,6 +9,10 @@ declare function FormatErrors(data: any): void;
 declare function redireccionaralLogin(xhr: any): void;
 declare var isBusy: boolean;
 declare function moredata(maxscroll: number, controller: string, tbody: string): void;
+declare function showAuditModal(data: any): void;
+declare function showAuditModalFromForm(): void;
+declare function initAuditListPage(checkboxSelector: string, idCellSelector: string, apiUrl: string, idParamName?: string): void;
+declare function formatAuditDateTime(dateString: string): string;
 
 interface IRoles {
     Alias: string

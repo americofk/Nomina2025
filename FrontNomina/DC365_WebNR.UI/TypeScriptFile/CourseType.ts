@@ -230,6 +230,9 @@ escuchadores: {
         },
         'Id'
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectCourseType', '.CourseTypeIdtbltc', '/tipocursos/getbyid', 'Id');
 }
 
 export { }

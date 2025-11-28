@@ -241,3 +241,6 @@ enableRowDoubleClick(
     },
     'Id'
 );
+
+// Inicializar modal de auditoría
+initAuditListPage('.selectInstructor', '.InstructorIdtblIns', '/instructor/getbyid', 'Id');

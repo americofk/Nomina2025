@@ -10,13 +10,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using DC365_WebNR.CORE.Aplication.Attributes;
 using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 namespace DC365_WebNR.CORE.Domain.Models
 {
     /// <summary>
     /// Clase para gestion de ProjCategory.
     /// </summary>
-    public class ProjCategory
+    public class ProjCategory : AuditableCompanyModel
     {
         /// <summary>
         /// Identificador.

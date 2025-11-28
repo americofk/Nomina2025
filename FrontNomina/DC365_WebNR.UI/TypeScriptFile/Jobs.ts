@@ -304,6 +304,9 @@ escuchadores: {
             funtionNewJob("open");
         }
     );
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectJobs', '.JobIdtblpos', '/cargosactivos/getbyid', 'Id');
 }
 
 funciones: {

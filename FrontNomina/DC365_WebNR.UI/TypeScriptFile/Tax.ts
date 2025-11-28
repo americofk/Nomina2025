@@ -172,13 +172,13 @@ const fn = {
     SettingNewAndEdit: function (viewmode: string) {
         if (viewmode == "new") {
             option = 1;
-            $(".showid").addClass("collapse");
+            $(".Showid").addClass("collapse");
             $(".contenedor-paycycle ").addClass("collapse");
 
         }
         else {
             option = 2;
-            $(".showid").removeClass("collapse");
+            $(".Showid").removeClass("collapse");
             $(".contenedor-paycycle ").removeClass("collapse");
             fnDetail.SearchTaxDetail();
         }
@@ -329,11 +329,11 @@ const fnDetail = {
     SettingNewAndEdit: function (viewmode: string) {
         if (viewmode == "new") {
             optiondetail = 1;
-            $(".showid").addClass("collapse");
+            $(".Showid").addClass("collapse");
         }
         else {
             optiondetail = 2;
-            $(".showid").removeClass("collapse");
+            $(".Showid").removeClass("collapse");
         }
     },
 
@@ -634,5 +634,7 @@ esuchadores: {
     // Aplicar estilo clickable a las filas
     $('.tbody-Table-Tax .row-app').addClass('row-clickable');
 }
+
+initAuditListPage('.selectTax', '.TaxIdTbl', '/impuestos/getbyid', 'taxid');
 
 export { }

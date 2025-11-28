@@ -23,6 +23,7 @@ const fn = {
             /*            $("#Email").prop('disabled', true);*/
             $('.Contempresa').removeClass('collapse');
             $('.contImputDatosPersonalesFoto').removeClass('collapse');
+            $('.Showid').removeClass('collapse');
             fn.funtionNewAndEditUsers("open");
         }
         else {
@@ -31,6 +32,7 @@ const fn = {
             $("#Email").removeAttr("readonly");
             $('.contImputDatosPersonalesFoto').addClass('collapse');
             $('.Contempresa').addClass('collapse');
+            $('.Showid').addClass('collapse');
             fn.funtionNewAndEditUsers("open");
 
         }
@@ -254,6 +256,7 @@ escuchadores: {
     });
 
     $('.OpCloseform').on('click', function () {
+        $('.Showid').addClass('collapse');
         fn.funtionNewAndEditUsers("close");
     });
 
@@ -868,6 +871,9 @@ escuchadores: {
 
     // Aplicar estilo clickable a las filas
     $('.tbody-Table-user .row-app').addClass('row-clickable');
+
+    // Inicializar modal de auditoría
+    initAuditListPage('.selectUsers', '.Aliastbl', '/usuarios/getbyid', 'Alias');
 }
 
 

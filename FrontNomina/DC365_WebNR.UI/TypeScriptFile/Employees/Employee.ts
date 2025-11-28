@@ -895,4 +895,48 @@ escuchadores: {
     $('.tbody-Table-Employee .row-app').addClass('row-clickable');
 }
 
+// Inicializar modal de auditoría con tipo de empleado
+var employeeType = $('#employee-page').data('employee-type') || 'Empleados';
+$('.AuditInfo').on('click', function() {
+    var _id;
+    var contador = 0;
+    $(".selectEmployees[type=checkbox]").each(function() {
+        if ($(this).is(":checked")) {
+            contador++;
+            _id = $(this).parent().parent().find('.EmployeeIdtbl').html().trim();
+        }
+    });
+
+    if (contador === 0) {
+        windows_message("¡Debe seleccionar un registro para ver la información de auditoría!", "error");
+        return;
+    }
+
+    if (contador > 1) {
+        windows_message("¡Debe seleccionar solo un registro!", "info");
+        return;
+    }
+
+    $.ajax({
+        url: '/empleadosactivos/getbyid',
+        type: "GET",
+        data: { Id: _id, type: employeeType },
+        async: true,
+        success: function(data) {
+            if (data != null) {
+                showAuditModal(data);
+            } else {
+                windows_message("Error obteniendo datos de auditoría", "error");
+            }
+        },
+        error: function(xhr) {
+            redireccionaralLogin(xhr);
+        }
+    });
+});
+
+// Evento para el formulario de edición
+$('.AuditInfoForm').on('click', function() {
+    showAuditModalFromForm();
+});
 

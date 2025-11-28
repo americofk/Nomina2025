@@ -102,11 +102,11 @@ const fn = {
     SettingNewAndEdit: function (viewmode: string) {
         if (viewmode == "new") {
             option = 1;
-            $(".showid").addClass("collapse");
+            $(".Showid").addClass("collapse");
         }
         else {
             option = 2;
-            $(".showid").removeClass("collapse");
+            $(".Showid").removeClass("collapse");
         }
     },
 
@@ -324,5 +324,7 @@ esuchadores: {
     // Aplicar estilo clickable a las filas
     $('.tbody-Table-Loans .row-app').addClass('row-clickable');
 }
+
+initAuditListPage('.selectLoans', '.LoanIdIdTbl', '/prestamos/getbyid', 'loanid');
 
 export { }

@@ -358,6 +358,8 @@ escuchadores: {
             $('.margenFormmularios').addClass('ContenedorFormularios-three');
         }
     );
+
+    initAuditListPage('.selectCourse', '.CourseIdtblcur', '/cursos/getbyid', 'Id');
 }
 
 

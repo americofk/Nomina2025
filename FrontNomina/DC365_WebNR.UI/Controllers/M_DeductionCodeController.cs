@@ -120,6 +120,23 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="DeductionCodeId">Identificador del código de deducción.</param>
+        /// <returns>Datos del código de deducción en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string DeductionCodeId)
+        {
+            GetdataUser();
+            DeductionCode _model = new DeductionCode();
+            deductionCode = new ProcessDeductionCode(dataUser[0]);
+
+            _model = await deductionCode.GetIdDataAsync(DeductionCodeId);
+
+            return (Json(_model));
+        }
+
+        /// <summary>
 
         /// Guarda los cambios.
 

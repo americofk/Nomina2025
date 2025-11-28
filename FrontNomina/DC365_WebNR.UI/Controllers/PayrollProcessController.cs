@@ -360,5 +360,22 @@ namespace DC365_WebNR.UI.Controllers
             responseUI = await process.CancelPayroll(PayrollProcessId);
             return (Json(responseUI));
         }
+
+        /// <summary>
+        /// Obtiene un proceso de nómina por Id (para auditoría).
+        /// </summary>
+        /// <param name="Id">Parametro Id.</param>
+        /// <returns>Resultado de la operacion.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string Id)
+        {
+            GetdataUser();
+            PayrollProcess _model = new PayrollProcess();
+            process = new ProcessPayrollProcess(dataUser[0]);
+
+            _model = await process.GetIdDataAsync(Id);
+
+            return (Json(_model));
+        }
     }
 }

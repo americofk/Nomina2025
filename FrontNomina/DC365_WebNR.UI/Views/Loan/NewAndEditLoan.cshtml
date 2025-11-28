@@ -21,6 +21,7 @@
         </ul>
 
         <ul class="menuoptions">
+            <li class="AuditInfoForm Showid collapse"><a class="btn2 btn-app" title="Información de auditoría"><i class="fa fa-info-circle"></i></a></li>
             <li class="OpCloseform">
                 <a class="btn2 btn-app ">
                     <i class="fa fa-close i-close"></i>
@@ -48,9 +49,16 @@
                 }
                 @*<h3 class="TituloFormularios seteartitulo">Nuevo código de prestamo</h3>*@
                 <form class="contenidoNuevoGasto2" role="tabpanel" data-example-id="togglable-tabs" id="FormNewAndEditLoan" asp-action="save">
+                    @* Campos ocultos de auditoría *@
+                    <input type="hidden" asp-for="DataAreaId" />
+                    <input type="hidden" asp-for="RecId" />
+                    <input type="hidden" asp-for="CreatedBy" />
+                    <input type="hidden" asp-for="CreatedOn" />
+                    <input type="hidden" asp-for="ModifiedBy" />
+                    <input type="hidden" asp-for="ModifiedOn" />
 
                     <div class="contInterNuevoConteGastos">
-                        <div class="contlotes showid collapse">
+                        <div class="contlotes Showid collapse">
 
                             <label class="control-label ancholabel">Id. Código</label>
                             <div class="anchoimput">

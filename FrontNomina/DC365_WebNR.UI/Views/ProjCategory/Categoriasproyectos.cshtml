@@ -50,6 +50,11 @@
                 </li>
             </ul>
             <ul class="menuoptions">
+                <li class="AuditInfo">
+                    <a class="btn2 btn-app" title="Información de auditoría">
+                        <i class="fa fa-info-circle"></i>
+                    </a>
+                </li>
                 <li class="OpcActualizar">
                     <a class="btn2 btn-app">
                         <i class="fa fa-repeat "></i>
@@ -180,6 +185,9 @@
     <form asp-action="updateStatus" class="updateStatus-ProjectCategory collapse" id="updateStatus-ProjectCategory">
     </form>
 
+    @* Modal de información de auditoría *@
+    @{await Html.RenderPartialAsync("_ModalAuditInfo");}
+
     <!-- Modal para guardar vista -->
     <div class="modal fade" id="modal-save-view" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document" style="width:400px; max-width:90%; margin:60px auto;">
@@ -225,6 +233,7 @@
 
 </div>
 
+<script src="~/js/audit-modal.js?@version"></script>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/ProjCategory-views.js?@version"></script>

@@ -239,3 +239,5 @@ enableRowDoubleClick(
     },
     'Id'
 );
+
+initAuditListPage('.selectCourseLocation', '.CourseLocationIdtblcl', '/ubicacioncursos/getbyid', 'Id');

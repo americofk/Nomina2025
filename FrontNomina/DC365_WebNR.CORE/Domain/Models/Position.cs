@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using DC365_WebNR.CORE.Aplication.Attributes;
+using DC365_WebNR.CORE.Domain.Models.Common;
 
 
 
@@ -17,7 +18,7 @@ namespace DC365_WebNR.CORE.Domain.Models
     /// <summary>
     /// Puesto
     /// </summary>
-    public class Position: IValidatableObject
+    public class Position: AuditableCompanyModel, IValidatableObject
     {
         /// <summary>
         /// Automatico

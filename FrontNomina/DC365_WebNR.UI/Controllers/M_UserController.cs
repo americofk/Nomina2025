@@ -116,6 +116,21 @@ namespace DC365_WebNR.UI.Controllers
             return (Json(_model));
         }
 
+        /// <summary>
+        /// Obtiene un registro por su ID para el modal de auditoría.
+        /// </summary>
+        /// <param name="Alias">Alias del usuario.</param>
+        /// <returns>Datos del usuario en formato JSON.</returns>
+        [HttpGet("getbyid")]
+        public async Task<JsonResult> GetById(string Alias)
+        {
+            GetdataUser();
+            processUser = new ProcessUser(dataUser[0]);
+
+            User _model = await processUser.GetIdDataAsync(Alias);
+            return (Json(_model));
+        }
+
         //Empresas asignadas al usuario
         /// <summary>
         /// Busca.

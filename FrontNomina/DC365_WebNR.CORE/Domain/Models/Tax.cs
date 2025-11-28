@@ -6,6 +6,7 @@
 /// <date>2025</date>
 using DC365_WebNR.CORE.Aplication.Attributes;
 using DC365_WebNR.CORE.Domain.Const;
+using DC365_WebNR.CORE.Domain.Models.Common;
 using DC365_WebNR.CORE.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace DC365_WebNR.CORE.Domain.Models
     /// <summary>
     /// Clase para gestion de Tax.
     /// </summary>
-    public class Tax
+    public class Tax : AuditableCompanyModel
     {
         /// <summary>
         /// Identificador.
