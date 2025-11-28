@@ -1,0 +1,207 @@
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.AuditLog>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Auditoría";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    var token = ViewBag.Token ?? "";
+    var userRecId = ViewBag.UserRecId ?? 0;
+    var dataAreaId = ViewBag.DataAreaId ?? "";
+}
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+<div class="contDasboard" id="auditlog-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
+
+    @*Opciones del Formulario*@
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="ViewAuditLogDetails">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-eye"></i>
+                        Ver Detalles
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat "></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app ">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla auditoría -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Registros de Auditoría ISO 27001</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    @{await Html.RenderPartialAsync("ViewFilter");}
+                </div>
+
+                @* Controles de vistas de usuario *@
+                <div class="grid-views-inline" style="display:flex; align-items:center; gap:8px; margin-right:29px;">
+                    <button class="btn btn-sm" id="btn-save-view-changes" title="Guardar cambios en la vista" style="display:none; padding:5px 12px; background:#337ab7; color:#fff; border:1px solid #337ab7;">
+                        <i class="fa fa-save" style="font-size:14px;"></i>
+                    </button>
+                    <button class="btn btn-default btn-sm" id="btn-manage-columns" title="Gestionar columnas" style="padding:5px 12px; background:#fff; border:1px solid #ccc;">
+                        <i class="fa fa-columns" style="font-size:14px;"></i>
+                    </button>
+                    <div class="dropdown dropdown-views-widget">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="padding:5px 12px; background:#fff; border:1px solid #ccc;">
+                            <i class="fa fa-eye" style="font-size:14px;"></i>
+                            <span id="current-view-name" style="font-size:13px; margin:0 5px;">Vista por defecto</span>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="padding:5px 0; border:1px solid #ccc; border-radius:0; box-shadow:none;">
+                            <li><a href="#" data-view="default">Vista por defecto</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="dropdown-header">Vistas Guardadas</li>
+                            <li id="saved-views-container"><span class="text-muted-views">Sin vistas guardadas</span></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" id="btn-new-view">Nueva Vista</a></li>
+                        </ul>
+                    </div>
+                    <style>
+                        .dropdown-views-widget { position: relative; }
+                        .dropdown-views-widget .dropdown-menu { min-width: calc(100% - 4px); width: calc(100% - 4px); left: 0; right: auto; }
+                        .dropdown-views-widget .dropdown-menu > li > a { padding: 5px 15px; font-size: 13px; color: #333; white-space: nowrap; background-color: #fff; }
+                        .dropdown-views-widget .dropdown-menu > li > a:hover,
+                        .dropdown-views-widget .dropdown-menu > li > a:focus,
+                        .dropdown-views-widget ul.dropdown-menu li a:hover { background: #337ab7 !important; background-color: #337ab7 !important; color: #fff !important; }
+                        .dropdown-views-widget .dropdown-menu .divider { margin: 5px 0; }
+                        .dropdown-views-widget .dropdown-menu .dropdown-header { padding: 5px 15px; font-size: 12px; color: #777; white-space: nowrap; }
+                        .dropdown-views-widget .text-muted-views { padding: 5px 15px; display: block; font-size: 12px; color: #999; white-space: nowrap; }
+                        .dropdown-views-widget #saved-views-container .saved-view-item { font-size: 13px; }
+                        .dropdown-views-widget #saved-views-container .saved-view-item:hover { background: #f5f5f5; }
+                        .dropdown-views-widget #saved-views-container .saved-view-item a:hover { color: #337ab7; }
+                        .dropdown-views-widget #saved-views-container .btn-set-default:hover { color: #f0ad4e !important; }
+                    </style>
+                </div>
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblAuditLog" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="selectAllAuditLog" type="checkbox" class="check-table-app">
+                                <label for="selectAllAuditLog" class="label-cell"></label>
+                            </td>
+                            <td class="cell-app cell-header-app">Entidad</td>
+                            <td class="cell-app cell-header-app">Campo</td>
+                            <td class="cell-app cell-header-app">Valor Anterior</td>
+                            <td class="cell-app cell-header-app">Nuevo Valor</td>
+                            <td class="cell-app cell-header-app">Modificado Por</td>
+                            <td class="cell-app cell-header-app">Fecha Cambio</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-AuditLog">
+                        @{
+                            int idCheckCont = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            var idCheck = $"checkAuditLog_{idCheckCont}";
+                            <tr class="row-app">
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectAuditLog">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal AuditLogRecIdtbl collapse" data-title="RecId">
+                                    @item.RecId
+                                </td>
+                                <td class="cell-app EntityNametbl" data-title="Entidad">
+                                    @item.EntityName
+                                </td>
+                                <td class="cell-app FieldNametbl" data-title="Campo">
+                                    @item.FieldName
+                                </td>
+                                <td class="cell-app OldValuetbl" data-title="Valor Anterior">
+                                    @(item.OldValue?.Length > 30 ? item.OldValue.Substring(0, 30) + "..." : item.OldValue)
+                                </td>
+                                <td class="cell-app NewValuetbl" data-title="Nuevo Valor">
+                                    @(item.NewValue?.Length > 30 ? item.NewValue.Substring(0, 30) + "..." : item.NewValue)
+                                </td>
+                                <td class="cell-app ChangedBytbl" data-title="Modificado Por">
+                                    @item.ChangedBy
+                                </td>
+                                <td class="cell-app ChangedAttbl" data-title="Fecha Cambio">
+                                    @item.ChangedAt.ToString("dd/MM/yyyy HH:mm:ss")
+                                </td>
+                            </tr>
+                            idCheckCont++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de detalles de auditoría -->
+@{await Html.RenderPartialAsync("_ModalAuditLogDetails");}
+
+<!-- Modal para guardar vista -->
+<div class="modal fade" id="modal-save-view" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width:400px; max-width:90%; margin:60px auto;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#337ab7; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+                <h4 class="modal-title" style="color:white; font-size:18px; font-weight:400; margin:0;">Nueva Vista</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color:white; opacity:1; font-size:24px; margin:0; padding:0; line-height:1;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:20px;">
+                <div class="form-group" style="margin-bottom:15px;">
+                    <label for="view-name" style="font-weight:500; font-size:14px; color:#555; margin-bottom:5px; display:block;">Nombre de la vista</label>
+                    <input type="text" class="form-control" id="view-name" placeholder="Ej: Mi vista personalizada" style="border:1px solid #ccc; border-radius:0; padding:8px 12px;">
+                </div>
+                <div class="checkbox" style="margin-top:15px;">
+                    <label style="font-weight:400; font-size:14px; color:#555;">
+                        <input type="checkbox" id="view-is-default" style="margin-right:5px;"> Establecer como vista por defecto
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer" style="padding:15px 20px; border-top:1px solid #e5e5e5; text-align:right;">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border:1px solid #ccc; background:#fff; padding:6px 20px;">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn-confirm-save-view" style="background:#337ab7; border-color:#337ab7; padding:6px 20px; margin-left:10px;">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de gestión de columnas -->
+<div class="modal fade" id="modal-manage-columns" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width:450px; max-width:90%; margin:60px auto;">
+        <div class="modal-content">
+            <div class="modal-header" style="background:#337ab7; padding:10px 15px; display:flex; justify-content:space-between; align-items:center;">
+                <h4 class="modal-title" style="color:white; font-size:18px; font-weight:400; margin:0;">Gestionar Columnas</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color:white; opacity:1; font-size:24px; margin:0; padding:0; line-height:1;">&times;</button>
+            </div>
+            <div class="modal-body" style="padding:20px; max-height:400px; overflow-y:auto;">
+                <p style="font-size:13px; color:#666; margin-bottom:15px;">Seleccione las columnas que desea mostrar:</p>
+                <div id="columns-list"></div>
+            </div>
+            <div class="modal-footer" style="padding:15px 20px; border-top:1px solid #e5e5e5; text-align:right;">
+                <button type="button" class="btn btn-default" data-dismiss="modal" style="border:1px solid #ccc; background:#fff; padding:6px 20px;">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btn-apply-columns" style="background:#337ab7; border-color:#337ab7; padding:6px 20px; margin-left:10px;">Aplicar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/AuditLog.js?@version"></script>
+    <script src="~/js/grid-columns-manager.js?@version"></script>
+    <script src="~/js/grid-views-manager.js?@version"></script>
+    <script src="~/js/AuditLog-views.js?@version"></script>
+}

@@ -161,6 +161,10 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
                 if (entry.Entity is AuditLog)
                     continue;
 
+                // Skip UserGridView entity (too many changes from view management)
+                if (entry.Entity is UserGridView)
+                    continue;
+
                 // Only track Added, Modified states
                 if (entry.State != EntityState.Added && entry.State != EntityState.Modified)
                     continue;

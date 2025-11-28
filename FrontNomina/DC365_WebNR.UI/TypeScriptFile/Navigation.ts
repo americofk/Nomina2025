@@ -349,6 +349,11 @@ $('.report-dgt12').on('click', function () {
     window.open("/reportes/dgt12", '_blank');
 });
 
+//ir al listado de auditoría ISO 27001
+$('.auditoria').on('click', function () {
+    window.location.href = "/auditoria#Configuración";
+});
+
 //ir al reporte de todos los empleados
 $('.report-all-employee').on('click', function () {
     window.open("/reportes/reporteempleados", '_blank');

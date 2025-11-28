@@ -1,4 +1,5 @@
 using DC365_PayrollHR.Core.Application.CommandsAndQueries;
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.AuditLogs;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.CalendarHolidays;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.ClassRooms;
@@ -182,6 +183,8 @@ namespace DC365_PayrollHR.Core.Application
 
                 services.AddScoped<ILicenseValidationQueryHandler, LicenseValidationQueryHandler>();
                 services.AddScoped<IQueryByIdHandler<GeneralConfigResponse>, GeneralConfigQueryHandler>();
+
+                services.AddScoped<IAuditLogQueryHandler, AuditLogQueryHandler>();
 
             //services.AddScoped<IQueryWithSearchHandler<Loan>, LoanQueryHandler>();
             #endregion

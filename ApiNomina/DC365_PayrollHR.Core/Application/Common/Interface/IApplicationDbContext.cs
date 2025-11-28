@@ -298,6 +298,11 @@ namespace DC365_PayrollHR.Core.Application.Common.Interface
         /// </summary>
         public DbSet<UserGridView> UserGridViews { get; set; }
 
+        /// <summary>
+        /// Registros de auditoría ISO 27001.
+        /// </summary>
+        public DbSet<AuditLog> AuditLogs { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>

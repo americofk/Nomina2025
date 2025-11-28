@@ -88,5 +88,7 @@ namespace DC365_PayrollHR.Core.Domain.Consts
         public const string EmployeeWorkCalendar = "";
         public const string CalendarHoliday = "";
         public const string GeneralConfig = "";
+
+        public const string AuditLog = "MENU-0069";
     }
 }

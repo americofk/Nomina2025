@@ -382,6 +382,11 @@ namespace DC365_WebNR.INFRASTRUCTURE.Services
                 case "Provinces":
                     UrlResponse = $"{urlBaseOne}​provinces";
                     break;
+
+                //Registros de auditoría
+                case "AuditLogs":
+                    UrlResponse = $"{urlBaseOne}auditlogs";
+                    break;
             }
 
             return UrlResponse;
