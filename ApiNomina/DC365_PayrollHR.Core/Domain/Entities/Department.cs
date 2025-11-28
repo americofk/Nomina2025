@@ -46,16 +46,15 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         public string Description { get; set; }
 
         /// <summary>
-
         /// Estado.
-
         /// </summary>
-
         public bool DepartamentStatus { get; set; } = true;
 
-        //Compañia por la que va a guardar y buscar 
-        //[MaxLength(5)]
-        //public string InCompany { get; set; }
+        /// <summary>
+        /// Cuenta contable para exportación de asiento contable.
+        /// </summary>
+        [MaxLength(20)]
+        public string AccountCode { get; set; }
 
     }
 }

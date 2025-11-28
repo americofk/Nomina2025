@@ -3,7 +3,8 @@
     "allow": [
       "Bash(findstr:*)",
       "Bash(sqlcmd:*)",
-      "Bash(dotnet ef migrations remove:*)"
+      "Bash(dotnet ef migrations remove:*)",
+      "Bash(dotnet ef database update:*)"
     ],
     "deny": [],
     "ask": []

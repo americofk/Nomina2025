@@ -21,11 +21,12 @@
     const apiBase = '/api/v2.0';
 
     // Columnas del grid de departamentos
-    const allColumns = ['DepartmentId', 'Name', 'QtyWorkers', 'StartDate', 'EndDate', 'Description'];
+    const allColumns = ['DepartmentId', 'Name', 'AccountCode', 'QtyWorkers', 'StartDate', 'EndDate', 'Description'];
     const defaultColumns = [...allColumns];
     const columnTitles: Record<string, string> = {
         'DepartmentId': 'Id Departamento',
         'Name': 'Nombre del departamento',
+        'AccountCode': 'Cuenta contable',
         'QtyWorkers': 'Trabajadores',
         'StartDate': 'Fecha inicial',
         'EndDate': 'Fecha final',
@@ -174,6 +175,7 @@
         const colClassMap: Record<string, string> = {
             'DepartmentId': 'DepartmentIdtbl',
             'Name': 'Nametbl',
+            'AccountCode': 'AccountCodetbl',
             'QtyWorkers': 'QtyWorkerstbl',
             'StartDate': 'StartDatetbl',
             'EndDate': 'EndDatetbl',
@@ -184,6 +186,7 @@
         const headerTextMap: Record<string, string> = {
             'DepartmentId': 'Id Departamento',
             'Name': 'Nombre del departamento',
+            'AccountCode': 'Cuenta contable',
             'QtyWorkers': 'Trabajadores',
             'StartDate': 'Fecha inicial',
             'EndDate': 'Fecha final',

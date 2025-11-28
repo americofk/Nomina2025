@@ -142,6 +142,7 @@
                             </td>
                             <td class="cell-app  cell-header-app">Id Departamento</td>
                             <td class="cell-app  cell-header-app">Nombre del departamento</td>
+                            <td class="cell-app  cell-header-app">Cuenta contable</td>
                             <td class="cell-app  cell-header-app">Trabajadores</td>
                             <td class="cell-app  cell-header-app">Fecha inicial</td>
                             <td class="cell-app  cell-header-app">Fecha final</td>
@@ -165,6 +166,9 @@
                                 </td>
                                 <td class="cell-app Nametbl" data-title="Nombre del Departamento">
                                     @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td class="cell-app AccountCodetbl" data-title="Cuenta contable">
+                                    @Html.DisplayFor(modelItem => item.AccountCode)
                                 </td>
                                 <td class="cell-app QtyWorkerstbl" data-title="Trabajadores">
                                     @Html.DisplayFor(modelItem => item.QtyWorkers)

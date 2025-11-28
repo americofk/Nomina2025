@@ -67,12 +67,18 @@ namespace DC365_WebNR.CORE.Domain.Models
         public DateTime EndDate { get; set; }
 
         /// <summary>
-
         /// Descripcion.
-
         /// </summary>
-
         [MaxLength(100)]
-        public string Description { get; set; }        
+        public string Description { get; set; }
+
+        /// <summary>
+        /// Cuenta contable para exportación de asiento contable.
+        /// Permite letras, números, guion (-) y guion bajo (_).
+        /// </summary>
+        [MaxLength(20)]
+        [RegularExpression(@"^[a-zA-Z0-9\-_]*$", ErrorMessage = "La cuenta contable solo permite letras, números, guion (-) y guion bajo (_)")]
+        [CustomFilter("Cuenta Contable")]
+        public string AccountCode { get; set; }
     }
 }

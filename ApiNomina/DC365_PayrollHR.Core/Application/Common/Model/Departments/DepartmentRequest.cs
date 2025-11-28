@@ -46,7 +46,11 @@ namespace DC365_PayrollHR.Core.Application.Common.Model.Departments
         public string Description { get; set; }
 
         /// <summary>
+        /// Cuenta contable para exportación de asiento contable.
+        /// </summary>
+        public string AccountCode { get; set; }
 
+        /// <summary>
         /// Valida los datos.
 
         /// </summary>

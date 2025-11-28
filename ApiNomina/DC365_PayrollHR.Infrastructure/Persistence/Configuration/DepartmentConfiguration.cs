@@ -33,10 +33,11 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
             builder.Property(x => x.EndDate).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(100);
             builder.Property(x => x.DepartamentStatus).IsRequired();
+            builder.Property(x => x.AccountCode).HasMaxLength(20);
 
             builder.Property(x => x.DepartmentId).HasDefaultValueSql("FORMAT((NEXT VALUE FOR dbo.DepartmentId),'DPT-00000000#')")
                     .HasMaxLength(20);
-            
+
         }
     }
 }
