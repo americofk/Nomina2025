@@ -15,20 +15,55 @@
     const entityName = pageEl.dataset.entity || 'Employee';
     const employeeType = pageEl.dataset.employeeType || 'Empleados';
 
-    // Columnas del grid de empleados (varía según el tipo)
-    // Empleados y Prospectos: Número de personal, Nombre, Apellido, Tipo de empleado, Fecha de ingreso, Edad
-    // Dados de baja: Número de personal, Nombre, Apellido, Motivo, Fecha de ingreso, Edad
-    const allColumns = ['EmployeeId', 'Name', 'LastName', 'EmployeeType', 'AdmissionDate', 'Age'];
-    const defaultColumns = [...allColumns];
+    // Columnas del grid de empleados - todos los campos de la entidad
+    const allColumns = [
+        'EmployeeId', 'Name', 'LastName', 'PersonalTreatment', 'BirthDate', 'Gender', 'Age',
+        'DependentsNumbers', 'MaritalStatus', 'NSS', 'ARS', 'AFP', 'AdmissionDate', 'Country',
+        'EmployeeType', 'HomeOffice', 'OwnCar', 'HasDisability', 'ApplyforOvertime', 'IsFixedWorkCalendar',
+        'WorkFrom', 'WorkTo', 'BreakWorkFrom', 'BreakWorkTo', 'EmployeeStatus', 'StartWorkDate',
+        'EndWorkDate', 'PayMethod', 'WorkStatus', 'EmployeeAction', 'OccupationId', 'EducationLevelId',
+        'DisabilityTypeId', 'Nationality', 'LocationId'
+    ];
+    // Columnas visibles por defecto (las más importantes)
+    const defaultColumns = ['EmployeeId', 'Name', 'LastName', 'EmployeeType', 'AdmissionDate', 'Age'];
 
-    // Títulos varían según el tipo de empleado
+    // Títulos de las columnas
     const columnTitles: Record<string, string> = {
         'EmployeeId': 'Número de personal',
         'Name': 'Nombre',
         'LastName': 'Apellido',
-        'EmployeeType': employeeType === 'Dados de baja' ? 'Motivo' : 'Tipo de empleado',
-        'AdmissionDate': 'Fecha de ingreso',
-        'Age': 'Edad'
+        'PersonalTreatment': 'Tratamiento',
+        'BirthDate': 'Fecha nacimiento',
+        'Gender': 'Género',
+        'Age': 'Edad',
+        'DependentsNumbers': 'Dependientes',
+        'MaritalStatus': 'Estado civil',
+        'NSS': 'NSS',
+        'ARS': 'ARS',
+        'AFP': 'AFP',
+        'AdmissionDate': 'Fecha ingreso',
+        'Country': 'País',
+        'EmployeeType': employeeType === 'Dados de baja' ? 'Motivo' : 'Tipo empleado',
+        'HomeOffice': 'Home Office',
+        'OwnCar': 'Vehículo propio',
+        'HasDisability': 'Discapacidad',
+        'ApplyforOvertime': 'Aplica horas extra',
+        'IsFixedWorkCalendar': 'Calendario fijo',
+        'WorkFrom': 'Hora entrada',
+        'WorkTo': 'Hora salida',
+        'BreakWorkFrom': 'Inicio descanso',
+        'BreakWorkTo': 'Fin descanso',
+        'EmployeeStatus': 'Estado',
+        'StartWorkDate': 'Inicio trabajo',
+        'EndWorkDate': 'Fin trabajo',
+        'PayMethod': 'Método pago',
+        'WorkStatus': 'Estado laboral',
+        'EmployeeAction': 'Acción',
+        'OccupationId': 'Ocupación',
+        'EducationLevelId': 'Nivel educación',
+        'DisabilityTypeId': 'Tipo discapacidad',
+        'Nationality': 'Nacionalidad',
+        'LocationId': 'Localidad'
     };
 
     let columnsManager: any = null;
@@ -165,9 +200,38 @@
             'EmployeeId': 'Número de personal',
             'Name': 'Nombre',
             'LastName': 'Apellido',
-            'EmployeeType': employeeType === 'Dados de baja' ? 'Motivo' : 'Tipo de empleado',
-            'AdmissionDate': 'Fecha de ingreso',
-            'Age': 'Edad'
+            'PersonalTreatment': 'Tratamiento',
+            'BirthDate': 'Fecha nacimiento',
+            'Gender': 'Género',
+            'Age': 'Edad',
+            'DependentsNumbers': 'Dependientes',
+            'MaritalStatus': 'Estado civil',
+            'NSS': 'NSS',
+            'ARS': 'ARS',
+            'AFP': 'AFP',
+            'AdmissionDate': 'Fecha ingreso',
+            'Country': 'País',
+            'EmployeeType': employeeType === 'Dados de baja' ? 'Motivo' : 'Tipo empleado',
+            'HomeOffice': 'Home Office',
+            'OwnCar': 'Vehículo propio',
+            'HasDisability': 'Discapacidad',
+            'ApplyforOvertime': 'Aplica horas extra',
+            'IsFixedWorkCalendar': 'Calendario fijo',
+            'WorkFrom': 'Hora entrada',
+            'WorkTo': 'Hora salida',
+            'BreakWorkFrom': 'Inicio descanso',
+            'BreakWorkTo': 'Fin descanso',
+            'EmployeeStatus': 'Estado',
+            'StartWorkDate': 'Inicio trabajo',
+            'EndWorkDate': 'Fin trabajo',
+            'PayMethod': 'Método pago',
+            'WorkStatus': 'Estado laboral',
+            'EmployeeAction': 'Acción',
+            'OccupationId': 'Ocupación',
+            'EducationLevelId': 'Nivel educación',
+            'DisabilityTypeId': 'Tipo discapacidad',
+            'Nationality': 'Nacionalidad',
+            'LocationId': 'Localidad'
         };
 
         // Reordenar headers
@@ -194,9 +258,38 @@
             'EmployeeId': 'EmployeeIdtbl',
             'Name': 'Nametbl',
             'LastName': 'LastNametbl',
-            'EmployeeType': 'EmployeeTypetbl',
+            'PersonalTreatment': 'PersonalTreatmenttbl',
+            'BirthDate': 'BirthDatetbl',
+            'Gender': 'Gendertbl',
+            'Age': 'Agetbl',
+            'DependentsNumbers': 'DependentsNumberstbl',
+            'MaritalStatus': 'MaritalStatustbl',
+            'NSS': 'NSStbl',
+            'ARS': 'ARStbl',
+            'AFP': 'AFPtbl',
             'AdmissionDate': 'AdmissionDatetbl',
-            'Age': 'Agetbl'
+            'Country': 'Countrytbl',
+            'EmployeeType': 'EmployeeTypetbl',
+            'HomeOffice': 'HomeOfficetbl',
+            'OwnCar': 'OwnCartbl',
+            'HasDisability': 'HasDisabilitytbl',
+            'ApplyforOvertime': 'ApplyforOvertimetbl',
+            'IsFixedWorkCalendar': 'IsFixedWorkCalendartbl',
+            'WorkFrom': 'WorkFromtbl',
+            'WorkTo': 'WorkTotbl',
+            'BreakWorkFrom': 'BreakWorkFromtbl',
+            'BreakWorkTo': 'BreakWorkTotbl',
+            'EmployeeStatus': 'EmployeeStatustbl',
+            'StartWorkDate': 'StartWorkDatetbl',
+            'EndWorkDate': 'EndWorkDatetbl',
+            'PayMethod': 'PayMethodtbl',
+            'WorkStatus': 'WorkStatustbl',
+            'EmployeeAction': 'EmployeeActiontbl',
+            'OccupationId': 'OccupationIdtbl',
+            'EducationLevelId': 'EducationLevelIdtbl',
+            'DisabilityTypeId': 'DisabilityTypeIdtbl',
+            'Nationality': 'Nationalitytbl',
+            'LocationId': 'LocationIdtbl'
         };
 
         // Reordenar body rows

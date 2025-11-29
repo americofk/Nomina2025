@@ -223,18 +223,45 @@
                             <td class="cell-app  cell-header-app">Número de personal</td>
                             <td class="cell-app  cell-header-app">Nombre</td>
                             <td class="cell-app  cell-header-app">Apellido</td>
+                            <td class="cell-app  cell-header-app">Tratamiento</td>
+                            <td class="cell-app  cell-header-app">Fecha nacimiento</td>
+                            <td class="cell-app  cell-header-app">Género</td>
+                            <td class="cell-app  cell-header-app">Edad</td>
+                            <td class="cell-app  cell-header-app">Dependientes</td>
+                            <td class="cell-app  cell-header-app">Estado civil</td>
+                            <td class="cell-app  cell-header-app">NSS</td>
+                            <td class="cell-app  cell-header-app">ARS</td>
+                            <td class="cell-app  cell-header-app">AFP</td>
+                            <td class="cell-app  cell-header-app">Fecha ingreso</td>
+                            <td class="cell-app  cell-header-app">País</td>
                             @if (ViewBag.typeEmployee == "Dados de baja")
                             {
                                 <td class="cell-app  cell-header-app">Motivo</td>
-
                             }
                             else
                             {
-                                <td class="cell-app  cell-header-app">Tipo de empleado</td>
-
+                                <td class="cell-app  cell-header-app">Tipo empleado</td>
                             }
-                            <td class="cell-app  cell-header-app">Fecha de ingreso</td>
-                            <td class="cell-app  cell-header-app">Edad</td>
+                            <td class="cell-app  cell-header-app">Home Office</td>
+                            <td class="cell-app  cell-header-app">Vehículo propio</td>
+                            <td class="cell-app  cell-header-app">Discapacidad</td>
+                            <td class="cell-app  cell-header-app">Aplica horas extra</td>
+                            <td class="cell-app  cell-header-app">Calendario fijo</td>
+                            <td class="cell-app  cell-header-app">Hora entrada</td>
+                            <td class="cell-app  cell-header-app">Hora salida</td>
+                            <td class="cell-app  cell-header-app">Inicio descanso</td>
+                            <td class="cell-app  cell-header-app">Fin descanso</td>
+                            <td class="cell-app  cell-header-app">Estado</td>
+                            <td class="cell-app  cell-header-app">Inicio trabajo</td>
+                            <td class="cell-app  cell-header-app">Fin trabajo</td>
+                            <td class="cell-app  cell-header-app">Método pago</td>
+                            <td class="cell-app  cell-header-app">Estado laboral</td>
+                            <td class="cell-app  cell-header-app">Acción</td>
+                            <td class="cell-app  cell-header-app">Ocupación</td>
+                            <td class="cell-app  cell-header-app">Nivel educación</td>
+                            <td class="cell-app  cell-header-app">Tipo discapacidad</td>
+                            <td class="cell-app  cell-header-app">Nacionalidad</td>
+                            <td class="cell-app  cell-header-app">Localidad</td>
                         </tr>
                     </thead>
                     <tbody class="tbody-Table-Employee">
@@ -258,7 +285,39 @@
                             <td class="cell-app LastNametbl" data-title="Apellido">
                                 @Html.DisplayFor(modelItem => item.LastName)
                             </td>
-
+                            <td class="cell-app PersonalTreatmenttbl" data-title="Tratamiento">
+                                @Html.DisplayFor(modelItem => item.PersonalTreatment)
+                            </td>
+                            <td class="cell-app BirthDatetbl" data-title="Fecha nacimiento">
+                                @Convert.ToDateTime(item.BirthDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app Gendertbl" data-title="Género">
+                                @Html.DisplayFor(modelItem => item.Gender)
+                            </td>
+                            <td class="cell-app Agetbl" data-title="Edad">
+                                @Html.DisplayFor(modelItem => item.Age)
+                            </td>
+                            <td class="cell-app DependentsNumberstbl" data-title="Dependientes">
+                                @Html.DisplayFor(modelItem => item.DependentsNumbers)
+                            </td>
+                            <td class="cell-app MaritalStatustbl" data-title="Estado civil">
+                                @Html.DisplayFor(modelItem => item.MaritalStatus)
+                            </td>
+                            <td class="cell-app NSStbl" data-title="NSS">
+                                @Html.DisplayFor(modelItem => item.NSS)
+                            </td>
+                            <td class="cell-app ARStbl" data-title="ARS">
+                                @Html.DisplayFor(modelItem => item.ARS)
+                            </td>
+                            <td class="cell-app AFPtbl" data-title="AFP">
+                                @Html.DisplayFor(modelItem => item.AFP)
+                            </td>
+                            <td class="cell-app AdmissionDatetbl" data-title="Fecha ingreso">
+                                @Convert.ToDateTime(item.AdmissionDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app Countrytbl" data-title="País">
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
                             @if (ViewBag.typeEmployee == "Dados de baja")
                             {
                                 <td class="cell-app EmployeeTypetbl" data-title="Motivo">
@@ -267,16 +326,69 @@
                             }
                             else
                             {
-                                <td class="cell-app EmployeeTypetbl" data-title="Motivo">
+                                <td class="cell-app EmployeeTypetbl" data-title="Tipo empleado">
                                     @Html.DisplayFor(modelItem => item.EmployeeType)
                                 </td>
                             }
-
-                            <td class="cell-app AdmissionDatetbl" data-title="Fecha de ingreso">
-                                @Convert.ToDateTime(item.AdmissionDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            <td class="cell-app HomeOfficetbl" data-title="Home Office">
+                                @(item.HomeOffice ? "Sí" : "No")
                             </td>
-                            <td class="cell-app Agetbl" data-title="Edad">
-                                @Html.DisplayFor(modelItem => item.Age)
+                            <td class="cell-app OwnCartbl" data-title="Vehículo propio">
+                                @(item.OwnCar ? "Sí" : "No")
+                            </td>
+                            <td class="cell-app HasDisabilitytbl" data-title="Discapacidad">
+                                @(item.HasDisability ? "Sí" : "No")
+                            </td>
+                            <td class="cell-app ApplyforOvertimetbl" data-title="Aplica horas extra">
+                                @(item.ApplyforOvertime ? "Sí" : "No")
+                            </td>
+                            <td class="cell-app IsFixedWorkCalendartbl" data-title="Calendario fijo">
+                                @(item.IsFixedWorkCalendar ? "Sí" : "No")
+                            </td>
+                            <td class="cell-app WorkFromtbl" data-title="Hora entrada">
+                                @item.WorkFrom.ToString(@"hh\:mm")
+                            </td>
+                            <td class="cell-app WorkTotbl" data-title="Hora salida">
+                                @item.WorkTo.ToString(@"hh\:mm")
+                            </td>
+                            <td class="cell-app BreakWorkFromtbl" data-title="Inicio descanso">
+                                @item.BreakWorkFrom.ToString(@"hh\:mm")
+                            </td>
+                            <td class="cell-app BreakWorkTotbl" data-title="Fin descanso">
+                                @item.BreakWorkTo.ToString(@"hh\:mm")
+                            </td>
+                            <td class="cell-app EmployeeStatustbl" data-title="Estado">
+                                @(item.EmployeeStatus ? "Activo" : "Inactivo")
+                            </td>
+                            <td class="cell-app StartWorkDatetbl" data-title="Inicio trabajo">
+                                @Convert.ToDateTime(item.StartWorkDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app EndWorkDatetbl" data-title="Fin trabajo">
+                                @Convert.ToDateTime(item.EndWorkDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
+                            </td>
+                            <td class="cell-app PayMethodtbl" data-title="Método pago">
+                                @Html.DisplayFor(modelItem => item.PayMethod)
+                            </td>
+                            <td class="cell-app WorkStatustbl" data-title="Estado laboral">
+                                @Html.DisplayFor(modelItem => item.WorkStatus)
+                            </td>
+                            <td class="cell-app EmployeeActiontbl" data-title="Acción">
+                                @Html.DisplayFor(modelItem => item.EmployeeAction)
+                            </td>
+                            <td class="cell-app OccupationIdtbl" data-title="Ocupación">
+                                @Html.DisplayFor(modelItem => item.OccupationId)
+                            </td>
+                            <td class="cell-app EducationLevelIdtbl" data-title="Nivel educación">
+                                @Html.DisplayFor(modelItem => item.EducationLevelId)
+                            </td>
+                            <td class="cell-app DisabilityTypeIdtbl" data-title="Tipo discapacidad">
+                                @Html.DisplayFor(modelItem => item.DisabilityTypeId)
+                            </td>
+                            <td class="cell-app Nationalitytbl" data-title="Nacionalidad">
+                                @Html.DisplayFor(modelItem => item.Nationality)
+                            </td>
+                            <td class="cell-app LocationIdtbl" data-title="Localidad">
+                                @Html.DisplayFor(modelItem => item.LocationId)
                             </td>
 
                         </tr>

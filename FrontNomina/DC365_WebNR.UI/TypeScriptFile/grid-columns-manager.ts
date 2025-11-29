@@ -168,10 +168,10 @@ class GridColumnsManager {
                     margin: 60px auto;
                 }
 
-                /* Contenedor de lista de columnas - altura flexible sin scroll */
+                /* Contenedor de lista de columnas - con scroll para muchas columnas */
                 .columns-list-container {
-                    max-height: none;
-                    overflow-y: visible;
+                    max-height: 400px;
+                    overflow-y: auto;
                     border: 1px solid #ddd;
                     border-radius: 4px;
                     padding: 10px;

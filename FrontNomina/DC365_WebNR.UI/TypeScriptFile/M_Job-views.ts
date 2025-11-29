@@ -12,13 +12,14 @@
     const userRecId = parseInt(pageEl.dataset.user || '0', 10);
     const apiBase = '/api/v2.0';
 
-    // Columnas del grid de cargos
-    const allColumns = ['JobId', 'Name', 'Description'];
-    const defaultColumns = [...allColumns];
+    // Columnas del grid de cargos - todos los campos
+    const allColumns = ['JobId', 'Name', 'Description', 'JobStatus'];
+    const defaultColumns = ['JobId', 'Name', 'Description'];
     const columnTitles: Record<string, string> = {
         'JobId': 'Id. Cargo',
         'Name': 'Nombre de cargo',
-        'Description': 'Descripción'
+        'Description': 'Descripción',
+        'JobStatus': 'Estado'
     };
 
     let columnsManager: any = null;
@@ -152,15 +153,17 @@
         if (!table) return;
 
         const colClassMap: Record<string, string> = {
-            'JobId': 'JobIdtblpos',
-            'Name': 'Nametblcr',
-            'Description': 'DescriptionIdtblcr'
+            'JobId': 'JobIdtbl',
+            'Name': 'Nametbl',
+            'Description': 'Descriptiontbl',
+            'JobStatus': 'JobStatustbl'
         };
 
         const headerTextMap: Record<string, string> = {
             'JobId': 'Id. Cargo',
             'Name': 'Nombre de cargo',
-            'Description': 'Descripción'
+            'Description': 'Descripción',
+            'JobStatus': 'Estado'
         };
 
         // Reordenar headers

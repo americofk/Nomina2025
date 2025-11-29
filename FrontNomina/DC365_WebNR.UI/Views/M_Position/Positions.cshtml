@@ -189,9 +189,11 @@
                             </td>
                             <td class="cell-app  cell-header-app">Id.Puesto</td>
                             <td class="cell-app  cell-header-app">Nombre de puesto</td>
+                            <td class="cell-app  cell-header-app">Es vacante</td>
                             <td class="cell-app  cell-header-app">Departamento</td>
                             <td class="cell-app  cell-header-app">Cargo</td>
                             <td class="cell-app  cell-header-app">Notifica al puesto</td>
+                            <td class="cell-app  cell-header-app">Estado</td>
                             <td class="cell-app  cell-header-app">Fecha inicial</td>
                             <td class="cell-app  cell-header-app">Fecha final</td>
                             <td class="cell-app  cell-header-app styleRowDescripThree">Descripción</td>
@@ -210,36 +212,34 @@
                                     <input id="@idCheck" type="checkbox" class="check-table-app selectPosition">
                                     <label for="@idCheck" class="label-cell"></label>
                                 </td>
-                                <td class="cell-app cell-principal PositionIdtblpos" data-title="Id de cargo">
+                                <td class="cell-app cell-principal PositionIdtbl" data-title="Id.Puesto">
                                     @Html.DisplayFor(modelItem => item.PositionId)
                                 </td>
-                                <td class="cell-app Nametblcr" data-title="Nombre de cargo">
+                                <td class="cell-app PositionNametbl" data-title="Nombre de puesto">
                                     @Html.DisplayFor(modelItem => item.PositionName)
                                 </td>
-                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                <td class="cell-app IsVacanttbl" data-title="Es vacante">
+                                    @(item.IsVacant ? "Sí" : "No")
+                                </td>
+                                <td class="cell-app DepartmentIdtbl" data-title="Departamento">
                                     @Html.DisplayFor(modelItem => item.DepartmentId)
                                 </td>
-
-                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                <td class="cell-app JobIdtbl" data-title="Cargo">
                                     @Html.DisplayFor(modelItem => item.JobId)
                                 </td>
-
-                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                <td class="cell-app NotifyPositionIdtbl" data-title="Notifica al puesto">
                                     @Html.DisplayFor(modelItem => item.NotifyPositionId)
                                 </td>
-
-                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                <td class="cell-app PositionStatustbl" data-title="Estado">
+                                    @(item.PositionStatus ? "Activo" : "Inactivo")
+                                </td>
+                                <td class="cell-app StartDatetbl" data-title="Fecha inicial">
                                     @Convert.ToDateTime(item.StartDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
-
                                 </td>
-
-
-                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                <td class="cell-app EndDatetbl" data-title="Fecha final">
                                     @Convert.ToDateTime(item.EndDate).ToString("d", CultureInfo.CreateSpecificCulture(ViewBag.Culture))
-
                                 </td>
-
-                                <td class="cell-app CourseLocationIdtblcr" data-title="Descripción)">
+                                <td class="cell-app Descriptiontbl" data-title="Descripción">
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
 

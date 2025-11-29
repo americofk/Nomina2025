@@ -12,15 +12,17 @@
     const userRecId = parseInt(pageEl.dataset.user || '0', 10);
     const apiBase = '/api/v2.0';
 
-    // Columnas del grid de puestos
-    const allColumns = ['PositionId', 'PositionName', 'DepartmentId', 'JobId', 'NotifyPositionId', 'StartDate', 'EndDate', 'Description'];
-    const defaultColumns = [...allColumns];
+    // Columnas del grid de puestos - todos los campos de la entidad
+    const allColumns = ['PositionId', 'PositionName', 'IsVacant', 'DepartmentId', 'JobId', 'NotifyPositionId', 'PositionStatus', 'StartDate', 'EndDate', 'Description'];
+    const defaultColumns = ['PositionId', 'PositionName', 'DepartmentId', 'JobId', 'NotifyPositionId', 'StartDate', 'EndDate', 'Description'];
     const columnTitles: Record<string, string> = {
         'PositionId': 'Id.Puesto',
         'PositionName': 'Nombre de puesto',
+        'IsVacant': 'Es vacante',
         'DepartmentId': 'Departamento',
         'JobId': 'Cargo',
         'NotifyPositionId': 'Notifica al puesto',
+        'PositionStatus': 'Estado',
         'StartDate': 'Fecha inicial',
         'EndDate': 'Fecha final',
         'Description': 'Descripción'
@@ -157,22 +159,26 @@
         if (!table) return;
 
         const colClassMap: Record<string, string> = {
-            'PositionId': 'PositionIdtblpos',
-            'PositionName': 'Nametblcr',
-            'DepartmentId': 'CourseLocationIdtblcr',
-            'JobId': 'CourseLocationIdtblcr',
-            'NotifyPositionId': 'CourseLocationIdtblcr',
-            'StartDate': 'CourseLocationIdtblcr',
-            'EndDate': 'CourseLocationIdtblcr',
-            'Description': 'CourseLocationIdtblcr'
+            'PositionId': 'PositionIdtbl',
+            'PositionName': 'PositionNametbl',
+            'IsVacant': 'IsVacanttbl',
+            'DepartmentId': 'DepartmentIdtbl',
+            'JobId': 'JobIdtbl',
+            'NotifyPositionId': 'NotifyPositionIdtbl',
+            'PositionStatus': 'PositionStatustbl',
+            'StartDate': 'StartDatetbl',
+            'EndDate': 'EndDatetbl',
+            'Description': 'Descriptiontbl'
         };
 
         const headerTextMap: Record<string, string> = {
             'PositionId': 'Id.Puesto',
             'PositionName': 'Nombre de puesto',
+            'IsVacant': 'Es vacante',
             'DepartmentId': 'Departamento',
             'JobId': 'Cargo',
             'NotifyPositionId': 'Notifica al puesto',
+            'PositionStatus': 'Estado',
             'StartDate': 'Fecha inicial',
             'EndDate': 'Fecha final',
             'Description': 'Descripción'
@@ -197,30 +203,19 @@
             }
         }
 
-        // Reordenar body rows - usando índice de columna basado en header
+        // Reordenar body rows usando clases CSS
         const bodyRows = table.querySelectorAll('tbody tr');
         bodyRows.forEach((row) => {
             const checkboxCell = row.querySelector('.check-cell-app');
             const cells = Array.from(row.querySelectorAll('td:not(.check-cell-app)'));
 
-            // Mapeo de índices: la tabla tiene columnas en orden fijo
-            const columnIndexMap: Record<string, number> = {
-                'PositionId': 0,
-                'PositionName': 1,
-                'DepartmentId': 2,
-                'JobId': 3,
-                'NotifyPositionId': 4,
-                'StartDate': 5,
-                'EndDate': 6,
-                'Description': 7
-            };
-
             cells.forEach(cell => (cell as HTMLElement).style.display = 'none');
             visible.forEach((colName) => {
-                const idx = columnIndexMap[colName];
-                if (idx !== undefined && cells[idx]) {
-                    (cells[idx] as HTMLElement).style.display = '';
-                    row.appendChild(cells[idx]);
+                const className = colClassMap[colName];
+                const cell = cells.find(c => c.classList.contains(className));
+                if (cell) {
+                    (cell as HTMLElement).style.display = '';
+                    row.appendChild(cell);
                 }
             });
             if (checkboxCell) {

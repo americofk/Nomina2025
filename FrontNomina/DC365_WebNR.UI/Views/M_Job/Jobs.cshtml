@@ -176,6 +176,7 @@
                             <td class="cell-app  cell-header-app">Id. Cargo</td>
                             <td class="cell-app  cell-header-app">Nombre de cargo</td>
                             <td class="cell-app  cell-header-app">Descripción</td>
+                            <td class="cell-app  cell-header-app">Estado</td>
 
                         </tr>
                     </thead>
@@ -191,14 +192,17 @@
                                     <input id="@idCheck" type="checkbox" class="check-table-app selectJobs">
                                     <label for="@idCheck" class="label-cell"></label>
                                 </td>
-                                <td class="cell-app cell-principal JobIdtblpos" data-title="Id de cargo">
+                                <td class="cell-app cell-principal JobIdtbl" data-title="Id. Cargo">
                                     @Html.DisplayFor(modelItem => item.JobId)
                                 </td>
-                                <td class="cell-app Nametblcr" data-title="Nombre de cargo">
+                                <td class="cell-app Nametbl" data-title="Nombre de cargo">
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </td>
-                                <td class="cell-app DescriptionIdtblcr" data-title="Descripción)">
+                                <td class="cell-app Descriptiontbl" data-title="Descripción">
                                     @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td class="cell-app JobStatustbl" data-title="Estado">
+                                    @(item.JobStatus ? "Activo" : "Inactivo")
                                 </td>
 
                             </tr>
