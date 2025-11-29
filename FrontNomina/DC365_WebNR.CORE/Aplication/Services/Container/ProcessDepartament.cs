@@ -84,6 +84,8 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
 
                 responseUI.Message = DataApi.Message;
                 responseUI.Type = ErrorMsg.TypeOk;
+                // Devolver el ID del registro creado para que el frontend pueda cambiar a modo edición
+                responseUI.IdType = DataApi.Data?.DepartmentId;
             }
             else
             {

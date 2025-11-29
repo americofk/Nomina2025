@@ -286,3 +286,15 @@ interface IPayroll{
     PayCycleQty: number
 }
 
+// Funciones globales adicionales
+declare function AutomaticBinding(data: any, formSelector: string): void;
+declare function optionFilterFunction(element: any): void;
+declare function textFilterMaskFunction(element: any): void;
+declare function Datafilter(tbodySelector: string, url: string): void;
+declare function enableRowDoubleClick(
+    tbodySelector: string,
+    idCellSelector: string,
+    apiUrl: string,
+    callback: (data: any) => void,
+    idParamName?: string
+): void;

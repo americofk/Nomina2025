@@ -122,8 +122,8 @@ escuchadores: {
 
     //save departamento
     $("#createAndEditDepartment").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $.ajax({
                 url: "/departamentosactivos/guardar",
                 type: "POST",
@@ -135,6 +135,13 @@ escuchadores: {
                         FormatErrors(data);
                     } else {
                         windows_message(data.Message, data.Type, {});
+
+                        // Si era una creación (option=1) y se devolvió el ID, cambiar a modo edición
+                        if (option === 1 && data.IdType) {
+                            $('#DepartmentId').val(data.IdType);
+                            fn.SettingNewAndEdit("Edit"); // Cambiar a modo edición
+                        }
+
                         $.get(location.href)
                             .done(function (r) {
                                 var newDom = $(r);
@@ -155,6 +162,12 @@ escuchadores: {
     // Guardar y cerrar
     $('.btnSaveAndClose').on('click', function () {
         shouldCloseAfterSave = true;
+        $("#createAndEditDepartment").submit();
+    });
+
+    // Guardar (solo guardar, sin cerrar)
+    $('.btnSaveOnly').on('click', function () {
+        shouldCloseAfterSave = false;
         $("#createAndEditDepartment").submit();
     });
 
@@ -203,8 +216,8 @@ escuchadores: {
 
     //eliminar departamento
     $("#deleteDepartment").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectDepartment[type=checkbox]").each(function () {

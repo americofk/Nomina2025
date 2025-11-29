@@ -8,9 +8,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Common
     public abstract class AuditableCompanyModel : AuditableModel
     {
         /// <summary>
-        /// Company identifier (formerly InCompany)
+        /// Company identifier (formerly InCompany).
+        /// Se asigna automáticamente desde la sesión del usuario en el controlador.
         /// </summary>
-        [Required]
         [MaxLength(10)]
         [Display(Name = "Empresa")]
         public string DataAreaId { get; set; }
