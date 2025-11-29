@@ -190,7 +190,37 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
                 };
             }
 
-            var entity = BuildDtoHelper<Employee>.OnBuild(model, response);
+            // Asignar propiedades directamente para que EF detecte los cambios correctamente
+            response.Name = model.Name;
+            response.LastName = model.LastName;
+            response.PersonalTreatment = model.PersonalTreatment;
+            response.BirthDate = model.BirthDate;
+            response.Gender = model.Gender;
+            response.Age = model.Age;
+            response.DependentsNumbers = model.DependentsNumbers;
+            response.MaritalStatus = model.MaritalStatus;
+            response.NSS = model.NSS;
+            response.ARS = model.ARS;
+            response.AFP = model.AFP;
+            response.AdmissionDate = model.AdmissionDate;
+            response.Country = model.Country;
+            response.EmployeeType = model.EmployeeType;
+            response.HomeOffice = model.HomeOffice;
+            response.OwnCar = model.OwnCar;
+            response.HasDisability = model.HasDisability;
+            response.WorkFrom = model.WorkFrom;
+            response.WorkTo = model.WorkTo;
+            response.BreakWorkFrom = model.BreakWorkFrom;
+            response.BreakWorkTo = model.BreakWorkTo;
+            response.PayMethod = model.PayMethod;
+            response.OccupationId = model.OccupationId;
+            response.EducationLevelId = model.EducationLevelId;
+            response.DisabilityTypeId = model.DisabilityTypeId;
+            response.Nationality = model.Nationality;
+            response.LocationId = model.LocationId;
+            response.ApplyforOvertime = model.ApplyforOvertime;
+            response.IsFixedWorkCalendar = model.IsFixedWorkCalendar;
+
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
