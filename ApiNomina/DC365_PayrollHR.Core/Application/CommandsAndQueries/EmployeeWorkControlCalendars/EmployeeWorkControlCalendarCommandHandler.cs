@@ -168,7 +168,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeWorkContro
             var entity = BuildDtoHelper<EmployeeWorkControlCalendar>.OnBuild(model, response);
             entity.TotalHour = (decimal)(Math.Abs((model.WorkTo - model.WorkFrom).TotalHours) - Math.Abs((model.BreakWorkFrom - model.BreakWorkTo).TotalHours));
 
-            _dbContext.EmployeeWorkControlCalendars.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(entity)

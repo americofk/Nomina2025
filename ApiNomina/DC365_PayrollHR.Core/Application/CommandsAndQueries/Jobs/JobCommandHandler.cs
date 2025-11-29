@@ -161,7 +161,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
             }
 
             var entity = BuildDtoHelper<Job>.OnBuild(model, response);
-            _dbContext.Jobs.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -200,7 +199,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Jobs
             }
 
             response.JobStatus = status;
-            _dbContext.Jobs.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

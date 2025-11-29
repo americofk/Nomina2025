@@ -316,7 +316,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
             var entity = response;
             entity.IsForTax = model.IsForTax;
 
-            dbContext.PayCycles.Update(entity);
             await dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -364,7 +363,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
             var entity = response;
             entity.IsForTss = model.IsForTss;
 
-            dbContext.PayCycles.Update(entity);
             await dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

@@ -30,7 +30,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
             // Propiedades
             builder.Property(x => x.RecId)
                    .IsRequired()
-                   .ValueGeneratedOnAdd();
+                   .HasDefaultValueSql("NEXT VALUE FOR dbo.RecId");
 
             builder.Property(x => x.UserRefRecId)
                    .IsRequired();

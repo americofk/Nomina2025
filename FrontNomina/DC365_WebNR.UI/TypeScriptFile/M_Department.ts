@@ -136,14 +136,8 @@ escuchadores: {
                     } else {
                         windows_message(data.Message, data.Type, {});
 
-                        // Debug: ver qué devuelve el servidor
-                        console.log('Respuesta del servidor:', data);
-                        console.log('option actual:', option);
-                        console.log('IdType recibido:', data.IdType);
-
                         // Si era una creación (option=1) y se devolvió el ID, cambiar a modo edición
                         if (option === 1 && data.IdType) {
-                            console.log('Cambiando a modo edición con ID:', data.IdType);
                             $('#DepartmentId').val(data.IdType);
                             fn.SettingNewAndEdit("Edit"); // Cambiar a modo edición
                         }

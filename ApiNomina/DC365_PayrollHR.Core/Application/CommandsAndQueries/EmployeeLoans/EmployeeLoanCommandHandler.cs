@@ -198,7 +198,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
                     message = $"El registro seleccionado ya fue procesado en una nómina, se actualizó la fecha hasta";
 
                     response.ValidTo = model.ValidTo;
-                    _dbContext.EmployeeLoans.Update(response);
                     await _dbContext.SaveChangesAsync();
                 }
                 else
@@ -220,7 +219,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
             else
             {
                 var entity = BuildDtoHelper<EmployeeLoan>.OnBuild(model, response);
-                _dbContext.EmployeeLoans.Update(entity);
                 await _dbContext.SaveChangesAsync();
 
                 return new Response<object>(true) { Message = "Registro actualizado con éxito" };

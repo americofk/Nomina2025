@@ -188,7 +188,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDeductionC
                 };
             }
             var entity = BuildDtoHelper<EmployeeDeductionCode>.OnBuild(model, response);
-            _dbContext.EmployeeDeductionCodes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

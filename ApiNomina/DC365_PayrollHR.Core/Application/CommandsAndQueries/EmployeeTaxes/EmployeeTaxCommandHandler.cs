@@ -162,7 +162,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeTaxes
             }
 
             var entity = BuildDtoHelper<EmployeeTax>.OnBuild(model, response);
-            _dbContext.EmployeeTaxes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

@@ -132,7 +132,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CalendarHolidays
             }
 
             var entity = BuildDtoHelper<CalendarHoliday>.OnBuild(model, response);
-            _dbContext.CalendarHolidays.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

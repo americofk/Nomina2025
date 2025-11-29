@@ -116,7 +116,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeHistories
             var entity = response;
             entity.RegisterDate = model.RegisterDate;
 
-            _dbContext.EmployeeHistories.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -149,7 +148,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeHistories
             var entity = response;
             entity.IsUseDGT = model.IsUseDGT;
 
-            _dbContext.EmployeeHistories.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

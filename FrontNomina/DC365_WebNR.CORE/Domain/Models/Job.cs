@@ -33,8 +33,7 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// Max 200
         /// </summary>
         [MaxLength(200)]
-        [Required(ErrorMessage = "Descripci�n" + ErrorMsg.Emptym)]
-        [CustomFilter("Descripci�n")]
+        [CustomFilter("Descripción")]
         public string Description { get; set; }
 
         public bool JobStatus { get; set; } = true;

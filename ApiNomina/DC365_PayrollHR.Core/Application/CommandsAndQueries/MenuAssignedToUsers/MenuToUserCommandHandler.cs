@@ -87,7 +87,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenuAssignedToUser
                         entity.DeletedBy = null;
                         entity.DeletedOn = null;
 
-                        _dbContext.MenuAssignedToUsers.Update(entity);
                         await _dbContext.SaveChangesAsync();
                     }
                     else
@@ -191,7 +190,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenuAssignedToUser
             }
 
             var entity = BuildDtoHelper<MenuAssignedToUser>.OnBuild(model, response);
-            _dbContext.MenuAssignedToUsers.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

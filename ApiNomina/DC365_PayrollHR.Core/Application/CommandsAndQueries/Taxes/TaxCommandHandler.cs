@@ -168,7 +168,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Taxes
             }
 
             var entity = BuildDtoHelper<Tax>.OnBuild(model, response);
-            _dbContext.Taxes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -207,7 +206,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Taxes
             }
 
             response.TaxStatus = status;
-            _dbContext.Taxes.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

@@ -234,7 +234,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions
             }
 
             var entity = BuildDtoHelper<EmployeePosition>.OnBuild(model, response);
-            _dbContext.EmployeePositions.Update(entity);
             await _dbContext.SaveChangesAsync();
 
 
@@ -243,7 +242,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions
             var entityUpdate = employee;
             entityUpdate.EndWorkDate = model.ToDate;
 
-            _dbContext.Employees.Update(entityUpdate);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -292,7 +290,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions
             response.EmployeePositionStatus = false;
             response.ToDate = model.ToDate;
 
-            _dbContext.EmployeePositions.Update(response);
             await _dbContext.SaveChangesAsync();
 
             //Actualizamos la fecha de empleo final del empleado
@@ -300,7 +297,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions
             var entityUpdate = employee;
             entityUpdate.EndWorkDate = model.ToDate;
 
-            _dbContext.Employees.Update(entityUpdate);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

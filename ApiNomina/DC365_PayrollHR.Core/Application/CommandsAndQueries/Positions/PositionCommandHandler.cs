@@ -193,7 +193,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
             }
 
             var entity = BuildDtoHelper<Position>.OnBuild(model, response);
-            _dbContext.Positions.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -232,7 +231,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
             }
 
             response.PositionStatus = status;
-            _dbContext.Positions.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -264,7 +262,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Positions
             }
 
             response.IsVacant = isVacants;
-            _dbContext.Positions.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

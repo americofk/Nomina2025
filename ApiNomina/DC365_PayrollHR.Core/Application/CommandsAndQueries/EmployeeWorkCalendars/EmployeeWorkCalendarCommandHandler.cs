@@ -166,7 +166,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeWorkCalend
 
             var entity = BuildDtoHelper<EmployeeWorkCalendar>.OnBuild(model, response);
 
-            _dbContext.EmployeeWorkCalendars.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(entity)

@@ -263,7 +263,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeEarningCod
             entity.IndexEarningDiary = entity.IndexEarningMonthly / constans;
             entity.IndexEarningHour = entity.IndexEarningDiary / 8;
 
-            _dbContext.EmployeeEarningCodes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             //return new Response<object>(false)

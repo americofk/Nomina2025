@@ -151,7 +151,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDepartment
             }
 
             var entity = BuildDtoHelper<EmployeeDepartment>.OnBuild(model, response);
-            _dbContext.EmployeeDepartments.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -193,7 +192,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDepartment
             }
 
             response.EmployeeDepartmentStatus = status;
-            _dbContext.EmployeeDepartments.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

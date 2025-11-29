@@ -75,7 +75,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeBankAccoun
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeeBankAccounts.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -182,14 +181,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeBankAccoun
             }
 
             var entity = BuildDtoHelper<EmployeeBankAccount>.OnBuild(model, response);
-            _dbContext.EmployeeBankAccounts.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             //Actualizo la entidad que era principal
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeeBankAccounts.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 

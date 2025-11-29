@@ -80,7 +80,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeeDocuments.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -186,14 +185,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
             }
 
             var entity = BuildDtoHelper<EmployeeDocument>.OnBuild(model, response);
-            _dbContext.EmployeeDocuments.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             //Actualizo la entidad que era principal
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeeDocuments.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -238,7 +235,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
                 entity.FileAttach = data;
                 entity.FileName = request.File.FileName;
 
-                _dbContext.EmployeeDocuments.Update(entity);
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -311,7 +307,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
             entity.FileAttach = null;
             entity.FileName = null;
 
-            _dbContext.EmployeeDocuments.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<bool>(true) { Message = "Archivo adjunto eliminado correctamente" };

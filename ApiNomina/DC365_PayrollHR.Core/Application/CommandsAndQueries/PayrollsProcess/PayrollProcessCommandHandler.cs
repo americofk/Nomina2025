@@ -256,7 +256,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             entity.IsPayCycleTss = paycycle.IsForTss;
             //Actualización para los cálculos de deducciones
 
-            _dbContext.PayrollsProcess.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -636,7 +635,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var entity = response;
             entity.PayrollProcessStatus = PayrollProcessStatus.Paid;
 
-            _dbContext.PayrollsProcess.Update(entity);
             await _dbContext.SaveChangesAsync();
 
 
@@ -780,7 +778,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var entity = response;
             entity.PayrollProcessStatus = PayrollProcessStatus.Canceled;
 
-            _dbContext.PayrollsProcess.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

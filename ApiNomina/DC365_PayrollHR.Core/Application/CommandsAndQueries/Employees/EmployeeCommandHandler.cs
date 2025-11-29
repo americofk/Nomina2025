@@ -191,7 +191,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
             }
 
             var entity = BuildDtoHelper<Employee>.OnBuild(model, response);
-            _dbContext.Employees.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -233,7 +232,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
             }
 
             response.EmployeeStatus = status;
-            _dbContext.Employees.Update(response);
             await _dbContext.SaveChangesAsync();
 
 
@@ -290,7 +288,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
                 imageEmployee.Image = entity.Image;
                 imageEmployee.Extension = entity.Extension;
 
-                _dbContext.EmployeeImages.Update(imageEmployee);
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -401,7 +398,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
             entity.StartWorkDate = model.FromDate;
             entity.EndWorkDate = model.ToDate;
 
-            _dbContext.Employees.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             //Se guarda la información en la tabla del historial
@@ -465,7 +461,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
             entity.EndWorkDate = model.ToDate;
             entity.EmployeeAction = model.EmployeeAction;
 
-            _dbContext.Employees.Update(entity);
             await _dbContext.SaveChangesAsync();
 
 

@@ -191,7 +191,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
             response.IsFinished = true;
             response.EndDate = DateTime.Now;
 
-            _NewDbContext.BatchHistories.Update(response);
             await _NewDbContext.SaveChangesAsync();
         }
 

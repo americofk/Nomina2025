@@ -210,14 +210,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeesAddress
             }
             entity.ProvinceName = province.Name;
 
-            _dbContext.EmployeesAddress.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             //Actualizo la entidad que era principal
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeesAddress.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 

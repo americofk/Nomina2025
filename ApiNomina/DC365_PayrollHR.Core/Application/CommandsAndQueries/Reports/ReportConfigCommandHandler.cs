@@ -57,7 +57,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
             {
                 var entity = BuildDtoHelper<ReportConfig>.OnBuild(model, response);
 
-                _dbContext.ReportsConfig.Update(entity);
                 await _dbContext.SaveChangesAsync();
 
                 return new Response<object>(entity)

@@ -68,7 +68,11 @@ namespace DC365_WebNR.UI.Controllers
 
             var positionVacant = await selectListsDropDownList(SelectListOptions.PositionVacant);
             var position = await selectListsDropDownList(SelectListOptions.Position);
-            var PositionAll = position.Concat(positionVacant).ToList();
+            var PositionAll = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "", Text = "-- Seleccione --" }
+            };
+            PositionAll.AddRange(position.Concat(positionVacant));
             ViewBag.SelectListPosition = PositionAll;
             ViewBag.Department = await selectListsDropDownList(SelectListOptions.Department);
             ViewBag.Job = await selectListsDropDownList(SelectListOptions.Job);

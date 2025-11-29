@@ -186,7 +186,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
 
             message = string.IsNullOrEmpty(message)?"Registro actualizado con éxito":message;
 
-            dbContext.Payrolls.Update(entity);
             await dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = message };
@@ -218,7 +217,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
             }
 
             response.PayrollStatus = status;
-            dbContext.Payrolls.Update(response);
             await dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

@@ -159,8 +159,11 @@ escuchadores: {
     $("#createAndEditVacants").submit(function (e) {
         e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            if ($('#NotifyPositionId').val() == $('#PositionId').val()) {
-                windows_message("!El puesto al que notifica no puede ser el mismo al que esta editando!", "error");
+            // Solo validar si NotifyPositionId tiene un valor y es igual al PositionId
+            var notifyPositionId = $('#NotifyPositionId').val();
+            var positionId = $('#PositionId').val();
+            if (notifyPositionId && notifyPositionId != '' && notifyPositionId == positionId) {
+                windows_message("¡El puesto al que notifica no puede ser el mismo al que está editando!", "error");
                 $('#NotifyPositionId').focus();
 
             } else {

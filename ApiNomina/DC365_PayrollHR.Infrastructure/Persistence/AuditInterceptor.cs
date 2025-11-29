@@ -165,8 +165,8 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
                 if (entry.Entity is UserGridView)
                     continue;
 
-                // Only track Added, Modified states
-                if (entry.State != EntityState.Added && entry.State != EntityState.Modified)
+                // Only track Modified states (not Added - only audit edits, not creates)
+                if (entry.State != EntityState.Modified)
                     continue;
 
                 var entityName = entry.Entity.GetType().Name;
@@ -187,32 +187,16 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
                     if (ExcludedProperties.Contains(property.Metadata.Name))
                         continue;
 
-                    if (entry.State == EntityState.Modified)
-                    {
-                        // Skip if value hasn't changed
-                        if (Equals(property.OriginalValue, property.CurrentValue))
-                            continue;
+                    // Skip if value hasn't changed
+                    if (Equals(property.OriginalValue, property.CurrentValue))
+                        continue;
 
-                        auditEntry.Changes.Add(new PropertyChange
-                        {
-                            PropertyName = property.Metadata.Name,
-                            OldValue = property.OriginalValue?.ToString(),
-                            NewValue = property.CurrentValue?.ToString()
-                        });
-                    }
-                    else if (entry.State == EntityState.Added)
+                    auditEntry.Changes.Add(new PropertyChange
                     {
-                        // Skip null values on insert
-                        if (property.CurrentValue == null)
-                            continue;
-
-                        auditEntry.Changes.Add(new PropertyChange
-                        {
-                            PropertyName = property.Metadata.Name,
-                            OldValue = null,
-                            NewValue = property.CurrentValue.ToString()
-                        });
-                    }
+                        PropertyName = property.Metadata.Name,
+                        OldValue = property.OriginalValue?.ToString(),
+                        NewValue = property.CurrentValue?.ToString()
+                    });
                 }
 
                 if (auditEntry.Changes.Any())

@@ -201,7 +201,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.DeductionCodes
             }
 
             //Actualizamos la tabla principal
-            _dbContext.DeductionCodes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -283,7 +282,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.DeductionCodes
             }
 
             response.DeductionStatus = status;
-            _dbContext.DeductionCodes.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

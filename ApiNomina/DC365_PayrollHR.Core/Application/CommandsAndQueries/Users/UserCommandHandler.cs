@@ -122,7 +122,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
                 return a;
 
             var entity = BuildDtoHelper<User>.OnBuild(model, response);
-            _dbContext.Users.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -158,7 +157,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
                 return a;
 
             var entity = BuildDtoHelper<User>.OnBuild(model, response);
-            _dbContext.Users.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -192,7 +190,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
                 imageUser.Image = entity.Image;
                 imageUser.Extension = entity.Extension;
 
-                _dbContext.UserImages.Update(imageUser);
                 await _dbContext.SaveChangesAsync();
             }
 

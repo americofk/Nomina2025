@@ -153,7 +153,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ProjCategories
             }
 
             var entity = BuildDtoHelper<ProjCategory>.OnBuild(model, response);
-            _dbContext.ProjCategories.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -192,7 +191,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ProjCategories
             }
 
             response.ProjCategoryStatus = status;
-            _dbContext.ProjCategories.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

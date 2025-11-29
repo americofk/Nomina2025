@@ -77,7 +77,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeContactsIn
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeeContactsInf.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 
@@ -183,7 +182,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeContactsIn
             }
 
             var entity = BuildDtoHelper<EmployeeContactInf>.OnBuild(model, response);
-            _dbContext.EmployeeContactsInf.Update(entity);
             await _dbContext.SaveChangesAsync();
 
 
@@ -191,7 +189,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeContactsIn
             if (principalEntity != null)
             {
                 principalEntity.IsPrincipal = false;
-                _dbContext.EmployeeContactsInf.Update(principalEntity);
                 await _dbContext.SaveChangesAsync();
             }
 

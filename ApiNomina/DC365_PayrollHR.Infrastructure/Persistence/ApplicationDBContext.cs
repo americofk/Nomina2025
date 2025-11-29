@@ -61,8 +61,39 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
 
             base.OnModelCreating(modelBuilder);
 
+            // Configurar RecId con secuencia para todas las entidades auditables
+            ConfigureRecIdForAuditableEntities(modelBuilder);
+
             //Añadir filtros globales
             //GlobalFilterConfiguration.ConfigureFilter(modelBuilder, _CurrentUserInformation.Company);
+        }
+
+        /// <summary>
+        /// Configura el RecId con valor por defecto de secuencia para todas las entidades
+        /// que heredan de AuditableEntity o AuditableCompanyEntity.
+        /// </summary>
+        private void ConfigureRecIdForAuditableEntities(ModelBuilder modelBuilder)
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                var clrType = entityType.ClrType;
+
+                // Verificar si hereda de AuditableEntity o AuditableCompanyEntity
+                if (typeof(AuditableEntity).IsAssignableFrom(clrType) ||
+                    typeof(AuditableCompanyEntity).IsAssignableFrom(clrType))
+                {
+                    // Buscar la propiedad RecId
+                    var recIdProperty = entityType.FindProperty("RecId");
+                    if (recIdProperty != null)
+                    {
+                        // Solo configurar si no tiene ya un valor por defecto
+                        if (recIdProperty.GetDefaultValueSql() == null)
+                        {
+                            recIdProperty.SetDefaultValueSql("NEXT VALUE FOR dbo.RecId");
+                        }
+                    }
+                }
+            }
         }
 
         public override DatabaseFacade Database => base.Database;

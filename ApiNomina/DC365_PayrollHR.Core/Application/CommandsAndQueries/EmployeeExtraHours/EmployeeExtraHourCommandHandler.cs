@@ -292,7 +292,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeExtraHours
                 entity.Amount = ((salary.Sum(x => x.Amount) / constans) / 8 * entity.Indice) * quantity;
             }
 
-            _dbContext.EmployeeExtraHours.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

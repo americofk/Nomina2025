@@ -138,7 +138,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
                 //Actualizamos la versión anterior
                 var entityversion = validateversion[0];
                 entityversion.ValidTo = model.ValidFrom.AddDays(-1);
-                _dbContext.EarningCodeVersions.Update(entityversion);
                 await _dbContext.SaveChangesAsync();
 
                 //Creamos una nueva versión
@@ -189,20 +188,17 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
                 {
                     var entityversion = validateversion[1];
                     entityversion.ValidTo = model.ValidFrom.AddDays(-1);
-                    _dbContext.EarningCodeVersions.Update(entityversion);
                     await _dbContext.SaveChangesAsync();
                 }
 
                 //Actualizamos la versión actual
                 var entityVersionUpdate = BuildDtoHelper<EarningCodeVersion>.OnBuild(model, validateversion[0]);
-                _dbContext.EarningCodeVersions.Update(entityVersionUpdate);
                 await _dbContext.SaveChangesAsync();
 
                 Message = "Registro actualizado con éxito";
             }
 
-            //Actualizamos la tabla principal            
-            _dbContext.EarningCodes.Update(entity);
+            //Actualizamos la tabla principal
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = Message };
@@ -336,14 +332,12 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
             var entityVersionUpdate = versions.First();
             entityVersionUpdate.ValidTo = DateTime.ParseExact("31/12/2132", "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture);
 
-            _dbContext.EarningCodeVersions.Update(entityVersionUpdate);
             await _dbContext.SaveChangesAsync();
 
             //Actualizamos la tabla principal
             var principalEntity = await _dbContext.EarningCodes.Where(x => x.EarningCodeId == id).FirstOrDefaultAsync();
 
             var entity = BuildDtoHelper<EarningCode>.OnBuild(entityVersionUpdate, principalEntity);
-            _dbContext.EarningCodes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<bool>(true) { Message = "Registros elimando con éxito" };
@@ -375,7 +369,6 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
             }
 
             response.EarningCodeStatus = status;
-            _dbContext.EarningCodes.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

@@ -71,7 +71,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.GeneralConfigs
             {
                 var entity = BuildDtoHelper<GeneralConfig>.OnBuild(model, response);
 
-                _dbContext.GeneralConfigs.Update(entity);
                 await _dbContext.SaveChangesAsync();
 
                 return new Response<object>(entity)

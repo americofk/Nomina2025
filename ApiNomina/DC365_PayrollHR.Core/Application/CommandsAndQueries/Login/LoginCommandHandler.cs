@@ -207,7 +207,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
             user.TemporaryPassword = SecurityHelper.MD5(GenerateTokenString());
             user.DateTemporaryPassword = DateTime.Today;
 
-            dbContext.Users.Update(user);
             await dbContext.SaveChangesAsync();
 
             string emailResponse = await _emailServices.SendEmail(user.Email, user.TemporaryPassword, user.Name);
@@ -255,7 +254,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
                 user.TemporaryPassword = null;
                 user.DateTemporaryPassword = default;
 
-                dbContext.Users.Update(user);
                 await dbContext.SaveChangesAsync();
 
                 return new Response<object>(false)
@@ -272,7 +270,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
             user.TemporaryPassword = null;
             user.DateTemporaryPassword = default;
 
-            dbContext.Users.Update(user);
             await dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Contraseña cambiada correctamente" };

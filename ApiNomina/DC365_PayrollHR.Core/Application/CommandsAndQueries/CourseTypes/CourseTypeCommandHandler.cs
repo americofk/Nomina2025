@@ -147,7 +147,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseTypes
             }
 
             var entity = BuildDtoHelper<CourseType>.OnBuild(model, response);
-            _dbContext.CourseTypes.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

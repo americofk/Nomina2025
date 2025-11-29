@@ -175,7 +175,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PositionRequiremen
             }
 
             var entity = BuildDtoHelper<PositionRequirement>.OnBuild(model, response);
-            _dbContext.PositionRequirements.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

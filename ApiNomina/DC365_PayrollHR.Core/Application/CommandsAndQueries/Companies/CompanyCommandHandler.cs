@@ -91,7 +91,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Companies
             var entity = response;
             entity.CompanyStatus = status;
 
-            _dbContext.Companies.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(entity)

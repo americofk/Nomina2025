@@ -198,8 +198,15 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Departments
                 };
             }
 
-            var entity = BuildDtoHelper<Department>.OnBuild(model, response);
-            _dbContext.Departments.Update(entity);
+            // Actualizar propiedades manualmente para que EF detecte los cambios correctamente
+            // y el interceptor de auditoría pueda registrar los valores originales y nuevos
+            response.Name = model.Name;
+            response.QtyWorkers = model.QtyWorkers;
+            response.StartDate = model.StartDate;
+            response.EndDate = model.EndDate;
+            response.Description = model.Description;
+            response.AccountCode = model.AccountCode;
+
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -238,7 +245,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Departments
             }
 
             response.DepartamentStatus = status;
-            _dbContext.Departments.Update(response);
+            // NO llamar a Update() - la entidad ya está siendo rastreada
+            // y los cambios se detectan automáticamente para la auditoría
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };

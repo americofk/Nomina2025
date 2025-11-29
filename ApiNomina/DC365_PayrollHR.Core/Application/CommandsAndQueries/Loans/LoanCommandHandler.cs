@@ -154,7 +154,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Loans
             }
 
             var entity = BuildDtoHelper<Loan>.OnBuild(model, response);
-            _dbContext.Loans.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -193,7 +192,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Loans
             }
 
             response.LoanStatus = status;
-            _dbContext.Loans.Update(response);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
