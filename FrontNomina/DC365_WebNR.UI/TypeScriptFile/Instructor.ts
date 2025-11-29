@@ -45,8 +45,8 @@ var shouldCloseAfterSave = false;
 
 //save tipo instrutor
 $("#createAndEditInstructor").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         $('.progreso').modal({ backdrop: 'static', keyboard: false })
         $.ajax({
             url: "/instructor/guardar",
@@ -63,6 +63,15 @@ $("#createAndEditInstructor").submit(function (e) {
                     windows_message(_errors, data.Type);
                 } else {
                     windows_message(data.Message, data.Type, {});
+
+                    // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                    if (option === 1 && data.IdType) {
+                        $('#InstructorId').val(data.IdType);
+                        option = 2;
+                        $('.Showid').removeClass('collapse');
+                        $('.setiartitulo').text('Editar instructor de cursos');
+                    }
+
                     $.get(location.href)
                         .done(function (r) {
                             var newDom = $(r);
@@ -144,8 +153,8 @@ $('.EditInstructor').on('click', function () {
 
 //eliminar tipo de cursos
 $("#DeleteInstructor").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         var contador: boolean = false;
         // Recorremos todos los checkbox para contar los que estan seleccionados
         $(".selectInstructor[type=checkbox]").each(function () {

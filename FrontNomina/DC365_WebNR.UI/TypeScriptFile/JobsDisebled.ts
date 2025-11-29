@@ -14,8 +14,8 @@ variables: {
 escuchadores: {
     //eliminar cargo
     $("#DeleteJobsDisabled").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
 
             $(".selectJobs[type=checkbox]").each(function () {

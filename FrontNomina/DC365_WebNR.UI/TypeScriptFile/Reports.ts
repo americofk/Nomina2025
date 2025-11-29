@@ -123,8 +123,8 @@ escuchadores: {
                     $('.progreso').addClass("collapse");
 
                     $("#SendEmailReport").submit(function (e) {
-                        if ($(this).valid()) {
-                            e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
 
                             var datatype = $("#update-report").attr("data-type");
 

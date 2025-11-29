@@ -20,6 +20,7 @@ interface ResponseUI {
 interface ResponseUIGeneric {
     Message: string
     Type: string
+    IdType: string
     Errors: Array<string>
     Obj: any
 }

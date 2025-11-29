@@ -175,13 +175,32 @@ namespace DC365_WebNR.UI.Controllers
             var result = await process.DownloadDocument(IdEmployee, internalid);
 
             byte[] doc;
-            if (result.Type == ErrorMsg.TypeOk)
+            if (result.Type == ErrorMsg.TypeOk && !string.IsNullOrEmpty(result.Obj.Content))
             {
                 doc = Convert.FromBase64String(result.Obj.Content);
-                return File(doc, "application/pdf", result.Obj.FileName);
+                string contentType = GetContentType(result.Obj.FileName);
+
+                // Devolver sin nombre de archivo para que se muestre en el navegador en lugar de descargarse
+                Response.Headers.Append("Content-Disposition", "inline");
+                return File(doc, contentType);
             }
 
             return RedirectToAction("Index", "Error");
+        }
+
+        private string GetContentType(string fileName)
+        {
+            var extension = System.IO.Path.GetExtension(fileName)?.ToLowerInvariant();
+            return extension switch
+            {
+                ".pdf" => "application/pdf",
+                ".png" => "image/png",
+                ".jpg" => "image/jpeg",
+                ".jpeg" => "image/jpeg",
+                ".doc" => "application/msword",
+                ".docx" => "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                _ => "application/octet-stream"
+            };
         }
 
 
@@ -211,9 +230,27 @@ namespace DC365_WebNR.UI.Controllers
         public async Task<JsonResult> UploadDocument(IFormFile file, string IdEmpleyee, int internalid)
         {
             GetdataUser();
-            
+
             process = new ProcessEmployeeDocument(dataUser[0]);
             var result = await process.UploadDocument(file, IdEmpleyee, internalid);
+
+            return (Json(result));
+        }
+
+        /// <summary>
+        /// Elimina el archivo adjunto de un documento.
+        /// </summary>
+        /// <param name="IdEmployee">ID del empleado.</param>
+        /// <param name="internalid">ID interno del documento.</param>
+        /// <returns>Resultado de la operación.</returns>
+        [HttpPost("eliminaradjunto")]
+        [AutoValidateAntiforgeryToken]
+        public async Task<JsonResult> DeleteAttachment(string IdEmployee, int internalid)
+        {
+            GetdataUser();
+
+            process = new ProcessEmployeeDocument(dataUser[0]);
+            var result = await process.DeleteAttachment(IdEmployee, internalid);
 
             return (Json(result));
         }

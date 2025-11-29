@@ -67,8 +67,8 @@ const fn = {
 
         //guardar información
         $("#FormNewAndEdiTax").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 $.ajax({
                     url: "/impuestos/guardar",
                     type: "POST",
@@ -81,6 +81,15 @@ const fn = {
                         }
                         else {
                             windows_message(data.Message, data.Type);
+
+                            // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                            if (option === 1 && data.IdType) {
+                                $('#TaxId').val(data.IdType);
+                                option = 2;
+                                $('.Showid').removeClass('collapse');
+                                $('.seteartitulo').text('Editar impuesto');
+                            }
+
                             $(".contenedor-paycycle ").removeClass("collapse");
 
                             //Refrescamos la tabla con la información guardada
@@ -110,8 +119,8 @@ const fn = {
 
         //eliminar configuracion de impuesto
         $("#deleteTaxDetail").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 var contador: boolean = false;
                 // Recorremos todos los checkbox para contar los que estan seleccionados
                 $(".selectTaxDetail[type=checkbox]").each(function () {
@@ -308,8 +317,8 @@ const fnDetail = {
 
         //guardar nuevo taxdetail
         $("#new_TaxDetail").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 $.ajax({
                     url: "/detalleimpuestos/guardar",
                     type: "POST",
@@ -406,8 +415,8 @@ esuchadores: {
 
     //Eliminar
     $("#DeleteTax").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectTax[type=checkbox]").each(function () {

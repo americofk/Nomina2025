@@ -408,6 +408,8 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         Cash = 0,
         [Display(Name = "Transferencia")]
         Transfer = 1,
+        [Display(Name = "Cheque")]
+        Check = 2,
     }
     /// <summary>
     /// Enumeracion de valores para TypeDTG.

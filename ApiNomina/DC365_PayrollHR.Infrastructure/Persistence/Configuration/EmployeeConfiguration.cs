@@ -50,8 +50,12 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
             builder.Property(x => x.BreakWorkFrom);
             builder.Property(x => x.BreakWorkTo);
 
-            builder.Property(x => x.Nationality).HasMaxLength(5);
-            builder.Property(x => x.LocationId).HasMaxLength(10);
+            builder.Property(x => x.Nationality).HasMaxLength(50);
+            builder.Property(x => x.LocationId).HasMaxLength(20);
+            builder.Property(x => x.Country).HasMaxLength(20);
+            builder.Property(x => x.OccupationId).HasMaxLength(80);
+            builder.Property(x => x.EducationLevelId).HasMaxLength(80);
+            builder.Property(x => x.DisabilityTypeId).HasMaxLength(20);
 
 
             builder.Property(x => x.IsFixedWorkCalendar);
@@ -62,17 +66,17 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
                 .WithMany()
                 .HasForeignKey(x => x.Country)
                 .IsRequired();
-            
+
             builder.HasOne<Occupation>()
                 .WithMany()
                 .HasForeignKey(x => x.OccupationId)
                 .IsRequired();
-            
+
             builder.HasOne<EducationLevel>()
                 .WithMany()
                 .HasForeignKey(x => x.EducationLevelId)
                 .IsRequired();
-            
+
             builder.HasOne<DisabilityType>()
                 .WithMany()
                 .HasForeignKey(x => x.DisabilityTypeId)

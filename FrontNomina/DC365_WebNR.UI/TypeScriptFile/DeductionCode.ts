@@ -17,8 +17,8 @@ var shouldCloseAfterSave = false;
 escuchadores: {
     //eliminar
     $("#DeleteDeductionCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectDeductionCode[type=checkbox]").each(function () {
@@ -93,8 +93,8 @@ escuchadores: {
 
     //save
     $("#NewAndEditDeductionCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             let closeAfter = shouldCloseAfterSave;
             shouldCloseAfterSave = false;
             if (option == 2) {
@@ -416,8 +416,8 @@ escuchadores: {
 
     //eliminar codigo de version
     $("#Delete-Deduction-CodeVersion").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: number = 0;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectDeductionCode[type=checkbox]").each(function () {
@@ -561,6 +561,15 @@ const fn= {
 
                 } else {
                     windows_message(data.Message, data.Type);
+
+                    // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                    if (option === 1 && data.IdType) {
+                        $('#DeductionCodeId').val(data.IdType);
+                        option = 2;
+                        $('.Showid').removeClass('collapse');
+                        $('.seteartitulo').text('Editar codigo de descuento');
+                    }
+
                     $.get(location.href)
                         .done(function (r) {
                             var newDom = $(r);

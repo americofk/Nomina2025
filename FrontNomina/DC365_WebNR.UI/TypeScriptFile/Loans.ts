@@ -59,8 +59,8 @@ const fn = {
 
         //guardar información
         $("#FormNewAndEditLoan").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 $.ajax({
                     url: "/prestamos/guardar",
                     type: "POST",
@@ -73,6 +73,15 @@ const fn = {
                         }
                         else {
                             windows_message(data.Message, data.Type);
+
+                            // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                            if (option === 1 && data.IdType) {
+                                $('#LoanId').val(data.IdType);
+                                option = 2;
+                                $('.Showid').removeClass('collapse');
+                                $('.seteartitulo').text('Editar prestamo');
+                            }
+
                             //Refrescamos la tabla con la información guardada
                             fn.RefreshTable();
 
@@ -172,8 +181,8 @@ esuchadores: {
 
     //Eliminar
     $("#DeleteLoan").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectLoans[type=checkbox]").each(function () {

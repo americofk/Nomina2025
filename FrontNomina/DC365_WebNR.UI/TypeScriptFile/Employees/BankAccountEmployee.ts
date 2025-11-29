@@ -159,8 +159,8 @@ const fn = {
         });
         //save contact info employee
         $(dom_element.form).submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 $('.progreso').modal({ backdrop: 'static', keyboard: false })
                 fn.SaveBankAccountEmployee()
             }
@@ -197,8 +197,8 @@ escuchadores: {
 
     //eliminar informacion de contacto
     $(dom_element.form_delete).submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(`${dom_element.class_check}[type=checkbox]`).each(function () {

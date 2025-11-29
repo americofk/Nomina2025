@@ -267,8 +267,8 @@ escuchadores: {
 
     //eliminar prestamos de empleados
     $(dom_element.form_delete).submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(`${dom_element.class_check}[type=checkbox]`).each(function () {

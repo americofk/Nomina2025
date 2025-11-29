@@ -38,12 +38,26 @@
                                         <i class="fa fa-paperclip"></i>
                                         @*Formulario para el documento*@
                                         <form id="save-empdoc-form" asp-action="UploadDocument" asp-controller="EmployeeDocumentController">
-                                            <input type="file" class="form-file-doc Document" name="file" />
+                                            <input type="file" class="form-file-doc Document" name="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
                                             <span class="trigger-upload-doc">
                                                 Adjuntar
                                             </span>
                                         </form>
                                         @*Fin del formulario para la foto de perfil*@
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app btn-ver-adjunto">
+                                        <i class="fa fa-eye"></i>
+                                        Ver Adjunto
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="btn2 btn-app btn-eliminar-adjunto">
+                                        <i class="fa fa-times"></i>
+                                        Quitar Adjunto
                                     </a>
                                 </li>
 

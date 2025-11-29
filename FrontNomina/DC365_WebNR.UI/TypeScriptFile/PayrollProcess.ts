@@ -70,8 +70,8 @@ const fn = {
 
         //guardar información
         $("#FormNewAndEditPayrollsProcess").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 if ($("#PayrollProcessStatus").val() == "0") {
                     $.ajax({
                         url: "/procesonomina/guardar",
@@ -149,8 +149,8 @@ const fn = {
 
         //pagar nomina
         $("#Pay-Payroll").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
 
                 //if ($("#PayrollProcessStatus").val() != "3" || $("#PayrollProcessStatus").val() != "4") {
                     windows_message("¿Desea pagar la nómina?", "confirm", {
@@ -195,8 +195,8 @@ const fn = {
 
         //cancelar nomina
         $("#Cancel-Payroll").submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
 
                 if ($("#PayrollProcessStatus").val() != "3" || $("#PayrollProcessStatus").val() != "4") {
                     windows_message("¿Desea cancelar la nómina?", "confirm", {
@@ -441,8 +441,8 @@ esuchadores: {
 
     //Eliminar proceso de nómina
     $("#DeletePayrollProcess").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             var statusPayroll: boolean = false;
 
@@ -506,8 +506,8 @@ esuchadores: {
 
     //procesar nomina
     $("#Process-Payroll").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             //if ($("#PayrollProcessStatus").val() != "3" && $("#PayrollProcessStatus").val() != "4") {
                 let messageConfirm: string = "¿Desea procesar la nómina?";
                 if ($("#PayrollProcessStatus").val() != "0") {
@@ -573,8 +573,8 @@ esuchadores: {
 
     //calcular nomina
     $("#Calc-Payroll").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
 
             //if ($("#PayrollProcessStatus").val() != "3" || $("#PayrollProcessStatus").val() != "4") {
                 windows_message("¿Desea calcular la nómina?", "confirm", {

@@ -315,8 +315,13 @@ function ListDeparment(_option: string = "#DepartmentId") {
             async: false,
             success: function (data) {
 
+                $(_option).html('');
+                // Agregar opción vacía al inicio
+                var emptyOption = $(document.createElement('option'));
+                emptyOption.text('-- Seleccione --');
+                emptyOption.val('');
+                $(_option).append(emptyOption);
                 if (data.length > 0) {
-                    $(_option).html('');
                     $(data).each(function () {
                         var option = $(document.createElement('option'));
                         option.text(this.Name);
@@ -341,8 +346,13 @@ function ListJobs() {
             type: "Get",
             async: false,
             success: function (data) {
+                $("#JobId").html('');
+                // Agregar opción vacía al inicio
+                var emptyOption = $(document.createElement('option'));
+                emptyOption.text('-- Seleccione --');
+                emptyOption.val('');
+                $("#JobId").append(emptyOption);
                 if (data.length > 0) {
-                    $("#JobId").html('');
                     $(data).each(function () {
                         var option = $(document.createElement('option'));
                         option.text(this.Name);
@@ -369,8 +379,13 @@ function ListPosition() {
 
             success: function (data) {
 
+                $("#NotifyPositionId").html('');
+                // Agregar opción vacía al inicio
+                var emptyOption = $(document.createElement('option'));
+                emptyOption.text('-- Seleccione --');
+                emptyOption.val('');
+                $("#NotifyPositionId").append(emptyOption);
                 if (data.length > 0) {
-                    $("#NotifyPositionId").html('');
                     $(data).each(function () {
                         var option = $(document.createElement('option'));
                         option.text(this.PositionName);

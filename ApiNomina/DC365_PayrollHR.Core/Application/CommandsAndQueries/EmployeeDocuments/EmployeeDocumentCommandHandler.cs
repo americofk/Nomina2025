@@ -26,6 +26,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
         public Task<Response<bool>> DeleteByEmployee(List<string> ids, string employeeid);
         public Task<Response<object>> UploadDocument(EmplDocFileRequest request, string employeeid, int internalid);
         public Task<Response<object>> DownloadDocument(string employeeid, int internalid);
+        public Task<Response<bool>> DeleteAttachment(string employeeid, int internalid);
     }
 
     /// <summary>
@@ -235,6 +236,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
                 }
 
                 entity.FileAttach = data;
+                entity.FileName = request.File.FileName;
 
                 _dbContext.EmployeeDocuments.Update(entity);
                 await _dbContext.SaveChangesAsync();
@@ -263,13 +265,56 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDocuments
             var document = await _dbContext.EmployeeDocuments.Where(x => x.EmployeeId == employeeid && x.InternalId == internalid).FirstOrDefaultAsync();
 
             string string64 = string.Empty;
+            string fileName = $"{employeeid}_{internalid}.pdf";
 
             if (document != null)
             {
                 string64 = Convert.ToBase64String(document.FileAttach, 0, document.FileAttach.Length);
+                // Usar el nombre del archivo guardado si existe
+                if (!string.IsNullOrEmpty(document.FileName))
+                {
+                    fileName = document.FileName;
+                }
             }
 
-            return new Response<object>(new { Content = string64, FileName = $"{employeeid}_{internalid}.pdf" });
+            return new Response<object>(new { Content = string64, FileName = fileName });
+        }
+
+        /// <summary>
+        /// Elimina el archivo adjunto de un documento.
+        /// </summary>
+        /// <param name="employeeid">ID del empleado.</param>
+        /// <param name="internalid">ID interno del documento.</param>
+        /// <returns>Resultado de la operación.</returns>
+        public async Task<Response<bool>> DeleteAttachment(string employeeid, int internalid)
+        {
+            var entity = await _dbContext.EmployeeDocuments.Where(x => x.EmployeeId == employeeid && x.InternalId == internalid).FirstOrDefaultAsync();
+
+            if (entity == null)
+            {
+                return new Response<bool>(false)
+                {
+                    Succeeded = false,
+                    Errors = new List<string>() { "El registro seleccionado no existe" }
+                };
+            }
+
+            if (entity.FileAttach == null || entity.FileAttach.Length == 0)
+            {
+                return new Response<bool>(false)
+                {
+                    Succeeded = false,
+                    Errors = new List<string>() { "El registro no tiene archivo adjunto" }
+                };
+            }
+
+            entity.FileAttach = null;
+            entity.FileName = null;
+
+            _dbContext.EmployeeDocuments.Update(entity);
+            await _dbContext.SaveChangesAsync();
+
+            return new Response<bool>(true) { Message = "Archivo adjunto eliminado correctamente" };
         }
     }
 

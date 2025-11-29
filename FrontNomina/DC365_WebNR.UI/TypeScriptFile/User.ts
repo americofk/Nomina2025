@@ -264,8 +264,8 @@ escuchadores: {
     var shouldCloseAfterSave = false;
 
     $('#CreateAndEditUser').submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
 
             // Asignar DataAreaId desde el contenedor de la página
             var dataAreaId = $('#user-page').data('dataarea');
@@ -290,6 +290,15 @@ escuchadores: {
                                 $('.tblUser').replaceWith($('.tblUser', newDom));
                             });
                         windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#Alias').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar usuario');
+                        }
+
 
                         if (shouldCloseAfterSave) {
                             fn.funtionNewAndEditUsers("close");

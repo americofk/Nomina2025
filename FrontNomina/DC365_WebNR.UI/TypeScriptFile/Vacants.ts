@@ -15,8 +15,8 @@ variables: {
 escuchadores: {
     //eliminar position
     $("#DeleteVacants").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             $(".selectPosition[type=checkbox]").each(function () {
 
@@ -157,8 +157,8 @@ escuchadores: {
 
     //save vacants
     $("#createAndEditVacants").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             if ($('#NotifyPositionId').val() == $('#PositionId').val()) {
                 windows_message("!El puesto al que notifica no puede ser el mismo al que esta editando!", "error");
                 $('#NotifyPositionId').focus();
@@ -184,6 +184,15 @@ escuchadores: {
                                     $('.tblCargosVcantes').replaceWith($('.tblCargosVcantes', newDom));
                                 });
                             windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#PositionId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar vacante');
+                        }
+
                             if (shouldCloseAfterSave) {
                                 let form = document.getElementById("createAndEditVacants") as HTMLFormElement;
                                 form.reset();
@@ -215,7 +224,15 @@ escuchadores: {
         form.reset();
         $('.Showid').addClass('collapse');
         $('.setiartitulo').text('Nuevo puesto vacante');
+        // Limpiar selects para que se recarguen con opción vacía
+        $('#DepartmentId').empty();
+        $('#JobId').empty();
+        $('#NotifyPositionId').empty();
         loadlistsSelect();
+        // Resetear selects a opción vacía
+        $('#DepartmentId').val('');
+        $('#JobId').val('');
+        $('#NotifyPositionId').val('');
         funtionNewVacant("open");
     });
 

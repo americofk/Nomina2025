@@ -25,7 +25,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Occupation> builder)
         {
             builder.HasKey(x => x.OccupationId);
-            builder.Property(x => x.OccupationId).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.OccupationId).HasMaxLength(80).IsRequired();
 
             builder.Property(x => x.Description).HasMaxLength(200);
         }

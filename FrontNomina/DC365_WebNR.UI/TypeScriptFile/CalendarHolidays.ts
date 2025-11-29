@@ -48,8 +48,8 @@ const fn = {
 escuchadores: {
     //eliminar
     $("#delete-Holiday").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             let cont = 0;
             // Recorremos todos los checkbox para contar los que estan seleccionados
@@ -130,8 +130,8 @@ escuchadores: {
 
     //save
     $("#createAndEditCalendarHoliday").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
                 url: "/calendarholiday/guardar",

@@ -28,8 +28,8 @@ funciones: {
                     });
                     //save Addres employee
                     $("#newAddres").submit(function (e) {
-                        if ($(this).valid()) {
-                            e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                             saveAddresemployee()
                         }
                     });
@@ -92,8 +92,8 @@ funciones: {
 
                     //save Addres employee
                     $("#newAddres").submit(function (e) {
-                        if ($(this).valid()) {
-                            e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                             saveAddresemployee()
                         }
                     });
@@ -187,8 +187,8 @@ escuchador: {
 
     //eliminar direccion de empleado
     $("#DeleteAddress").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var ListId = [];
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados

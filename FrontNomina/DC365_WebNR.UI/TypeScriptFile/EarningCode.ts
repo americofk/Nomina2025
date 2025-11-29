@@ -50,6 +50,15 @@ const fn = {
                         });
 
                     windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#EarningCodeId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar codigo de ganancia');
+                        }
+
                     if (shouldClose) {
                         fn.funtionNewEarningCode("close");
                     }
@@ -69,8 +78,8 @@ var shouldCloseAfterSave = false;
 escuchadores: {
     //eliminar
     $("#DeleteEarningCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectEarningCode[type=checkbox]").each(function () {
@@ -150,8 +159,8 @@ escuchadores: {
 
     //save
     $("#NewAndEditEarningCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             let closeAfter = shouldCloseAfterSave;
             shouldCloseAfterSave = false;
             if (option==2) {
@@ -427,8 +436,8 @@ escuchadores: {
 
     //eliminar codigo de version
     $("#Delete-Earning-CodeVersion").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: number = 0;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectEarningCode[type=checkbox]").each(function () {

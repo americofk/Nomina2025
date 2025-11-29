@@ -185,8 +185,8 @@ const fn = {
 
         //submit save
         $(dom_element.form).submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 fn.SaveEmployeeTax()
             }
         });
@@ -222,8 +222,8 @@ escuchadores: {
 
     //eliminar horas extras
     $(dom_element.form_delete).submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             let cont: number = 0;
             // Recorremos todos los checkbox para contar los que estan seleccionados

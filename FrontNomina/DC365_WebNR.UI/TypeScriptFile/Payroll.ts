@@ -211,8 +211,8 @@ escuchadores: {
 
     //eliminar
     $("#deletePayroll").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectPayroll[type=checkbox]").each(function () {
@@ -294,8 +294,8 @@ escuchadores: {
 
     //save
     $("#NewAndEditPayrolls").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $("#CurrencyId").prop("disabled", false);
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
@@ -321,6 +321,15 @@ escuchadores: {
                                 $('.tblPayrolls').replaceWith($('.tblPayrolls', newDom));
                             });
                         windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el objeto, cambiar a modo edicion
+                        if (option === 1 && data.Obj && data.Obj.PayrollId) {
+                            $('#PayrollId').val(data.Obj.PayrollId);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar nomina');
+                        }
+
 
                         if (shouldCloseAfterSave) {
                             fn.funtionNewPayroll("close");

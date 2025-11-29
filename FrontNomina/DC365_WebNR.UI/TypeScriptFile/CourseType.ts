@@ -61,8 +61,8 @@ escuchadores: {
 
     //save tipo de curso
     $("#createAndEditTypeCourse").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $.ajax({
                 url: "/tipocursos/guardar",
                 type: "POST",
@@ -78,6 +78,15 @@ escuchadores: {
                         windows_message(_errors, data.Type);
                     } else {
                         windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#CourseTypeId').val(data.IdType);
+                            option = 2;
+                            $('.Showidcourse').removeClass('collapse');
+                            $('.setiartitulo').text('Editar tipo de curso');
+                        }
+
                         $.get(location.href)
                             .done(function (r) {
                                 var newDom = $(r);
@@ -148,8 +157,8 @@ escuchadores: {
 
     //eliminar tipo de cursos
     $("#deleteCourseType").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             $(".selectCourseType[type=checkbox]").each(function () {
                 if ($(this).is(":checked")) {

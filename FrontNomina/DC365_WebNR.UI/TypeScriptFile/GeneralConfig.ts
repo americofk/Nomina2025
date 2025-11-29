@@ -9,8 +9,8 @@
 
 //guardar información
 $("#SaveGeneralConfig").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         $.ajax({
             url: "/generalconfig/guardar",
             type: "POST",

@@ -194,6 +194,19 @@ namespace DC365_PayrollHR.WebUI.Controllers
         {
             return Ok(await _CommandHandler.DownloadDocument(employeeid, internalid));
         }
+
+        /// <summary>
+        /// Elimina el archivo adjunto de un documento.
+        /// </summary>
+        /// <param name="employeeid">ID del empleado.</param>
+        /// <param name="internalid">ID interno del documento.</param>
+        /// <returns>Resultado de la operación.</returns>
+        [HttpDelete("attachment/{employeeid}/{internalid}")]
+        [AuthorizePrivilege(MenuId = MenuConst.EmployeeDocument, Edit = true)]
+        public async Task<ActionResult> DeleteAttachment(string employeeid, int internalid)
+        {
+            return Ok(await _CommandHandler.DeleteAttachment(employeeid, internalid));
+        }
     }
 
 }

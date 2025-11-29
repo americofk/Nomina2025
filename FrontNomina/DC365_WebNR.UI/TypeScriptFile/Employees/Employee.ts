@@ -42,6 +42,7 @@ $(document).ready(function () {
 variables: {
     var defaultimage: string = "/Images/Dashboard/default_perfil.png";
     var option: number;
+    var shouldCloseAfterSave: boolean = false;
 }
 funciones: {
     //funcion abrir formulario para nuevo empleado
@@ -111,8 +112,8 @@ funciones: {
                     $(call).removeClass("collapse");
                     //contratar empleado prospecto
                     $("#Form-hire-employee").submit(function (e) {
-                        if ($(this).valid()) {
-                            e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                             windows_message("¿Desea contratar prospecto seleccionado?", "confirm", {
                                 onOk: function () {
                                     $('.progreso').modal({ backdrop: 'static', keyboard: false })
@@ -178,8 +179,8 @@ funciones: {
                     $(call).removeClass("collapse");
                     //contratar empleado prospecto
                     $("#Form-dissmis-employee").submit(function (e) {
-                        if ($(this).valid()) {
-                            e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                             windows_message("¿Desea desvincular al empleado seleccionado?", "confirm", {
                                 onOk: function () {
                                     $('.progreso').modal({ backdrop: 'static', keyboard: false })
@@ -410,8 +411,8 @@ escuchadores: {
 
     //eliminar empleado
     $("#deleteEmployees").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectEmployees[type=checkbox]").each(function () {
@@ -552,10 +553,16 @@ escuchadores: {
         MostrarOpciones("New");
     });
 
+    // Guardar y cerrar
+    $('.btnSaveAndClose').on('click', function () {
+        shouldCloseAfterSave = true;
+        $("#createAndEditEmployee").submit();
+    });
+
     //save employee
     $("#createAndEditEmployee").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
                 url: "/empleadosactivos/guardar",
@@ -585,14 +592,20 @@ escuchadores: {
                                 var newDom = $(r);
                                 $('.tbody-Table-Employee').replaceWith($('.tbody-Table-Employee', newDom));
                             });
-                        //let form = document.getElementById("createAndEditEmployee") as HTMLFormElement;
-                        //form.reset();
-                        //funtionNewEmployee("close");
-                        if (option == 1)
-                            FindEmployeeId(data.IdType);
-                        else
-                            FindEmployeeId($("#EmployeeId").val().toString());
 
+                        // Si debe cerrar después de guardar
+                        if (shouldCloseAfterSave) {
+                            let form = document.getElementById("createAndEditEmployee") as HTMLFormElement;
+                            form.reset();
+                            funtionNewEmployee("close");
+                            shouldCloseAfterSave = false;
+                        } else {
+                            // Cambiar a modo edición
+                            if (option == 1)
+                                FindEmployeeId(data.IdType);
+                            else
+                                FindEmployeeId($("#EmployeeId").val().toString());
+                        }
 
                     }
 

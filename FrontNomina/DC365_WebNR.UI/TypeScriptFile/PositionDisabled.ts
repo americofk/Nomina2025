@@ -18,8 +18,8 @@ escuchadores: {
 
     //eliminar position
     $("#DeletePosition").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             $(".selectPosition[type=checkbox]").each(function () {
 

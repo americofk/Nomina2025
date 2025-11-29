@@ -66,8 +66,8 @@ escuchadores: {
 
     //eliminar
     $("#delete-ProjectCategory").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".select-ProjectCategory[type=checkbox]").each(function () {
@@ -152,8 +152,8 @@ escuchadores: {
 
     //save
     $("#createAndEditProjectCategory").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
                 url: "/categoriaproyectoactivas/guardar",
@@ -176,6 +176,15 @@ escuchadores: {
                                 $('.tbl-ProjectCategory').replaceWith($('.tbl-ProjectCategory', newDom));
                             });
                         windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#ProjCategoryId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar categoria');
+                        }
+
                         if (shouldCloseAfterSave) {
                             fn.funtionNewProjectCategory("close");
                             shouldCloseAfterSave = false;

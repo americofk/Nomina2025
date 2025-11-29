@@ -59,6 +59,15 @@ const fn = {
                         });
 
                     windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#PositionId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar puesto');
+                        }
+
                     if (shouldClose) {
                         let form = document.getElementById("createAndEditPosition") as HTMLFormElement;
                         form.reset();
@@ -79,8 +88,8 @@ var shouldCloseAfterSave = false;
 escuchadores: {
     //save position
     $("#createAndEditPosition").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             if (option == 2) {
                 if ($('#NotifyPositionId').val() == $('#PositionId').val()) {
                     windows_message("¿El puesto al que notifica no puede ser el mismo al que esta editando?", "error");
@@ -108,8 +117,8 @@ escuchadores: {
 
     //eliminar position
     $("#DeletePosition").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             $(".selectPosition[type=checkbox]").each(function () {
 

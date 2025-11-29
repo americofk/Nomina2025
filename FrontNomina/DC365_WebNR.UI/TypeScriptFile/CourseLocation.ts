@@ -45,8 +45,8 @@ var shouldCloseAfterSave = false;
 
 //save ubicacion de curso
 $("#createAndEditCourseLocation").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         $('.progreso').modal({ backdrop: 'static', keyboard: false })
         $.ajax({
             url: "/ubicacioncursos/guardar",
@@ -69,6 +69,15 @@ $("#createAndEditCourseLocation").submit(function (e) {
                             $('.tblCourseLocation').replaceWith($('.tblCourseLocation', newDom));
                         });
                     windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#CourseLocationId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar ubicacion');
+                        }
+
                     if (shouldCloseAfterSave) {
                         funtionNewCourseLocation("close");
                         shouldCloseAfterSave = false;
@@ -142,8 +151,8 @@ $('.EditCourseLocation').on('click', function () {
 
 //eliminar ubicacion de cursos
 $("#DeleteCourseLocation").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         var contador: boolean = false;
         $(".selectCourseLocation[type=checkbox]").each(function () {
 

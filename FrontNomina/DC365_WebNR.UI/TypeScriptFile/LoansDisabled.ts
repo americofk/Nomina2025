@@ -11,8 +11,8 @@ esuchadores: {
 
     //Eliminar
     $("#DeleteLoan-disable").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectLoans-disable[type=checkbox]").each(function () {

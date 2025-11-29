@@ -154,8 +154,8 @@ const fn = {
         });
         //save contact info employee
         $(dom_element.form).submit(function (e) {
-            if ($(this).valid()) {
-                e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                 fn.SaveEmployeeEarningCode()
             }
         });
@@ -199,8 +199,8 @@ escuchadores: {
 
     //eliminar
     $(dom_element.form_delete).submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(`${dom_element.class_check}[type=checkbox]`).each(function () {
@@ -268,33 +268,38 @@ escuchadores: {
     });
 
 
-    //cargar documento
-    $(".Document").change(function (e) {
+    //cargar documento - usar delegación de eventos para el input file dentro del modal
+    $(document).on('change', '.Document', function (e) {
         let contador: number = 0;
         let internalid: string = "";
         // Recorremos todos los checkbox para contar los que estan seleccionados
         $(`${dom_element.class_check}[type=checkbox]`).each(function () {
             if ($(this).is(":checked")) {
-                contador++;                
+                contador++;
                 internalid = $(this).parent().parent().find(".InternalIdtblEd").html().trim();
             }
         });
 
         if (contador == 0) {
             windows_message("¡Debe seleccionar un registro!", "error");
+            // Limpiar el input file para permitir seleccionar el mismo archivo de nuevo
+            $(this).val('');
         }
         else if (contador > 1) {
             windows_message("¡Debe seleccionar solo un registro!", "error");
+            $(this).val('');
         }
         else {
             let _dato = this as HTMLInputElement;
-            if (_dato.files != null) {
+            if (_dato.files != null && _dato.files.length > 0) {
                 let originalform: HTMLFormElement;
                 originalform = document.querySelector("#save-empdoc-form");
 
                 let dataform = new FormData(originalform);
                 dataform.append("IdEmpleyee", $('#EmployeeId').val().toString());
                 dataform.append("internalid", internalid);
+
+                $('.progreso').modal({ backdrop: 'static', keyboard: false });
 
                 $.ajax({
                     url: "/documentosempleados/cargardocumento",
@@ -304,17 +309,117 @@ escuchadores: {
                     processData: false,
                     async: true,
                     success: function (data: ResponseUI) {
+                        $('.progreso').modal('hide');
                         if (data.Type == "error") {
                             FormatErrors(data);
                         } else {
                             windows_message(data.Message, data.Type);
                             fn.SearchEarningCode($('#EmployeeId').val().toString());
                         }
+                        // Limpiar el input file
+                        $('.Document').val('');
                     }, error: function (xhr) {
+                        $('.progreso').modal('hide');
                         redireccionaralLogin(xhr);
                     }
                 });
             }
+        }
+    });
+
+    // Ver adjunto - abrir documento en nueva pestaña
+    $(document).on('click', '.btn-ver-adjunto', function () {
+        let contador: number = 0;
+        let internalid: string = "";
+        let hasAttach: boolean = false;
+        let employeeId: string = $('#EmployeeId').val().toString();
+
+        // Recorremos todos los checkbox para contar los que estan seleccionados
+        $(`${dom_element.class_check}[type=checkbox]`).each(function () {
+            if ($(this).is(":checked")) {
+                contador++;
+                internalid = $(this).parent().parent().find(".InternalIdtblEd").html().trim();
+                // Verificar si tiene adjunto (el icono tiene clase fa-paperclip)
+                hasAttach = $(this).parent().parent().find("i.fa-paperclip").length > 0;
+            }
+        });
+
+        if (contador == 0) {
+            windows_message("¡Debe seleccionar un registro!", "error");
+        }
+        else if (contador > 1) {
+            windows_message("¡Debe seleccionar solo un registro!", "error");
+        }
+        else if (!hasAttach) {
+            windows_message("El registro seleccionado no tiene documento adjunto.", "info");
+        }
+        else {
+            // Abrir el documento en nueva pestaña
+            window.open(`/documentosempleados/descargardocumento?IdEmployee=${employeeId}&internalid=${internalid}`, '_blank');
+        }
+    });
+
+    // Eliminar adjunto
+    $(document).on('click', '.btn-eliminar-adjunto', function () {
+        let contador: number = 0;
+        let internalid: string = "";
+        let hasAttach: boolean = false;
+        let employeeId: string = $('#EmployeeId').val().toString();
+
+        // Recorremos todos los checkbox para contar los que estan seleccionados
+        $(`${dom_element.class_check}[type=checkbox]`).each(function () {
+            if ($(this).is(":checked")) {
+                contador++;
+                internalid = $(this).parent().parent().find(".InternalIdtblEd").html().trim();
+                // Verificar si tiene adjunto (el icono tiene clase fa-paperclip)
+                hasAttach = $(this).parent().parent().find("i.fa-paperclip").length > 0;
+            }
+        });
+
+        if (contador == 0) {
+            windows_message("¡Debe seleccionar un registro!", "error");
+        }
+        else if (contador > 1) {
+            windows_message("¡Debe seleccionar solo un registro!", "error");
+        }
+        else if (!hasAttach) {
+            windows_message("El registro seleccionado no tiene documento adjunto.", "info");
+        }
+        else {
+            windows_message("¿Desea eliminar el archivo adjunto?", "confirm", {
+                onOk: function () {
+                    $('.progreso').modal({ backdrop: 'static', keyboard: false });
+
+                    $.ajax({
+                        url: "/documentosempleados/eliminaradjunto",
+                        type: "POST",
+                        data: {
+                            IdEmployee: employeeId,
+                            internalid: internalid
+                        },
+                        headers: {
+                            'RequestVerificationToken': $('input[name="__RequestVerificationToken"]:first').val() as string
+                        },
+                        async: true,
+                        success: function (data: ResponseUI) {
+                            $('.progreso').modal('hide');
+                            if (data.Type == "error") {
+                                FormatErrors(data);
+                            } else {
+                                windows_message(data.Message, data.Type);
+                                fn.SearchEarningCode($('#EmployeeId').val().toString());
+                            }
+                        },
+                        error: function (xhr) {
+                            $('.progreso').modal('hide');
+                            redireccionaralLogin(xhr);
+                        }
+                    });
+                },
+                onCancel: function () {
+                    // No hacer nada
+                }
+            });
         }
     });
 

@@ -62,8 +62,8 @@ const fn = {
 escuchadores: {
     //eliminar
     $("#delete-Project").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".select-ProjId[type=checkbox]").each(function () {
@@ -147,8 +147,8 @@ escuchadores: {
 
     //save
     $("#createAndEditProject").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
                 url: "/proyectosactivos/guardar",
@@ -171,6 +171,15 @@ escuchadores: {
                                 $('.tbl-Project').replaceWith($('.tbl-Project', newDom));
                             });
                         windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#ProjId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar proyecto');
+                        }
+
                         if (shouldCloseAfterSave) {
                             fn.funtionNewProject("close");
                             shouldCloseAfterSave = false;

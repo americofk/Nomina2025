@@ -25,8 +25,8 @@ $(".form-file").on("change", function () {
 
 //save
 $("#Form-batchHistori").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         $('.progreso').modal({ backdrop: 'static', keyboard: false })
         
         let originalform: HTMLFormElement;
@@ -81,8 +81,8 @@ $("#Form-batchHistori").submit(function (e) {
 
 //eliminar
 $("#DeleteHistory").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         var contador: boolean = false;
         // Recorremos todos los checkbox para contar los que estan seleccionados
         $(".selectHistory[type=checkbox]").each(function () {

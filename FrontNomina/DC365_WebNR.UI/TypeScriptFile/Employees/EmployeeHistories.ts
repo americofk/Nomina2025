@@ -10,8 +10,8 @@
 escuchadores: {
     //eliminar historial
     $("#Delete-employee-history").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             var _EmployeeID: string;
             let cont: number = 0;
@@ -151,8 +151,8 @@ const fn = {
                     $(call).removeClass("collapse");
                
                     $("#Update-history-employee").submit(function (e) {
-                        if ($(this).valid()) {
-                            e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
                             windows_message("¿Desea actualizar el historial seleccionado?", "confirm", {
                                 onOk: function () {
                                     $('.progreso').modal({ backdrop: 'static', keyboard: false })

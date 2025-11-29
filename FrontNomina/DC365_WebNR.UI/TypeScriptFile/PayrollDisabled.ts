@@ -106,8 +106,8 @@ $("#content-scroll").scroll(function () {
 
 //eliminar
 $("#deletePayroll").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         var contador: boolean = false;
         // Recorremos todos los checkbox para contar los que estan seleccionados
         $(".selectPayroll[type=checkbox]").each(function () {

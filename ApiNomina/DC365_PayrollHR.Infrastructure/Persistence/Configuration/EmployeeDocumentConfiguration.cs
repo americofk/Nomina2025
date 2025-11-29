@@ -31,6 +31,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
             builder.Property(x => x.DueDate).IsRequired();
             builder.Property(x => x.DocumentNumber).HasMaxLength(30).IsRequired();
             builder.Property(x => x.FileAttach);
+            builder.Property(x => x.FileName).HasMaxLength(255);
 
             builder.Property(x => x.Comment).HasMaxLength(200);
             builder.HasOne<Employee>()

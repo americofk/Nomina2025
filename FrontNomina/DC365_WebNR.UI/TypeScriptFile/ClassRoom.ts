@@ -45,8 +45,8 @@ var shouldCloseAfterSave = false;
 
 //save salon de curso
 $("#createAndEditClassRoom").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         $('.progreso').modal({ backdrop: 'static', keyboard: false })
         $.ajax({
             url: "/salonescurso/guardar",
@@ -70,6 +70,15 @@ $("#createAndEditClassRoom").submit(function (e) {
 
                         });
                     windows_message(data.Message, data.Type);
+
+                        // Si era creacion y se devolvio el ID, cambiar a modo edicion
+                        if (option === 1 && data.IdType) {
+                            $('#ClassRoomId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar salon');
+                        }
+
                     if (shouldCloseAfterSave) {
                         funtionNewClassRoom("close");
                         shouldCloseAfterSave = false;
@@ -144,8 +153,8 @@ $('.EditClassRoom').on('click', function () {
 
 //eliminar salon de cursos
 $("#DeleteClassRoom").submit(function (e) {
-    if ($(this).valid()) {
-        e.preventDefault();
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
+        if ($(this).valid()) {
         var contador: boolean = false;
         $(".selectClassRoom[type=checkbox]").each(function () {
 

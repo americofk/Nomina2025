@@ -14,8 +14,8 @@ variables: {
 escuchadores: {
     //eliminar
     $("#DeleteDeductionCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectDeductionCode[type=checkbox]").each(function () {
@@ -90,8 +90,8 @@ escuchadores: {
 
     //save
     $("#NewAndEditDeductionCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
                 url: "/codigosdeduccion/guardar",

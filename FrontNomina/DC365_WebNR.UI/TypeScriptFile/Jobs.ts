@@ -33,8 +33,8 @@ escuchadores: {
 
     //save cargo
     $("#createAndEditJobs").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
 
             $.ajax({
@@ -51,12 +51,21 @@ escuchadores: {
                         });
                         windows_message(_errors, data.Type);
                     } else {
+                        windows_message(data.Message, data.Type);
+
+                        // Si era una creación (option=1) y se devolvió el ID, cambiar a modo edición
+                        if (option === 1 && data.IdType) {
+                            $('#JobId').val(data.IdType);
+                            option = 2;
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar cargo');
+                        }
+
                         $.get(location.href)
                             .done(function (r) {
                                 var newDom = $(r);
                                 $('.tblCargosActivos').replaceWith($('.tblCargosActivos', newDom));
                             });
-                        windows_message(data.Message, data.Type);
                         if (shouldCloseAfterSave) {
                             let form = document.getElementById("createAndEditJobs") as HTMLFormElement;
                             form.reset();
@@ -81,8 +90,8 @@ escuchadores: {
 
     //eliminar cargo
     $("#DeleteJobs").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             $(".selectJobs[type=checkbox]").each(function () {
 

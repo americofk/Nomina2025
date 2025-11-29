@@ -92,6 +92,8 @@ namespace DC365_WebNR.CORE.Aplication.Services
                 {
                     responseUI.Message = DataApi.Message;
                     responseUI.Type = "success";
+                    // Devolver el ID del registro creado para cambiar a modo edicion
+                    responseUI.IdType = DataApi.Data?.PositionId;
                 }
 
             }

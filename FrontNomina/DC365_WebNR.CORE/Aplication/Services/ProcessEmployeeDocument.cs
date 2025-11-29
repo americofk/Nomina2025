@@ -251,5 +251,58 @@ namespace DC365_WebNR.CORE.Aplication.Services
             return responseUI;
         }
 
+        // eliminar adjunto
+        /// <summary>
+        /// Elimina el archivo adjunto de un documento.
+        /// </summary>
+        /// <param name="employeeid">ID del empleado.</param>
+        /// <param name="internalid">ID interno del documento.</param>
+        /// <returns>Resultado de la operación.</returns>
+        public async Task<ResponseUI> DeleteAttachment(string employeeid, int internalid)
+        {
+            ResponseUI responseUI = new ResponseUI();
+            string urlData = $"{urlsServices.GetUrl("EmployeeDocument")}/attachment/{employeeid}/{internalid}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Delete);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var DataApi = JsonConvert.DeserializeObject<Response<bool>>(Api.Content.ReadAsStringAsync().Result);
+                if (DataApi.Succeeded)
+                {
+                    responseUI.Message = DataApi.Message;
+                    responseUI.Type = ErrorMsg.TypeOk;
+                }
+                else
+                {
+                    responseUI.Type = ErrorMsg.TypeError;
+                    responseUI.Errors = DataApi.Errors;
+                }
+            }
+            else
+            {
+                responseUI.Type = ErrorMsg.TypeError;
+                try
+                {
+                    var content = Api.Content?.ReadAsStringAsync().Result;
+                    if (!string.IsNullOrEmpty(content))
+                    {
+                        var resulError = JsonConvert.DeserializeObject<Response<string>>(content);
+                        responseUI.Errors = resulError?.Errors ?? new List<string>() { $"Error: {Api.StatusCode}" };
+                    }
+                    else
+                    {
+                        responseUI.Errors = new List<string>() { $"Error: {Api.StatusCode}" };
+                    }
+                }
+                catch
+                {
+                    responseUI.Errors = new List<string>() { "Ocurrió un error procesando la solicitud, inténtelo más tarde." };
+                }
+            }
+
+            return responseUI;
+        }
+
     }
 }

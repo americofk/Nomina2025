@@ -46,6 +46,10 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// </summary>
         public byte[] FileAttach { get; set; }
         /// <summary>
+        /// Nombre del archivo adjunto.
+        /// </summary>
+        public string FileName { get; set; }
+        /// <summary>
         /// Indica si.
         /// </summary>
         public bool IsPrincipal { get; set; }

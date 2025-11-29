@@ -32,8 +32,8 @@ funciones: {
 escuchadores: {
     //eliminar
     $("#DeleteEarningCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectEarningCode[type=checkbox]").each(function () {
@@ -113,8 +113,8 @@ escuchadores: {
 
     //save
     $("#NewAndEditEarningCode").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $.ajax({
                 url: "/codigosganancias/guardar",

@@ -11,8 +11,8 @@ escuchadores: {
 
     //save PayCycle
     $("#SavePayCycle").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             $('.progreso').modal({ backdrop: 'static', keyboard: false })
             $('.PayrollIdPayCycle').val($('.PayrollId').val().toString());
             $.ajax({
@@ -45,8 +45,8 @@ escuchadores: {
 
     //eliminar
     $("#deletePayCycle").submit(function (e) {
+        e.preventDefault(); // Siempre prevenir el envío nativo del formulario
         if ($(this).valid()) {
-            e.preventDefault();
             var contador: boolean = false;
             // Recorremos todos los checkbox para contar los que estan seleccionados
             $(".selectPayCycle[type=checkbox]").each(function () {

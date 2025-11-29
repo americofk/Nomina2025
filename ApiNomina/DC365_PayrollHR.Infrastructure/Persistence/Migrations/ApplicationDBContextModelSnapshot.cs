@@ -1576,8 +1576,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.EducationLevel", b =>
                 {
                     b.Property<string>("EducationLevelId")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(20)
@@ -1653,6 +1653,7 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<string>("Country")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("CreatedBy")
@@ -1678,11 +1679,13 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<string>("DisabilityTypeId")
                         .IsRequired()
+                        .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("EducationLevelId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<int>("EmployeeAction")
                         .HasColumnType("int");
@@ -1717,8 +1720,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LocationId")
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("MaritalStatus")
                         .HasColumnType("int");
@@ -1741,12 +1744,13 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Nationality")
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("OccupationId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<bool>("OwnCar")
                         .HasColumnType("bit");
@@ -2183,6 +2187,10 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
 
                     b.Property<byte[]>("FileAttach")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -3425,8 +3433,8 @@ namespace DC365_PayrollHR.Infrastructure.Migrations
             modelBuilder.Entity("DC365_PayrollHR.Core.Domain.Entities.Occupation", b =>
                 {
                     b.Property<string>("OccupationId")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
 
                     b.Property<string>("CreatedBy")
                         .HasMaxLength(20)
