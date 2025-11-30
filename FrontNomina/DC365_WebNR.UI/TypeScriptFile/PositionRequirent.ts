@@ -29,7 +29,7 @@ escuchadores: {
         $(".selectPosition[type=checkbox]").each(function () {
             if ($(this).is(":checked")) {
                 contador++;
-                idpositionforRequirement = $(this).parent().parent().find(".PositionIdtblpos").html().trim();
+                idpositionforRequirement = $(this).parent().parent().find(".PositionIdtbl").html().trim();
             }
 
         });

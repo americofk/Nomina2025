@@ -28,7 +28,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "IdPosition");
                     input.attr("class", "IdPosition");
-                    input.val($(this).parent().parent().find(".PositionIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".PositionIdtbl").html().trim());
                     $(".DeletePosition").append(input);
 
                 }
@@ -96,7 +96,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "PositionIdpos");
                     input.attr("class", "PositionIdpos");
-                    input.val($(this).parent().parent().find(".PositionIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".PositionIdtbl").html().trim());
                     $(".form-Enabledposition").append(input);
                 }
 
@@ -175,7 +175,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "PositionIdIsVacant");
                     input.attr("class", "PositionIdIsVacant");
-                    input.val($(this).parent().parent().find(".PositionIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".PositionIdtbl").html().trim());
                     $(".form-IsVacant").append(input);
                 }
 

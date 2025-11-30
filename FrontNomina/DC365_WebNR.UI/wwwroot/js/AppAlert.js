@@ -7,23 +7,24 @@ var timeout;
 function windows_message(text, type, functions, nameButtons = { Ok: "Aceptar", Cancel: "Cancelar" }) {
     let types = {
         error: {
-            icon: "/Images/IconAlert/error.png",//"error.png",
+            icon: "/Images/IconAlert/confirm.png",
             text: "Error",
-            action: "notification"
+            action: "notification",
+            bodyIcon: "icon-error"
         },
         success: {
-            icon: "/Images/IconAlert/success.png",//"success.png",
+            icon: "/Images/IconAlert/confirm.png",
             text: "Completado",
-            action: "notification"
+            action: "notification",
+            bodyIcon: "icon-success"
         },
         confirm: {
-            icon: "/Images/IconAlert/confirm.png",//"confirm.png",
-            text: "Confirmación",
-            action: "confirmation"
+            icon: "/Images/IconAlert/confirm.png",
+            text: "Alerta",
+            action: "confirmation",
+            bodyIcon: "icon-confirm"
         }
     }
-
-    remove_alert
 
     create_dom();
 
@@ -33,28 +34,28 @@ function windows_message(text, type, functions, nameButtons = { Ok: "Aceptar", C
         let modal = create("div", "id", "modal-alert");
 
         let alert_app = create("div", "class", "alert-app " + types[type].action);
-        let alert_title = create("div", "class", "alert-title " + type);
+        let alert_title = create("div", "class", "alert-title");
         let alert_icon_text = create("div", "class", "alert-icon-text");
-        let icon = create("img", "class", "icon");
-        icon.setAttribute("src", types[type].icon);
+        let icon = create("i", "class", "fa fa-info-circle icon");
+        let title_text = document.createElement("span");
+        title_text.innerText = types[type].text;
+        title_text.className = "alert-title-text";
 
-        let icon_close = create("img", "class", "alert-close")
-        icon_close.setAttribute("src", "/Images/IconAlert/close.png");
+        let icon_close = create("i", "class", "fa fa-times alert-close");
 
-
-        let span = document.createElement("span");
-        span.innerText = types[type].text;
-
+        // Nuevo body con icono de tipo
         let alert_body = create("div", "class", "alert-body");
+        let alert_type_icon = create("div", "class", "alert-type-icon " + types[type].bodyIcon);
+        let alert_message = create("div", "class", "alert-message");
         let span_body = document.createElement("span");
         span_body.innerHTML = text;
 
         modal.addChild(alert_app.addChild(
             alert_title.addChild(
-                alert_icon_text.addChild(icon).addChild(span)
+                alert_icon_text.addChild(icon).addChild(title_text)
             ).addChild(icon_close)
         ).addChild(
-            alert_body.addChild(span_body)
+            alert_body.addChild(alert_type_icon).addChild(alert_message.addChild(span_body))
         ));
 
         if (type == "confirm") {
@@ -64,10 +65,10 @@ function windows_message(text, type, functions, nameButtons = { Ok: "Aceptar", C
             okbutton.innerText = nameButtons.Ok;
 
             let cancelbutton = create("div", "class", "cancelbutton");
-            cancelbutton.innerText = nameButtons.Cancel; //Texto del boton cancelar
+            cancelbutton.innerText = nameButtons.Cancel;
 
             alert_app.addChild(
-                alert_footer.addChild(okbutton).addChild(cancelbutton)
+                alert_footer.addChild(cancelbutton).addChild(okbutton)
             )
 
             okbutton.addEventListener("click", () => {
@@ -85,23 +86,24 @@ function windows_message(text, type, functions, nameButtons = { Ok: "Aceptar", C
             }, false);
         }
 
-
         var body = document.querySelectorAll("body");
         body[0].appendChild(modal);
-
 
         let btn_close = document.querySelector(".alert-close");
         btn_close.addEventListener("click", remove_alert, false);
 
-        // opcional
+        // Auto cerrar success despues de 3 segundos
         if (type == "success") {
             timeout = setTimeout(remove_alert, 3000);
+        }
+        // Auto cerrar error despues de 10 segundos
+        if (type == "error") {
+            timeout = setTimeout(remove_alert, 10000);
         }
     }
 
     function remove_alert() {
         var body = document.querySelectorAll("body");
-        // var remove_alert = document.querySelector(".alert-app");
         var remove_alert = document.querySelector("#modal-alert")
         if (remove_alert != null) {
             body[0].removeChild(remove_alert);
@@ -117,23 +119,22 @@ function create(type, atttype, attvalue) {
     return element;
 }
 
-
 // funciones de prueba
 function show_message_error() {
-    windows_message("Este es un mensaje.", "error");
+    windows_message("Este es un mensaje de error.", "error");
 }
 
 function show_message_sucess() {
-    windows_message("Este es un mensaje.", "success");
+    windows_message("Operacion completada exitosamente.", "success");
 }
 
 function show_message_confirm() {
-    windows_message("¿Está seguro de continuar?.", "confirm", {
+    windows_message("¿Esta seguro de continuar con esta accion?", "confirm", {
         onOk: function () {
-            alert("Hola...");
+            alert("Confirmado");
         },
         onCancel: function () {
-            alert("Adios...");
+            alert("Cancelado");
         }
     });
 }

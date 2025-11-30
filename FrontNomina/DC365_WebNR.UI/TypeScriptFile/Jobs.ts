@@ -100,7 +100,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "IdJobs");
                     input.attr("class", "IdJobs");
-                    input.val($(this).parent().parent().find(".JobIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".JobIdtbl").html().trim());
                     $(".DeleteJobs").append(input);
 
                 }
@@ -166,7 +166,7 @@ escuchadores: {
         $(".selectJobs[type=checkbox]").each(function () {
             if ($(this).is(":checked")) {
                 contador++;
-                Id = $(this).parent().parent().find(".JobIdtblpos").html().trim();
+                Id = $(this).parent().parent().find(".JobIdtbl").html().trim();
             }
         });
 
@@ -220,7 +220,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "JobIdpos");
                     input.attr("class", "JobIdpos");
-                    input.val($(this).parent().parent().find(".JobIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".JobIdtbl").html().trim());
                     $(".form-Diseblejob").append(input);
                 }
 
@@ -327,7 +327,7 @@ escuchadores: {
     );
 
     // Inicializar modal de auditoría
-    initAuditListPage('.selectJobs', '.JobIdtblpos', '/cargosactivos/getbyid', 'Id');
+    initAuditListPage('.selectJobs', '.JobIdtbl', '/cargosactivos/getbyid', 'Id');
 }
 
 funciones: {

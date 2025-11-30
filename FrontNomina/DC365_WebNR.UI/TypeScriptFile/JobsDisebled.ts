@@ -25,7 +25,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "IdJobsDisabled");
                     input.attr("class", "IdJobsDisabled");
-                    input.val($(this).parent().parent().find(".JobIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".JobIdtbl").html().trim());
                     $(".DeleteJobsDisabled").append(input);
 
                 }
@@ -96,7 +96,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "JobIdpos");
                     input.attr("class", "JobIdpos");
-                    input.val($(this).parent().parent().find(".JobIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".JobIdtbl").html().trim());
                     $(".form-Enebledjob").append(input);
                 }
 
@@ -188,7 +188,7 @@ escuchadores: {
     // Habilitar doble clic en filas para editar
     enableRowDoubleClick(
         '.tbody-Table-jobdisabled',
-        '.JobIdtblpos',
+        '.JobIdtbl',
         '/cargosactivos/{id}',
         function (data: IJob) {
             option = 2;

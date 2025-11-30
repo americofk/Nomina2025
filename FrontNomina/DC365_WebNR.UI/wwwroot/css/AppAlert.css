@@ -1,3 +1,6 @@
+/* **************************************************************************** */
+/* Modal overlay para confirmaciones */
+/* **************************************************************************** */
 .modal-alert-confirm {
     display: block;
     position: fixed;
@@ -8,233 +11,276 @@
     z-index: 4000;
 }
 
-    .modal-alert-confirm:before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        /* width: 100%;
-    height: 100vh; */
-        background-color: rgba(0,0,0,0.2);
-        z-index: -1;
-        width: 100%;
-        height: 100vh;
-    }
-/* **************************************************************************** */
-/* Contenerdor de la alerta */
-.alert-app{
-    background-color: #fff;
-    width: 30%;
-    height: auto;
-    min-height: 80px;
-    border-radius: 2px;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    box-shadow: 1px 1px 6px 5px rgba(0, 0, 0, 0.3);
-    z-index:4000;
-}
-
-.notification{
+.modal-alert-confirm:before {
+    content: "";
     position: fixed;
-    margin-left: calc(100% - 32%);
-    margin-top:20px;
-    animation-name: show-notify;
-    animation-duration: 1.5s;
-    animation-iteration-count: 1;
-    top:0;
-}
-
-.confirmation {
-    margin: auto;
-    margin-top: 130px;
-    animation-name: show-confirm;
-    animation-duration: 1.5s;
-    animation-iteration-count: 1;
     top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+    width: 100%;
+    height: 100vh;
+}
+
+/* **************************************************************************** */
+/* Contenedor principal de la alerta */
+/* **************************************************************************** */
+.alert-app {
+    background-color: #fff;
+    width: 380px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+    z-index: 4000;
+    overflow: hidden;
+}
+
+/* Notificaciones (success/error) - aparecen arriba a la derecha */
+.notification {
     position: fixed;
-    left: 35%;
+    right: 20px;
+    top: 115px;
+    animation: fadeIn 0.3s ease-out;
 }
 
-/* Animación para las notificaciones y los errores */
-@keyframes show-notify{
-    0%{
-        margin-left: calc(100% + 20px);
-    }
-
-    50%{
-        margin-left: calc( 100% - 34%);
-    }
-
-    100%{
-        margin-left: calc( 100% - 32%);
-    }
+/* Confirmaciones - aparecen centradas */
+.confirmation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: scaleIn 0.2s ease-out;
 }
 
-/* Animación para el confirmar */
-@keyframes show-confirm{
-    0%{
-        transform: scale(0);
+/* Animacion fade in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
     }
-
-    50%{
-        transform: scale(1.1);
-    }
-
-    100%{
-        transform: scale(1);
-
+    100% {
+        opacity: 1;
     }
 }
 
-/* Fin del contenedor */
+/* Animacion de escala para confirmacion */
+@keyframes scaleIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
 /* **************************************************************************** */
-
+/* Header de la alerta - siempre azul */
 /* **************************************************************************** */
-/* Titulo */
-.alert-app .alert-title{
+.alert-app .alert-title {
     display: flex;
-    height: 35px;
+    height: 42px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 0 12px;
     box-sizing: border-box;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+    background-color: #2d5f8b;
 }
 
-/* Imagen del titulo  */
-.alert-app .alert-title > img{
+/* Boton cerrar (X) */
+.alert-app .alert-title .alert-close {
     cursor: pointer;
-    width: 12px;
-    height: 12px;
+    font-size: 18px;
+    color: #fff;
+    opacity: 0.9;
+    transition: opacity 0.2s, transform 0.2s;
 }
 
-/* Efecto hover del boton de cerrar */
-.alert-app .alert-title > img:hover{
-    /* filter: brightness(80%);   */
-    transform:scale(1.1);
+.alert-app .alert-title .alert-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
 }
 
-/* Contenedor del titulo y el icono */
-.alert-app .alert-title .alert-icon-text{
+/* Contenedor del icono y titulo en el header */
+.alert-app .alert-title .alert-icon-text {
     display: flex;
     justify-content: left;
     align-items: center;
 }
 
-/* titulo */
-.alert-app .alert-title .alert-icon-text > span{
-    font-size: 16px;
-    font-weight: bold;
+/* Icono del header (info) */
+.alert-app .alert-title .alert-icon-text .icon {
+    font-size: 20px;
     color: #fff;
 }
 
-/* Icono */
-.alert-app .alert-title .alert-icon-text .icon{
-    width: 26px;
-    height: 26px;
-    margin-right: 5px;
-    border-radius: 100%;
-    border: 1px solid rgba(0, 0, 0, 0.4);
-}
-/* Color de los errores */
-.error{
-    background-color: rgb(165, 40, 40);
+/* Texto del titulo en el header */
+.alert-app .alert-title .alert-icon-text .alert-title-text {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 10px;
 }
 
-/* Color de las notificaciones */
-.success{
-    /* background-color: rgb(40, 109, 165); */
-    background-color: rgb(40, 112, 90);
+/* Eliminar colores especificos del header - ahora todos son iguales */
+.alert-title.error,
+.alert-title.success,
+.alert-title.confirm {
+    background-color: #2d5f8b;
 }
-
-/* Color de las confirmaciones */
-.confirm {
-    /* background-color: rgb(13, 172, 172); */
-    background-color: rgb(23 44 77);
-}
-/* Fin de la sección del titulo */
-/* **************************************************************************** */
 
 /* **************************************************************************** */
-/* Sección del cuerpo */
-
-/* Cuerpo */
+/* Cuerpo de la alerta */
+/* **************************************************************************** */
 .alert-app .alert-body {
     width: 100%;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    padding: 20px;
     box-sizing: border-box;
-    max-height: 100px;
+    max-height: 200px;
     overflow-y: auto;
-    min-height: 55px;
+    min-height: 80px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: #fff;
 }
 
-/* Texto del cuerpo */
-.alert-app .alert-body > span{
-    font-size: 15px;
-    color: rgb(36, 36, 36);
+/* Icono del tipo de alerta en el body */
+.alert-app .alert-body .alert-type-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icono success - verde fuerte */
+.alert-app .alert-body .alert-type-icon.icon-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.alert-app .alert-body .alert-type-icon.icon-success::before {
+    content: "\2713";
+    font-size: 22px;
+    font-weight: bold;
+}
+
+/* Icono error - rojo fuerte */
+.alert-app .alert-body .alert-type-icon.icon-error {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.alert-app .alert-body .alert-type-icon.icon-error::before {
+    content: "X";
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+/* Icono confirm - amarillo fuerte */
+.alert-app .alert-body .alert-type-icon.icon-confirm {
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.alert-app .alert-body .alert-type-icon.icon-confirm::before {
+    content: "?";
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Contenedor del mensaje */
+.alert-app .alert-body .alert-message {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-height: 40px;
+}
+
+/* Texto del mensaje */
+.alert-app .alert-body .alert-message span {
+    font-size: 14px;
+    color: #333;
     line-height: 1.5;
 }
 
-/* Fin de la sección del cuerpo */
 /* **************************************************************************** */
-
+/* Footer - solo para confirmaciones */
 /* **************************************************************************** */
-/* Sección del pie */
 .alert-app .alert-footer {
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
-    height: 45px;
-    width: 100%;
-    /* justify-content: space-between; */
-    align-items: center;
-    padding: 10px;
+    padding: 12px 20px;
     box-sizing: border-box;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    background-color: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    gap: 10px;
 }
 
-/* Botones del pie */
-    .alert-app .alert-footer > div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 80px;
-        height: 25px;
-        border-radius: 3px;
-        padding: 15px;
-        color: #fff;
-        box-sizing: border-box;
-        font-size: 15px;
-        margin-left: 20px;
-        margin-right: 20px;
-        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-        cursor: pointer;
-        font-weight: 500;
-    }
-
-/* Efecto hover de los botones */
-.alert-app .alert-footer > div:hover{
-    filter: brightness(108%);
+/* Botones del footer */
+.alert-app .alert-footer > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    height: 34px;
+    border-radius: 4px;
+    padding: 0 16px;
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s, transform 0.1s;
+    border: none;
 }
 
-/* Estilos de color de los botones */
-    .alert-app .alert-footer .okbutton {
-        background-color: rgb(51 122 183);
-        border: 2px solid rgba(9, 28, 73, 0.3);
-    }
-
-/* Estilo de color de los botones */
-.alert-app .alert-footer .cancelbutton{
-    background-color: rgb(218, 36, 20);
-    border:2px solid rgba(92, 15, 9, 0.3);
+.alert-app .alert-footer > div:hover {
+    filter: brightness(110%);
 }
 
-/* Fin de la sección del pie */
+.alert-app .alert-footer > div:active {
+    transform: scale(0.98);
+}
+
+/* Boton Aceptar - azul */
+.alert-app .alert-footer .okbutton {
+    background-color: #2d5f8b;
+    order: 2;
+}
+
+/* Boton Cancelar - gris */
+.alert-app .alert-footer .cancelbutton {
+    background-color: #6c757d;
+    order: 1;
+}
+
 /* **************************************************************************** */
+/* Scrollbar personalizado para el body */
+/* **************************************************************************** */
+.alert-app .alert-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.alert-app .alert-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.alert-app .alert-body::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.alert-app .alert-body::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
