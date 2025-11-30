@@ -1,29 +1,19 @@
 <!-- Modal de detalles de auditoría -->
-<div class="modal modal-AuditLogDetails" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="ContenModalAuditDetails">
-        <div class="modal-content" style="max-width: 800px; margin: 50px auto;">
+<div class="modal fade modal-AuditLogDetails" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width: 800px; max-width: 95%;">
+        <div class="modal-content">
             <!-- Header del modal -->
-            <div class="modal-options">
-                <div class="menuoptions-flex-submodal">
-                    <ul class="menuoptions">
-                        <li>
-                            <span style="font-weight: bold; font-size: 16px; color: #333; padding: 10px;">
-                                <i class="fa fa-info-circle"></i> Detalles del Registro de Auditoría
-                            </span>
-                        </li>
-                    </ul>
-                    <ul class="menuoptions">
-                        <li class="close-modal-auditlog-details">
-                            <a class="btn2 btn-app">
-                                <i class="fa fa-close i-close"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="modal-header" style="background-color: #337ab7; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;">
+                <h4 class="modal-title" style="color: #fff; font-size: 16px; font-weight: bold; margin: 0;">
+                    <i class="fa fa-info-circle"></i> Detalles del Registro de Auditoría
+                </h4>
+                <button type="button" class="close close-modal-auditlog-details" style="color: #fff; opacity: 1; font-size: 24px; margin: 0; padding: 0;">
+                    <span>&times;</span>
+                </button>
             </div>
 
             <!-- Contenido del modal -->
-            <div class="modal-body-auditlog" style="padding: 20px;">
+            <div class="modal-body" style="padding: 15px 20px;">
                 <div class="row" style="display: flex; flex-wrap: wrap;">
                     <!-- Columna 1 -->
                     <div class="col-md-6" style="flex: 1; min-width: 300px; padding: 10px;">
@@ -43,7 +33,7 @@
                             <label style="font-weight: bold; color: #555;">Modificado Por:</label>
                             <input type="text" id="audit-detail-changedby" class="form-control" readonly style="background-color: #f5f5f5;" />
                         </div>
-                        <div class="form-group" style="margin-bottom: 15px;">
+                        <div class="form-group" style="margin-bottom: 0;">
                             <label style="font-weight: bold; color: #555;">Fecha de Cambio:</label>
                             <input type="text" id="audit-detail-changedat" class="form-control" readonly style="background-color: #f5f5f5;" />
                         </div>
@@ -62,20 +52,21 @@
                             <label style="font-weight: bold; color: #555;">Valor Anterior:</label>
                             <textarea id="audit-detail-oldvalue" class="form-control" rows="3" readonly style="background-color: #f5f5f5; resize: none;"></textarea>
                         </div>
-                        <div class="form-group" style="margin-bottom: 15px;">
+                        <div class="form-group" style="margin-bottom: 0;">
                             <label style="font-weight: bold; color: #555;">Nuevo Valor:</label>
                             <textarea id="audit-detail-newvalue" class="form-control" rows="3" readonly style="background-color: #f5f5f5; resize: none;"></textarea>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Footer del modal -->
-            <div class="modal-footer-auditlog" style="padding: 15px; border-top: 1px solid #ddd; text-align: right;">
-                <button type="button" class="btn btn-default close-modal-auditlog-details" style="padding: 8px 20px;">
-                    <i class="fa fa-times"></i> Cerrar
-                </button>
-            </div>
         </div>
     </div>
 </div>
+<style>
+    .modal-AuditLogDetails .modal-dialog {
+        margin: 50px auto;
+    }
+    .modal-AuditLogDetails .modal-content {
+        min-height: auto;
+    }
+</style>
