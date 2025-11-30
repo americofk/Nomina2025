@@ -43,7 +43,7 @@ function showAuditLogDetails() {
     $(".selectAuditLog[type=checkbox]").each(function () {
         if ($(this).is(":checked")) {
             contador++;
-            recId = parseInt($(this).parent().parent().find(".AuditLogRecIdtbl").html().trim());
+            recId = parseInt($(this).closest('.row-app').attr('data-recid') || '0');
         }
     });
 

@@ -138,6 +138,16 @@
 </div>
 
 <script src="~/js/M_Departmentdisabled.js?@version" type="module"></script>
+<script src="~/js/table-features.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Department-Disabled'
+        });
+    });
+</script>
 @section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

@@ -210,7 +210,17 @@
 <script src="~/js/audit-modal.js?@version"></script>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_CourseType-views.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-CourseType'
+        });
+    });
+</script>
 <script src="~/js/CourseType.js?@version" type="module"></script>
 
 @section Scripts {

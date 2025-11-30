@@ -2,6 +2,7 @@
     List<SelectListItem> filters = (List<SelectListItem>)ViewBag.Filter;
 }
 <div class="contenedor-filtros">
-    @Html.DropDownList("Filter", filters, new { @class = "form-control-option-filtre optionFilter-prospect" })
-    <input type="text" class="form-control-text-filtre buscador textFilter-prospect" placeholder="Filtro">
+    @* Dropdown oculto para mantener compatibilidad con código existente *@
+    @Html.DropDownList("Filter", filters, new { @class = "form-control-option-filtre optionFilter-prospect", style = "display:none;" })
+    <input type="text" class="form-control-text-filtre buscador textFilterMask textFilter-prospect" placeholder="Buscar en todas las columnas...">
 </div>

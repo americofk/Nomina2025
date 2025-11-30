@@ -183,6 +183,16 @@
 
 <script src="~/js/BatchHistory.js" type="module"></script>
 <script src="~/js/AppInputDate.js"></script>
+<script src="~/js/table-features.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-History'
+        });
+    });
+</script>
 @section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

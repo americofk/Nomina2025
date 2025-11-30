@@ -129,6 +129,16 @@
 
 <script src="~/js/M_Department.js?@version" type="module"></script>
 <script src="~/js/ProjectDisabled.js?@version" type="module"></script>
+<script src="~/js/table-features.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Project-Disabled'
+        });
+    });
+</script>
 
 @section Scripts {
 

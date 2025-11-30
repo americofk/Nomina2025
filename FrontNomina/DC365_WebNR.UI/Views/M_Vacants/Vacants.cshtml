@@ -285,7 +285,17 @@
 <script src="~/js/audit-modal.js?@version"></script>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Vacants-views.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Vacants'
+        });
+    });
+</script>
 @section Scripts {
     <script src="~/js/Vacants.js"></script>
     <script src="~/js/PositionRequirent.js"></script>

@@ -512,7 +512,17 @@
 </div>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Employee-views.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Employee'
+        });
+    });
+</script>
 @section Scripts {
     <script src="~/js/Employees/Employee.js"></script>
     <script src="~/js/Employees/AddresEmployees.js"></script>

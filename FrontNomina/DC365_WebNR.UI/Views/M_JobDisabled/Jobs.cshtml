@@ -140,6 +140,16 @@
     @{await Html.RenderPartialAsync("~/Views/M_Job/NewAndEditJobs.cshtml", new DC365_WebNR.CORE.Domain.Models.Job());}
 
 </div>
+<script src="~/js/table-features.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-jobdisabled'
+        });
+    });
+</script>
 @section Scripts {
     <script src="~/js/Jobs.js"></script>
     <script src="~/js/JobsDisebled.js"></script>

@@ -64,7 +64,7 @@
         <div class="scrollbar-TablePrimari">
 
             <div class="container-table-app" id="content-scroll" >
-                <table class="table-app-width table-app tblLoan-disable">
+                <table class="table-app-width table-app tblLoan-disable" id="MainTable">
                     <thead>
                         <tr class="row-header-app">
                             <td class="cell-app check-cell-app cell-header-app">
@@ -144,6 +144,16 @@
 </div>
 
 <script src="~/js/LoansDisabled.js" type="module"></script>
+<script src="~/js/table-features.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Loans'
+        });
+    });
+</script>
 @section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

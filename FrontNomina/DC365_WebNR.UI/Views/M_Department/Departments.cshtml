@@ -269,9 +269,20 @@
 <script src="~/js/audit-modal.js?@version"></script>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Department.js?@version" type="module"></script>
 <script src="~/js/M_Department-views.js?@version"></script>
 <script src="~/js/AppInputDate.js"></script>
+<script>
+    // Inicializar filtro en todas las columnas y ordenamiento
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Department'
+        });
+    });
+</script>
 @section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

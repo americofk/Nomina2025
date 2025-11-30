@@ -331,10 +331,20 @@
 <script src="~/js/audit-modal.js?@version"></script>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Position-views.js?@version"></script>
 <script src="~/js/Position.js" type="module"></script>
 <script src="~/js/PositionRequirent.js"></script>
 <script src="~/js/AppInputDate.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Position'
+        });
+    });
+</script>
 @section Scripts {
 
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

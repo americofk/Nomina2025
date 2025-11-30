@@ -184,6 +184,16 @@
 <script src="~/js/Employees/EmployeeTax.js" type="module"></script>
 <script src="~/js/AppInputDate.js"></script>
 <script src="~/js/Employees/EmployeeExtraHour.js" type="module"></script>
+<script src="~/js/table-features.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Employee'
+        });
+    });
+</script>
 @*<script src="~/js/Employees/ContactsEmployee.js"></script>*@
 @*<script src="~/js/Employee.js"></script>
     <script src="~/js/AddresEmployees.js"></script>*@

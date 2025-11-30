@@ -8,6 +8,7 @@
     var userRecId = ViewBag.UserRecId ?? 0;
     var dataAreaId = ViewBag.DataAreaId ?? "";
 }
+<link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
 <div class="contDasboard" id="auditlog-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
@@ -100,10 +101,10 @@
                             </td>
                             <td class="cell-app cell-header-app">Entidad</td>
                             <td class="cell-app cell-header-app">Campo</td>
-                            <td class="cell-app cell-header-app">Valor Anterior</td>
                             <td class="cell-app cell-header-app">Nuevo Valor</td>
-                            <td class="cell-app cell-header-app">Modificado Por</td>
+                            <td class="cell-app cell-header-app">Valor Anterior</td>
                             <td class="cell-app cell-header-app">Fecha Cambio</td>
+                            <td class="cell-app cell-header-app">Modificado Por</td>
                         </tr>
                     </thead>
                     <tbody class="tbody-Table-AuditLog">
@@ -113,31 +114,28 @@
                         @foreach (var item in Model)
                         {
                             var idCheck = $"checkAuditLog_{idCheckCont}";
-                            <tr class="row-app">
+                            <tr class="row-app" data-recid="@item.RecId">
                                 <td class="cell-app check-cell-app">
                                     <input id="@idCheck" type="checkbox" class="check-table-app selectAuditLog">
                                     <label for="@idCheck" class="label-cell"></label>
                                 </td>
-                                <td class="cell-app cell-principal AuditLogRecIdtbl collapse" data-title="RecId">
-                                    @item.RecId
-                                </td>
-                                <td class="cell-app EntityNametbl" data-title="Entidad">
+                                <td class="cell-app cell-principal EntityNametbl" data-title="Entidad">
                                     @item.EntityName
                                 </td>
                                 <td class="cell-app FieldNametbl" data-title="Campo">
                                     @item.FieldName
                                 </td>
-                                <td class="cell-app OldValuetbl" data-title="Valor Anterior">
-                                    @(item.OldValue?.Length > 30 ? item.OldValue.Substring(0, 30) + "..." : item.OldValue)
-                                </td>
                                 <td class="cell-app NewValuetbl" data-title="Nuevo Valor">
                                     @(item.NewValue?.Length > 30 ? item.NewValue.Substring(0, 30) + "..." : item.NewValue)
                                 </td>
-                                <td class="cell-app ChangedBytbl" data-title="Modificado Por">
-                                    @item.ChangedBy
+                                <td class="cell-app OldValuetbl" data-title="Valor Anterior">
+                                    @(item.OldValue?.Length > 30 ? item.OldValue.Substring(0, 30) + "..." : item.OldValue)
                                 </td>
                                 <td class="cell-app ChangedAttbl" data-title="Fecha Cambio">
                                     @item.ChangedAt.ToString("dd/MM/yyyy HH:mm:ss")
+                                </td>
+                                <td class="cell-app ChangedBytbl" data-title="Modificado Por">
+                                    @item.ChangedBy
                                 </td>
                             </tr>
                             idCheckCont++;
@@ -203,5 +201,15 @@
     <script src="~/js/AuditLog.js?@version"></script>
     <script src="~/js/grid-columns-manager.js?@version"></script>
     <script src="~/js/grid-views-manager.js?@version"></script>
+    <script src="~/js/table-features.js?@version"></script>
     <script src="~/js/AuditLog-views.js?@version"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initTableFeatures({
+                filterInput: '.textFilterMask',
+                table: '#MainTable',
+                tbody: '.tbody-Table-AuditLog'
+            });
+        });
+    </script>
 }

@@ -139,6 +139,16 @@
 
 </div>
 <script src="~/js/EarningCodeDisabled.js" type="module"></script>
+<script src="~/js/table-features.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-EarningCode-Disabled'
+        });
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

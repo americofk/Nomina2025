@@ -248,7 +248,17 @@
 <script src="~/js/audit-modal.js?@version"></script>
 <script src="~/js/grid-columns-manager.js?@version"></script>
 <script src="~/js/grid-views-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
 <script src="~/js/Tax-views.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-Tax'
+        });
+    });
+</script>
 @section Scripts {
     <script src="~/js/Tax.js" type="module"></script>
     <script src="~/js/AppInputDate.js"></script>
