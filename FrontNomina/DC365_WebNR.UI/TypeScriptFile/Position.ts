@@ -514,7 +514,7 @@ escuchadores: {
     // Habilitar doble clic en filas para editar
     enableRowDoubleClick(
         '.tbody-Table-Position',
-        '.PositionIdtblpos',
+        '.PositionIdtbl',
         '/puestosactivos/{id}',
         function (data: IPosition) {
             option = 2;
@@ -526,7 +526,7 @@ escuchadores: {
     );
 
     // Inicializar modal de auditoría
-    initAuditListPage('.selectPosition', '.PositionIdtblpos', '/puestosactivos/getbyid', 'Id');
+    initAuditListPage('.selectPosition', '.PositionIdtbl', '/puestosactivos/getbyid', 'Id');
 }
 
 export { }

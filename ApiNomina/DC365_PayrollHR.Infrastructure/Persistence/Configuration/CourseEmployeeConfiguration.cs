@@ -27,8 +27,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
             builder.HasKey(x => new { x.CourseId, x.EmployeeId });
 
             builder.Property(x => x.Comment)
-                .HasMaxLength(300)
-                .IsRequired();
+                .HasMaxLength(300);
 
             builder.HasOne<Course>()
                .WithMany()

@@ -315,7 +315,7 @@ escuchadores: {
     // Habilitar doble clic en filas para editar
     enableRowDoubleClick(
         '.tbody-Table-job',
-        '.JobIdtblpos',
+        '.JobIdtbl',
         '/cargosactivos/{id}',
         function (data: IJob) {
             option = 2;

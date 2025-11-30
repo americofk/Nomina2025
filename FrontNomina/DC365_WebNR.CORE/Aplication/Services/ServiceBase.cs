@@ -40,10 +40,18 @@ namespace DC365_WebNR.CORE.Aplication.Services
 
             if (response.StatusCode != HttpStatusCode.ServiceUnavailable)
             {
-                var d = response.Content.ReadAsStringAsync().Result;
-                var resulError = JsonConvert.DeserializeObject<Response<string>>(response.Content.ReadAsStringAsync().Result);
-                responseUI.Type = ErrorMsg.TypeError;
-                responseUI.Errors = resulError.Errors;
+                var content = response.Content.ReadAsStringAsync().Result;
+                try
+                {
+                    var resulError = JsonConvert.DeserializeObject<Response<string>>(content);
+                    responseUI.Type = ErrorMsg.TypeError;
+                    responseUI.Errors = resulError?.Errors ?? new List<string>() { content };
+                }
+                catch
+                {
+                    responseUI.Type = ErrorMsg.TypeError;
+                    responseUI.Errors = new List<string>() { content };
+                }
             }
             else
             {

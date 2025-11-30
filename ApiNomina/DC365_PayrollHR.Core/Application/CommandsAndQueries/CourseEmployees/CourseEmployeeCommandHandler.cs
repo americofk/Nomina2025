@@ -75,6 +75,19 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseEmployees
                 };
             }
 
+            var existingRecord = await _dbContext.CourseEmployees
+                .Where(x => x.CourseId == model.CourseId && x.EmployeeId == model.EmployeeId)
+                .FirstOrDefaultAsync();
+            if (existingRecord != null)
+            {
+                return new Response<object>(false)
+                {
+                    Succeeded = false,
+                    Errors = new List<string>() { "El empleado ya está asignado a este curso" },
+                    StatusHttp = 400
+                };
+            }
+
             var entity = BuildDtoHelper<CourseEmployee>.OnBuild(model, new CourseEmployee());
 
             _dbContext.CourseEmployees.Add(entity);

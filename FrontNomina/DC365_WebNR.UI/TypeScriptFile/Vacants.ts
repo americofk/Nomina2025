@@ -25,7 +25,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "IdPositionVacants");
                     input.attr("class", "IdPositionVacants");
-                    input.val($(this).parent().parent().find(".PositionIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".PositionIdtbl").html().trim());
                     $(".DeleteVacants").append(input);
 
                 }
@@ -95,7 +95,7 @@ escuchadores: {
                     let input = $(document.createElement('input'));
                     input.attr("name", "PositionidVacant");
                     input.attr("class", "PositionidVacant");
-                    input.val($(this).parent().parent().find(".PositionIdtblpos").html().trim());
+                    input.val($(this).parent().parent().find(".PositionIdtbl").html().trim());
                     $(".form-Diseblevacants").append(input);
                 }
 
@@ -254,7 +254,7 @@ escuchadores: {
         $(".selectPosition[type=checkbox]").each(function () {
             if ($(this).is(":checked")) {
                 contador++;
-                id = $(this).parent().parent().find(".PositionIdtblpos").html().trim();
+                id = $(this).parent().parent().find(".PositionIdtbl").html().trim();
 
             }
 
@@ -328,7 +328,7 @@ escuchadores: {
     // Habilitar doble clic en filas para editar
     enableRowDoubleClick(
         '.tbody-Table-Vacants',
-        '.PositionIdtblpos',
+        '.PositionIdtbl',
         '/vacantes/{id}',
         function (data: IPosition) {
             option = 2;
@@ -341,7 +341,7 @@ escuchadores: {
     );
 
     // Inicializar modal de auditoría
-    initAuditListPage('.selectPosition', '.PositionIdtblpos', '/vacantes/getbyid', 'Id');
+    initAuditListPage('.selectPosition', '.PositionIdtbl', '/vacantes/getbyid', 'Id');
 }
 
 funciones: {
@@ -378,7 +378,7 @@ funciones: {
         $(".selectPosition[type=checkbox]").each(function () {
             if ($(this).is(":checked")) {
                 contador++;
-                id = $(this).parent().parent().find(".PositionIdtblpos").html().trim();
+                id = $(this).parent().parent().find(".PositionIdtbl").html().trim();
 
             }
 

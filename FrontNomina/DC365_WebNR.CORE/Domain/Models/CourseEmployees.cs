@@ -34,7 +34,6 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// <summary>
         /// Valor de texto para Comment.
         /// </summary>
-        [Required(ErrorMessage = "Comentario" + ErrorMsg.Emptym)]
         public string Comment { get; set; }
         /// <summary>
         /// Identificador.
