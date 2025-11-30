@@ -81,50 +81,97 @@
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-template-rows: auto;
-        grid-gap: 20px;
+        grid-gap: 15px;
         padding-left: 0;
         padding-right: 0;
         padding-top: 0;
         padding-bottom: 20px;
-        /*font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;*/
     }
 
 .card-AppDashboard {
     align-items: center;
-    padding-top: 0px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #ccc;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: auto;
+    min-height: 80px;
 }
 
-    .card-AppDashboard > i {
-        padding-bottom: 10px;
-        font-size: 30px;
-    }
+.card-AppDashboard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    top: 0;
+}
+
+.card-AppDashboard > .text-section {
+    order: 1;
+    margin-left: 0;
+    flex: 1;
+}
+
+.card-AppDashboard > i {
+    order: 2;
+    font-size: 32px;
+    margin-left: 10px;
+    color: #aaa;
+}
 
 .card-qty {
-    font-size: 28px;
+    font-size: 26px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
 }
 
 .text-section-title {
     font-size: 13px;
+    color: #666;
+    font-weight: 500;
 }
 
+/* Colores de borde izquierdo */
 .card-yellow {
-    box-shadow: inset 0 0px 3px 3px #8290078f;
+    border-left-color: #c4a900;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.card-yellow > i {
+    color: #c4a900;
 }
 
 .card-green {
-    box-shadow: inset 0 0px 3px 3px #098e16;
+    border-left-color: #28a745;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.card-green > i {
+    color: #28a745;
 }
 
 .card-orange {
-    box-shadow: inset 0 0px 3px 3px #d86615d1;
+    border-left-color: #e67e22;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.card-orange > i {
+    color: #e67e22;
 }
 
 .card-blue {
-    box-shadow: inset 0 0px 3px 3px #22b4ea;
+    border-left-color: #3498db;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.card-blue > i {
+    color: #3498db;
 }
 
 .card-cyan {
-    box-shadow: inset 0 0px 3px 3px #07c3ba;
+    border-left-color: #17a2b8;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.card-cyan > i {
+    color: #17a2b8;
 }
 
 
