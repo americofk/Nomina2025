@@ -81,7 +81,7 @@ namespace DC365_WebNR.CORE.Aplication.ProcessHelper
                     Titulo = item1.MenuId.ToString();
 
                     menulit = menulit + "<div class='sub-menu'>";
-                    List<MenuApp> listChild = list.Where(x => x.MenuFather == item1.MenuId).ToList();
+                    List<MenuApp> listChild = list.Where(x => x.MenuFather == item1.MenuId).OrderBy(x => x.Sort).ToList();
                     foreach (var item2 in listChild)
                     {
                         menulit = menulit + string.Format("<a class='{0}' title='{2}'><i class='{1}'></i>{2}</a>", item2.Action, item2.Icon, item2.MenuName);

@@ -67,6 +67,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
             {
                 response = await _dbContext.MenusApp
                     .Where(x => x.IsViewMenu == true)
+                    .OrderBy(x => x.Sort)
                     .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                     .Take(validFilter.PageSize)
                     .ToListAsync();
@@ -86,8 +87,10 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
                         Description = x.Menu.Description,
                         Action = x.Menu.Action,
                         Icon = x.Menu.Icon,
-                        MenuName = x.Menu.MenuName
+                        MenuName = x.Menu.MenuName,
+                        Sort = x.Menu.Sort
                     })
+                    .OrderBy(x => x.Sort)
                     .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                     .Take(validFilter.PageSize)
                     .ToListAsync();
