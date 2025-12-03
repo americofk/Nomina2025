@@ -9,8 +9,8 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum PayrollAction
     {
-        Deduccion = 0,
-        Aporte = 1,
-        Ambos = 2
+        Deduction = 0,
+        Contribution = 1,
+        Both = 2
     }
 }

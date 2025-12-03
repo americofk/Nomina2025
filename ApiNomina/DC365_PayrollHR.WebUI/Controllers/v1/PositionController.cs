@@ -28,7 +28,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/positions")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     public class PositionController : ControllerBase
     {
         private readonly IQueryHandler<Position> _QueryHandler;

@@ -20,7 +20,7 @@
     <div class="menuoptions-flex">
         <ul class="menuoptions">
             @{
-                if (Model.PayrollProcessStatus != PayrollProcessStatus.Pagado && Model.PayrollProcessStatus != PayrollProcessStatus.Cerrado && Model.PayrollProcessStatus != PayrollProcessStatus.Cancelado)
+                if (Model.PayrollProcessStatus != PayrollProcessStatus.Paid && Model.PayrollProcessStatus != PayrollProcessStatus.Closed && Model.PayrollProcessStatus != PayrollProcessStatus.Canceled)
                 {
                     <li class="btnSaveAndClose">
                         <a class="btn2 btn-app">
@@ -40,7 +40,7 @@
             @{
                 if (!string.IsNullOrEmpty(Model.PayrollProcessId))
                 {
-                    if (Model.PayrollProcessStatus != PayrollProcessStatus.Pagado && Model.PayrollProcessStatus != PayrollProcessStatus.Cerrado && Model.PayrollProcessStatus != PayrollProcessStatus.Cancelado)
+                    if (Model.PayrollProcessStatus != PayrollProcessStatus.Paid && Model.PayrollProcessStatus != PayrollProcessStatus.Closed && Model.PayrollProcessStatus != PayrollProcessStatus.Canceled)
                     {
                         <li class="li-separador">
                             <a class="btn2 btn-app" style="border: 1px solid #fff;">

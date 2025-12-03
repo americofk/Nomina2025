@@ -57,7 +57,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CompanyAssignedToU
             IQueryable<CompaniesAssignedToUser> tmpResponse;
             IQueryable<Company> tmpResponseCmpy;
 
-            if (user.ElevationType == Domain.Enums.AdminType.AdministradorLocal)
+            if (user.ElevationType == Domain.Enums.AdminType.LocalAdmin)
             {
                 tmpResponseCmpy = _dbContext.Companies
                                             .AsQueryable();

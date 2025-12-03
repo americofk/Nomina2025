@@ -229,7 +229,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
                 Name = "Administrador del Sistema",
                 Email = "admin@rh365.com",
                 Password = SecurityHelper.MD5("12345678"),
-                ElevationType = Core.Domain.Enums.AdminType.AdministradorLocal,
+                ElevationType = Core.Domain.Enums.AdminType.LocalAdmin,
                 CompanyDefaultId = "DAT",
                 FormatCodeId = "es-DO",
                 TemporaryPassword = "",

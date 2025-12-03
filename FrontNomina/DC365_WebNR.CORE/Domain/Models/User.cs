@@ -34,12 +34,12 @@ namespace DC365_WebNR.CORE.Domain.Models
 
         public AdminType ElevationType {
             get {
-                return ElevationTypeBool ? AdminType.AdministradorLocal : AdminType.Usuario;
+                return ElevationTypeBool ? AdminType.LocalAdmin : AdminType.User;
             }
 
             set
             {
-                ElevationTypeBool = (value == AdminType.AdministradorLocal);
+                ElevationTypeBool = (value == AdminType.LocalAdmin);
             }
         }
 

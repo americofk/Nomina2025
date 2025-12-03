@@ -24,7 +24,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/users/options")]
     [Authorize]
     [ApiController]
-    //[AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    //[AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     /// <summary>
     /// Controlador para gestion de UserCompany.
     /// </summary>

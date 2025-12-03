@@ -31,7 +31,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/employeeaddress")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class EmployeeAddressController : ControllerBase
     {

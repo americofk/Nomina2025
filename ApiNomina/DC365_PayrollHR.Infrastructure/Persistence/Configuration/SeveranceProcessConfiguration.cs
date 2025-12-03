@@ -60,7 +60,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
                 .HasDefaultValue(0);
 
             builder.Property(x => x.SeveranceProcessStatus)
-                .HasDefaultValue(Core.Domain.Enums.SeveranceProcessStatus.Creado);
+                .HasDefaultValue(Core.Domain.Enums.SeveranceProcessStatus.Created);
 
             // Ignorar la propiedad Details - no es una columna de BD
             builder.Ignore(x => x.Details);

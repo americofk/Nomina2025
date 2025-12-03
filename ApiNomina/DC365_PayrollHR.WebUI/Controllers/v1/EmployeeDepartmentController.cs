@@ -28,7 +28,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/employeedepartments")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     public class EmployeeDepartmentController : ControllerBase
     {
         private readonly IQueryHandler<EmployeeDepartmentResponse> _QueryHandler;

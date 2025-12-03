@@ -9,12 +9,12 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum PayrollProcessStatus
     {
-        Creado = 0,
-        Procesado = 1,
-        Calculado = 2,
-        Pagado = 3,
-        Cerrado = 4,
-        Cancelado = 5
+        Created = 0,
+        Processed = 1,
+        Calculated = 2,
+        Paid = 3,
+        Closed = 4,
+        Canceled = 5
 
     }
 }

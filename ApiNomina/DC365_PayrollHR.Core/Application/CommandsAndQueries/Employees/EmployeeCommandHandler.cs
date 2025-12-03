@@ -406,7 +406,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
         public async Task<Response<object>> AddEmployeetoJob(EmployeePositionRequest model)
         {
             var employee = await _dbContext.Employees.Where(x => x.EmployeeId == model.EmployeeId
-                                                            && x.WorkStatus != WorkStatus.Empleado).FirstOrDefaultAsync();
+                                                            && x.WorkStatus != WorkStatus.Employ).FirstOrDefaultAsync();
 
             if (employee == null)
             {
@@ -424,7 +424,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
                 return response;
 
             var entity = employee;
-            entity.WorkStatus = WorkStatus.Empleado;
+            entity.WorkStatus = WorkStatus.Employ;
             entity.StartWorkDate = model.FromDate;
             entity.EndWorkDate = model.ToDate;
 
@@ -458,7 +458,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
         public async Task<Response<object>> DismissEmployee(EmployeeRequestDismiss model)
         {
             var employee = await _dbContext.Employees.Where(x => x.EmployeeId == model.EmployeeId
-                                                            && x.WorkStatus != WorkStatus.Desvinculado).FirstOrDefaultAsync();
+                                                            && x.WorkStatus != WorkStatus.Dismissed).FirstOrDefaultAsync();
 
             if (employee == null)
             {
@@ -487,7 +487,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Employees
             }
 
             var entity = employee;
-            entity.WorkStatus = WorkStatus.Desvinculado;
+            entity.WorkStatus = WorkStatus.Dismissed;
             entity.EndWorkDate = model.ToDate;
             entity.EmployeeAction = model.EmployeeAction;
 

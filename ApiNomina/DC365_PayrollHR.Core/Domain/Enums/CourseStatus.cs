@@ -9,8 +9,8 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum CourseStatus
     {
-        Creado = 0,
-        EnProceso = 1,
-        Cerrado = 2
+        Created = 0,
+        InProcess = 1,
+        Closed = 2
     }
 }

@@ -210,10 +210,10 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
                     ppa => ppa.PayrollProcessId,
                     pp => pp.PayrollProcessId,
                     (ppa, pp) => new { Ppa = ppa, Pp = pp })
-                .Where(x => (x.Ppa.PayrollActionType == Domain.Enums.PayrollActionType.Deduccion 
-                        || x.Ppa.PayrollActionType == Domain.Enums.PayrollActionType.Aporte)
+                .Where(x => (x.Ppa.PayrollActionType == Domain.Enums.PayrollActionType.Deduction 
+                        || x.Ppa.PayrollActionType == Domain.Enums.PayrollActionType.Contribution)
                         && x.Pp.PeriodEndDate.Year == year
-                        && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                        && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
                         && x.Pp.PayrollId == payrollid)
                 .GroupBy(x => new { x.Pp.PeriodEndDate.Month, x.Ppa.PayrollActionType })
                 .Select(x => new
@@ -227,12 +227,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
             {
                 key.Add(months[item.Key]);
 
-                var a = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Aporte)
+                var a = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Contribution)
                     .FirstOrDefault();
 
                 Ctbutionvalue.Add(a == null?0:a.Amount);
 
-                var b = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Deduccion)
+                var b = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Deduction)
                     .FirstOrDefault();
 
                 Dtbutionvalue.Add(b == null ? 0 : b.Amount);
@@ -266,7 +266,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
                     ppa => ppa.PayrollProcessId,
                     pp => pp.PayrollProcessId,
                     (ppa, pp) => new { Ppa = ppa, Pp = pp })
-                .Where( x=> x.Pp.PeriodEndDate.Year == year && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                .Where( x=> x.Pp.PeriodEndDate.Year == year && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
                         && x.Pp.PayrollId == payrollid)
                 .GroupBy(x => x.Ppa.ActionName)
                 .Select(x => new
@@ -314,9 +314,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
                     ppa => ppa.PayrollProcessId,
                     pp => pp.PayrollProcessId,
                     (ppa, pp) => new { Ppa = ppa, Pp = pp })
-                .Where(x => x.Ppa.PayrollActionType != Domain.Enums.PayrollActionType.Aporte
+                .Where(x => x.Ppa.PayrollActionType != Domain.Enums.PayrollActionType.Contribution
                        && x.Pp.PeriodEndDate.Year == year
-                       && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                       && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
                        && x.Pp.PayrollId == payrollid)
                 .GroupBy(x => new { x.Pp.PeriodEndDate.Month, x.Ppa.PayrollActionType })
                 .Select(x => new
@@ -338,12 +338,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
                 {
                     if(count == 1)
                     {
-                        var plus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Ingreso)                                        
+                        var plus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Earning)                                        
                                         .FirstOrDefault();
 
                         total += plus == null ? 0 : plus.Amount;
 
-                        var minus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType != PayrollActionType.Ingreso)
+                        var minus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType != PayrollActionType.Earning)
                                         .GroupBy(x => x.Month)
                                         .Select(x => new
                                         {
@@ -358,11 +358,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
 
                     if (count == 2)
                     {
-                        var plus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Ingreso)
+                        var plus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Earning)
                                         .FirstOrDefault();
                         total += plus == null ? 0 : plus.Amount;
 
-                        var minus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType != PayrollActionType.Ingreso)
+                        var minus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType != PayrollActionType.Earning)
                                         .GroupBy(x => x.Month)
                                         .Select(x => new
                                         {
@@ -377,11 +377,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.DashboardInfo
 
                     if (count == 3)
                     {
-                        var plus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Ingreso)
+                        var plus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType == PayrollActionType.Earning)
                                         .FirstOrDefault();
                         total += plus == null ? 0 : plus.Amount;
 
-                        var minus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType != PayrollActionType.Ingreso)
+                        var minus = graphicsData.Where(x => x.Month == item.Key && x.PayrollActionType != PayrollActionType.Earning)
                                             .GroupBy(x => x.Month)
                                             .Select(x => new
                                             {

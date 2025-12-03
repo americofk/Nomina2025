@@ -9,10 +9,10 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum DocumentType
     {
-        Cedula = 0,
-        Pasaporte = 1,
-        NSS = 2,
-        CarnetMigratorio = 3,
-        InteriorYPolicia = 4
+        IdentificationCard = 0,
+        Passport = 1,
+        SocialSecurityNumber = 2,
+        MigrationCard = 3,
+        InteriorAndPolice = 4
     }
 }

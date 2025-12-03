@@ -149,8 +149,8 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
             //Validar regalía
             if(response.IsRoyaltyPayroll != model.IsRoyaltyPayroll)
             {
-                var payrollprocess = await dbContext.PayrollsProcess.Where(x => x.PayrollId == id && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado
-                                                                            && x.PayrollProcessStatus != PayrollProcessStatus.Creado)
+                var payrollprocess = await dbContext.PayrollsProcess.Where(x => x.PayrollId == id && x.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                                                                            && x.PayrollProcessStatus != PayrollProcessStatus.Created)
                                                                     .FirstOrDefaultAsync();
 
                 if (payrollprocess != null)                
@@ -162,8 +162,8 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.Payrolls
             //Validar si es por hora
             if(response.IsForHourPayroll != model.IsForHourPayroll)
             {
-                var payrollprocess = await dbContext.PayrollsProcess.Where(x => x.PayrollId == id && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado
-                                                                            && x.PayrollProcessStatus != PayrollProcessStatus.Creado)
+                var payrollprocess = await dbContext.PayrollsProcess.Where(x => x.PayrollId == id && x.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                                                                            && x.PayrollProcessStatus != PayrollProcessStatus.Created)
                                                                     .FirstOrDefaultAsync();
 
                 if (payrollprocess != null)                

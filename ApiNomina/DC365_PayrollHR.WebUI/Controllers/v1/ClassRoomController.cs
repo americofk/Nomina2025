@@ -30,7 +30,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     /// </summary>
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     public class ClassRoomController : ControllerBase
     {
         private readonly IQueryHandler<ClassRoom> _QueryHandler;

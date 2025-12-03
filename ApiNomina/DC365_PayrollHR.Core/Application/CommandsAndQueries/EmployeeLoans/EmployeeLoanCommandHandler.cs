@@ -109,7 +109,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
                                                                 (pp, pa) => new { Pp = pp, Pa = pa })
                                                             .Where(x => (response.ValidFrom <= x.Pp.PeriodEndDate || response.ValidTo >= x.Pp.PeriodEndDate)
                                                                 && x.Pp.PayrollId == response.PayrollId
-                                                                && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                                                                && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
                                                                 && x.Pa.ActionId == response.LoanId
                                                                 && x.Pa.EmployeeId == parentid).FirstOrDefaultAsync();
 
@@ -177,7 +177,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
 
             //var payrollprocess = await _dbContext.PayrollsProcess.Where(x => (response.ValidFrom <= x.PeriodEndDate || response.ValidTo >= x.PeriodEndDate)
             //                                                                         && x.PayrollId == response.PayrollId 
-            //                                                                         && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado).FirstOrDefaultAsync();
+            //                                                                         && x.PayrollProcessStatus != PayrollProcessStatus.Canceled).FirstOrDefaultAsync();
             
             var payrollprocess = await _dbContext.PayrollsProcess
                                                     .Join(_dbContext.PayrollProcessActions,
@@ -186,7 +186,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeLoans
                                                         (pp, pa) => new { Pp = pp, Pa = pa })
                                                     .Where(x => (response.ValidFrom <= x.Pp.PeriodEndDate || response.ValidTo >= x.Pp.PeriodEndDate)
                                                         && x.Pp.PayrollId == response.PayrollId
-                                                        && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                                                        && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
                                                         && x.Pa.ActionId == response.LoanId
                                                         && x.Pa.EmployeeId == model.EmployeeId).FirstOrDefaultAsync();
             string message = string.Empty;

@@ -63,7 +63,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
 
             List<MenuApp> response;
 
-            if (adminType == AdminType.AdministradorLocal)
+            if (adminType == AdminType.LocalAdmin)
             {
                 response = await _dbContext.MenusApp
                     .Where(x => x.IsViewMenu == true)
@@ -127,7 +127,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.MenusApp
 
             List<MenuApp> response;
 
-            if (adminType == AdminType.AdministradorLocal)
+            if (adminType == AdminType.LocalAdmin)
             {
                 response = await _dbContext.MenusApp.Where(x => !string.IsNullOrEmpty(x.MenuFather))
                     .ToListAsync();

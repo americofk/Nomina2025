@@ -84,8 +84,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             }
 
             var payrollprocess = await _dbContext.PayrollsProcess.Where(x => x.PayrollId == model.PayrollId
-                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Pagado
-                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Paid
+                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Canceled
                                                                         ).FirstOrDefaultAsync();
 
             if (payrollprocess != null)
@@ -100,7 +100,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             var paycycle = await _dbContext.PayCycles.OrderBy(x => x.PayCycleId)
                                                      .Where(x => x.PayrollId == model.PayrollId
-                                                            && x.StatusPeriod == StatusPeriod.Abierto)
+                                                            && x.StatusPeriod == StatusPeriod.Open)
                                                      .FirstOrDefaultAsync();
 
             if (paycycle == null)
@@ -157,8 +157,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 foreach (var item in ids)
                 {
                     var response = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == item
-                                                                          && (x.PayrollProcessStatus == PayrollProcessStatus.Creado
-                                                                          || x.PayrollProcessStatus == PayrollProcessStatus.Cancelado))
+                                                                          && (x.PayrollProcessStatus == PayrollProcessStatus.Created
+                                                                          || x.PayrollProcessStatus == PayrollProcessStatus.Canceled))
                                                                    .FirstOrDefaultAsync();
 
                     if (response == null)
@@ -201,7 +201,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         public async Task<Response<object>> Update(string id, PayrollProcessRequest model)
         {
             var response = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == id
-                                                                  && x.PayrollProcessStatus == PayrollProcessStatus.Creado).FirstOrDefaultAsync();
+                                                                  && x.PayrollProcessStatus == PayrollProcessStatus.Created).FirstOrDefaultAsync();
 
             if (response == null)
             {
@@ -214,9 +214,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             }
 
             var payrollprocess = await _dbContext.PayrollsProcess.Where(x => x.PayrollId == model.PayrollId
-                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Cerrado
-                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Pagado
-                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Closed
+                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Paid
+                                                                        && x.PayrollProcessStatus != PayrollProcessStatus.Canceled
                                                                         && x.PayrollProcessId != id).FirstOrDefaultAsync();
 
             if (payrollprocess != null)
@@ -231,7 +231,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             var paycycle = await _dbContext.PayCycles.OrderBy(x => x.PayCycleId)
                                                      .Where(x => x.PayrollId == model.PayrollId
-                                                            && x.StatusPeriod == StatusPeriod.Abierto)
+                                                            && x.StatusPeriod == StatusPeriod.Open)
                                                      .FirstOrDefaultAsync();
 
             if (paycycle == null)
@@ -302,7 +302,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 employees = await _dbContext.Employees
                         .Where(x => x.EndWorkDate > payrollprocess.PeriodEndDate
                                 && x.StartWorkDate <= payrollprocess.PeriodStartDate
-                                && x.WorkStatus == WorkStatus.Empleado)
+                                && x.WorkStatus == WorkStatus.Employ)
                         .GroupBy(x => new { x.EmployeeId, x.PayMethod, x.Name, x.LastName })
                         .Select(x => new EmpPayrollProcessHelper
                         {
@@ -322,7 +322,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                             .Where(x => x.E.EndWorkDate > payrollprocess.PeriodEndDate
                                     && x.E.StartWorkDate <= payrollprocess.PeriodStartDate //Modificación para no buscar empleados que no están contratados
                                     && x.Ec.PayrollId == payrollid
-                                    && x.E.WorkStatus == WorkStatus.Empleado && x.E.EmployeeStatus == true)
+                                    && x.E.WorkStatus == WorkStatus.Employ && x.E.EmployeeStatus == true)
                             .GroupBy(x => new { x.E.EmployeeId, x.E.PayMethod, x.E.Name, x.E.LastName, x.E.StartWorkDate })
                             .Select(x => new EmpPayrollProcessHelper
                             {
@@ -385,7 +385,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                         PayMethod = item.PayMethod,
                         DepartmentId = department == null ? "N/A" : department.DepartmentId,
                         DepartmentName = department == null ? "N/A" : department.DepartmentName,
-                        PayrollProcessStatus = PayrollProcessStatus.Procesado,
+                        PayrollProcessStatus = PayrollProcessStatus.Processed,
                         StartWorkDate = item.StartWorkDate
                     });
                 }
@@ -408,7 +408,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 await _dbContext.SaveChangesAsync();
 
                 //Actualizar el status del proceso de nómina
-                payrollprocess.PayrollProcessStatus = PayrollProcessStatus.Procesado;
+                payrollprocess.PayrollProcessStatus = PayrollProcessStatus.Processed;
                 payrollprocess.EmployeeQuantity = payrollProcessDetails.Count();
                 payrollprocess.EmployeeQuantityForPay = payrollProcessDetails.Count();
                 _dbContext.PayrollsProcess.Update(payrollprocess);
@@ -553,7 +553,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 await _dbContext.SaveChangesAsync();
 
                 //Actualizar el status del proceso de nómina, si fue usado para el calculo de impuesto y el monto a pagar
-                payrollprocess.PayrollProcessStatus = PayrollProcessStatus.Calculado;
+                payrollprocess.PayrollProcessStatus = PayrollProcessStatus.Calculated;
                 payrollprocess.UsedForTax = payrollprocess.IsPayCycleTax;
                 payrollprocess.UsedForTss = payrollprocess.IsPayCycleTss;
                 payrollprocess.TotalAmountToPay = updateprocessdetail.Sum(x => x.TotalAmount);
@@ -600,7 +600,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         public async Task<Response<object>> PayPayroll(string payrollprocessid)
         {
             var response = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == payrollprocessid
-                                                       && x.PayrollProcessStatus == PayrollProcessStatus.Calculado).FirstOrDefaultAsync();
+                                                       && x.PayrollProcessStatus == PayrollProcessStatus.Calculated).FirstOrDefaultAsync();
 
             if (response == null)
             {
@@ -633,7 +633,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             //Se llena la entidad con los campos a actualizar
             var entity = response;
-            entity.PayrollProcessStatus = PayrollProcessStatus.Pagado;
+            entity.PayrollProcessStatus = PayrollProcessStatus.Paid;
 
             await _dbContext.SaveChangesAsync();
 
@@ -641,7 +641,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var paycycle = await _dbContext.PayCycles.OrderBy(x => x.PayCycleId)
                                                      .Where(x => x.PayrollId == response.PayrollId
                                                             && x.PayCycleId == response.PayCycleId
-                                                            && x.StatusPeriod == StatusPeriod.Abierto)
+                                                            && x.StatusPeriod == StatusPeriod.Open)
                                                      .FirstOrDefaultAsync();
 
             if (paycycle == null)
@@ -655,7 +655,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             }
 
             var cycle = paycycle;
-            cycle.StatusPeriod = StatusPeriod.Pagado;
+            cycle.StatusPeriod = StatusPeriod.Paid;
             cycle.PayDate = response.PaymentDate;
             cycle.AmountPaidPerPeriod = response.TotalAmountToPay;
 
@@ -679,7 +679,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                                                                     && x.PayrollId == response.PayrollId
                                                                     //&& x.WorkedDay <= response.PeriodEndDate
                                                                     && x.CalcPayrollDate <= response.PeriodEndDate
-                                                                    && x.StatusExtraHour == StatusExtraHour.Abierto)
+                                                                    && x.StatusExtraHour == StatusExtraHour.Open)
                                                             .ToListAsync();
                 foreach (var hour in a)
                 {
@@ -761,8 +761,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         public async Task<Response<object>> CancelPayroll(string payrollprocessid)
         {
             var response = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == payrollprocessid
-                                                       && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado
-                                                       && x.PayrollProcessStatus != PayrollProcessStatus.Pagado).FirstOrDefaultAsync();
+                                                       && x.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                                                       && x.PayrollProcessStatus != PayrollProcessStatus.Paid).FirstOrDefaultAsync();
 
             if (response == null)
             {
@@ -776,7 +776,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             //Se llena la entidad con los campos a actualizar
             var entity = response;
-            entity.PayrollProcessStatus = PayrollProcessStatus.Cancelado;
+            entity.PayrollProcessStatus = PayrollProcessStatus.Canceled;
 
             await _dbContext.SaveChangesAsync();
 
@@ -801,9 +801,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 .Where(x => x.Ppa.EmployeeId == employeeid
                        && x.Pp.PeriodStartDate >= startperioddate && x.Pp.PeriodEndDate <= endperioddate
                        && x.Pp.IsRoyaltyPayroll == false
-                       && x.Ppa.PayrollActionType == PayrollActionType.Ingreso
+                       && x.Ppa.PayrollActionType == PayrollActionType.Earning
                        && x.Ppa.ApplyRoyaltyPayroll == true
-                       && (x.Pp.PayrollProcessStatus == PayrollProcessStatus.Pagado || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Cerrado))
+                       && (x.Pp.PayrollProcessStatus == PayrollProcessStatus.Paid || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Closed))
                 .Select(x => new
                 {
                     ActionName = x.Ppa.ActionName,
@@ -818,7 +818,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                 localPayrollProcessActions.Add(new PayrollProcessAction()
                 {
-                    PayrollActionType = PayrollActionType.Ingreso,
+                    PayrollActionType = PayrollActionType.Earning,
                     EmployeeId = employeeid,
                     PayrollProcessId = payrollprocessid,
                     InternalId = cont,
@@ -880,7 +880,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                     localPayrollProcessActions.Add(new PayrollProcessAction()
                     {
-                        PayrollActionType = PayrollActionType.Ingreso,
+                        PayrollActionType = PayrollActionType.Earning,
                         EmployeeId = employeeid,
                         PayrollProcessId = payrollprocessid,
                         InternalId = cont,
@@ -941,7 +941,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                     localPayrollProcessActions.Add(new PayrollProcessAction()
                     {
-                        PayrollActionType = PayrollActionType.Prestamo,
+                        PayrollActionType = PayrollActionType.Loan,
                         EmployeeId = employeeid,
                         PayrollProcessId = payrollprocessid,
                         InternalId = cont,
@@ -1010,17 +1010,17 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                     decimal deductionamountWithTax = 0;
                     decimal contributionamount = 0;
 
-                    if (item.PayrollAction == PayrollAction.Deduccion || item.PayrollAction == PayrollAction.Ambos)
+                    if (item.PayrollAction == PayrollAction.Deduction || item.PayrollAction == PayrollAction.Both)
                     {
                         //Porcentaje
-                        if (item.DeductionType == IndexBase.PorcentajeIngreso)
+                        if (item.DeductionType == IndexBase.EarningPercent)
                         {
                             deductionamount = EarningTssAmount * (item.DeductionAmount / 100);
                             deductionamountWithTax = EarningTssAndTaxAmount * (item.DeductionAmount / 100);
                         }
 
                         //Monto fijo
-                        if (item.DeductionType == IndexBase.MontoFijo)
+                        if (item.DeductionType == IndexBase.FixedAmount)
                         {
                             if (item.EmployeeDeductionAmount > 0)
                             {
@@ -1036,16 +1036,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                     }
 
 
-                    if (item.PayrollAction == PayrollAction.Aporte || item.PayrollAction == PayrollAction.Ambos)
+                    if (item.PayrollAction == PayrollAction.Contribution || item.PayrollAction == PayrollAction.Both)
                     {
                         //Porcentaje
-                        if (item.ContributionType == IndexBase.PorcentajeIngreso)
+                        if (item.ContributionType == IndexBase.EarningPercent)
                         {
                             contributionamount = EarningTssAmount * (item.ContributionAmount / 100);
                         }
 
                         //Monto fijo
-                        if (item.ContributionType == IndexBase.MontoFijo)
+                        if (item.ContributionType == IndexBase.FixedAmount)
                         {
                             contributionamount = item.ContributionAmount;
                         }
@@ -1067,7 +1067,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                         localPayrollProcessActions.Add(new PayrollProcessAction()
                         {
-                            PayrollActionType = PayrollActionType.Deduccion,
+                            PayrollActionType = PayrollActionType.Deduction,
                             EmployeeId = employeeid,
                             PayrollProcessId = payrollprocessid,
                             InternalId = cont,
@@ -1096,7 +1096,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                         localPayrollProcessActions.Add(new PayrollProcessAction()
                         {
-                            PayrollActionType = PayrollActionType.Aporte,
+                            PayrollActionType = PayrollActionType.Contribution,
                             EmployeeId = employeeid,
                             PayrollProcessId = payrollprocessid,
                             InternalId = cont,
@@ -1215,10 +1215,10 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 decimal deductionformonth = 0;
                 decimal contributionformonth = 0;
 
-                if (item.PayrollAction == PayrollAction.Deduccion || item.PayrollAction == PayrollAction.Ambos)
+                if (item.PayrollAction == PayrollAction.Deduction || item.PayrollAction == PayrollAction.Both)
                 {
                     //Porcentaje
-                    if (item.DeductionType == IndexBase.PorcentajeIngreso)
+                    if (item.DeductionType == IndexBase.EarningPercent)
                     {
                         deductionamount = totalEarningTssAmount * (item.DeductionAmount / 100);
                         deductionamountWithTax = totalEarningTssAndTaxAmount * (item.DeductionAmount / 100);
@@ -1227,7 +1227,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                     }
 
                     //Monto fijo
-                    if (item.DeductionType == IndexBase.MontoFijo)
+                    if (item.DeductionType == IndexBase.FixedAmount)
                     {
                         if (item.EmployeeDeductionAmount > 0)
                         {
@@ -1243,10 +1243,10 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 }
 
 
-                if (item.PayrollAction == PayrollAction.Aporte || item.PayrollAction == PayrollAction.Ambos)
+                if (item.PayrollAction == PayrollAction.Contribution || item.PayrollAction == PayrollAction.Both)
                 {
                     //Porcentaje
-                    if (item.ContributionType == IndexBase.PorcentajeIngreso)
+                    if (item.ContributionType == IndexBase.EarningPercent)
                     {
                         contributionamount = totalEarningTssAmount * (item.ContributionAmount / 100);
                         contributionformonth = anyPrevAmount ? contributionamount : localSalaryAmount * (item.ContributionAmount / 100); ;
@@ -1254,7 +1254,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                     }
 
                     //Monto fijo
-                    if (item.ContributionType == IndexBase.MontoFijo)
+                    if (item.ContributionType == IndexBase.FixedAmount)
                     {
                         contributionamount = item.ContributionAmount;
                     }
@@ -1282,7 +1282,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                     localPayrollProcessActions.Add(new PayrollProcessAction()
                     {
-                        PayrollActionType = PayrollActionType.Deduccion,
+                        PayrollActionType = PayrollActionType.Deduction,
                         EmployeeId = employeeid,
                         PayrollProcessId = payrollprocessid,
                         InternalId = cont,
@@ -1318,7 +1318,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                     localPayrollProcessActions.Add(new PayrollProcessAction()
                     {
-                        PayrollActionType = PayrollActionType.Aporte,
+                        PayrollActionType = PayrollActionType.Contribution,
                         EmployeeId = employeeid,
                         PayrollProcessId = payrollprocessid,
                         InternalId = cont,
@@ -1403,7 +1403,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                     localPayrollProcessActions.Add(new PayrollProcessAction()
                     {
-                        PayrollActionType = PayrollActionType.Impuesto,
+                        PayrollActionType = PayrollActionType.Tax,
                         EmployeeId = employeeid,
                         PayrollProcessId = payrollprocessid,
                         InternalId = cont,
@@ -1437,7 +1437,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                        && x.Eeh.PayrollId == payrollid
                        //&& x.Eeh.WorkedDay <= endperioddate
                        && x.Eeh.CalcPayrollDate <= endperioddate //Cambio para usar la fecha de uso para cálculo de horas extras
-                       && x.Eeh.StatusExtraHour == StatusExtraHour.Abierto)
+                       && x.Eeh.StatusExtraHour == StatusExtraHour.Open)
                 .GroupBy(x => new { x.Eeh.EarningCodeId, x.Ec.IsISR, x.Ec.IsTSS, x.Ec.Name, x.Ec.IsRoyaltyPayroll })
                 .Select(x => new
                 {
@@ -1456,7 +1456,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
                 localPayrollProcessActions.Add(new PayrollProcessAction()
                 {
-                    PayrollActionType = PayrollActionType.HorasExtras,
+                    PayrollActionType = PayrollActionType.ExtraHours,
                     EmployeeId = employeeid,
                     PayrollProcessId = payrollprocessid,
                     InternalId = cont,
@@ -1622,31 +1622,31 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             switch (_PayFrecuency)
             {
-                case PayFrecuency.Diario:
+                case PayFrecuency.Diary:
                     newamount = amount / 30;
                     break;
-                case PayFrecuency.Semanal:
+                case PayFrecuency.Weekly:
                     newamount = amount / 4;
                     break;
-                case PayFrecuency.Bisemanal:
+                case PayFrecuency.TwoWeekly:
                     newamount = amount / 2;
                     break;
-                case PayFrecuency.Quincenal:
+                case PayFrecuency.BiWeekly:
                     newamount = amount / 2;
                     break;
-                case PayFrecuency.Mensual:
+                case PayFrecuency.Monthly:
                     newamount = 1;
                     break;
-                case PayFrecuency.Trimestral:
+                case PayFrecuency.ThreeMonth:
                     newamount = amount * 3;
                     break;
-                case PayFrecuency.Cuatrimestral:
+                case PayFrecuency.FourMonth:
                     newamount = amount * 4;
                     break;
-                case PayFrecuency.Semestral:
+                case PayFrecuency.Biannual:
                     newamount = amount * 6;
                     break;
-                case PayFrecuency.Anual:
+                case PayFrecuency.Yearly:
                     newamount = amount * 12;
                     break;
             }
@@ -1665,7 +1665,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                                                 .Where(x => x.EmployeeId == employeeid
                                                        && x.CalendarDate >= startperioddate
                                                        && x.CalendarDate <= endperioddate
-                                                       && x.StatusWorkControl == StatusWorkControl.Pendiente)
+                                                       && x.StatusWorkControl == StatusWorkControl.Pendint)
                                                 .ToListAsync();
 
             decimal totalhours = workcontrol.Sum(x => x.TotalHour);
@@ -1714,7 +1714,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             foreach (var item in workcontrol)
             {
                 var entity = item;
-                entity.StatusWorkControl = StatusWorkControl.EnProceso;
+                entity.StatusWorkControl = StatusWorkControl.InProcess;
                 entity.PayrollProcessId = payrollprocessid;
                 employeeWorks.Add(entity);
             }
@@ -1747,7 +1747,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 var workcontrol = await _dbContext.EmployeeWorkControlCalendars
                                                     .Where(x => x.CalendarDate >= startperioddate
                                                            && x.CalendarDate <= endperioddate
-                                                           && x.StatusWorkControl == StatusWorkControl.EnProceso
+                                                           && x.StatusWorkControl == StatusWorkControl.InProcess
                                                            && x.PayrollProcessId == payrollprocessid)
                                                     .ToListAsync();
 
@@ -1756,7 +1756,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 foreach (var item in workcontrol)
                 {
                     var entity = item;
-                    entity.StatusWorkControl = StatusWorkControl.Pendiente;
+                    entity.StatusWorkControl = StatusWorkControl.Pendint;
                     entity.PayrollProcessId = "";
                     employeeWorks.Add(entity);
                 }
@@ -1787,7 +1787,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         private async Task<bool> UpdateWorkControlToPaid(string payrollprocessid)
         {
             var workcontrol = await _dbContext.EmployeeWorkControlCalendars
-                                                .Where(x => x.StatusWorkControl == StatusWorkControl.EnProceso
+                                                .Where(x => x.StatusWorkControl == StatusWorkControl.InProcess
                                                        && x.PayrollProcessId == payrollprocessid)
                                                 .ToListAsync();
 
@@ -1796,7 +1796,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             foreach (var item in workcontrol)
             {
                 var entity = item;
-                entity.StatusWorkControl = StatusWorkControl.Pagado;
+                entity.StatusWorkControl = StatusWorkControl.Paid;
                 employeeWorks.Add(entity);
             }
 

@@ -9,7 +9,7 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum PayMethod
     {
-        Efectivo = 0,
-        Transferencia = 1,
+        Cash = 0,
+        Transfer = 1,
     }
 }

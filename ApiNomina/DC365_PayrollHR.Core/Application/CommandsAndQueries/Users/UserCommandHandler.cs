@@ -317,7 +317,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
             if (!string.IsNullOrEmpty(CompanyDefaultId))
             {
                 var user = await _dbContext.Users.Where(x => x.Alias == alias).FirstOrDefaultAsync();
-                if (user.ElevationType == Domain.Enums.AdminType.AdministradorLocal)
+                if (user.ElevationType == Domain.Enums.AdminType.LocalAdmin)
                 {
                     var companyForUser = _dbContext.Companies.Where(x => x.CompanyId == CompanyDefaultId).FirstOrDefaultAsync();
                     if (await companyForUser == null)
@@ -388,7 +388,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Users
             }
 
             var adminType = (AdminType)Enum.Parse(typeof(AdminType), _currentUserInformation.ElevationType);
-            if (adminType != AdminType.AdministradorLocal)
+            if (adminType != AdminType.LocalAdmin)
             {
                 var companyUser = await _dbContext.CompaniesAssignedToUsers.Where(x => x.Alias == _currentUserInformation.Alias
                                                                               && x.CompanyId == companyid).FirstOrDefaultAsync();

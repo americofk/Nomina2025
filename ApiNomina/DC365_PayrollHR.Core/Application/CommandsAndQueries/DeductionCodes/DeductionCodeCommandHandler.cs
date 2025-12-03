@@ -168,8 +168,8 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.DeductionCodes
                                 action => action.PayrollProcessId,
                                 process => process.PayrollProcessId,
                                 (action, process) => new { Action = action, Process = process })
-                        .Where(x => x.Action.ActionId == id && (x.Action.PayrollActionType == PayrollActionType.Deduccion || x.Action.PayrollActionType == PayrollActionType.Aporte)
-                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                        .Where(x => x.Action.ActionId == id && (x.Action.PayrollActionType == PayrollActionType.Deduction || x.Action.PayrollActionType == PayrollActionType.Contribution)
+                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Canceled
                                 && (x.Process.PeriodEndDate >= model.ValidFrom && x.Process.PeriodEndDate <= model.ValidTo))
                         .FirstOrDefaultAsync();
 
@@ -341,8 +341,8 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.DeductionCodes
                                 action => action.PayrollProcessId,
                                 process => process.PayrollProcessId,
                                 (action, process) => new { Action = action, Process = process })
-                        .Where(x => x.Action.ActionId == id && (x.Action.PayrollActionType == PayrollActionType.Deduccion || x.Action.PayrollActionType == PayrollActionType.Aporte)
-                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                        .Where(x => x.Action.ActionId == id && (x.Action.PayrollActionType == PayrollActionType.Deduction || x.Action.PayrollActionType == PayrollActionType.Contribution)
+                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Canceled
                                 && (x.Process.PeriodEndDate >= response.ValidFrom && x.Process.PeriodEndDate <= response.ValidTo))
                         .FirstOrDefaultAsync();
 

@@ -132,7 +132,7 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// <summary>
         /// Estado.
         /// </summary>
-        public WorkStatus WorkStatus { get; set; } = WorkStatus.Candidato;
+        public WorkStatus WorkStatus { get; set; } = WorkStatus.Candidate;
 
 
         /// <summary>

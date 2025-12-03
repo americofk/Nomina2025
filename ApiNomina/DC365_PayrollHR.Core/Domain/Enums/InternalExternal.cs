@@ -9,7 +9,7 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum InternalExternal
     {
-        Interno = 0,
-        Externo = 1,
+        Intenal = 0,
+        External = 1,
     }
 }

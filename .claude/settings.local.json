@@ -23,12 +23,7 @@
       "Bash(del \"F:\\Nomina2025\\ApiNomina\\DC365_PayrollHR.Infrastructure\\obj\\DC365_PayrollHR.Infrastructure.csproj.EntityFrameworkCore.targets\")",
       "Bash(dotnet restore:*)",
       "Bash(dotnet ef migrations add:*)",
-      "Bash(dotnet ef migrations script:*)",
-      "Bash(powershell -Command \"Get-ChildItem -Path ''F:\\Nomina2025\\ApiNomina\\DC365_PayrollHR.WebUI'' -Recurse -Filter ''*.cs'' | ForEach-Object { (Get-Content $_FullName -Raw) -replace ''AdminType\\.User'', ''AdminType.Usuario'' -replace ''AdminType\\.LocalAdmin'', ''AdminType.AdministradorLocal'' | Set-Content $_FullName -NoNewline }\")",
-      "Bash(python3:*)",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -NoProfile -File - <<'EOF'\n$path = 'F:\\Nomina2025\\ApiNomina\\DC365_PayrollHR.WebUI'\n$files = Get-ChildItem -Path $path -Recurse -Filter '*.cs'\nforeach ($file in $files) {\n    $content = [System.IO.File]::ReadAllText($file.FullName)\n    $newContent = $content.Replace('AdminType.User', 'AdminType.Usuario').Replace('AdminType.LocalAdmin', 'AdminType.AdministradorLocal')\n    if ($content -ne $newContent) {\n        [System.IO.File]::WriteAllText($file.FullName, $newContent)\n        Write-Host \"Updated: $($file.Name)\"\n    }\n}\nEOF)",
-      "Bash(powershell.exe -ExecutionPolicy Bypass -Command \"Get-ChildItem -Path ''F:\\Nomina2025\\ApiNomina\\DC365_PayrollHR.WebUI'' -Recurse -Filter ''*.cs'' | ForEach-Object { $content = [IO.File]::ReadAllText($_.FullName, [Text.Encoding]::UTF8); $newContent = $content.Replace(''AdminType.User'', ''AdminType.Usuario'').Replace(''AdminType.LocalAdmin'', ''AdminType.AdministradorLocal''); if ($content -ne $newContent) { [IO.File]::WriteAllText($_.FullName, $newContent, [Text.Encoding]::UTF8); Write-Host (''Updated: '' + $_.Name) } }\")",
-      "Bash(powershell -Command:*)"
+      "Bash(dotnet ef migrations script:*)"
     ],
     "deny": [],
     "ask": []

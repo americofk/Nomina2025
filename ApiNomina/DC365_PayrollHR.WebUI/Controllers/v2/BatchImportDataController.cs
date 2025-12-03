@@ -29,7 +29,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/importbatch")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.AdministradorLocal)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.LocalAdmin)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class BatchImportDataController : ControllerBase
     {

@@ -68,7 +68,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Companies
             IQueryable<Company> tempResponse;
             List<CompanyResponse> response;
 
-            if (adminType == AdminType.AdministradorLocal)
+            if (adminType == AdminType.LocalAdmin)
             {
                 tempResponse =  _dbContext.Companies
                                         .OrderBy(x => x.CompanyId)

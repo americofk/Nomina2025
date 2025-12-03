@@ -24,7 +24,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/auditlogs")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class AuditLogController : ControllerBase
     {

@@ -117,9 +117,9 @@ namespace DC365_PayrollHR.Core.Application.Common.Model
                 ForRule(this, x => x.ValidTo == default, "La fecha final no puede estar vacía"),
                 ForRule(this, x => x.ValidFrom > x.ValidTo, "La fecha final no puede ser menor que la fecha final"),
                 ForRule(this, x => !Enum.IsDefined(typeof(IndexBase), x.IndexBase), "La base índice suministrada no existe"),
-                ForRule(this, x => x.IndexBase != IndexBase.Hora && x.IndexBase != IndexBase.MontoFijo, "La base índice suministrada debe ser tipo hora o monto fijo"),
-                ForRule(this, x => x.IndexBase == IndexBase.Hora && x.MultiplyAmount == 0, "Si la base índice es hora el monto debe ser diferente de 0"),
-                ForRule(this, x => x.IndexBase == IndexBase.Hora && x.IsExtraHours == true, "Si la base índice es hora el código no puede aplicar para el cálculo de horas extras"),
+                ForRule(this, x => x.IndexBase != IndexBase.Hour && x.IndexBase != IndexBase.FixedAmount, "La base índice suministrada debe ser tipo hora o monto fijo"),
+                ForRule(this, x => x.IndexBase == IndexBase.Hour && x.MultiplyAmount == 0, "Si la base índice es hora el monto debe ser diferente de 0"),
+                ForRule(this, x => x.IndexBase == IndexBase.Hour && x.IsExtraHours == true, "Si la base índice es hora el código no puede aplicar para el cálculo de horas extras"),
                 
 
 

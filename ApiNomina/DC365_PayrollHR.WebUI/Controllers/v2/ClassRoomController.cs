@@ -31,7 +31,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     /// </summary>
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class ClassRoomController : ControllerBase
     {

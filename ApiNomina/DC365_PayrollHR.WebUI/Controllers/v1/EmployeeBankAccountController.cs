@@ -29,7 +29,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/employeebankaccounts")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     public class EmployeeBankAccountController : ControllerBase
     {
         private readonly IQueryHandler<EmployeeBankAccount> _QueryHandler;

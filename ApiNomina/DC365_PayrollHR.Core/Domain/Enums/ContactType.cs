@@ -9,9 +9,9 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum ContactType
     {
-        Celular = 0,
-        Correo = 1,
-        Telefono = 2,
+        MobilePhone = 0,
+        Email = 1,
+        Phone = 2,
         Otro = 3
     }
 }

@@ -29,7 +29,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/employeeearningcodes")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     public class EmployeeEarningCodeController : ControllerBase
     {
         private readonly IQueryHandler<EmployeeEarningCode> _QueryHandler;

@@ -66,7 +66,7 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// <summary>
         /// Frecuencia de pago del empleado.
         /// </summary>
-        public PayFrecuency PayFrecuency { get; set; } = PayFrecuency.NoSeleccionado;
+        public PayFrecuency PayFrecuency { get; set; } = PayFrecuency.NotSelected;
 
         /// <summary>
         /// Tipo de cálculo de salario (0=Ordinario, 1=Intermitente, -1=No seleccionado).

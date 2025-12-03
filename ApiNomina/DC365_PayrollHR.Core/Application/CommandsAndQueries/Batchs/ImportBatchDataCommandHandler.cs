@@ -153,7 +153,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
 
                             if (!string.IsNullOrEmpty(item.PositionId))
                             {
-                                entity.WorkStatus = WorkStatus.Empleado;
+                                entity.WorkStatus = WorkStatus.Employ;
                                 entity.StartWorkDate = item.PositionFromDate;
                                 entity.EndWorkDate = item.PositionToDate;
                             }
@@ -893,7 +893,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
                         }
 
                         var earningcode = await _NewDbContext.EarningCodeVersions.Where(x => x.EarningCodeId == item.EarningCodeId
-                                                                                        && x.IndexBase == IndexBase.Hora
+                                                                                        && x.IndexBase == IndexBase.Hour
                                                                                         && x.MultiplyAmount != 0
                                                                                         && x.ValidFrom <= item.WorkedDay && x.ValidTo >= item.WorkedDay
                                                                                         && x.DataAreaId == session[0])
@@ -1054,7 +1054,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
                         }
 
                         var earningcode = await _NewDbContext.EarningCodes.Where(x => x.EarningCodeId == item.EarningCodeId
-                                                                                        && x.IndexBase == IndexBase.MontoFijo
+                                                                                        && x.IndexBase == IndexBase.FixedAmount
                                                                                         && x.DataAreaId == session[0])
                                                                                  .IgnoreQueryFilters()
                                                                                  .FirstOrDefaultAsync();
@@ -1732,31 +1732,31 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Batchs
 
             switch (_PayFrecuency)
             {
-                case PayFrecuency.Diario:
+                case PayFrecuency.Diary:
                     newamount = amount / 30;
                     break;
-                case PayFrecuency.Semanal:
+                case PayFrecuency.Weekly:
                     newamount = amount / 4;
                     break;
-                case PayFrecuency.Bisemanal:
+                case PayFrecuency.TwoWeekly:
                     newamount = amount / 2;
                     break;
-                case PayFrecuency.Quincenal:
+                case PayFrecuency.BiWeekly:
                     newamount = amount / 2;
                     break;
-                case PayFrecuency.Mensual:
+                case PayFrecuency.Monthly:
                     newamount = 1;
                     break;
-                case PayFrecuency.Trimestral:
+                case PayFrecuency.ThreeMonth:
                     newamount = amount * 3;
                     break;
-                case PayFrecuency.Cuatrimestral:
+                case PayFrecuency.FourMonth:
                     newamount = amount * 4;
                     break;
-                case PayFrecuency.Semestral:
+                case PayFrecuency.Biannual:
                     newamount = amount * 6;
                     break;
-                case PayFrecuency.Anual:
+                case PayFrecuency.Yearly:
                     newamount = amount * 12;
                     break;
             }

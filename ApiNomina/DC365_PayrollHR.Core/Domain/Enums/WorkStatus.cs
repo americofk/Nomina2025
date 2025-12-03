@@ -9,8 +9,8 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum WorkStatus
     {
-        Candidato = 0,
-        Desvinculado = 1,
-        Empleado = 2
+        Candidate = 0,
+        Dismissed = 1,
+        Employ = 2
     }
 }

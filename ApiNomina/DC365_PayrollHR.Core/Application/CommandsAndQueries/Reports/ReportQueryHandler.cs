@@ -88,8 +88,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                 .Where(x => x.Pp.PayrollProcessId == payrollProcessId
                         && x.Ppd.DepartmentId.Contains(departmentid)
                         && x.Ppd.EmployeeId.Contains(employeeid)
-                        && x.Pp.PayrollProcessStatus == PayrollProcessStatus.Pagado
-                        || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Cerrado)
+                        && x.Pp.PayrollProcessStatus == PayrollProcessStatus.Paid
+                        || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Closed)
                 .Select(x => new
                 {
                     EmployeeName = x.Ppd.EmployeeName,
@@ -113,7 +113,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                          .FirstOrDefault(),
 
                     EmployeeEmail = _dbContext.EmployeeContactsInf
-                                         .Where(y => y.EmployeeId == x.Ppd.EmployeeId && y.IsPrincipal == true && y.ContactType == ContactType.Correo)
+                                         .Where(y => y.EmployeeId == x.Ppd.EmployeeId && y.IsPrincipal == true && y.ContactType == ContactType.Email)
                                          .Select(x => x.NumberAddress)
                                          .FirstOrDefault(),
                 }).ToListAsync();
@@ -128,17 +128,17 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
                     var s = b.Where(x => x.ActionId == configuration.Salary).Select(x => x.ActionAmount).ToList().Sum();
                     var com = b.Where(x => x.ActionId == configuration.Comission).Select(x => x.ActionAmount).ToList().Sum();
-                    var eh = b.Where(x => x.PayrollActionType == PayrollActionType.HorasExtras).Select(x => x.ActionAmount).ToList().Sum();
-                    var oEarning = b.Where(x => x.PayrollActionType == PayrollActionType.Ingreso && x.ActionId != configuration.Salary && x.ActionId != configuration.Comission)
+                    var eh = b.Where(x => x.PayrollActionType == PayrollActionType.ExtraHours).Select(x => x.ActionAmount).ToList().Sum();
+                    var oEarning = b.Where(x => x.PayrollActionType == PayrollActionType.Earning && x.ActionId != configuration.Salary && x.ActionId != configuration.Comission)
                                     .Select(x => x.ActionAmount).ToList().Sum();
 
 
-                    var afp = b.Where(x => x.ActionId == configuration.AFP && x.PayrollActionType == PayrollActionType.Deduccion).Select(x => x.ActionAmount).ToList().Sum();
-                    var sfs = b.Where(x => x.ActionId == configuration.SFS && x.PayrollActionType == PayrollActionType.Deduccion).Select(x => x.ActionAmount).ToList().Sum();
+                    var afp = b.Where(x => x.ActionId == configuration.AFP && x.PayrollActionType == PayrollActionType.Deduction).Select(x => x.ActionAmount).ToList().Sum();
+                    var sfs = b.Where(x => x.ActionId == configuration.SFS && x.PayrollActionType == PayrollActionType.Deduction).Select(x => x.ActionAmount).ToList().Sum();
                     var loanCoop = b.Where(x => x.ActionId == configuration.LoanCooperative).Select(x => x.ActionAmount).ToList().Sum();
-                    var t = b.Where(x => x.PayrollActionType == PayrollActionType.Impuesto).Select(x => x.ActionAmount).ToList().Sum();
-                    var loan = b.Where(x => x.PayrollActionType == PayrollActionType.Prestamo).Select(x => x.ActionAmount).ToList().Sum();
-                    var oDiscount = b.Where(x => x.PayrollActionType == PayrollActionType.Deduccion && x.ActionId != configuration.AFP && x.ActionId != configuration.LoanCooperative && x.ActionId != configuration.SFS)
+                    var t = b.Where(x => x.PayrollActionType == PayrollActionType.Tax).Select(x => x.ActionAmount).ToList().Sum();
+                    var loan = b.Where(x => x.PayrollActionType == PayrollActionType.Loan).Select(x => x.ActionAmount).ToList().Sum();
+                    var oDiscount = b.Where(x => x.PayrollActionType == PayrollActionType.Deduction && x.ActionId != configuration.AFP && x.ActionId != configuration.LoanCooperative && x.ActionId != configuration.SFS)
                                     .Select(x => x.ActionAmount).ToList().Sum();
 
                     //Actualización abono de cooperativa
@@ -224,9 +224,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                     (pp, ppd) => new { Pp = pp, Ppd = ppd })
                 .Where(x => x.Pp.PayrollProcessId == payrollProcessId
                         && x.Ppd.DepartmentId.Contains(departmentid)
-                        && (x.Pp.PayrollProcessStatus == PayrollProcessStatus.Pagado
-                        || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Cerrado
-                        || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Calculado))
+                        && (x.Pp.PayrollProcessStatus == PayrollProcessStatus.Paid
+                        || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Closed
+                        || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Calculated))
                 .GroupBy(x => new
                 {
                     x.Ppd.PayMethod,
@@ -258,16 +258,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
                 var s = b.Where(x => x.ActionId == configuration.Salary).Select(x => x.ActionAmount).ToList().Sum();
                 var com = b.Where(x => x.ActionId == configuration.Comission).Select(x => x.ActionAmount).ToList().Sum();
-                var eh = b.Where(x => x.PayrollActionType == PayrollActionType.HorasExtras).Select(x => x.ActionAmount).ToList().Sum();
-                var oEarning = b.Where(x => x.PayrollActionType == PayrollActionType.Ingreso && x.ActionId != configuration.Salary && x.ActionId != configuration.Comission)
+                var eh = b.Where(x => x.PayrollActionType == PayrollActionType.ExtraHours).Select(x => x.ActionAmount).ToList().Sum();
+                var oEarning = b.Where(x => x.PayrollActionType == PayrollActionType.Earning && x.ActionId != configuration.Salary && x.ActionId != configuration.Comission)
                                    .Select(x => x.ActionAmount).ToList().Sum();
 
-                var afp = b.Where(x => x.ActionId == configuration.AFP && x.PayrollActionType == PayrollActionType.Deduccion).Select(x => x.ActionAmount).ToList().Sum();
-                var sfs = b.Where(x => x.ActionId == configuration.SFS && x.PayrollActionType == PayrollActionType.Deduccion).Select(x => x.ActionAmount).ToList().Sum();
+                var afp = b.Where(x => x.ActionId == configuration.AFP && x.PayrollActionType == PayrollActionType.Deduction).Select(x => x.ActionAmount).ToList().Sum();
+                var sfs = b.Where(x => x.ActionId == configuration.SFS && x.PayrollActionType == PayrollActionType.Deduction).Select(x => x.ActionAmount).ToList().Sum();
                 var loanCoop = b.Where(x => x.ActionId == configuration.LoanCooperative).Select(x => x.ActionAmount).ToList().Sum();
-                var t = b.Where(x => x.PayrollActionType == PayrollActionType.Impuesto).Select(x => x.ActionAmount).ToList().Sum();
-                var loan = b.Where(x => x.PayrollActionType == PayrollActionType.Prestamo).Select(x => x.ActionAmount).ToList().Sum();
-                var oDiscount = b.Where(x => x.PayrollActionType == PayrollActionType.Deduccion && x.ActionId != configuration.AFP && x.ActionId != configuration.LoanCooperative && x.ActionId != configuration.SFS)
+                var t = b.Where(x => x.PayrollActionType == PayrollActionType.Tax).Select(x => x.ActionAmount).ToList().Sum();
+                var loan = b.Where(x => x.PayrollActionType == PayrollActionType.Loan).Select(x => x.ActionAmount).ToList().Sum();
+                var oDiscount = b.Where(x => x.PayrollActionType == PayrollActionType.Deduction && x.ActionId != configuration.AFP && x.ActionId != configuration.LoanCooperative && x.ActionId != configuration.SFS)
                                    .Select(x => x.ActionAmount).ToList().Sum();
 
                 var deductCoop = b.Where(x => x.ActionId == configuration.DeductionCooperative).Select(x => x.ActionAmount).ToList().Sum();
@@ -350,9 +350,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                 (pp, ppd) => new { Pp = pp, Ppd = ppd })
             .Where(x => x.Pp.PayrollProcessId == payrollProcessId
                     && x.Ppd.DepartmentId.Contains(departmentId)
-                    && (x.Pp.PayrollProcessStatus == PayrollProcessStatus.Pagado
-                    || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Cerrado
-                    || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Calculado))
+                    && (x.Pp.PayrollProcessStatus == PayrollProcessStatus.Paid
+                    || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Closed
+                    || x.Pp.PayrollProcessStatus == PayrollProcessStatus.Calculated))
             .Select(x => new
             {
                 EmployeeId = x.Ppd.EmployeeId,
@@ -391,17 +391,17 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
 
                         var s = b.Where(x => x.ActionId == configuration.Salary).Select(x => x.ActionAmount).ToList().Sum();
                         var com = b.Where(x => x.ActionId == configuration.Comission).Select(x => x.ActionAmount).ToList().Sum();
-                        var eh = b.Where(x => x.PayrollActionType == PayrollActionType.HorasExtras).Select(x => x.ActionAmount).ToList().Sum();
-                        var oEarning = b.Where(x => x.PayrollActionType == PayrollActionType.Ingreso && x.ActionId != configuration.Salary && x.ActionId != configuration.Comission)
+                        var eh = b.Where(x => x.PayrollActionType == PayrollActionType.ExtraHours).Select(x => x.ActionAmount).ToList().Sum();
+                        var oEarning = b.Where(x => x.PayrollActionType == PayrollActionType.Earning && x.ActionId != configuration.Salary && x.ActionId != configuration.Comission)
                                         .Select(x => x.ActionAmount).ToList().Sum();
 
 
-                        var afp = b.Where(x => x.ActionId == configuration.AFP && x.PayrollActionType == PayrollActionType.Deduccion).Select(x => x.ActionAmount).ToList().Sum();
-                        var sfs = b.Where(x => x.ActionId == configuration.SFS && x.PayrollActionType == PayrollActionType.Deduccion).Select(x => x.ActionAmount).ToList().Sum();
+                        var afp = b.Where(x => x.ActionId == configuration.AFP && x.PayrollActionType == PayrollActionType.Deduction).Select(x => x.ActionAmount).ToList().Sum();
+                        var sfs = b.Where(x => x.ActionId == configuration.SFS && x.PayrollActionType == PayrollActionType.Deduction).Select(x => x.ActionAmount).ToList().Sum();
                         var loanCoop = b.Where(x => x.ActionId == configuration.LoanCooperative).Select(x => x.ActionAmount).ToList().Sum();
-                        var t = b.Where(x => x.PayrollActionType == PayrollActionType.Impuesto).Select(x => x.ActionAmount).ToList().Sum();
-                        var loan = b.Where(x => x.PayrollActionType == PayrollActionType.Prestamo).Select(x => x.ActionAmount).ToList().Sum();
-                        var oDiscount = b.Where(x => x.PayrollActionType == PayrollActionType.Deduccion && x.ActionId != configuration.AFP && x.ActionId != configuration.LoanCooperative && x.ActionId != configuration.SFS)
+                        var t = b.Where(x => x.PayrollActionType == PayrollActionType.Tax).Select(x => x.ActionAmount).ToList().Sum();
+                        var loan = b.Where(x => x.PayrollActionType == PayrollActionType.Loan).Select(x => x.ActionAmount).ToList().Sum();
+                        var oDiscount = b.Where(x => x.PayrollActionType == PayrollActionType.Deduction && x.ActionId != configuration.AFP && x.ActionId != configuration.LoanCooperative && x.ActionId != configuration.SFS)
                                         .Select(x => x.ActionAmount).ToList().Sum();
 
                         var deductCoop = b.Where(x => x.ActionId == configuration.DeductionCooperative).Select(x => x.ActionAmount).ToList().Sum();
@@ -519,7 +519,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                     ep => ep.Ep.PositionId,
                     p => p.PositionId,
                     (ep, p) => new { Ep = ep, P = p })
-            .Where(x => x.Ep.E.WorkStatus == WorkStatus.Empleado
+            .Where(x => x.Ep.E.WorkStatus == WorkStatus.Employ
                     && x.Ep.Ep.EmployeePositionStatus == true
                     && x.P.DepartmentId.Contains(departmentId))
             .Select(x => new
@@ -617,8 +617,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                                 ec => ec.EarningCodeId,
                                                 (joins, ec) => new { Joins = joins, Ec = ec })
                                             .Where(x => x.Ec.IsUseDGT == true &&
-                                                   x.Joins.Join.E.EndWorkDate == new DateTime(2134, 12, 31) && x.Joins.Join.E.WorkStatus == WorkStatus.Empleado
-                                                   && x.Joins.Join.E.EmployeeType == EmployeeType.Empleado
+                                                   x.Joins.Join.E.EndWorkDate == new DateTime(2134, 12, 31) && x.Joins.Join.E.WorkStatus == WorkStatus.Employ
+                                                   && x.Joins.Join.E.EmployeeType == EmployeeType.Employee
                                                    && x.Joins.Join.Eh.RegisterDate >= startDate && x.Joins.Join.Eh.RegisterDate <= endDate)
                                             .Select(x => new
                                             {
@@ -781,7 +781,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                                 ec => ec.EarningCodeId,
                                                 (join, ec) => new { Join = join, Ec = ec })
                                             .Where(x => x.Ec.IsUseDGT == true &&
-                                                    x.Join.E.EndWorkDate == new DateTime(2134, 12, 31) && x.Join.E.WorkStatus == WorkStatus.Empleado)
+                                                    x.Join.E.EndWorkDate == new DateTime(2134, 12, 31) && x.Join.E.WorkStatus == WorkStatus.Employ)
 
                                             .Select(x => new
                                             {
@@ -868,7 +868,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                                 ed => ed.EmployeeId,
                                                 (join, ed) => new { Join = join, Ed = ed })
                                             .Where(x => x.Join.Eh.RegisterDate >= startDate && x.Join.Eh.RegisterDate <= endDate
-                                                   && x.Join.E.EmployeeType == EmployeeType.Contratista
+                                                   && x.Join.E.EmployeeType == EmployeeType.Contractor
                                                    && x.Join.Eh.Type == "NI")
                                             .Select(x => new
                                             {
@@ -934,8 +934,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                                 eh => eh.EmployeeId,
                                                 (e, eh) => new { E = e, Eh = eh })
                                             .Where(x => x.Eh.IsUseDGT == true
-                                                   && x.E.WorkStatus == WorkStatus.Empleado
-                                                   && x.E.EmployeeType == EmployeeType.Empleado
+                                                   && x.E.WorkStatus == WorkStatus.Employ
+                                                   && x.E.EmployeeType == EmployeeType.Employee
                                                    && x.Eh.RegisterDate >= startDate && x.Eh.RegisterDate <= endDate
                                                    && x.Eh.Type == "NO")
                                             .Select(x => new
@@ -945,7 +945,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                                 Document = _dbContext.EmployeeDocuments.Where(y => y.EmployeeId == x.E.EmployeeId).Select(
                                                                                               y => new { y.DocumentType, y.DocumentNumber }).FirstOrDefault(),
                                                 x.E.LocationId,
-                                                Contact = _dbContext.EmployeeContactsInf.Where(y => y.EmployeeId == x.E.EmployeeId && y.IsPrincipal == true && y.ContactType == ContactType.Telefono).Select(
+                                                Contact = _dbContext.EmployeeContactsInf.Where(y => y.EmployeeId == x.E.EmployeeId && y.IsPrincipal == true && y.ContactType == ContactType.Phone).Select(
                                                                                               y => new { y.NumberAddress }).FirstOrDefault(),
 
                                                 Address = _dbContext.EmployeesAddress.Where(y => y.EmployeeId == x.E.EmployeeId && y.IsPrincipal == true).FirstOrDefault()
@@ -995,9 +995,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
             {
                 switch (e)
                 {
-                    case DocumentType.Cedula:
+                    case DocumentType.IdentificationCard:
                         return "C";
-                    case DocumentType.Pasaporte:
+                    case DocumentType.Passport:
                         return "P";
                     default:
                         return "X";
@@ -1088,7 +1088,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
                                                 e => e.EmployeeId,
                                                 (join, e) => new { Join = join, E = e })
                                             .Where(x => x.Join.Pp.PeriodStartDate >= startDate && x.Join.Pp.PeriodEndDate <= endDate
-                                                   && x.Join.Pp.PayrollProcessStatus == PayrollProcessStatus.Pagado
+                                                   && x.Join.Pp.PayrollProcessStatus == PayrollProcessStatus.Paid
                                                    && x.Join.Pp.PayrollId == payrollid)
                                             .Select(x => new
                                             {
@@ -1158,15 +1158,15 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports
         {
             switch (e)
             {
-                case DocumentType.Cedula:
+                case DocumentType.IdentificationCard:
                     return "C";
-                case DocumentType.Pasaporte:
+                case DocumentType.Passport:
                     return "P";
-                case DocumentType.NSS:
+                case DocumentType.SocialSecurityNumber:
                     return "N";
-                case DocumentType.CarnetMigratorio:
+                case DocumentType.MigrationCard:
                     return "M";
-                case DocumentType.InteriorYPolicia:
+                case DocumentType.InteriorAndPolice:
                     return "I";
                 default:
                     return "X";

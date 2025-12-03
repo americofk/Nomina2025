@@ -630,40 +630,40 @@ namespace DC365_WebNR.UI.Controllers
            
             switch (typePayroll)
             {
-                case PayFrecuency.Diario:
+                case PayFrecuency.Diary:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddDays(totalDues * qtyPeriodForPaid);
 
                     break;
-                case PayFrecuency.Semanal:
+                case PayFrecuency.Weekly:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddDays((totalDues * qtyPeriodForPaid)*7);
                     break;
-                case PayFrecuency.Bisemanal:
+                case PayFrecuency.TwoWeekly:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddDays((totalDues * qtyPeriodForPaid) * 14);
 
                     break;
-                case PayFrecuency.Quincenal:
+                case PayFrecuency.BiWeekly:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddMonths(qtyPeriodForPaid - 1).AddDays(qtyPeriodForPaid % 2 == 0 ? 0 : 15);
                     for (int i = 1; i <= totalDues-1; i++)
                     {
                         dato[0].PayDate = dato[0].PayDate.AddMonths(qtyPeriodForPaid - 1).AddDays(qtyPeriodForPaid % 2 == 0 ? 0 : 15);
                     }
                     break;
-                case PayFrecuency.Mensual:
+                case PayFrecuency.Monthly:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddMonths(totalDues * qtyPeriodForPaid);
                     break;
-                case PayFrecuency.Trimestral:
+                case PayFrecuency.ThreeMonth:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddMonths((totalDues * qtyPeriodForPaid) * 3);
 
                     break;
-                case PayFrecuency.Cuatrimestral:
+                case PayFrecuency.FourMonth:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddMonths((totalDues * qtyPeriodForPaid) * 4);
 
                     break;
-                case PayFrecuency.Semestral:
+                case PayFrecuency.Biannual:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddMonths((totalDues * qtyPeriodForPaid) * 6);
 
                     break;
-                case PayFrecuency.Anual:
+                case PayFrecuency.Yearly:
                     dato[0].PayDate = dato[0].PeriodStartDate.AddYears(totalDues * qtyPeriodForPaid);
 
                     break;

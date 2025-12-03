@@ -133,19 +133,19 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             if(payrollactions != null)
             {
-                var a = payrollactions.Find(x => x.Type == PayrollActionType.Deduccion);
+                var a = payrollactions.Find(x => x.Type == PayrollActionType.Deduction);
                 response.TotalDeductions = a != null?a.Total:0;
 
-                a = payrollactions.Find(x => x.Type == PayrollActionType.Ingreso);
+                a = payrollactions.Find(x => x.Type == PayrollActionType.Earning);
                 response.TotalEarnings = a != null ? a.Total : 0;
 
-                a = payrollactions.Find(x => x.Type == PayrollActionType.Prestamo);
+                a = payrollactions.Find(x => x.Type == PayrollActionType.Loan);
                 response.TotalLoans = a != null ? a.Total : 0;
 
-                a = payrollactions.Find(x => x.Type == PayrollActionType.Impuesto);
+                a = payrollactions.Find(x => x.Type == PayrollActionType.Tax);
                 response.TotalTaxes = a != null ? a.Total : 0;
 
-                a = payrollactions.Find(x => x.Type == PayrollActionType.HorasExtras);
+                a = payrollactions.Find(x => x.Type == PayrollActionType.ExtraHours);
                 response.TotalEarnings += a != null ? a.Total : 0;
 
                 response.Total = response.TotalEarnings - response.TotalDeductions - response.TotalLoans - response.TotalTaxes;
@@ -180,9 +180,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var response = await _dbContext.PayrollsProcess
                 .OrderBy(x => x.PayrollProcessId)
                 .Where(x => x.PayrollId == payrollid && 
-                      ( x.PayrollProcessStatus == PayrollProcessStatus.Pagado 
-                        || x.PayrollProcessStatus == PayrollProcessStatus.Cerrado
-                        || x.PayrollProcessStatus == PayrollProcessStatus.Calculado)
+                      ( x.PayrollProcessStatus == PayrollProcessStatus.Paid 
+                        || x.PayrollProcessStatus == PayrollProcessStatus.Closed
+                        || x.PayrollProcessStatus == PayrollProcessStatus.Calculated)
                       )
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)                
                 .Take(validFilter.PageSize)

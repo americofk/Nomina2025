@@ -31,7 +31,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/employees")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class EmployeeController : ControllerBase
     {
@@ -60,7 +60,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeEnabled, View = true)]
         public async Task<ActionResult> GetEnabled([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
-            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[]{ "true", WorkStatus.Empleado.ToString()});
+            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[]{ "true", WorkStatus.Employ.ToString()});
             return StatusCode(objectresult.StatusHttp, objectresult);
 
         }
@@ -195,7 +195,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeDisabled, View = true)]
         public async Task<ActionResult> GetDisabled([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
-            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[] { "false", WorkStatus.Empleado.ToString() });
+            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[] { "false", WorkStatus.Employ.ToString() });
             return StatusCode(objectresult.StatusHttp, objectresult);
 
         }
@@ -306,7 +306,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeCandidate, View = true)]
         public async Task<ActionResult> GetCandidate([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
-            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[] { "true", WorkStatus.Candidato.ToString() });
+            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[] { "true", WorkStatus.Candidate.ToString() });
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 
@@ -414,7 +414,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
         [AuthorizePrivilege(MenuId = MenuConst.EmployeeDissmis, View = true)]
         public async Task<ActionResult> GetDismiss([FromQuery] PaginationFilter paginationFilter, [FromQuery] SearchFilter searchFilter)
         {
-            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[] { "true", WorkStatus.Desvinculado.ToString() });
+            var objectresult = await _QueryHandler.GetAll(paginationFilter,searchFilter, new string[] { "true", WorkStatus.Dismissed.ToString() });
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
 

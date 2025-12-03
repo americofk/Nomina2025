@@ -152,9 +152,9 @@ namespace DC365_PayrollHR.Core.Application.Common.Model
                 ForRule(this, x => x.ValidFrom == default(DateTime), "La fecha de inicio no puede estar vacía"),
                 ForRule(this, x => x.ValidTo == default(DateTime), "La fecha de fin no puede estar vacía"),
                 ForRule(this, x => x.ValidTo < x.ValidFrom, "La fecha de fin no puede ser menor que la fecha de inicio"),       
-                ForRule(this, x => x.PayrollAction == PayrollAction.Aporte && x.Ctbution_MultiplyAmount == 0, "El monto o porcentaje no puede ser 0"),
-                ForRule(this, x => x.PayrollAction == PayrollAction.Deduccion && x.Dduction_MultiplyAmount == 0, "El monto o porcentaje no puede ser 0"),
-                ForRule(this, x => x.PayrollAction == PayrollAction.Ambos && (x.Dduction_MultiplyAmount == 0 || x.Ctbution_MultiplyAmount == 0), "El monto o porcentaje no puede ser 0")   
+                ForRule(this, x => x.PayrollAction == PayrollAction.Contribution && x.Ctbution_MultiplyAmount == 0, "El monto o porcentaje no puede ser 0"),   
+                ForRule(this, x => x.PayrollAction == PayrollAction.Deduction && x.Dduction_MultiplyAmount == 0, "El monto o porcentaje no puede ser 0"),   
+                ForRule(this, x => x.PayrollAction == PayrollAction.Both && (x.Dduction_MultiplyAmount == 0 || x.Ctbution_MultiplyAmount == 0), "El monto o porcentaje no puede ser 0")   
             };
 
             return validationResults;

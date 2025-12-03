@@ -9,8 +9,8 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum StatusWorkControl
     {
-        Pendiente = 0,
-        Pagado = 1,
-        EnProceso = 2
+        Pendint = 0,
+        Paid = 1,
+        InProcess = 2
     }
 }

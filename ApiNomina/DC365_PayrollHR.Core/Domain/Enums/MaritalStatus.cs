@@ -9,11 +9,11 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum MaritalStatus
     {
-        Casado = 0,
-        Soltero = 1,
-        Viudo = 2,
-        Divorciado = 3,
-        Separado = 4
+        Married = 0,
+        Single = 1,
+        Widowed = 2,
+        Divorced = 3,
+        Separated = 4
 
     }
 }

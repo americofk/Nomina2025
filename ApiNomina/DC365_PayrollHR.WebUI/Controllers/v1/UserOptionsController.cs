@@ -30,7 +30,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/users/options")]
     [Authorize]
     [ApiController]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
     public class UserOptionsController : ControllerBase
     {
         private readonly IQueryHandler<UserResponse> _QueryHandler;

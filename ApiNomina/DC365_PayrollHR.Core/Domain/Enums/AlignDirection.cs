@@ -9,7 +9,7 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum AlignDirection
     {
-        Derecha = 0,
-        Izquierda = 1
+        Right = 0,
+        Left = 1
     }
 }

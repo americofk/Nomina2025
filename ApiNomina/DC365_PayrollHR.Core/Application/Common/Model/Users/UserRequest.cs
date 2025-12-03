@@ -37,7 +37,7 @@ namespace DC365_PayrollHR.Core.Application.Common.Model.Users
         /// <summary>
         /// Tipo.
         /// </summary>
-        public AdminType ElevationType { get; set; } = AdminType.Usuario;
+        public AdminType ElevationType { get; set; } = AdminType.User;
         /// <summary>
         /// Identificador.
         /// </summary>

@@ -47,7 +47,7 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// <summary>
         /// Obtiene o establece StatusExtraHour.
         /// </summary>
-        public StatusExtraHour StatusExtraHour { get; set; } = StatusExtraHour.Abierto;
+        public StatusExtraHour StatusExtraHour { get; set; } = StatusExtraHour.Open;
         /// <summary>
         /// Identificador.
         /// </summary>
