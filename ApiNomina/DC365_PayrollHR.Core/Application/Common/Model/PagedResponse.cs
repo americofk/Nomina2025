@@ -23,6 +23,14 @@ namespace DC365_PayrollHR.Core.Application.Common.Model
         /// Valor numerico para PageSize.
         /// </summary>
         public int PageSize { get; set; }
+        /// <summary>
+        /// Total de registros.
+        /// </summary>
+        public int TotalRecords { get; set; }
+        /// <summary>
+        /// Total de paginas.
+        /// </summary>
+        public int TotalPages { get; set; }
         public PagedResponse(T data, int pageNumber, int pageSize)
         {
             this.PageNumber = pageNumber;

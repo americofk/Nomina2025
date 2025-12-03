@@ -169,6 +169,37 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Endpoint AJAX para paginacion de departamentos.
+        /// Busca en DepartmentId y Name.
+        /// </summary>
+        [HttpGet("GetDepartmentsPaged")]
+        public async Task<JsonResult> GetDepartmentsPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processDepartament = new ProcessDepartament(dataUser[0]);
+
+            // Buscar en DepartmentId y Name usando el filtro generico
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "DepartmentId,Name"; // Buscar en ambos campos
+            }
+
+            var pagedResult = await processDepartament.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
+        /// <summary>
 
         /// Ejecuta Departament_Filter_OrMore_Data de forma asincrona.
 
