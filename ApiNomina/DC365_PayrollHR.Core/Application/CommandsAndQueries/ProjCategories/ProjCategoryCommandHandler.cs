@@ -24,6 +24,16 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ProjCategories
         IUpdateCommandHandler<ProjCategoryRequestUpdate>
     {
         public Task<Response<object>> UpdateStatus(string id, bool status);
+        public Task<Response<List<ProjCategorySimpleResponse>>> GetByProject(string projId);
+    }
+
+    /// <summary>
+    /// Modelo simple para respuesta de categorías de proyecto.
+    /// </summary>
+    public class ProjCategorySimpleResponse
+    {
+        public string ProjCategoryId { get; set; }
+        public string CategoryName { get; set; }
     }
 
     /// <summary>
@@ -194,6 +204,25 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.ProjCategories
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
+        }
+
+        /// <summary>
+        /// Obtiene las categorías de proyecto filtradas por proyecto.
+        /// </summary>
+        /// <param name="projId">Identificador del proyecto.</param>
+        /// <returns>Lista de categorías del proyecto.</returns>
+        public async Task<Response<List<ProjCategorySimpleResponse>>> GetByProject(string projId)
+        {
+            var categories = await _dbContext.ProjCategories
+                .Where(x => x.ProjId == projId && x.ProjCategoryStatus == true && x.IsDeleted == false)
+                .Select(x => new ProjCategorySimpleResponse
+                {
+                    ProjCategoryId = x.ProjCategoryId,
+                    CategoryName = x.CategoryName
+                })
+                .ToListAsync();
+
+            return new Response<List<ProjCategorySimpleResponse>>(categories);
         }
     }
 

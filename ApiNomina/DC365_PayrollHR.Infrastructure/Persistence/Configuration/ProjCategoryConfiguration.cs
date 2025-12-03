@@ -32,6 +32,12 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
 
             builder.Property(x => x.CategoryName).IsRequired().HasMaxLength(100);
             builder.Property(x => x.LedgerAccount).HasMaxLength(20);
+            builder.Property(x => x.ProjId).IsRequired().HasMaxLength(20);
+
+            builder.HasOne(x => x.Project)
+                .WithMany()
+                .HasForeignKey(x => x.ProjId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

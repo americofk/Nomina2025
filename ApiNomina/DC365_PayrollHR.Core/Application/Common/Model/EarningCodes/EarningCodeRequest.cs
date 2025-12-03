@@ -94,6 +94,11 @@ namespace DC365_PayrollHR.Core.Application.Common.Model
         public TimeSpan WorkTo { get; set; }
 
         /// <summary>
+        /// Indica si aplica para el cálculo de prestaciones laborales.
+        /// </summary>
+        public bool IsSeverance { get; set; }
+
+        /// <summary>
 
         /// Valida los datos.
 

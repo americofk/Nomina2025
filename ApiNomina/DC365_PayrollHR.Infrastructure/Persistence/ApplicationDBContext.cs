@@ -513,5 +513,24 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
         /// Obtiene o establece AuditLogs.
         /// </summary>
         public DbSet<AuditLog> AuditLogs { get; set; }
+
+        #region Severance Process (Prestaciones Laborales)
+
+        /// <summary>
+        /// Procesos de prestaciones laborales.
+        /// </summary>
+        public DbSet<SeveranceProcess> SeveranceProcesses { get; set; }
+
+        /// <summary>
+        /// Detalles de prestaciones laborales por empleado.
+        /// </summary>
+        public DbSet<SeveranceProcessDetail> SeveranceProcessDetails { get; set; }
+
+        /// <summary>
+        /// Vista de información de prestaciones (View_SeveranceInfo).
+        /// </summary>
+        public DbSet<ViewSeveranceInfo> ViewSeveranceInfo { get; set; }
+
+        #endregion
     }
 }

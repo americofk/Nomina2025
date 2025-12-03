@@ -107,6 +107,10 @@ const fn = {
         $("#ContNewAndEditLoan").removeClass("collapse");
         fn.SettingNewAndEdit(viewmode);
 
+        // Inicializar filtro de categorías por proyecto después de cargar el formulario
+        // Usar window para acceder a la función global desde módulo ES6
+        (window as any).filterProjCategoryByProject('#ProjId', '#ProjCategoryId');
+
         InstaciateListener();
     },
 

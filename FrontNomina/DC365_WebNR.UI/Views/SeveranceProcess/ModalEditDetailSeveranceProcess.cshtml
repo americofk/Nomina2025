@@ -1,0 +1,335 @@
+@model DC365_WebNR.CORE.Domain.Models.SeveranceProcessDetail
+@using DC365_WebNR.CORE.Domain.Models.Enums
+@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    Layout = null;
+}
+
+<div class="modal-sev-detail" id="ModalEditDetail">
+    <div class="modal-sev-detail-content">
+        <div class="opcioneslistpageForm">
+            <div class="menuoptions-flex">
+                <ul class="menuoptions">
+                    <li class="btnSaveAndCloseDetail">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-check-square-o"></i>
+                            Guardar y Cerrar
+                        </a>
+                    </li>
+                    <li class="btnSaveDetail">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-save"></i>
+                            Guardar
+                        </a>
+                    </li>
+                    <li class="btnCalculateDetail">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-cogs"></i>
+                            Calcular
+                        </a>
+                    </li>
+                    <li class="btnPrintDetailReport">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-print"></i>
+                            Imprimir Reporte
+                        </a>
+                    </li>
+                </ul>
+                <ul class="menuoptions">
+                    <li class="AuditInfoDetail">
+                        <a class="btn2 btn-app" title="Información de auditoría">
+                            <i class="fa fa-info-circle"></i>
+                        </a>
+                    </li>
+                    <li class="closeModalDetail">
+                        <a class="btn2 btn-app">
+                            <i class="fa fa-close i-close"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contNewEntyti">
+        <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+            <div class="x_panel">
+                <div class="x_content">
+                    <form id="formEditDetail" class="form-detail-severance">
+                        <input type="hidden" name="SeveranceProcessId" value="@Model.SeveranceProcessId" />
+                        <input type="hidden" name="EmployeeId" value="@Model.EmployeeId" />
+                        <input type="hidden" name="RecId" id="DetailRecId" value="@Model.RecId" />
+                        <!-- Campos de auditoría -->
+                        <input type="hidden" id="DetailDataAreaId" value="@Model.DataAreaId" />
+                        <input type="hidden" id="DetailCreatedBy" value="@Model.CreatedBy" />
+                        <input type="hidden" id="DetailCreatedOn" value="@Model.CreatedOn.ToString("o")" />
+                        <input type="hidden" id="DetailModifiedBy" value="@Model.ModifiedBy" />
+                        <input type="hidden" id="DetailModifiedOn" value="@Model.ModifiedOn.ToString("o")" />
+
+                        <!-- Datos del empleado -->
+                        <div class="contenidoNuevoGasto2">
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Nº de Personal</label>
+                                    <div class="anchoimput">
+                                        <input type="text" class="form-control" value="@Model.EmployeeId" readonly />
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Nombre</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="EmployeeName" class="form-control" value="@Model.EmployeeName" readonly />
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Documento</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="Document" class="form-control" value="@Model.Document" readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Fecha inicial empleo</label>
+                                    <div class="anchoimput">
+                                        <input type="datetime-local" name="StartWorkDate" class="form-control" value="@Model.StartWorkDate.ToString("yyyy-MM-ddTHH:mm")" />
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Fecha final empleo</label>
+                                    <div class="anchoimput">
+                                        <input type="datetime-local" name="EndWorkDate" class="form-control" value="@Model.EndWorkDate.ToString("yyyy-MM-ddTHH:mm")" />
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Tiempo Laborando</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="TiempoLaborando" class="form-control" value="@Model.TiempoLaborando" readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Frecuencia de pago</label>
+                                    <div class="anchoimput">
+                                        @{
+                                            var payFreqValue = (int)Model.PayFrecuency;
+                                        }
+                                        <select name="PayFrecuency" class="form-control" required>
+                                            <option value="-1" selected="@(payFreqValue == -1)">Seleccione...</option>
+                                            <option value="4" selected="@(payFreqValue == 4)">Mensual</option>
+                                            <option value="3" selected="@(payFreqValue == 3)">Quincenal</option>
+                                            <option value="1" selected="@(payFreqValue == 1)">Semanal</option>
+                                            <option value="0" selected="@(payFreqValue == 0)">Diario</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Tipo de cálculo</label>
+                                    <div class="anchoimput">
+                                        @{
+                                            var salCalcValue = Model.SalaryCalculationType;
+                                        }
+                                        <select name="SalaryCalculationType" class="form-control" required>
+                                            <option value="-1" selected="@(salCalcValue == -1)">Seleccione...</option>
+                                            <option value="0" selected="@(salCalcValue == 0)">Ordinario</option>
+                                            <option value="1" selected="@(salCalcValue == 1)">Intermitente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Vacaciones Pendientes</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="DiasVacaciones" class="form-control plugin-number-format" value="@Model.DiasVacaciones.ToString("N2")" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Totales de Salarios -->
+                        <div class="contenidoNuevoGasto2">
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Sumatoria de los salarios</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="SumaSalarios" class="form-control plugin-number-format" value="@Model.SumaSalarios.ToString("N2")" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Salario promedio mensual</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="SalarioPromedioMensual" class="form-control plugin-number-format" value="@Model.SalarioPromedioMensual.ToString("N2")" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Salario promedio diario</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="SalarioPromedioDiario" class="form-control plugin-number-format" value="@Model.SalarioPromedioDiario.ToString("N2")" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Toggles: Preaviso, Cesantía, Vacaciones -->
+                        <div class="contenidoNuevoGasto2 sev-toggles-row">
+                            <div class="contInterNuevoConteGastos sev-toggle-group">
+                                <div class="contlotes-toggle">
+                                    <label class="control-label">¿Ha sido usted pre-avisado?</label>
+                                    <label class="switch">
+                                        <input type="checkbox" name="WasNotified" @(Model.WasNotified ? "checked" : "") />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input type="text" name="MontoPreaviso" class="form-control plugin-number-format sev-monto-input" value="@Model.MontoPreaviso.ToString("N2")" />
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos sev-toggle-group">
+                                <div class="contlotes-toggle">
+                                    <label class="control-label">¿Desea incluir cesantía?</label>
+                                    <label class="switch">
+                                        <input type="checkbox" name="IncludeCesantia" @(Model.IncludeCesantia ? "checked" : "") />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input type="text" name="MontoCesantia" class="form-control plugin-number-format sev-monto-input" value="@Model.MontoCesantia.ToString("N2")" />
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos sev-toggle-group">
+                                <div class="contlotes-toggle">
+                                    <label class="control-label">¿Ha tomado las vacaciones?</label>
+                                    <label class="switch">
+                                        <input type="checkbox" name="TookVacations" @(Model.TookVacations ? "checked" : "") />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input type="text" name="MontoVacaciones" class="form-control plugin-number-format sev-monto-input" value="@Model.MontoVacaciones.ToString("N2")" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Toggle Navidad y Total -->
+                        <div class="contenidoNuevoGasto2 sev-toggles-row">
+                            <div class="contInterNuevoConteGastos sev-toggle-group">
+                                <div class="contlotes-toggle">
+                                    <label class="control-label">¿Incluir salario de navidad?</label>
+                                    <label class="switch">
+                                        <input type="checkbox" name="IncludeNavidad" @(Model.IncludeNavidad ? "checked" : "") />
+                                        <span class="slider round"></span>
+                                    </label>
+                                    <input type="text" name="MontoNavidad" class="form-control plugin-number-format sev-monto-input" value="@Model.MontoNavidad.ToString("N2")" />
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+                                <div class="contlotes">
+                                    <label class="control-label ancholabel">Total a Recibir</label>
+                                    <div class="anchoimput">
+                                        <input type="text" name="TotalARecibir" class="form-control plugin-number-format sev-total-input" value="@Model.TotalARecibir.ToString("N2")" readonly />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="contInterNuevoConteGastos">
+                                <!-- Espacio vacío para alineación -->
+                            </div>
+                        </div>
+
+                        <!-- Sección de Salarios Mensuales (al final) -->
+                        <div class="sev-salarios-section">
+                            <table class="sev-salarios-table">
+                                <thead>
+                                    <tr>
+                                        <th class="sev-col-mes">#</th>
+                                        <th class="sev-col-salario">Salarios</th>
+                                        <th class="sev-col-comision">Comisiones</th>
+                                        <th class="sev-col-total">Totales</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="sev-mes-num">1</td>
+                                        <td><input type="text" name="SalarioMes1" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes1.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes1" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes1.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes1 + Model.ComisionMes1).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">2</td>
+                                        <td><input type="text" name="SalarioMes2" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes2.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes2" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes2.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes2 + Model.ComisionMes2).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">3</td>
+                                        <td><input type="text" name="SalarioMes3" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes3.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes3" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes3.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes3 + Model.ComisionMes3).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">4</td>
+                                        <td><input type="text" name="SalarioMes4" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes4.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes4" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes4.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes4 + Model.ComisionMes4).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">5</td>
+                                        <td><input type="text" name="SalarioMes5" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes5.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes5" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes5.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes5 + Model.ComisionMes5).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">6</td>
+                                        <td><input type="text" name="SalarioMes6" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes6.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes6" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes6.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes6 + Model.ComisionMes6).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">7</td>
+                                        <td><input type="text" name="SalarioMes7" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes7.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes7" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes7.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes7 + Model.ComisionMes7).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">8</td>
+                                        <td><input type="text" name="SalarioMes8" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes8.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes8" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes8.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes8 + Model.ComisionMes8).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">9</td>
+                                        <td><input type="text" name="SalarioMes9" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes9.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes9" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes9.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes9 + Model.ComisionMes9).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">10</td>
+                                        <td><input type="text" name="SalarioMes10" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes10.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes10" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes10.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes10 + Model.ComisionMes10).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">11</td>
+                                        <td><input type="text" name="SalarioMes11" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes11.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes11" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes11.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes11 + Model.ComisionMes11).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="sev-mes-num">12</td>
+                                        <td><input type="text" name="SalarioMes12" class="form-control sev-input-salario plugin-number-format" value="@Model.SalarioMes12.ToString("N2")" /></td>
+                                        <td><input type="text" name="ComisionMes12" class="form-control sev-input-salario plugin-number-format" value="@Model.ComisionMes12.ToString("N2")" /></td>
+                                        <td><input type="text" class="form-control sev-input-total sev-total-mes" value="@((Model.SalarioMes12 + Model.ComisionMes12).ToString("N2"))" readonly /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

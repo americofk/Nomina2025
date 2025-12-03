@@ -176,6 +176,19 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Obtiene todos los proyectos activos para dropdown.
+        /// </summary>
+        /// <returns>Lista de proyectos en formato JSON.</returns>
+        [HttpGet("getall")]
+        public async Task<JsonResult> GetAll()
+        {
+            GetdataUser();
+            process = new ProcessProject(dataUser[0]);
+            var model = await process.GetAllDataAsync();
+            return Json(model);
+        }
+
+        /// <summary>
         /// Obtiene un registro por su ID para el modal de auditoría.
         /// </summary>
         /// <param name="ProjId">Identificador del proyecto.</param>

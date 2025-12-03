@@ -9,6 +9,7 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum PayFrecuency
     {
+        NotSelected = -1,
         Diary = 0,
         Weekly = 1,
         TwoWeekly = 2,

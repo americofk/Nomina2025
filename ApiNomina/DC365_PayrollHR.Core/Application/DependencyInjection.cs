@@ -52,7 +52,9 @@ using DC365_PayrollHR.Core.Application.CommandsAndQueries.Provinces;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.Reports;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.ReportsTXT;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.TaxDetails;
+using DC365_PayrollHR.Core.Application.CommandsAndQueries.SeveranceProcesses;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.Taxes;
+using DC365_PayrollHR.Core.Domain.Entities;
 using DC365_PayrollHR.Core.Application.CommandsAndQueries.Users;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model.CompanyAssignedToUsers;
@@ -186,6 +188,10 @@ namespace DC365_PayrollHR.Core.Application
 
                 services.AddScoped<IAuditLogQueryHandler, AuditLogQueryHandler>();
 
+                #region SeveranceProcess
+                services.AddScoped<IQueryHandler<SeveranceProcess>, SeveranceProcessQueryHandler>();
+                #endregion
+
             //services.AddScoped<IQueryWithSearchHandler<Loan>, LoanQueryHandler>();
             #endregion
 
@@ -250,8 +256,12 @@ namespace DC365_PayrollHR.Core.Application
 
                 services.AddScoped<ICalendarHolidayCommandHandler, CalendarHolidayCommandHandler>(); 
                 services.AddScoped<IGeneralConfigCommandHandler, GeneralConfigCommandHandler>(); 
-                services.AddScoped<IReportCommandHandler, ReportCommandHandler>(); 
-            
+                services.AddScoped<IReportCommandHandler, ReportCommandHandler>();
+
+                #region SeveranceProcess
+                services.AddScoped<ISeveranceProcessCommandHandler, SeveranceProcessCommandHandler>();
+                #endregion
+
 
             #endregion
 

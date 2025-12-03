@@ -61,93 +61,77 @@
 
                     <div class="contInterNuevoConteGastos">
                         <div class="contlotes Showid collapse">
-
                             <label class="control-label ancholabel">Id. Nómina</label>
                             <div class="anchoimput">
                                 <input asp-for="PayrollId" class="form-control PayrollId" readonly="readonly" />
-                                <span asp-validation-for="PayrollId" class="text-danger"></span>
                             </div>
-
                         </div>
                         <div class="contlotes">
                             <label class="control-label ancholabel">Nombre de nómina</label>
                             <div class="anchoimput">
                                 <input asp-for="Name" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
-
                         </div>
                         <div class="contlotes">
                             <label class="control-label ancholabel">Frecuencia de pago</label>
                             <div class="anchoimput">
                                 <select asp-for="PayFrecuency" class="form-control" asp-items="Html.GetEnumSelectList<PayFrecuency>()">
                                 </select>
-                                <span asp-validation-for="PayFrecuency" class="text-danger"></span>
                             </div>
-
                         </div>
                         <div class="contlotes">
                             <label class="control-label ancholabel">Moneda</label>
                             <div class="anchoimput">
-
                                 @Html.DropDownList("CurrencyId", currencies, "Seleccione...", new { @class = "form-control" })
-
-                                <span asp-validation-for="CurrencyId" class="text-danger"></span>
                             </div>
-                           
                         </div>
-                        <div class="contlotes">
-                            <label class="control-label ancholabel">¿Nómina de regalia?</label>
-
-                            <div class="anchoimput">
-                                <label class="switch">
-                                    <input asp-for="IsRoyaltyPayroll" />
-                                    <span class="slider round"></span>
-                                </label>
-                            </div>
-
-                        </div>
-                        
                     </div>
                     <div class="contInterNuevoConteGastos">
                         <div class="contlotes">
                             <label class="control-label ancholabel">Fecha inicial de pago</label>
-                            <div>
-
+                            <div class="anchoimput">
                                 <div class="app-input-date">
                                     <input asp-for="ValidFrom" class="form-control" />
                                     <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
                                     <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
-
                                 </div>
-                                <span asp-validation-for="ValidFrom" class="text-danger"></span>
                             </div>
-
                         </div>
                         <div class="contlotes">
                             <label class="control-label ancholabel">Fecha final de pago</label>
-                            <div>
-
+                            <div class="anchoimput">
                                 <div class="app-input-date">
                                     <input asp-for="ValidTo" class="form-control" />
                                     <i class="app-input-date-today fa fa-edit " title="Hoy"></i>
                                     <i class="app-input-date-never fa fa-hourglass-o " title="Nunca"></i>
                                 </div>
-                                <span asp-validation-for="ValidTo" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="contlotes">
                             <label class="control-label ancholabel">Secuencia de banco</label>
                             <div class="anchoimput">
                                 <input asp-for="BankSecuence" class="form-control" />
-                                <span asp-validation-for="BankSecuence" class="text-danger"></span>
                             </div>
-
                         </div>
-
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">Descripción</label>
+                            <div class="anchoimput">
+                                <input asp-for="Description" class="form-control" placeholder="Máximo 100 caracteres" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contInterNuevoConteGastos">
+                        <div class="contlotes">
+                            <label class="control-label ancholabel">¿Nómina de regalía?</label>
+                            <div class="anchoimput">
+                                <label class="switch">
+                                    <input asp-for="IsRoyaltyPayroll" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
                         <div class="contlotes">
                             <label class="control-label ancholabel">¿Nómina por hora?</label>
-
                             <div class="anchoimput">
                                 <label class="switch">
                                     <input asp-for="IsForHourPayroll" />
@@ -155,19 +139,6 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
-                    <div class="contInterNuevoConteGastos">
-                        <div class="contlotes">
-                            <label class="control-label ancholabel">Descripción</label>
-                            <div class="anchoimput">
-                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Máximo 100 caracteres"></textarea>
-                                <span asp-validation-for="Description" class="text-danger"></span>
-                            </div>
-
-                        </div>
-                       
-
-                        
                     </div>
                 </form>
 

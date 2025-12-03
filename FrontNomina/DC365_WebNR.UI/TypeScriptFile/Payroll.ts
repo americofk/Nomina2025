@@ -322,21 +322,26 @@ escuchadores: {
                             });
                         windows_message(data.Message, data.Type);
 
-                        // Si era creacion y se devolvio el objeto, cambiar a modo edicion
-                        if (option === 1 && data.Obj && data.Obj.PayrollId) {
-                            $('#PayrollId').val(data.Obj.PayrollId);
-                            option = 2;
-                            $('.Showid').removeClass('collapse');
-                            $('.seteartitulo').text('Editar nomina');
-                        }
-
-
                         if (shouldCloseAfterSave) {
                             fn.funtionNewPayroll("close");
                             shouldCloseAfterSave = false;
-                        } else if (option == 1) {
-                            $('.PayrollId').val(a.PayrollId);
-                            fn.SettingsNewAndEdit("edit");
+                        } else if (option === 1 && data.Obj && data.Obj.PayrollId) {
+                            // Si era creacion y se devolvio el objeto, cambiar a modo edicion
+                            $('#PayrollId').val(data.Obj.PayrollId);
+                            $('.PayrollIdPayCycle').val(data.Obj.PayrollId);
+                            option = 2;
+                            // Mostrar contenedor de ciclos de pago y cargar ciclos
+                            $('.contenedor-paycycle').removeClass('collapse');
+                            $('.Showid').removeClass('collapse');
+                            $('.seteartitulo').text('Editar nómina');
+                            fn.SearchListPayCycle(data.Obj.PayrollId);
+                            // Configurar modo edicion
+                            $("#CurrencyId").prop("disabled", true);
+                            $("#PayFrecuency").prop("disabled", "disabled");
+                            $("#ValidFrom").prop("readonly", "readonly");
+                            $("#ValidFrom").addClass("disabledDate");
+                            $("#toggle-title").attr("data-value", "1");
+                            $("#toggle-title").removeClass("collapse");
                         }
                     }
 

@@ -90,5 +90,7 @@ namespace DC365_PayrollHR.Core.Domain.Consts
         public const string GeneralConfig = "";
 
         public const string AuditLog = "MENU-0069";
+
+        public const string SeveranceProcess = "MENU-0070";
     }
 }

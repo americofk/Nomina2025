@@ -1,0 +1,955 @@
+/**
+ * SeveranceProcess.css
+ * Estilos para el modulo de Prestaciones Laborales (Severance Process)
+ * @author Equipo de Desarrollo
+ * @date 2025
+ */
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL OPEN PROCESS
+   ========================================== */
+.severance-open-container {
+    padding: 15px 20px;
+}
+
+/* ==========================================
+   SECCION INFO PROCESO - 3 COLUMNAS
+   ========================================== */
+.sev-info-section {
+    background-color: #f0f0f0;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+}
+
+.sev-info-row {
+    display: flex;
+    gap: 30px;
+}
+
+.sev-info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sev-info-col-desc {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sev-field {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sev-field label {
+    font-size: 12px;
+    color: #555;
+    min-width: 110px;
+}
+
+.sev-field input.form-control {
+    width: 180px;
+    height: 30px;
+    font-size: 13px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+}
+
+.sev-label-center {
+    font-size: 12px;
+    color: #555;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.sev-info-col-desc input.form-control {
+    width: 100%;
+    height: 30px;
+    font-size: 13px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+/* ==========================================
+   TITULO DETALLES Y TOOLBAR
+   ========================================== */
+.sev-details-title {
+    font-size: 13px;
+    color: #555;
+    margin: 15px 0 5px 0;
+}
+
+.sev-toolbar-gray {
+    background-color: #337ab7;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    min-height: 28px;
+}
+
+.sev-btn {
+    background-color: transparent;
+    border: none;
+    padding: 3px 10px;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.sev-btn:hover {
+    opacity: 0.8;
+}
+
+.sev-btn i {
+    color: #fff;
+    font-size: 14px;
+}
+
+
+/* ==========================================
+   INFORMACION DEL PROCESO
+   ========================================== */
+.severance-process-info {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+}
+
+.process-info-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.process-info-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.process-info-field label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.process-info-field input {
+    min-width: 150px;
+    height: 34px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 6px 10px;
+    font-size: 13px;
+    background-color: #fff;
+}
+
+.process-info-field .input-readonly {
+    background-color: #eaeaea;
+}
+
+.process-info-field-description {
+    flex: 1;
+    min-width: 300px;
+}
+
+.process-info-field-description input {
+    width: 100%;
+}
+
+/* ==========================================
+   SECCION DE DETALLES DE EMPLEADOS
+   ========================================== */
+.severance-details-section {
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 15px;
+}
+
+.section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* ==========================================
+   TOOLBAR DE DETALLES
+   ========================================== */
+.details-toolbar {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-toolbar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 400;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-toolbar:hover {
+    background-color: #f5f5f5;
+    border-color: #999;
+}
+
+.btn-toolbar i {
+    font-size: 13px;
+    color: #666;
+}
+
+/* ==========================================
+   TABLA DE DETALLES - HEADER AZUL
+   ========================================== */
+.tblSeveranceDetails .severance-header-row {
+    background-color: #2c5282 !important;
+}
+
+.tblSeveranceDetails .severance-header-row .cell-header-app {
+    background-color: #2c5282 !important;
+    color: #fff !important;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: none;
+    padding: 10px 8px;
+    border-bottom: none;
+}
+
+.tblSeveranceDetails .total-cell {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+.tblSeveranceDetails .cell-app-number {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.tblSeveranceDetails .row-app {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.tblSeveranceDetails .row-app:hover {
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   ESTILOS PARA CABECERA ANTERIOR (si se usa)
+   ========================================== */
+.severance-header {
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+}
+
+.severance-header-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.severance-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.severance-field label {
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.severance-field input {
+    min-width: 120px;
+    max-width: 200px;
+}
+
+.severance-field-wide {
+    flex: 1;
+    min-width: 250px;
+}
+
+.severance-field-wide input {
+    max-width: none;
+    width: 100%;
+}
+
+/* ==========================================
+   TARJETAS DE TOTALES (version anterior)
+   ========================================== */
+.severance-cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.severance-card {
+    background-color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid #3498db;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.severance-card:nth-child(1) {
+    border-left-color: #e67e22;
+}
+
+.severance-card:nth-child(2) {
+    border-left-color: #9b59b6;
+}
+
+.severance-card:nth-child(3) {
+    border-left-color: #1abc9c;
+}
+
+.severance-card:nth-child(4) {
+    border-left-color: #e74c3c;
+}
+
+.severance-card-total {
+    border-left-color: #27ae60;
+    background-color: #f8fff8;
+}
+
+.severance-card-label {
+    font-size: 11px;
+    color: #666;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.severance-card-value {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+}
+
+.severance-card-total .severance-card-value {
+    color: #27ae60;
+}
+
+/* ==========================================
+   MODAL DE DETALLE DE EMPLEADO
+   ========================================== */
+.severance-section {
+    background-color: #f9f9f9;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.severance-section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* ==========================================
+   FILAS DE CONCEPTOS (SWITCH + MONTO)
+   ========================================== */
+.severance-concept-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.severance-concept-row:last-child {
+    border-bottom: none;
+}
+
+.severance-switch-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+    min-width: 300px;
+}
+
+.severance-amount,
+.severance-days {
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+}
+
+.severance-amount label,
+.severance-days label {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.severance-amount input,
+.severance-days input {
+    text-align: right;
+}
+
+/* ==========================================
+   SWITCH TOGGLE STYLES
+   ========================================== */
+.switch-label {
+    font-size: 13px;
+    color: #333;
+    flex: 1;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.3s;
+}
+
+input:checked + .slider {
+    background-color: #27ae60;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #27ae60;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* ==========================================
+   SECCION DE TOTAL
+   ========================================== */
+.severance-total-section {
+    background-color: #f0f9f0;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 2px solid #27ae60;
+}
+
+.severance-total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.severance-total label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #27ae60;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.severance-total .total-input {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    color: #27ae60;
+    background-color: #fff;
+    border: 2px solid #27ae60;
+    border-radius: 6px;
+    padding: 10px 20px;
+    max-width: 250px;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 1400px) {
+    .severance-summary-cards {
+        flex-wrap: wrap;
+    }
+
+    .summary-card {
+        min-width: calc(33% - 10px);
+    }
+}
+
+@media (max-width: 1200px) {
+    .severance-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .summary-card {
+        min-width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .severance-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .severance-header-info {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .severance-field {
+        width: 100%;
+    }
+
+    .severance-field input {
+        max-width: none;
+        width: 100%;
+    }
+
+    .severance-concept-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .severance-switch-group {
+        min-width: auto;
+    }
+
+    .process-info-row {
+        flex-direction: column;
+    }
+
+    .process-info-field {
+        width: 100%;
+    }
+
+    .process-info-field input {
+        width: 100%;
+    }
+
+    .summary-card {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .severance-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .details-toolbar {
+        flex-direction: column;
+    }
+
+    .btn-toolbar {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================
+   LISTPAGE STYLES
+   ========================================== */
+.tblSeveranceProcess .cell-app-number {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.tblSeveranceProcess .TotalGeneralTbl {
+    font-weight: 600;
+    color: #27ae60;
+}
+
+/* Row clickable style */
+.row-clickable {
+    cursor: pointer;
+}
+
+.row-clickable:hover {
+    background-color: #f5f5f5;
+}
+
+/* ==========================================
+   MODAL STYLES
+   ========================================== */
+#ModalDetailSeveranceProcess .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+#ModalDetailSeveranceProcess .form-control[readonly] {
+    background-color: #f8f9fa;
+}
+
+/* Modal Agregar Empleado */
+.modal-AddEmployee {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1050;
+}
+
+.modal-AddEmployee .ContenModal-contact {
+    position: relative;
+    margin: 100px auto;
+    width: 400px;
+    max-width: 90%;
+}
+
+.modal-AddEmployee .modal-content {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-AddEmployee .modal-options {
+    padding: 0;
+}
+
+.modal-AddEmployee .TinyModal-add-employee {
+    padding: 20px;
+}
+
+.modal-AddEmployee .TituloEstandar {
+    margin: 0 0 15px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.modal-AddEmployee .cont-input-newform-col1 {
+    margin-bottom: 15px;
+}
+
+.modal-AddEmployee .contlotesmploye {
+    margin-bottom: 15px;
+}
+
+.modal-AddEmployee .labelModEmployeComen {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #555;
+}
+
+.modal-AddEmployee .contbtn-tinymodal {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.modal-AddEmployee .modal-header-title {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+}
+
+/* ==========================================
+   STATUS BADGES
+   ========================================== */
+.status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.status-badge-created {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+.status-badge-calculated {
+    background-color: #fff3e0;
+    color: #e65100;
+}
+
+.status-badge-closed {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
+
+.status-badge-cancelled {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+/* ==========================================
+   MODAL EDITAR DETALLE - VENTANA FLOTANTE
+   ========================================== */
+.modal-sev-detail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1060;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 50px;
+    overflow: hidden;
+}
+
+.modal-sev-detail-content {
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    width: 95%;
+    max-width: 1100px;
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    margin: 0 auto;
+}
+
+.modal-sev-detail .opcioneslistpageForm {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-radius: 4px 4px 0 0;
+}
+
+.modal-sev-detail .contNewEntyti {
+    padding: 8px 15px;
+}
+
+.modal-sev-detail .x_panel {
+    margin-bottom: 0;
+    box-shadow: none;
+}
+
+.modal-sev-detail .x_content {
+    padding: 0;
+}
+
+/* Estilos para toggles en fila */
+.sev-toggles-row {
+    margin-top: 2px;
+}
+
+.sev-toggle-group {
+    flex: 1;
+}
+
+.contlotes-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 3px 0;
+}
+
+.contlotes-toggle .control-label {
+    font-size: 11px;
+    color: #555;
+    min-width: 160px;
+    flex-shrink: 0;
+}
+
+.contlotes-toggle .switch {
+    flex-shrink: 0;
+}
+
+.sev-monto-input {
+    width: 110px !important;
+    text-align: right;
+}
+
+.sev-total-input {
+    font-weight: bold;
+    color: #27ae60 !important;
+    background-color: #f0fff0 !important;
+}
+
+/* Separación para el campo Total a Recibir */
+.sev-toggles-row .contInterNuevoConteGastos:has(.sev-total-input) {
+    padding-left: 20px;
+}
+
+.sev-toggles-row .contInterNuevoConteGastos:has(.sev-total-input) .contlotes {
+    border-left: 2px solid #27ae60;
+    padding-left: 15px;
+}
+
+/* El modal de detalle está oculto inicialmente */
+.modal-sev-detail {
+    display: none;
+}
+
+/* Formulario compacto dentro del modal */
+.modal-sev-detail .form-detail-severance .contenidoNuevoGasto2 {
+    margin-bottom: 4px;
+}
+
+.modal-sev-detail .form-detail-severance .contlotes {
+    margin-bottom: 3px;
+}
+
+.modal-sev-detail .form-detail-severance .control-label {
+    font-size: 11px;
+    margin-bottom: 2px;
+}
+
+.modal-sev-detail .form-detail-severance .form-control {
+    height: 28px;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+.modal-sev-detail .form-detail-severance select.form-control {
+    height: 28px;
+}
+
+.modal-sev-detail .ContenedorFormularios2 {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.modal-sev-detail .x_panel {
+    padding: 0;
+    border: none;
+}
+
+/* ==========================================
+   TABLA DE SALARIOS MENSUALES
+   ========================================== */
+.sev-salarios-section {
+    margin: 5px 0 0 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.sev-salarios-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.sev-salarios-table thead {
+    background-color: #f5f5f5;
+}
+
+.sev-salarios-table th {
+    padding: 6px 5px;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+}
+
+.sev-salarios-table td {
+    padding: 2px 4px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.sev-salarios-table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+.sev-col-mes {
+    width: 30px;
+    text-align: center;
+}
+
+.sev-col-salario,
+.sev-col-comision,
+.sev-col-total {
+    width: calc((100% - 30px) / 3);
+}
+
+.sev-mes-num {
+    font-weight: bold;
+    color: #1a73e8;
+    text-align: center;
+}
+
+.sev-input-salario {
+    height: 24px !important;
+    font-size: 11px !important;
+    padding: 2px 5px !important;
+    text-align: right;
+}
+
+.sev-input-total {
+    height: 24px !important;
+    font-size: 11px !important;
+    padding: 2px 5px !important;
+    text-align: right;
+    background-color: #f5f5f5 !important;
+    font-weight: 500;
+}

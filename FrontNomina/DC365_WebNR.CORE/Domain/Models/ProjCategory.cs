@@ -35,5 +35,17 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// </summary>
         [CustomFilter("Cuenta contable")]
         public string LedgerAccount { get; set; }
+
+        /// <summary>
+        /// Identificador del proyecto asociado.
+        /// </summary>
+        [Required(ErrorMessage = "Proyecto" + ErrorMsg.Emptym)]
+        [CustomFilter("Proyecto")]
+        public string ProjId { get; set; }
+
+        /// <summary>
+        /// Nombre del proyecto (para visualización).
+        /// </summary>
+        public string ProjectName { get; set; }
     }
 }

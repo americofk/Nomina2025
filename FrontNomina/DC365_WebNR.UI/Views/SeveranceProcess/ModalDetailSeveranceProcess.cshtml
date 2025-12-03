@@ -1,0 +1,211 @@
+@model DC365_WebNR.CORE.Domain.Models.SeveranceProcessDetail
+@using DC365_WebNR.CORE.Domain.Models.Enums;
+@{
+    bool isEdit = !string.IsNullOrEmpty(Model.EmployeeId) && Model.RecId > 0;
+    string titleModal = isEdit ? "Editar Calculo de Prestaciones" : "Agregar Empleado a Prestaciones";
+}
+
+<div class="modal fade modal-standard modal-lg" id="ModalDetailSeveranceProcess" data-backdrop="static">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@titleModal</h4>
+                <button type="button" class="close closeModalDetail" data-dismiss="modal">&times;</button>
+            </div>
+            <form id="formDetailSeveranceProcess">
+                <div class="modal-body">
+                    <input type="hidden" asp-for="SeveranceProcessId" />
+                    <input type="hidden" asp-for="RecId" />
+                    <input type="hidden" id="IsEdit" value="@isEdit.ToString().ToLower()" />
+
+                    <!-- Datos del Empleado -->
+                    <div class="severance-section">
+                        <h5 class="severance-section-title">Datos del Empleado</h5>
+                        <div class="row">
+                            @if (!isEdit)
+                            {
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Seleccione Empleado</label>
+                                        <select asp-for="EmployeeId" class="form-control" asp-items="@ViewBag.Employees" required>
+                                            <option value="">-- Seleccione --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <input type="hidden" asp-for="EmployeeId" />
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>No. de Personal</label>
+                                        <input type="text" value="@Model.EmployeeId" class="form-control" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Nombre</label>
+                                        <input type="text" value="@Model.EmployeeName" class="form-control" readonly />
+                                    </div>
+                                </div>
+                            }
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="StartWorkDate">Fecha Inicial Empleo</label>
+                                    <input asp-for="StartWorkDate" type="date" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label asp-for="EndWorkDate">Fecha Final Empleo</label>
+                                    <input asp-for="EndWorkDate" type="date" class="form-control" required />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Configuracion -->
+                    <div class="severance-section">
+                        <h5 class="severance-section-title">Configuracion de Calculo</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="CalculationType">Tipo de Calculo</label>
+                                    <select asp-for="CalculationType" class="form-control" asp-items="Html.GetEnumSelectList<SeveranceCalculationType>()">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tiempo Laborando</label>
+                                    <input type="text" id="TiempoLaborandoDisplay" value="@Model.TiempoLaborando" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Salarios -->
+                    <div class="severance-section">
+                        <h5 class="severance-section-title">Calculo de Salarios</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="SumaSalarios">Suma de Salarios</label>
+                                    <input asp-for="SumaSalarios" type="number" step="0.01" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="SalarioPromedioMensual">Salario Promedio Mensual</label>
+                                    <input asp-for="SalarioPromedioMensual" type="number" step="0.01" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label asp-for="SalarioPromedioDiario">Salario Promedio Diario</label>
+                                    <input asp-for="SalarioPromedioDiario" type="number" step="0.01" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Switches y Montos -->
+                    <div class="severance-section">
+                        <h5 class="severance-section-title">Conceptos a Incluir</h5>
+
+                        <!-- Preaviso -->
+                        <div class="severance-concept-row">
+                            <div class="severance-switch-group">
+                                <label class="switch-label">Ha sido usted pre-avisado?</label>
+                                <label class="switch">
+                                    <input type="checkbox" asp-for="WasNotified" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="severance-amount">
+                                <label>Monto Preaviso</label>
+                                <input asp-for="MontoPreaviso" type="number" step="0.01" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                        <!-- Cesantia -->
+                        <div class="severance-concept-row">
+                            <div class="severance-switch-group">
+                                <label class="switch-label">Desea incluir cesantia?</label>
+                                <label class="switch">
+                                    <input type="checkbox" asp-for="IncludeCesantia" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="severance-amount">
+                                <label>Monto Cesantia</label>
+                                <input asp-for="MontoCesantia" type="number" step="0.01" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                        <!-- Vacaciones -->
+                        <div class="severance-concept-row">
+                            <div class="severance-switch-group">
+                                <label class="switch-label">Ha tomado las vacaciones correspondientes al ultimo anio?</label>
+                                <label class="switch">
+                                    <input type="checkbox" asp-for="TookVacations" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="severance-days">
+                                <label>Dias de Vacaciones</label>
+                                <input asp-for="DiasVacaciones" type="number" class="form-control" />
+                            </div>
+                            <div class="severance-amount">
+                                <label>Monto Vacaciones</label>
+                                <input asp-for="MontoVacaciones" type="number" step="0.01" class="form-control" readonly />
+                            </div>
+                        </div>
+
+                        <!-- Navidad -->
+                        <div class="severance-concept-row">
+                            <div class="severance-switch-group">
+                                <label class="switch-label">Incluir salario de navidad?</label>
+                                <label class="switch">
+                                    <input type="checkbox" asp-for="IncludeNavidad" />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                            <div class="severance-amount">
+                                <label>Monto Navidad</label>
+                                <input asp-for="MontoNavidad" type="number" step="0.01" class="form-control" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total -->
+                    <div class="severance-total-section">
+                        <div class="severance-total">
+                            <label>Total a Recibir</label>
+                            <input asp-for="TotalARecibir" type="number" step="0.01" class="form-control total-input" readonly />
+                        </div>
+                    </div>
+
+                    <!-- Comentarios -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Comments">Comentarios</label>
+                                <textarea asp-for="Comments" class="form-control" rows="2" maxlength="500"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default closeModalDetail" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-info" id="btnCalculateEmployee">
+                        <i class="fa fa-calculator"></i> Calcular
+                    </button>
+                    <button type="submit" class="btn btn-primary" id="btnSaveDetail">
+                        <i class="fa fa-save"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,12 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
         /// <param name="modelBuilder">Parametro modelBuilder.</param>
         public static void ConfigureSequences(ModelBuilder modelBuilder)
         {
+            // Secuencia general para RecId (auditoría)
+            modelBuilder.HasSequence<long>("RecId")
+                .HasMax(999999999999)
+                .HasMin(1)
+                .StartsAt(20260000);
+
             modelBuilder.HasSequence<int>("PayrollId")
                 .HasMax(999999999)
                 .HasMin(1)
@@ -113,6 +119,16 @@ namespace DC365_PayrollHR.Infrastructure.Persistence.Configuration
                 .StartsAt(1);
             
             modelBuilder.HasSequence<int>("EmployeeHistoryId")
+                .HasMax(999999999)
+                .HasMin(1)
+                .StartsAt(1);
+
+            modelBuilder.HasSequence<int>("SeveranceProcessId")
+                .HasMax(999999999)
+                .HasMin(1)
+                .StartsAt(1);
+
+            modelBuilder.HasSequence<int>("SeveranceProcessDetailId")
                 .HasMax(999999999)
                 .HasMin(1)
                 .StartsAt(1);

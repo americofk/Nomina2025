@@ -199,5 +199,27 @@ namespace DC365_WebNR.CORE.Aplication.Services
             }
             return responseUI;
         }
+
+        /// <summary>
+        /// Obtiene las categorías de proyecto filtradas por proyecto.
+        /// </summary>
+        /// <param name="projId">Identificador del proyecto.</param>
+        /// <returns>Lista de categorías del proyecto.</returns>
+        public async Task<List<ProjCategory>> GetByProjectAsync(string projId)
+        {
+            List<ProjCategory> _model = new List<ProjCategory>();
+
+            string urlData = $"{urlsServices.GetUrl("ProjCategoryByProject")}/{projId}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<Response<List<ProjCategory>>>(Api.Content.ReadAsStringAsync().Result);
+                _model = response.Data;
+            }
+
+            return _model;
+        }
     }
 }

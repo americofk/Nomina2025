@@ -303,6 +303,21 @@ namespace DC365_PayrollHR.Core.Application.Common.Interface
         /// </summary>
         public DbSet<AuditLog> AuditLogs { get; set; }
 
+        /// <summary>
+        /// Procesos de Prestaciones Laborales.
+        /// </summary>
+        public DbSet<SeveranceProcess> SeveranceProcesses { get; set; }
+
+        /// <summary>
+        /// Detalles de Prestaciones Laborales por empleado.
+        /// </summary>
+        public DbSet<SeveranceProcessDetail> SeveranceProcessDetails { get; set; }
+
+        /// <summary>
+        /// Vista de información de prestaciones (View_SeveranceInfo).
+        /// </summary>
+        public DbSet<ViewSeveranceInfo> ViewSeveranceInfo { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 
         /// <summary>

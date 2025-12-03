@@ -301,6 +301,19 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
             var objectresult = await _CommandHandler.UpdateStatus(id, true);
             return StatusCode(objectresult.StatusHttp, objectresult);
         }
+
+        /// <summary>
+        /// Obtiene las categorías de proyecto filtradas por proyecto.
+        /// </summary>
+        /// <param name="projId">Identificador del proyecto.</param>
+        /// <returns>Lista de categorías del proyecto.</returns>
+        [HttpGet("byproject/{projId}")]
+        [AuthorizePrivilege(MenuId = MenuConst.ProjCategoryEnabled, View = true)]
+        public async Task<ActionResult> GetByProject(string projId)
+        {
+            var objectresult = await _CommandHandler.GetByProject(projId);
+            return StatusCode(objectresult.StatusHttp, objectresult);
+        }
     }
 
 }

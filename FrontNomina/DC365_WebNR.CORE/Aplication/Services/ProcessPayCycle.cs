@@ -35,7 +35,7 @@ namespace DC365_WebNR.CORE.Aplication.Services
         /// <param name="_PageNumber">Parametro _PageNumber.</param>
         /// <param name="PageSize">Parametro PageSize.</param>
         /// <returns>Resultado de la operacion.</returns>
-        public async Task<IEnumerable<PayCycle>> GetAllDataAsync(string Payrollid,int _PageNumber = 1, int PageSize=20)
+        public async Task<IEnumerable<PayCycle>> GetAllDataAsync(string Payrollid,int _PageNumber = 1, int PageSize=200)
         {
             List<PayCycle> courseType = new List<PayCycle>();
 

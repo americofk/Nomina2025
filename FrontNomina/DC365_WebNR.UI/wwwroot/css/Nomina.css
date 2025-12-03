@@ -1,4 +1,4 @@
-﻿
+
 .li-input {
     padding: 3px 15px 8px 15px !important;
     width: 155px;
@@ -17,10 +17,9 @@
 }
 
 .show-header {
-    height: 283px;
+    height: 240px;
     transition: all 1s cubic-bezier(0, 0, 0.2, 1);
     overflow-y: hidden;
-  
 }
 
 .hide-header {

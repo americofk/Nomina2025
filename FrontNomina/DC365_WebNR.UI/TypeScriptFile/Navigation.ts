@@ -354,6 +354,11 @@ $('.auditoria').on('click', function () {
     window.location.href = "/auditoria#Configuración";
 });
 
+//ir al módulo de prestaciones laborales
+$('.prestacioneslaborales').on('click', function () {
+    window.location.href = "/prestacioneslaborales#Recursos%20humanos";
+});
+
 //ir al reporte de todos los empleados
 $('.report-all-employee').on('click', function () {
     window.open("/reportes/reporteempleados", '_blank');

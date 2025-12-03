@@ -591,6 +591,11 @@ const fn= {
 
     SettingNewAndEdit: function (viewmode: string) {
         fn.ChangeOptionsDesign();
+
+        // Inicializar filtro de categorías por proyecto
+        // Usar window para acceder a la función global desde módulo ES6
+        (window as any).filterProjCategoryByProject('#ProjId', '#ProjCategory');
+
         if (viewmode == "edit") {
             $('.seteartitulo').text('Editar código de descuento');
             $('.Showid').removeClass('collapse');

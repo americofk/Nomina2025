@@ -23,7 +23,7 @@ namespace DC365_PayrollHR.Infrastructure.Persistence
         public ApplicationDBContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDBContext>();
-            optionsBuilder.UseSqlServer("Server=.;Database=DC365_PayrollDataApp;Trusted_Connection=true;TrustServerCertificate=true;");
+            optionsBuilder.UseSqlServer("Server=Localhost;Database=RH-365;Trusted_Connection=true;TrustServerCertificate=true;");
 
             // Use a mock user information for design-time
             var mockUserInfo = new DesignTimeUserInformation();

@@ -320,6 +320,11 @@ namespace DC365_WebNR.INFRASTRUCTURE.Services
                     UrlResponse = $"{urlBaseOne}projcategories/disabled";
                     break;
 
+                //Categoría de proyectos por proyecto
+                case "ProjCategoryByProject":
+                    UrlResponse = $"{urlBaseOne}projcategories/byproject";
+                    break;
+
                 //PayCycle
                 case "PayCycle":
                     UrlResponse = $"{urlBaseOne}paycycle";
@@ -386,6 +391,11 @@ namespace DC365_WebNR.INFRASTRUCTURE.Services
                 //Registros de auditoría
                 case "AuditLogs":
                     UrlResponse = $"{urlBaseOne}auditlogs";
+                    break;
+
+                //Proceso de prestaciones laborales
+                case "SeveranceProcess":
+                    UrlResponse = $"{urlBaseOne}severanceprocess/enabled";
                     break;
             }
 

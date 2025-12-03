@@ -68,8 +68,15 @@
 
                             </div>
 
-
-
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Proyecto <span class="text-danger">*</span></label>
+                                <div class="anchoimput">
+                                    <select asp-for="ProjId" class="form-control selectProjects">
+                                        <option value="">Seleccione un proyecto</option>
+                                    </select>
+                                    <span asp-validation-for="ProjId" class="text-danger"></span>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="contInterNuevoConteGastos">

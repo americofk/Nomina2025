@@ -733,3 +733,79 @@ function enableRowDoubleClick(
     }
 }
 
+// ============================================================================
+// Función para filtrar categorías de proyecto por proyecto seleccionado
+// Se usa en formularios que tienen dropdowns de Proyecto y Categoría de Proyecto
+// ============================================================================
+function filterProjCategoryByProject(projectSelector: string = '#ProjId', categorySelector: string = '#ProjCategory') {
+    // Guardar el valor actual de categoría (para modo edición)
+    let currentCategoryValue = $(categorySelector).val() as string;
+
+    // Escuchar cambios en el dropdown de proyecto
+    $(projectSelector).off('change.projCategoryFilter').on('change.projCategoryFilter', function () {
+        let projId = $(this).val() as string;
+        let categoryDropdown = $(categorySelector);
+
+        // Limpiar categorías actuales y agregar opción por defecto
+        categoryDropdown.html('<option value="">Seleccione...</option>');
+
+        if (projId && projId !== '') {
+            // Obtener categorías filtradas por proyecto
+            $.ajax({
+                url: `/categoriaproyectoactivas/byproject/${projId}`,
+                type: "GET",
+                async: true,
+                success: function (data: any[]) {
+                    if (data && data.length > 0) {
+                        data.forEach(function (category: any) {
+                            let option = $('<option></option>');
+                            // El frontend usa PascalCase (PropertyNamingPolicy = null en Startup.cs)
+                            option.val(category.ProjCategoryId);
+                            option.text(category.CategoryName);
+                            categoryDropdown.append(option);
+                        });
+                    }
+                },
+                error: function (xhr) {
+                    console.error("Error al cargar categorías de proyecto");
+                }
+            });
+        }
+    });
+
+    // Si hay un proyecto preseleccionado (modo edición), cargar sus categorías
+    let initialProjId = $(projectSelector).val() as string;
+    if (initialProjId && initialProjId !== '') {
+        $.ajax({
+            url: `/categoriaproyectoactivas/byproject/${initialProjId}`,
+            type: "GET",
+            async: true,
+            success: function (data: any[]) {
+                let categoryDropdown = $(categorySelector);
+                categoryDropdown.html('<option value="">Seleccione...</option>');
+
+                if (data && data.length > 0) {
+                    data.forEach(function (category: any) {
+                        let option = $('<option></option>');
+                        // El frontend usa PascalCase (PropertyNamingPolicy = null en Startup.cs)
+                        option.val(category.ProjCategoryId);
+                        option.text(category.CategoryName);
+                        categoryDropdown.append(option);
+                    });
+
+                    // Restaurar el valor seleccionado previamente
+                    if (currentCategoryValue && currentCategoryValue !== '') {
+                        categoryDropdown.val(currentCategoryValue);
+                    }
+                }
+            },
+            error: function (xhr) {
+                console.error("Error al cargar categorías de proyecto");
+            }
+        });
+    }
+}
+
+// Exponer funciones necesarias para módulos ES6 en el objeto window
+(window as any).filterProjCategoryByProject = filterProjCategoryByProject;
+

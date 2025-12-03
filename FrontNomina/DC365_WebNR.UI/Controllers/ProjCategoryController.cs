@@ -243,5 +243,19 @@ namespace DC365_WebNR.UI.Controllers
 
             return PartialView("ProjCategoryFilteOrMoreData", model);
         }
+
+        /// <summary>
+        /// Obtiene las categorías de proyecto filtradas por proyecto.
+        /// </summary>
+        /// <param name="projId">Identificador del proyecto.</param>
+        /// <returns>Lista de categorías del proyecto.</returns>
+        [HttpGet("byproject/{projId}")]
+        public async Task<JsonResult> GetByProject(string projId)
+        {
+            GetdataUser();
+            process = new ProcessProjCategory(dataUser[0]);
+            var model = await process.GetByProjectAsync(projId);
+            return Json(model);
+        }
     }
 }

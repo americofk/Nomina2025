@@ -20,6 +20,8 @@ $(document).ready(function () {
         });
     });
 
+    // Cargar proyectos en el dropdown
+    fn.loadProjects();
 });
 
 variables: {
@@ -59,6 +61,27 @@ const fn = {
             let form = document.getElementById("createAndEditProjectCategory") as HTMLFormElement;
             form.reset();
         }
+    },
+
+    // Cargar proyectos en el dropdown
+    loadProjects: function () {
+        $.ajax({
+            url: "/proyectosactivos/getall",
+            type: "GET",
+            async: true,
+            success: function (data: any[]) {
+                let select = $('.selectProjects');
+                select.find('option:not(:first)').remove();
+                if (data && data.length > 0) {
+                    data.forEach(function (project: any) {
+                        select.append(`<option value="${project.projId}">${project.name}</option>`);
+                    });
+                }
+            },
+            error: function (xhr) {
+                console.error("Error al cargar proyectos");
+            }
+        });
     }
 }
 

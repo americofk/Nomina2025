@@ -264,6 +264,8 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum PayFrecuency
     {
+        [Display(Name = "Seleccione...")]
+        NotSelected = -1,
         [Display(Name = "Diario")]
         Diary = 0,
         [Display(Name = "Semanal")]
@@ -523,5 +525,44 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
         [Display(Name = "Pagado")]
         Paid = 1
     }
-   
+
+    /// <summary>
+    /// Enumeracion de valores para SeveranceProcessStatus (Estado de Proceso de Prestaciones).
+    /// </summary>
+    public enum SeveranceProcessStatus
+    {
+        [Display(Name = "Creado")]
+        Created = 0,
+
+        [Display(Name = "Calculado")]
+        Calculated = 1,
+
+        [Display(Name = "Aprobado")]
+        Approved = 2,
+
+        [Display(Name = "Pagado")]
+        Paid = 3,
+
+        [Display(Name = "Cancelado")]
+        Canceled = 4
+    }
+
+    /// <summary>
+    /// Enumeracion de valores para SeveranceCalculationType (Tipo de cálculo de prestaciones).
+    /// </summary>
+    public enum SeveranceCalculationType
+    {
+        [Display(Name = "Desahucio")]
+        Desahucio = 0,
+
+        [Display(Name = "Despido justificado")]
+        DespidoJustificado = 1,
+
+        [Display(Name = "Renuncia")]
+        Renuncia = 2,
+
+        [Display(Name = "Dimisión justificada")]
+        DimisionJustificada = 3
+    }
+
 }

@@ -32,5 +32,15 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// Estado.
         /// </summary>
         public bool ProjCategoryStatus { get; set; } = true;
+
+        /// <summary>
+        /// Identificador del proyecto asociado.
+        /// </summary>
+        public string ProjId { get; set; }
+
+        /// <summary>
+        /// Proyecto asociado.
+        /// </summary>
+        public Project Project { get; set; }
     }
 }

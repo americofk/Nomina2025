@@ -1,0 +1,288 @@
+@model DC365_WebNR.CORE.Domain.Models.SeveranceProcess
+@using System.Globalization;
+@using DC365_WebNR.CORE.Domain.Models.Enums;
+@{
+    ViewData["Title"] = "Proceso de Prestaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    var token = ViewBag.Token ?? "";
+    var userRecId = ViewBag.UserRecId ?? 0;
+    var dataAreaId = ViewBag.DataAreaId ?? "";
+    var culture = ViewBag.Culture ?? "en-US";
+}
+
+<link href="~/css/SeveranceProcess.css?@version" rel="stylesheet" />
+<link href="~/css/PayrollProcess.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+
+<div class="contDasboard" id="openprocess-page"
+     data-token="@token"
+     data-user="@userRecId"
+     data-dataarea="@dataAreaId"
+     data-processid="@Model.SeveranceProcessId"
+     data-isnew="@(ViewBag.IsNew?.ToString().ToLower() ?? "false")">
+
+    <!--Opciones del Formulario - Barra superior azul-->
+    <div class="opcioneslistpageForm">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="SaveAndCloseSeverance">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-check-square-o"></i>
+                        Guardar y Cerrar
+                    </a>
+                </li>
+                <li class="SaveSeverance">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="AuditInfo"><a class="btn2 btn-app" title="Informacion de auditoria"><i class="fa fa-info-circle"></i></a></li>
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat"></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="contNewEntyti">
+        <div class="col-md-12 col-sm-12 col-xs-12 margenFormmularios ContenedorFormularios2">
+            <div class="x_panel">
+                <div class="x_content">
+
+                    <!-- Tarjetas de totales - Igual que proceso nomina -->
+                    <div class="container-AppDashboard show-totals" id="totals-container">
+                        <!-- Preaviso -->
+                        <div class="card-AppDashboard card-yellow">
+                            <i class="fa fa-money"></i>
+                            <div class="text-section">
+                                <p class="card-qty" id="card-preaviso">@Model.TotalPreaviso.ToString("N", CultureInfo.CreateSpecificCulture(culture.ToString()))</p>
+                                <p class="text-section-title">Preaviso</p>
+                            </div>
+                        </div>
+
+                        <!-- Cesantia -->
+                        <div class="card-AppDashboard card-green">
+                            <i class="fa fa-minus-square"></i>
+                            <div class="text-section">
+                                <p class="card-qty" id="card-cesantia">@Model.TotalCesantia.ToString("N", CultureInfo.CreateSpecificCulture(culture.ToString()))</p>
+                                <p class="text-section-title">Cesantia</p>
+                            </div>
+                        </div>
+
+                        <!-- Vacaciones -->
+                        <div class="card-AppDashboard card-orange">
+                            <i class="fa fa-calendar"></i>
+                            <div class="text-section">
+                                <p class="card-qty" id="card-vacaciones">@Model.TotalVacaciones.ToString("N", CultureInfo.CreateSpecificCulture(culture.ToString()))</p>
+                                <p class="text-section-title">Vacaciones</p>
+                            </div>
+                        </div>
+
+                        <!-- Navidad -->
+                        <div class="card-AppDashboard card-blue">
+                            <i class="fa fa-gift"></i>
+                            <div class="text-section">
+                                <p class="card-qty" id="card-navidad">@Model.TotalNavidad.ToString("N", CultureInfo.CreateSpecificCulture(culture.ToString()))</p>
+                                <p class="text-section-title">Navidad</p>
+                            </div>
+                        </div>
+
+                        <!-- Total General -->
+                        <div class="card-AppDashboard card-cyan">
+                            <i class="fa fa-bar-chart"></i>
+                            <div class="text-section">
+                                <p class="card-qty" id="card-total">@Model.TotalGeneral.ToString("N", CultureInfo.CreateSpecificCulture(culture.ToString()))</p>
+                                <p class="text-section-title">Total General</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informacion del proceso - Dos columnas -->
+                    <div class="contenidoNuevoGasto2">
+                        <div class="contInterNuevoConteGastos">
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Id. Proceso</label>
+                                <div class="anchoimput">
+                                    <input type="text" id="SeveranceProcessId" value="@Model.SeveranceProcessId" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Fecha</label>
+                                <div class="anchoimput">
+                                    <input type="date" id="ProcessDate" value="@Model.ProcessDate.ToString("yyyy-MM-dd")" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contInterNuevoConteGastos">
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Cant. de empleados</label>
+                                <div class="anchoimput">
+                                    <input type="text" id="EmployeeQuantity" value="@Model.EmployeeQuantity" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="contlotes">
+                                <label class="control-label ancholabel">Descripcion</label>
+                                <div class="anchoimput">
+                                    <input type="text" id="Description" value="@Model.Description" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Seccion de detalles de empleados -->
+                    <p class="sev-details-title">Detalles de empleados</p>
+
+                    <!-- Barra de botones gris -->
+                    <div class="sev-toolbar-gray">
+                        <button type="button" class="sev-btn AddEmployee">
+                            <i class="fa fa-plus-square"></i> Agregar Empleado
+                        </button>
+                        <button type="button" class="sev-btn EditEmployee">
+                            <i class="fa fa-edit"></i> Editar
+                        </button>
+                        <button type="button" class="sev-btn DeleteEmployee">
+                            <i class="fa fa-trash"></i> Eliminar
+                        </button>
+                        <button type="button" class="sev-btn CalculateProcess">
+                            <i class="fa fa-cogs"></i> Calcular
+                        </button>
+                        <button type="button" class="sev-btn PrintReport">
+                            <i class="fa fa-print"></i> Imprimir Reporte
+                        </button>
+                    </div>
+
+                    <!-- Tabla de detalles -->
+                    <div class="container-table-app" id="content-scroll" style="height: 300px; overflow-y: auto;">
+                        <table class="table-app tblSeveranceDetails" id="DetailsTable">
+                            <thead>
+                                <tr class="row-header-app">
+                                    <td class="cell-app check-cell-app cell-header-app">
+                                        <input id="check-detail-0" type="checkbox" class="check-table-app">
+                                        <label for="check-detail-0"> </label>
+                                    </td>
+                                    <td class="cell-app cell-header-app">ID Empleado</td>
+                                    <td class="cell-app cell-header-app">Nombre</td>
+                                    <td class="cell-app cell-header-app">Documento</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Salario</td>
+                                    <td class="cell-app cell-header-app">Fecha de entrada</td>
+                                    <td class="cell-app cell-header-app">Preavisado</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Monto Preaviso</td>
+                                    <td class="cell-app cell-header-app">Cesantia</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Monto Cesantia</td>
+                                    <td class="cell-app cell-header-app">Vacaciones</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Dias Vacaciones</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Monto Vacaciones</td>
+                                    <td class="cell-app cell-header-app">Navidad</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Salario Navidad</td>
+                                    <td class="cell-app cell-header-app cell-app-number">Total a recibir</td>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody-Table-SeveranceDetails" id="tbodyDetails">
+                                @if (Model.Details != null)
+                                {
+                                    int detailIndex = 1;
+                                    foreach (var detail in Model.Details)
+                                    {
+                                        string detailCheckId = $"check-detail-{detailIndex++}";
+                                        <tr class="row-app" data-employeeid="@detail.EmployeeId">
+                                            <td class="cell-app check-cell-app">
+                                                <input id="@detailCheckId" type="checkbox" class="check-table-app selectDetail">
+                                                <label for="@detailCheckId" class="label-cell"></label>
+                                            </td>
+                                            <td class="cell-app cell-principal EmployeeIdCell">@detail.EmployeeId</td>
+                                            <td class="cell-app">@detail.EmployeeName</td>
+                                            <td class="cell-app">@detail.Document</td>
+                                            <td class="cell-app cell-app-number">@detail.SalarioPromedioMensual.ToString("N2")</td>
+                                            <td class="cell-app">@detail.StartWorkDate.ToString("dd/MM/yyyy")</td>
+                                            <td class="cell-app">@(detail.WasNotified ? "Si" : "No")</td>
+                                            <td class="cell-app cell-app-number">@detail.MontoPreaviso.ToString("N2")</td>
+                                            <td class="cell-app">@(detail.IncludeCesantia ? "Si" : "No")</td>
+                                            <td class="cell-app cell-app-number">@detail.MontoCesantia.ToString("N2")</td>
+                                            <td class="cell-app">@(detail.TookVacations ? "Si" : "No")</td>
+                                            <td class="cell-app cell-app-number">@detail.DiasVacaciones</td>
+                                            <td class="cell-app cell-app-number">@detail.MontoVacaciones.ToString("N2")</td>
+                                            <td class="cell-app">@(detail.IncludeNavidad ? "Si" : "No")</td>
+                                            <td class="cell-app cell-app-number">@detail.MontoNavidad.ToString("N2")</td>
+                                            <td class="cell-app cell-app-number total-cell">@detail.TotalARecibir.ToString("N2")</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Token antiforgery -->
+    @Html.AntiForgeryToken()
+
+    <!-- Contenedor para modal de detalle -->
+    <div id="ContModalDetail"></div>
+
+    <!-- Modal para agregar empleado -->
+    <div class="modal modal-AddEmployee" aria-hidden="true" id="ModalAddEmployee">
+        <div class="ContenModal-contact">
+            <div class="modal-content">
+                <div class="modal-options">
+                    <div class="menuoptions-flex-submodal">
+                        <ul class="menuoptions">
+                            <li class="modal-header-title">
+                                Agregar Empleado
+                            </li>
+                        </ul>
+                        <ul class="menuoptions">
+                            <li class="close-modal-AddEmployee">
+                                <a class="btn2 btn-app">
+                                    <i class="fa fa-close i-close"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="container-modal-scrolling">
+                        <form id="formAddEmployee" class="TinyModal-add-employee">
+                            <div class="cont-input-newform-col1">
+                                <div class="contlotesmploye">
+                                    <label class="control-label labelModEmployeComen">Empleado <span class="text-danger">*</span></label>
+                                    <div>
+                                        <select id="SelectEmployee" name="EmployeeId" class="form-control" required>
+                                            <option value="">-- Seleccione un empleado --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contbtn-tinymodal">
+                                <input type="submit" value="Agregar" class="btn btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @{await Html.RenderPartialAsync("_ModalAuditInfo");}
+
+</div>
+
+<script src="~/js/audit-modal.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
+@section Scripts {
+    <script src="~/js/SeveranceProcessOpen.js?@version" type="module"></script>
+    <script src="~/js/AppInputDate.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

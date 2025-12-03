@@ -1,0 +1,194 @@
+@model IEnumerable<DC365_WebNR.CORE.Domain.Models.SeveranceProcess>
+@using System.Globalization;
+@{
+    ViewData["Title"] = "Prestaciones Laborales";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string version = $"dt={DateTime.Now.ToString("yyyyMMddhhmmss")}";
+    var token = ViewBag.Token ?? "";
+    var userRecId = ViewBag.UserRecId ?? 0;
+    var dataAreaId = ViewBag.DataAreaId ?? "";
+}
+
+<link href="~/css/SeveranceProcess.css?@version" rel="stylesheet" />
+<link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/AppInputDate.css" rel="stylesheet" />
+
+<div class="contDasboard" id="severanceprocess-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
+
+    <!--Opciones del Formulario-->
+    <div class="opcioneslistpage">
+        <div class="menuoptions-flex">
+            <ul class="menuoptions">
+                <li class="NewSeveranceProcess">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-plus-square-o"></i>
+                        Nuevo
+                    </a>
+                </li>
+                <li class="EditSeveranceProcess">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-edit"></i>
+                        Editar
+                    </a>
+                </li>
+                <li>
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-trash"></i>
+                        <input type="submit" value="Eliminar" form="DeleteSeveranceProcess" class="inputTypesubmit" />
+                    </a>
+                </li>
+            </ul>
+            <ul class="menuoptions">
+                <li class="AuditInfo"><a class="btn2 btn-app" title="Informacion de auditoria"><i class="fa fa-info-circle"></i></a></li>
+                <li class="OpcActualizar">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-repeat"></i>
+                    </a>
+                </li>
+                <li class="CerrarModulo">
+                    <a class="btn2 btn-app">
+                        <i class="fa fa-close i-close"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- tabla -->
+    <div class="ContenedorListEntity custonContainer">
+        <h3 class="TituloEstandar">Prestaciones Laborales</h3>
+
+        <div class="contenPretabla">
+            <div class="form-group-BuscadorDepartment" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    @{await Html.RenderPartialAsync("ViewFilter");}
+                </div>
+                <div class="grid-views-inline" style="display:flex; align-items:center; gap:8px; margin-right:29px;">
+                    <button class="btn btn-sm" id="btn-save-view-changes" title="Guardar cambios en la vista" style="display:none; padding:5px 12px; background:#337ab7; color:#fff; border:1px solid #337ab7;">
+                        <i class="fa fa-save" style="font-size:14px;"></i>
+                    </button>
+                    <button class="btn btn-default btn-sm" id="btn-manage-columns" title="Gestionar columnas" style="padding:5px 12px; background:#fff; border:1px solid #ccc;">
+                        <i class="fa fa-columns" style="font-size:14px;"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="scrollbar-TablePrimari">
+            <div class="container-table-app" id="content-scroll">
+                <table class="table-app tblSeveranceProcess" id="MainTable">
+                    <thead>
+                        <tr class="row-header-app">
+                            <td class="cell-app check-cell-app cell-header-app">
+                                <input id="check-table-0" type="checkbox" class="check-table-app">
+                                <label for="check-table-0"> </label>
+                            </td>
+                            <td class="cell-app cell-header-app">Id Proceso</td>
+                            <td class="cell-app cell-header-app">Descripcion</td>
+                            <td class="cell-app cell-header-app">Fecha</td>
+                            <td class="cell-app cell-header-app cell-app-number">Empleados</td>
+                            <td class="cell-app cell-header-app cell-app-number">Total Preaviso</td>
+                            <td class="cell-app cell-header-app cell-app-number">Total Cesantia</td>
+                            <td class="cell-app cell-header-app cell-app-number">Total Vacaciones</td>
+                            <td class="cell-app cell-header-app cell-app-number">Total Navidad</td>
+                            <td class="cell-app cell-header-app cell-app-number">Total General</td>
+                            <td class="cell-app cell-header-app">Estado</td>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody-Table-SeveranceProcess">
+                        @{int indexCheck = 1;}
+                        @foreach (var item in Model)
+                        {
+                            string idCheck = $"check-table-{indexCheck++}";
+                            <tr class="row-app">
+                                <td class="cell-app check-cell-app">
+                                    <input id="@idCheck" type="checkbox" class="check-table-app selectSeveranceProcess">
+                                    <label for="@idCheck" class="label-cell"></label>
+                                </td>
+                                <td class="cell-app cell-principal SeveranceProcessIdTbl" data-title="Id Proceso">
+                                    @Html.DisplayFor(modelItem => item.SeveranceProcessId)
+                                </td>
+                                <td class="cell-app DescriptionTbl" data-title="Descripcion">
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td class="cell-app ProcessDateTbl" data-title="Fecha">
+                                    @item.ProcessDate.ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="cell-app EmployeeQtyTbl cell-app-number" data-title="Empleados">
+                                    @Html.DisplayFor(modelItem => item.EmployeeQuantity)
+                                </td>
+                                <td class="cell-app TotalPreavisoTbl cell-app-number" data-title="Total Preaviso">
+                                    @item.TotalPreaviso.ToString("N2")
+                                </td>
+                                <td class="cell-app TotalCesantiaTbl cell-app-number" data-title="Total Cesantia">
+                                    @item.TotalCesantia.ToString("N2")
+                                </td>
+                                <td class="cell-app TotalVacacionesTbl cell-app-number" data-title="Total Vacaciones">
+                                    @item.TotalVacaciones.ToString("N2")
+                                </td>
+                                <td class="cell-app TotalNavidadTbl cell-app-number" data-title="Total Navidad">
+                                    @item.TotalNavidad.ToString("N2")
+                                </td>
+                                <td class="cell-app TotalGeneralTbl cell-app-number" data-title="Total General">
+                                    @item.TotalGeneral.ToString("N2")
+                                </td>
+                                <td class="cell-app StatusTbl" data-title="Estado">
+                                    @Html.DisplayFor(modelItem => item.SeveranceProcessStatus)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contenedor para formulario nuevo/editar -->
+    <div id="ContNewAndEditSeveranceProcess"></div>
+
+    <!-- Token antiforgery para operaciones AJAX -->
+    @Html.AntiForgeryToken()
+
+    <form asp-action="delete" class="collapse" id="DeleteSeveranceProcess"></form>
+
+    @{await Html.RenderPartialAsync("_ModalAuditInfo");}
+
+    <!-- Modal para gestionar columnas -->
+    <div class="modal fade" id="modal-manage-columns" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">Gestionar Columnas</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted">Seleccione las columnas que desea mostrar:</p>
+                    <div id="columns-list" class="columns-list-container"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn-apply-columns">Aplicar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="~/js/audit-modal.js?@version"></script>
+<script src="~/js/grid-columns-manager.js?@version"></script>
+<script src="~/js/table-features.js?@version"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        initTableFeatures({
+            filterInput: '.textFilterMask',
+            table: '#MainTable',
+            tbody: '.tbody-Table-SeveranceProcess'
+        });
+    });
+</script>
+@section Scripts {
+    <script src="~/js/SeveranceProcess.js?@version" type="module"></script>
+    <script src="~/js/AppInputDate.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

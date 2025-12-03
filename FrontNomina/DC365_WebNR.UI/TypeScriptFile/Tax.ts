@@ -60,6 +60,10 @@ const fn = {
 
         fn.SettingNewAndEdit(viewmode);
 
+        // Inicializar filtro de categorías por proyecto después de cargar el formulario
+        // Usar window para acceder a la función global desde módulo ES6
+        (window as any).filterProjCategoryByProject('#ProjId', '#ProjCategory');
+
         InstaciateListener();
 
         // Variable para controlar si debe cerrar después de guardar

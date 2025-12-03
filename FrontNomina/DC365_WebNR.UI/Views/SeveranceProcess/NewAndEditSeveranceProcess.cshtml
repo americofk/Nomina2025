@@ -1,0 +1,49 @@
+@model DC365_WebNR.CORE.Domain.Models.SeveranceProcess
+@{
+    string operation = string.IsNullOrEmpty(Model.SeveranceProcessId) ? "1" : "2";
+    string titleModal = string.IsNullOrEmpty(Model.SeveranceProcessId) ? "Nuevo Proceso de Prestaciones" : "Editar Proceso de Prestaciones";
+}
+
+<div class="modal fade modal-standard" id="ModalNewAndEditSeveranceProcess" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">@titleModal</h4>
+                <button type="button" class="close closeModal" data-dismiss="modal">&times;</button>
+            </div>
+            <form id="formSeveranceProcess" asp-action="save">
+                <div class="modal-body">
+                    <input type="hidden" name="operation" value="@operation" />
+                    <input type="hidden" asp-for="SeveranceProcessId" />
+                    <input type="hidden" asp-for="RecId" />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="ProcessDate" class="control-label">Fecha del Proceso</label>
+                                <input asp-for="ProcessDate" type="date" class="form-control" required />
+                                <span asp-validation-for="ProcessDate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label asp-for="Description" class="control-label">Descripcion</label>
+                                <input asp-for="Description" class="form-control" maxlength="200" placeholder="Descripcion del proceso..." />
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default closeModal" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnSaveSeveranceProcess">
+                        <i class="fa fa-save"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
