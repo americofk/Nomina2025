@@ -21,7 +21,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api")]
     [Authorize]
     [ApiController]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
     public class MenuAppController : ControllerBase
     {
         private readonly IMenuAppQueryHandler _MenuAppQueryHandler;

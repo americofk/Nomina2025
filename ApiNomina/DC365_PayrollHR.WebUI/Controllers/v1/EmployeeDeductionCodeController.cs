@@ -29,7 +29,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/employeedeductioncodes")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
     public class EmployeeDeductionCodeController : ControllerBase
     {
         private readonly IQueryHandler<EmployeeDeductionCode> _QueryHandler;

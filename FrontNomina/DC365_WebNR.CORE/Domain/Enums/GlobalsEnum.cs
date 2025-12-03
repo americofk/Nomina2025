@@ -61,13 +61,13 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum StatusPeriod
     {
         [Display(Name = "Abierto")]
-        Open = 0,
+        Abierto = 0,
         [Display(Name = "Procesado")]
-        Processed = 1,
+        Procesado = 1,
         [Display(Name = "Pagado")]
-        Paid = 2,
+        Pagado = 2,
         [Display(Name = "Registrado")]
-        Registered = 3
+        Registrado = 3
     }
 
     /// <summary>
@@ -78,9 +78,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum AdminType
     {
-        LocalAdmin = 0,
-        GlobalAdmin = 1,
-        User = 2
+        AdministradorLocal = 0,
+        AdministradorGlobal = 1,
+        Usuario = 2
     }
 
     /// <summary>
@@ -91,9 +91,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum CourseStatus
     {
-        Created = 0,
-        InProcess = 1,
-        Closed = 2
+        Creado = 0,
+        EnProceso = 1,
+        Cerrado = 2
     }
 
     /// <summary>
@@ -105,9 +105,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum InternalExternal
     {
         [Display(Name = "Interno")]
-        Internal = 0,
+        Interno = 0,
         [Display(Name = "Externo")]
-        External = 1,
+        Externo = 1,
     }
 
     /// <summary>
@@ -119,11 +119,11 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum Gender
     {
         [Display(Name = "Masculino")]
-        Male = 0,
+        Masculino = 0,
         [Display(Name = "Femenino")]
-        Female = 1,
+        Femenino = 1,
         [Display(Name = "No especificado")]
-        NonSpecific = 2
+        NoEspecificado = 2
     }
 
     /// <summary>
@@ -135,15 +135,15 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum MaritalStatus
     {
         [Display(Name = "Casado/a")]
-        Married = 0,
+        Casado = 0,
         [Display(Name = "Soltero/a")]
-        Single = 1,
+        Soltero = 1,
         [Display(Name = "Viudo/a")]
-        Widowed = 2,
+        Viudo = 2,
         [Display(Name = "Divorciado/a")]
-        Divorced = 3,
+        Divorciado = 3,
         [Display(Name = "Separado/a")]
-        Separated = 4
+        Separado = 4
     }
 
     /// <summary>
@@ -155,11 +155,11 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum EmployeeType
     {
         [Display(Name = "Empleado")]
-        Employee = 0,
+        Empleado = 0,
         [Display(Name = "Contratista")]
-        Contractor = 1,
+        Contratista = 1,
         //[Display(Name = "Pendiente por suspender")]
-        //PendingSuspend = 2
+        //PendienteSuspension = 2
     }
 
     /// <summary>
@@ -171,13 +171,13 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum ContactType
     {
         [Display(Name = "Celular")]
-        MobilePhone = 0,
+        Celular = 0,
 
         [Display(Name = "Correo")]
-        Email = 1,
+        Correo = 1,
 
         [Display(Name = "Teléfono")]
-        Phone = 2,
+        Telefono = 2,
 
         [Display(Name = "Otro")]
         Otro = 3
@@ -192,23 +192,23 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum IndexBase
     {
         [Display(Name = "Hora")]
-        Hour = 0, //Hora
+        Hora = 0,
         [Display(Name = "Período de pago")]
-        PayPeriod = 1,// Periodo de pago
+        PeriodoPago = 1,
         [Display(Name = "Mensual")]
-        Monthly = 2,//Mensual
+        Mensual = 2,
         [Display(Name = "Anual")]
-        Yearly = 3, //Anual
+        Anual = 3,
         [Display(Name = "Monto fijo")]
-        FixedAmount = 4, //Monto fijo
+        MontoFijo = 4,
         [Display(Name = "Retroactivo")]
-        Retroactive = 5, //Retroactivo
+        Retroactivo = 5,
         [Display(Name = "Indice salarial estándar")]
-        StandardWageRate = 6, // Indice salarial estandar
+        IndiceSalarial = 6,
         [Display(Name = "Porcentaje de ganancia")]
-        EarningPercent = 7, // Porcenatge de ganancia
+        PorcentajeIngreso = 7,
         [Display(Name = "Horas de trabajo")]
-        EarningHours = 8 // Horas de trabajo
+        HorasTrabajo = 8
     }
 
     /// <summary>
@@ -219,10 +219,14 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum WorkStatus
     {
-        Candidate = 0,
-        Dismissed = 1,
-        Employ = 2,
-        Disable = 3
+        [Display(Name = "Candidato")]
+        Candidato = 0,
+        [Display(Name = "Desvinculado")]
+        Desvinculado = 1,
+        [Display(Name = "Empleado")]
+        Empleado = 2,
+        [Display(Name = "Deshabilitado")]
+        Deshabilitado = 3
     }
 
     /// <summary>
@@ -234,9 +238,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum IndexBaseTwo
     {
         [Display(Name = "Hora")]
-        Hour = 0, //Hora
+        Hora = 0,
         [Display(Name = "Monto fijo")]
-        FixedAmount = 4, //Monto fijo
+        MontoFijo = 4
 
     }
 
@@ -249,11 +253,11 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum PayrollAction
     {
         [Display(Name = "Deducción")]
-        Deduction = 0,
-        [Display(Name = "Contribución")]
-        Contribution = 1,
+        Deduccion = 0,
+        [Display(Name = "Aporte")]
+        Aporte = 1,
         [Display(Name = "Ambos")]
-        Both = 2
+        Ambos = 2
     }
 
     /// <summary>
@@ -265,25 +269,25 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum PayFrecuency
     {
         [Display(Name = "Seleccione...")]
-        NotSelected = -1,
+        NoSeleccionado = -1,
         [Display(Name = "Diario")]
-        Diary = 0,
+        Diario = 0,
         [Display(Name = "Semanal")]
-        Weekly = 1,
+        Semanal = 1,
         [Display(Name = "Bisemanal")]
-        TwoWeekly = 2,
+        Bisemanal = 2,
         [Display(Name = "Quincenal")]
-        BiWeekly = 3,
+        Quincenal = 3,
         [Display(Name = "Mensual")]
-        Monthly = 4,
+        Mensual = 4,
         [Display(Name = "Trimestral")]
-        ThreeMonth = 5,
+        Trimestral = 5,
         [Display(Name = "Cuatrimestral")]
-        FourMonth = 6,
+        Cuatrimestral = 6,
         [Display(Name = "Semestral")]
-        Biannual = 7,
+        Semestral = 7,
         [Display(Name = "Anual")]
-        Yearly = 8
+        Anual = 8
     }
 
     /// <summary>
@@ -308,14 +312,16 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum DocumentType
     {
-        [Display(Name = "Cedula")]
-        IdentificationCard = 0,
+        [Display(Name = "Cédula")]
+        Cedula = 0,
         [Display(Name = "Pasaporte")]
-        Passport = 1,
-        [Display(Name = "Residencia")]
-        Residence = 2,
-        [Display(Name = "Licencia de conducir")]
-        DriverLicence = 3
+        Pasaporte = 1,
+        [Display(Name = "NSS")]
+        NSS = 2,
+        [Display(Name = "Carnet Migratorio")]
+        CarnetMigratorio = 3,
+        [Display(Name = "Interior y Policía")]
+        InteriorYPolicia = 4
     }
 
     /// <summary>
@@ -326,23 +332,23 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum PayrollProcessStatus
     {
-        [Display(Name = "Creada")]
-        Created = 0,
+        [Display(Name = "Creado")]
+        Creado = 0,
 
-        [Display(Name = "Procesada")]
-        Processed = 1,
+        [Display(Name = "Procesado")]
+        Procesado = 1,
 
-        [Display(Name = "Calculada")]
-        Calculated = 2,
+        [Display(Name = "Calculado")]
+        Calculado = 2,
 
-        [Display(Name = "Pagada")]
-        Paid = 3,
+        [Display(Name = "Pagado")]
+        Pagado = 3,
 
-        [Display(Name = "Cerrada")]
-        Closed = 4,
+        [Display(Name = "Cerrado")]
+        Cerrado = 4,
 
-        [Display(Name = "Cancelada")]
-        Canceled = 5
+        [Display(Name = "Cancelado")]
+        Cancelado = 5
     }
 
     /// <summary>
@@ -391,10 +397,10 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum StatusExtraHour
     {
-        [Display(Name = "Abierta")]
-        Open = 0,
-        [Display(Name = "Pagada")]
-        Pagada = 1
+        [Display(Name = "Abierto")]
+        Abierto = 0,
+        [Display(Name = "Pagado")]
+        Pagado = 1
     }
 
     /// <summary>
@@ -405,13 +411,12 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum PayMethod
     {
-
         [Display(Name = "Efectivo")]
-        Cash = 0,
+        Efectivo = 0,
         [Display(Name = "Transferencia")]
-        Transfer = 1,
+        Transferencia = 1,
         [Display(Name = "Cheque")]
-        Check = 2,
+        Cheque = 2
     }
     /// <summary>
     /// Enumeracion de valores para TypeDTG.
@@ -436,20 +441,20 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
 
     public enum PayrollActionType
     {
-        [Display(Name = "Ganancia")]
-        Earning = 0,
+        [Display(Name = "Ingreso")]
+        Ingreso = 0,
         [Display(Name = "Deducción")]
-        Deduction = 1,
+        Deduccion = 1,
         [Display(Name = "Impuesto")]
-        Tax = 2,
+        Impuesto = 2,
         [Display(Name = "Préstamo")]
-        Loan = 3,
+        Prestamo = 3,
         [Display(Name = "Cooperativa")]
-        Cooperative = 4,
-        [Display(Name = "Contribución")]
-        Contribution = 5,
+        Cooperativa = 4,
+        [Display(Name = "Aporte")]
+        Aporte = 5,
         [Display(Name = "Horas extras")]
-        ExtraHours = 6
+        HorasExtras = 6
     }
 
     /// <summary>
@@ -461,10 +466,9 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum IndexBaseDeduction
     {
         [Display(Name = "Monto fijo")]
-        FixedAmount = 4,
+        MontoFijo = 4,
         [Display(Name = "Porcentaje de ganancia")]
-        EarningPercent = 7,
-
+        PorcentajeIngreso = 7
     }
 
     /// <summary>
@@ -521,9 +525,11 @@ namespace DC365_WebNR.CORE.Domain.Models.Enums
     public enum StatusWorkControl
     {
         [Display(Name = "Pendiente")]
-        Pendint = 0,
+        Pendiente = 0,
         [Display(Name = "Pagado")]
-        Paid = 1
+        Pagado = 1,
+        [Display(Name = "En Proceso")]
+        EnProceso = 2
     }
 
     /// <summary>

@@ -9,10 +9,10 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum EmployeeType
     {
-        Employee = 0,
-        Contractor = 1,
-        PendingSuspend = 2,
-        PendingDismiss = 3
+        Empleado = 0,
+        Contratista = 1,
+        PendienteSuspension = 2,
+        PendienteDesvinculacion = 3
 
     }
 }

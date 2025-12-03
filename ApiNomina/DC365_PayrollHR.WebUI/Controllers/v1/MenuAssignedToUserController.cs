@@ -26,7 +26,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/menustouser")]
     [Authorize]
     [ApiController]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.LocalAdmin)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.AdministradorLocal)]
     public class MenuAssignedToUserController : ControllerBase
     {
         private readonly IQueryAllHandler<MenuToUserResponse> _QueryHandler;

@@ -168,8 +168,8 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
                                 action => action.PayrollProcessId,
                                 process => process.PayrollProcessId,
                                 (action, process) => new { Action = action, Process = process })
-                        .Where(x => x.Action.ActionId == id && x.Action.PayrollActionType == PayrollActionType.Earning
-                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                        .Where(x => x.Action.ActionId == id && x.Action.PayrollActionType == PayrollActionType.Ingreso
+                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Cancelado
                                 && (x.Process.PeriodEndDate >= model.ValidFrom && x.Process.PeriodEndDate <= model.ValidTo))
                         .FirstOrDefaultAsync();
 
@@ -309,8 +309,8 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
                                 action => action.PayrollProcessId,
                                 process => process.PayrollProcessId,
                                 (action, process) => new { Action = action, Process = process })
-                        .Where(x => x.Action.ActionId == id && x.Action.PayrollActionType == PayrollActionType.Earning
-                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                        .Where(x => x.Action.ActionId == id && x.Action.PayrollActionType == PayrollActionType.Ingreso
+                                && x.Process.PayrollProcessStatus != PayrollProcessStatus.Cancelado
                                 && (x.Process.PeriodEndDate >= response.ValidFrom && x.Process.PeriodEndDate <= response.ValidTo))
                         .FirstOrDefaultAsync();
 

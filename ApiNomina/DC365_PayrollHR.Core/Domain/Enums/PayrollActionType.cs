@@ -9,12 +9,12 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum PayrollActionType
     {
-        Earning = 0,
-        Deduction = 1,
-        Tax = 2,
-        Loan = 3,
-        Cooperative = 4,
-        Contribution = 5,
-        ExtraHours = 6
+        Ingreso = 0,
+        Deduccion = 1,
+        Impuesto = 2,
+        Prestamo = 3,
+        Cooperativa = 4,
+        Aporte = 5,
+        HorasExtras = 6
     }
 }

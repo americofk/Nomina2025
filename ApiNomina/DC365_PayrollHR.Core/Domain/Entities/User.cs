@@ -40,7 +40,7 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// <summary>
         /// Tipo.
         /// </summary>
-        public AdminType ElevationType { get; set; } = AdminType.User;
+        public AdminType ElevationType { get; set; } = AdminType.Usuario;
         /// <summary>
         /// Identificador.
         /// </summary>

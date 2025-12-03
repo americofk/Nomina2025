@@ -29,7 +29,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/employeeworkcontrolcalendars")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class EmployeeWorkControlCalendarController : ControllerBase
     {

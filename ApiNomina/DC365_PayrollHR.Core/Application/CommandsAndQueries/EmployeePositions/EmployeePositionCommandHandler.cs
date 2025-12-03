@@ -59,13 +59,13 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeePositions
             if (model.GetCallerName() == null)
             {
                 employee = await _dbContext.Employees.Where(x => x.EmployeeId == model.EmployeeId
-                                                            && x.WorkStatus == Domain.Enums.WorkStatus.Employ).FirstOrDefaultAsync();                
+                                                            && x.WorkStatus == Domain.Enums.WorkStatus.Empleado).FirstOrDefaultAsync();
             }
             else
             {
                 employee = await _dbContext.Employees.Where(x => x.EmployeeId == model.EmployeeId
-                                                            && x.WorkStatus == Domain.Enums.WorkStatus.Candidate ||
-                                                            x.WorkStatus == Domain.Enums.WorkStatus.Dismissed).FirstOrDefaultAsync();
+                                                            && x.WorkStatus == Domain.Enums.WorkStatus.Candidato ||
+                                                            x.WorkStatus == Domain.Enums.WorkStatus.Desvinculado).FirstOrDefaultAsync();
             }
 
             if (employee == null)

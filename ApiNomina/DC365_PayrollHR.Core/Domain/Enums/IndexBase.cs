@@ -9,14 +9,14 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum IndexBase
     {
-        Hour = 0, //Hora
-        PayPeriod = 1,// Periodo de pago
-        Monthly = 2,//Mensual
-        Yearly = 3, //Anual
-        FixedAmount = 4, //Monto fijo
-        Retroactive = 5, //Retroactivo
-        StandardWageRate = 6, // Indice salarial estandar
-        EarningPercent = 7, // Porcenatge de ganancia
-        EarningHours = 8 // Horas de trabajo
+        Hora = 0,
+        PeriodoPago = 1,
+        Mensual = 2,
+        Anual = 3,
+        MontoFijo = 4,
+        Retroactivo = 5,
+        IndiceSalarial = 6,
+        PorcentajeIngreso = 7,
+        HorasTrabajo = 8
     }
 }

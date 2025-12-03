@@ -9,9 +9,9 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum StatusPeriod
     {
-        Open = 0,
-        Processed = 1,
-        Paid = 2,
-        Registered = 3
+        Abierto = 0,
+        Procesado = 1,
+        Pagado = 2,
+        Registrado = 3
     }
 }

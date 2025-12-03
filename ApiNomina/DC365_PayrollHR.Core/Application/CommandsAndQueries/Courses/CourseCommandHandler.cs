@@ -128,7 +128,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
                 foreach (var item in ids)
                 {
                     var response = await _dbContext.Courses.Where(x => x.CourseId == item 
-                                            && x.CourseStatus == Domain.Enums.CourseStatus.Created).FirstOrDefaultAsync();
+                                            && x.CourseStatus == Domain.Enums.CourseStatus.Creado).FirstOrDefaultAsync();
 
                     if (response == null)
                     {

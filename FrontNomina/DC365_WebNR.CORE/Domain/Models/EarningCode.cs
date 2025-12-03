@@ -195,7 +195,7 @@ namespace DC365_WebNR.CORE.Domain.Models
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<ValidationResult> Error = new List<ValidationResult>();
-            if (IndexBase == IndexBaseTwo.Hour && MultiplyAmount==0)
+            if (IndexBase == IndexBaseTwo.Hora && MultiplyAmount==0)
             {
                 Error.Add(new ValidationResult("Debe ingresar monto o porcentaje"));
             }

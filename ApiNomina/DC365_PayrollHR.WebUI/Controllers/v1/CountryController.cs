@@ -26,7 +26,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/countries")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
     public class CountryController : ControllerBase
     {
         private readonly IQueryAllWithoutSearchHandler<Country> _QueryHandler;

@@ -30,7 +30,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/coursetypes")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
     public class CourseTypeController : ControllerBase
     {
         private readonly IQueryHandler<CourseType> _QueryHandler;

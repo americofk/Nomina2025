@@ -61,7 +61,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.SeveranceProcesses
                 TotalVacaciones = 0,
                 TotalNavidad = 0,
                 TotalGeneral = 0,
-                SeveranceProcessStatus = SeveranceProcessStatus.Created
+                SeveranceProcessStatus = SeveranceProcessStatus.Creado
             };
 
             _dbContext.SeveranceProcesses.Add(entity);
@@ -94,7 +94,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.SeveranceProcesses
                     }
 
                     // Verificar que no esté pagado
-                    if (response.SeveranceProcessStatus == SeveranceProcessStatus.Paid)
+                    if (response.SeveranceProcessStatus == SeveranceProcessStatus.Pagado)
                     {
                         throw new Exception($"El registro no se puede eliminar porque ya ha sido pagado - id {item}");
                     }
@@ -240,7 +240,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.SeveranceProcesses
                         existingDetail.Document = employee.NSS ?? "";
                         existingDetail.StartWorkDate = employee.StartWorkDate;
                         existingDetail.EndWorkDate = DateTime.Now;
-                        existingDetail.PayFrecuency = PayFrecuency.NotSelected;
+                        existingDetail.PayFrecuency = PayFrecuency.NoSeleccionado;
                         existingDetail.SalaryCalculationType = -1;
 
                         _dbContext.SeveranceProcessDetails.Update(existingDetail);
@@ -276,7 +276,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.SeveranceProcesses
                     StartWorkDate = employee.StartWorkDate,
                     EndWorkDate = DateTime.Now,
                     CalculationType = SeveranceCalculationType.Desahucio,
-                    PayFrecuency = PayFrecuency.NotSelected,
+                    PayFrecuency = PayFrecuency.NoSeleccionado,
                     SalaryCalculationType = -1,
                     TiempoLaborando = "",
                     YearsWorked = 0,

@@ -30,7 +30,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/users")]
     [Authorize]
     [ApiController]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.LocalAdmin)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.AdministradorLocal)]
     public class UserController : ControllerBase
     {
         private readonly IQueryHandler<UserResponse> _QueryHandler;

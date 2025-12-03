@@ -67,7 +67,7 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// <summary>
         /// Estado del proceso de prestaciones.
         /// </summary>
-        public SeveranceProcessStatus SeveranceProcessStatus { get; set; } = SeveranceProcessStatus.Created;
+        public SeveranceProcessStatus SeveranceProcessStatus { get; set; } = SeveranceProcessStatus.Creado;
 
         /// <summary>
         /// Lista de detalles por empleado (no mapeada a BD, solo para respuesta).

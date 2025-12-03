@@ -100,7 +100,7 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
 
             var response = await dbContext.EarningCodes
                 .OrderBy(x => x.EarningCodeId)
-                .Where(x => x.EarningCodeStatus == (bool)queryFilter && x.IndexBase == IndexBase.Hour && x.MultiplyAmount != 0)
+                .Where(x => x.EarningCodeStatus == (bool)queryFilter && x.IndexBase == IndexBase.Hora && x.MultiplyAmount != 0)
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToListAsync();
@@ -126,7 +126,7 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.EarningCodes
 
             var response = await dbContext.EarningCodes
                 .OrderBy(x => x.EarningCodeId)
-                .Where(x => x.EarningCodeStatus == (bool)queryFilter && x.IndexBase == IndexBase.FixedAmount)
+                .Where(x => x.EarningCodeStatus == (bool)queryFilter && x.IndexBase == IndexBase.MontoFijo)
                 .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                 .Take(validFilter.PageSize)
                 .ToListAsync();

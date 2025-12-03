@@ -26,7 +26,7 @@ namespace DC365_PayrollHR.WebUI.Controllers
     [Route("api/companies")]
     [Authorize]
     [ApiController]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.LocalAdmin)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.AdministradorLocal)]
     public class CompanyController : ControllerBase
     {
         private readonly IQueryHandler<CompanyResponse> _QueryHandler;

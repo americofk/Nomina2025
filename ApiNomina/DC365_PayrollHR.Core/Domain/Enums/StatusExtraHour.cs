@@ -9,7 +9,7 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum StatusExtraHour
     {
-        Open = 0,
+        Abierto = 0,
         Pagada = 1
     }
 }

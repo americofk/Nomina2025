@@ -139,15 +139,15 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
                 PayCycle payCycle = new PayCycle()
                 {
                     PeriodStartDate = i == 1 ? startPeriodDate : prevEndPeriodDate,
-                    PeriodEndDate = _payFrecuency == PayFrecuency.BiWeekly ? endPeriodDate : endPeriodDate.AddDays(-1),
+                    PeriodEndDate = _payFrecuency == PayFrecuency.Quincenal ? endPeriodDate : endPeriodDate.AddDays(-1),
                     DefaultPayDate = i == 1 ? startPeriodDate : prevEndPeriodDate,
                     AmountPaidPerPeriod = 0,
-                    StatusPeriod = Domain.Enums.StatusPeriod.Open,
+                    StatusPeriod = Domain.Enums.StatusPeriod.Abierto,
                     PayrollId = _model.PayrollId,
                     PayCycleId = secuence
                 };
 
-                if (_payFrecuency == PayFrecuency.BiWeekly)
+                if (_payFrecuency == PayFrecuency.Quincenal)
                 {
                     startPeriodDate = endPeriodDate.AddDays(1);
                     prevEndPeriodDate = startPeriodDate;
@@ -175,33 +175,33 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
 
             switch (_PayFrecuency)
             {
-                case PayFrecuency.Diary:
+                case PayFrecuency.Diario:
                     EndDate = _StartDate.AddDays(_Cycles);
                     break;
-                case PayFrecuency.Weekly:
+                case PayFrecuency.Semanal:
                     EndDate = _StartDate.AddDays(7* _Cycles);
                     break;
-                case PayFrecuency.TwoWeekly:
+                case PayFrecuency.Bisemanal:
                     EndDate = _StartDate.AddDays(14* _Cycles);
                     break;
-                case PayFrecuency.BiWeekly:
-                    EndDate = _StartDate.Day < 16? 
-                        new DateTime(_StartDate.Year, _StartDate.Month, 15): 
+                case PayFrecuency.Quincenal:
+                    EndDate = _StartDate.Day < 16?
+                        new DateTime(_StartDate.Year, _StartDate.Month, 15):
                         new DateTime((_StartDate.Month + 1 > 12?_StartDate.Year + 1:_StartDate.Year), (_StartDate.Month + 1 > 12 ? 1 : _StartDate.Month + 1), 1).AddDays(-1);
                     break;
-                case PayFrecuency.Monthly:
+                case PayFrecuency.Mensual:
                     EndDate = _StartDate.AddMonths(_Cycles);
                     break;
-                case PayFrecuency.ThreeMonth:
+                case PayFrecuency.Trimestral:
                     EndDate = _StartDate.AddMonths(3* _Cycles);
                     break;
-                case PayFrecuency.FourMonth:
+                case PayFrecuency.Cuatrimestral:
                     EndDate = _StartDate.AddMonths(4* _Cycles);
                     break;
-                case PayFrecuency.Biannual:
+                case PayFrecuency.Semestral:
                     EndDate = _StartDate.AddMonths(6* _Cycles);
                     break;
-                case PayFrecuency.Yearly:
+                case PayFrecuency.Anual:
                     EndDate = _StartDate.AddYears(1);
                     break;
             }
@@ -240,7 +240,7 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
                 {
                     var response = await dbContext.PayCycles.Where(x => x.PayCycleId == int.Parse(item) 
                                                                     && x.PayrollId == parentid
-                                                                    && x.StatusPeriod == StatusPeriod.Open).FirstOrDefaultAsync();
+                                                                    && x.StatusPeriod == StatusPeriod.Abierto).FirstOrDefaultAsync();
 
                     if (response == null)
                     {
@@ -289,7 +289,7 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
         public async Task<Response<object>> MarkIsForTax(PayCycleIsForTaxRequest model)
         {
             var response = await dbContext.PayCycles.Where(x => x.PayCycleId == model.PayCycleId && x.PayrollId == model.PayrollId
-                                                           && x.StatusPeriod == StatusPeriod.Open).FirstOrDefaultAsync();
+                                                           && x.StatusPeriod == StatusPeriod.Abierto).FirstOrDefaultAsync();
 
             if (response == null)
             {
@@ -334,7 +334,7 @@ namespace DC365_PayrollHR.Core.Application.StoreServices.PayCycles
         public async Task<Response<object>> MarkIsForTss(PayCycleIsForTssRequest model)
         {
             var response = await dbContext.PayCycles.Where(x => x.PayCycleId == model.PayCycleId && x.PayrollId == model.PayrollId
-                                                && x.StatusPeriod == StatusPeriod.Open).FirstOrDefaultAsync();
+                                                && x.StatusPeriod == StatusPeriod.Abierto).FirstOrDefaultAsync();
 
             if (response == null)
             {

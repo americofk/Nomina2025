@@ -57,18 +57,18 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.FilterExtraHours = new List<SelectListItem>();
             switch (workStatus)
             {
-                case WorkStatus.Candidate:
+                case WorkStatus.Candidato:
                     ViewBag.typeEmployee = "Prospectos a empleado";
                     break;
-                case WorkStatus.Dismissed:
+                case WorkStatus.Desvinculado:
                     ViewBag.typeEmployee = "Dados de baja";
 
                     break;
-                case WorkStatus.Employ:
+                case WorkStatus.Empleado:
                     ViewBag.typeEmployee = "Empleados";
-                    ViewBag.FilterExtraHours = FilterHelper<EmployeeExtraHour>.GetPropertyToSearch();                    
+                    ViewBag.FilterExtraHours = FilterHelper<EmployeeExtraHour>.GetPropertyToSearch();
                     break;
-              
+
             }
            
             processEmployee = new ProcessEmployee(dataUser[0]);

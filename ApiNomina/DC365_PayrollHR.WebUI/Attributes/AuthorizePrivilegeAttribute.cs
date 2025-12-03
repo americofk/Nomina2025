@@ -61,7 +61,7 @@ namespace DC365_PayrollHR.WebUI.Attributes
 
             //Si el usuario es administrador no busco los permisos del menú
             //En caso contrario busco los del menú
-            if (ElevationType != AdminType.LocalAdmin)
+            if (ElevationType != AdminType.AdministradorLocal)
             {
                 //Obtengo el usuario del token de ingreso
                 string Alias = context.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);

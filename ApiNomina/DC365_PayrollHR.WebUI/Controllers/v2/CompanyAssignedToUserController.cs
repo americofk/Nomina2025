@@ -25,7 +25,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/companiestouser")]
     [Authorize]
     [ApiController]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.LocalAdmin)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.AdministradorLocal)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class CompanyAssignedToUserController : ControllerBase
     {

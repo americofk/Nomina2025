@@ -75,7 +75,7 @@ namespace DC365_PayrollHR.Core.Domain.Entities
         /// <summary>
         /// Estado.
         /// </summary>
-        public PayrollProcessStatus PayrollProcessStatus { get; set; } = PayrollProcessStatus.Created;
+        public PayrollProcessStatus PayrollProcessStatus { get; set; } = PayrollProcessStatus.Creado;
 
 
 

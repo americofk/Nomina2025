@@ -115,7 +115,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeDeductionC
                                                                 && x.Pp.PayrollId == response.PayrollId
                                                                 && x.Pa.ActionId == item
                                                                 && x.Pa.EmployeeId == parentid 
-                                                                && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled).FirstOrDefaultAsync();
+                                                                && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado).FirstOrDefaultAsync();
 
                     if (payrollprocess != null)
                     {

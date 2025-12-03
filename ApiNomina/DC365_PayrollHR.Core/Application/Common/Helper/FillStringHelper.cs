@@ -28,7 +28,7 @@ namespace DC365_PayrollHR.Core.Application.Common.Helper
         {
             string newString = string.Empty;
 
-            if(_direction == AlignDirection.Left)
+            if(_direction == AlignDirection.Izquierda)
                 newString = _text.PadLeft(_totalLenght, _paddingChar);
             else
                 newString = _text.PadRight(_totalLenght, _paddingChar);

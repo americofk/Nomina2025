@@ -9,8 +9,8 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum Gender
     {
-        Male = 0,
-        Female = 1,
-        NonSpecific = 3
+        Masculino = 0,
+        Femenino = 1,
+        NoEspecificado = 3
     }
 }

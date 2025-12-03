@@ -9,15 +9,15 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum PayFrecuency
     {
-        NotSelected = -1,
-        Diary = 0,
-        Weekly = 1,
-        TwoWeekly = 2,
-        BiWeekly = 3,
-        Monthly = 4,
-        ThreeMonth = 5,
-        FourMonth = 6,
-        Biannual = 7,
-        Yearly = 8
+        NoSeleccionado = -1,
+        Diario = 0,
+        Semanal = 1,
+        Bisemanal = 2,
+        Quincenal = 3,
+        Mensual = 4,
+        Trimestral = 5,
+        Cuatrimestral = 6,
+        Semestral = 7,
+        Anual = 8
     }
 }

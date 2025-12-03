@@ -27,7 +27,7 @@ namespace DC365_PayrollHR.WebUI.Controllers.v2
     [Route("api/v2.0/currencies")]
     [ApiController]
     [Authorize]
-    [AuthorizeRole(ElevationTypeRequired = AdminType.User)]
+    [AuthorizeRole(ElevationTypeRequired = AdminType.Usuario)]
     [TypeFilter(typeof(CustomExceptionFilter))]
     public class CurrencyController : ControllerBase
     {

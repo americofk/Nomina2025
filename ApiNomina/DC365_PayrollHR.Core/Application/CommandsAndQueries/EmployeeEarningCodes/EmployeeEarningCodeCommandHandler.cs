@@ -151,7 +151,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeEarningCod
                                                                 (pp,pa)=> new {Pp=pp, Pa=pa })
                                                             .Where(x => (response.FromDate <= x.Pp.PeriodEndDate && response.ToDate >= x.Pp.PeriodEndDate)
                                                                 && x.Pp.PayrollId == response.PayrollId
-                                                                && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                                                                && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
                                                                 && x.Pa.ActionId == response.EarningCodeId
                                                                 && x.Pa.EmployeeId == parentid).FirstOrDefaultAsync();
                     
@@ -163,7 +163,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeEarningCod
                                                             //    (pp,pa)=> new {Pp=pp, Pa=pa })
                                                             //.Where(x => (response.FromDate <= x.Pp.PeriodEndDate || response.ToDate >= x.Pp.PeriodEndDate)
                                                             //    && x.Pp.PayrollId == response.PayrollId
-                                                            //    && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Canceled
+                                                            //    && x.Pp.PayrollProcessStatus != PayrollProcessStatus.Cancelado
                                                             //    && x.Pa.ActionId == response.EarningCodeId
                                                             //    && x.Pa.EmployeeId == parentid).FirstOrDefaultAsync();
 
@@ -303,31 +303,31 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeEarningCod
 
             switch (_PayFrecuency)
             {
-                case PayFrecuency.Diary:
+                case PayFrecuency.Diario:
                     newamount = amount / 30;
                     break;
-                case PayFrecuency.Weekly:
+                case PayFrecuency.Semanal:
                     newamount = amount / 4;
                     break;
-                case PayFrecuency.TwoWeekly:
+                case PayFrecuency.Bisemanal:
                     newamount = amount / 2;
                     break;
-                case PayFrecuency.BiWeekly:
+                case PayFrecuency.Quincenal:
                     newamount = amount / 2;
                     break;
-                case PayFrecuency.Monthly:
+                case PayFrecuency.Mensual:
                     newamount = 1;
                     break;
-                case PayFrecuency.ThreeMonth:
+                case PayFrecuency.Trimestral:
                     newamount = amount * 3;
                     break;
-                case PayFrecuency.FourMonth:
+                case PayFrecuency.Cuatrimestral:
                     newamount = amount * 4;
                     break;
-                case PayFrecuency.Biannual:
+                case PayFrecuency.Semestral:
                     newamount = amount * 6;
                     break;
-                case PayFrecuency.Yearly:
+                case PayFrecuency.Anual:
                     newamount = amount * 12;
                     break;
             }

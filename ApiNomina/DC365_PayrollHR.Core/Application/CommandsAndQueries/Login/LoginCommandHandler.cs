@@ -96,7 +96,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Login
 
             List<CompanyForUser> companies;
 
-            if (login.ElevationType == Domain.Enums.AdminType.LocalAdmin)
+            if (login.ElevationType == Domain.Enums.AdminType.AdministradorLocal)
             {
                 companies = await dbContext.Companies
                     .Where(x => x.CompanyStatus == true)

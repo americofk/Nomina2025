@@ -9,8 +9,8 @@ namespace DC365_PayrollHR.Core.Domain.Enums
     /// </summary>
     public enum AdminType
     {
-        LocalAdmin = 0,
-        //GlobalAdmin = 1,
-        User = 2
+        AdministradorLocal = 0,
+        //AdministradorGlobal = 1,
+        Usuario = 2
     }
 }

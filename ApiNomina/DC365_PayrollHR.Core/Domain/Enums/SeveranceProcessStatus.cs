@@ -12,27 +12,27 @@ namespace DC365_PayrollHR.Core.Domain.Enums
         /// <summary>
         /// Proceso creado pero no calculado.
         /// </summary>
-        Created = 0,
+        Creado = 0,
 
         /// <summary>
         /// Proceso con cálculos realizados.
         /// </summary>
-        Calculated = 1,
+        Calculado = 1,
 
         /// <summary>
         /// Proceso aprobado para pago.
         /// </summary>
-        Approved = 2,
+        Aprobado = 2,
 
         /// <summary>
         /// Proceso pagado/cerrado.
         /// </summary>
-        Paid = 3,
+        Pagado = 3,
 
         /// <summary>
         /// Proceso cancelado.
         /// </summary>
-        Canceled = 4
+        Cancelado = 4
     }
 
     /// <summary>

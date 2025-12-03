@@ -68,7 +68,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeExtraHours
 
             //Buscar el earning code por la versión del mismo, según la fecha
             var earningcode = await _dbContext.EarningCodeVersions.Where(x => x.EarningCodeId == model.EarningCodeId
-                                                            && x.IndexBase == IndexBase.Hour
+                                                            && x.IndexBase == IndexBase.Hora
                                                             && x.MultiplyAmount != 0
                                                             && x.ValidFrom <= model.WorkedDay && x.ValidTo >= model.WorkedDay).FirstOrDefaultAsync();
 
@@ -173,8 +173,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeExtraHours
 
                     var payrollprocess = await _dbContext.PayrollsProcess.Where(x => response.WorkedDay >= x.PeriodStartDate && response.WorkedDay <= x.PeriodEndDate
                                                                                 && x.PayrollId == response.PayrollId
-                                                                                && x.PayrollProcessStatus != PayrollProcessStatus.Canceled
-                                                                                && x.PayrollProcessStatus != PayrollProcessStatus.Paid)
+                                                                                && x.PayrollProcessStatus != PayrollProcessStatus.Cancelado
+                                                                                && x.PayrollProcessStatus != PayrollProcessStatus.Pagado)
                                                                          .FirstOrDefaultAsync();
 
                     if (payrollprocess != null)
@@ -224,7 +224,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeExtraHours
             var response = await _dbContext.EmployeeExtraHours.Where(x => x.EmployeeId == id
                                                                      && x.WorkedDay == model.WorkedDay
                                                                      && x.EarningCodeId == model.EarningCodeId
-                                                                     && x.StatusExtraHour == StatusExtraHour.Open).FirstOrDefaultAsync();
+                                                                     && x.StatusExtraHour == StatusExtraHour.Abierto).FirstOrDefaultAsync();
             if (response == null)
             {
                 return new Response<object>(false)
@@ -236,7 +236,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.EmployeeExtraHours
             }
 
             var earningcode = await _dbContext.EarningCodes.Where(x => x.EarningCodeId == model.EarningCodeId
-                                                && x.IndexBase == IndexBase.Hour
+                                                && x.IndexBase == IndexBase.Hora
                                                 && x.MultiplyAmount != 0).FirstOrDefaultAsync();
 
             if (earningcode == null)

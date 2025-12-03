@@ -24,7 +24,7 @@ namespace DC365_PayrollHR.WebUI.Attributes
         /// <summary>
         /// Valor numerico para ElevationTypeRequired.
         /// </summary>
-        public AdminType ElevationTypeRequired { get; set; } = AdminType.User;
+        public AdminType ElevationTypeRequired { get; set; } = AdminType.Usuario;
 
         /// <summary>
 
@@ -57,9 +57,9 @@ namespace DC365_PayrollHR.WebUI.Attributes
                 AdminType ElevationType = (AdminType)Enum.Parse(typeof(AdminType), context.HttpContext.User.FindFirstValue(ClaimTypes.Actor));
 
                 //La pantalla no necesita rol de admnistrador
-                if(ElevationTypeRequired == AdminType.LocalAdmin)
+                if(ElevationTypeRequired == AdminType.AdministradorLocal)
                 {
-                    if (ElevationType == AdminType.User)
+                    if (ElevationType == AdminType.Usuario)
                     {
                         context.Result = new JsonResult(new Response<string>
                         {

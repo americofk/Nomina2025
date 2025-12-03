@@ -2,17 +2,17 @@
 @model DC365_WebNR.CORE.Domain.Models.Employee
 
 @{
-    WorkStatus workStatus = WorkStatus.Candidate;
+    WorkStatus workStatus = WorkStatus.Candidato;
     List<SelectListItem> occupation = (List<SelectListItem>)ViewBag.Occupation;
     List<SelectListItem> educationLevel = (List<SelectListItem>)ViewBag.EducationLevel;
     List<SelectListItem> disabilityType = (List<SelectListItem>)ViewBag.DisabilityType;
     List<SelectListItem> country = (List<SelectListItem>)ViewBag.Country;
 
     if (ViewBag.typeEmployee == "Empleados")
-        workStatus = WorkStatus.Employ;
+        workStatus = WorkStatus.Empleado;
 
     if (ViewBag.typeEmployee == "Dados de baja")
-        workStatus = WorkStatus.Dismissed;
+        workStatus = WorkStatus.Desvinculado;
 
     var AdmissionDate = DateTime.Today.Date.ToString("yyyy-MM-dd");
 }
