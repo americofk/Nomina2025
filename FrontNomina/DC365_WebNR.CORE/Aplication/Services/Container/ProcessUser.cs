@@ -78,8 +78,8 @@ namespace DC365_WebNR.CORE.Aplication.Services.Container
         {
             List<User> _user = new List<User>();
 
-            //string urlData = $"{urlsServices.GetUrl("User")}?PageNumber={_PageNumber}&PageSize=20";
-            string urlData = $"{urlsServices.GetUrl("User")}?PageNumber={_PageNumber}&PageSize=20&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+            //string urlData = $"{urlsServices.GetUrl("User")}?PageNumber={_PageNumber}&PageSize=1500";
+            string urlData = $"{urlsServices.GetUrl("User")}?PageNumber={_PageNumber}&PageSize=1500&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
 
             var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);

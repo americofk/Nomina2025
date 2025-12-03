@@ -28,4 +28,27 @@ namespace DC365_WebNR.CORE.Domain.Models
         /// </summary>
         public int TotalRecords { get; set; }
     }
+
+    /// <summary>
+    /// Resultado paginado para uso en servicios.
+    /// </summary>
+    public class PaginatedResult<T>
+    {
+        /// <summary>
+        /// Datos de la página actual.
+        /// </summary>
+        public List<T> Data { get; set; } = new List<T>();
+        /// <summary>
+        /// Total de registros en la base de datos.
+        /// </summary>
+        public int TotalRecords { get; set; }
+        /// <summary>
+        /// Número de página actual.
+        /// </summary>
+        public int PageNumber { get; set; }
+        /// <summary>
+        /// Tamaño de página.
+        /// </summary>
+        public int PageSize { get; set; }
+    }
 }

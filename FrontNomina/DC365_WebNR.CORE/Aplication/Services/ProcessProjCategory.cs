@@ -36,7 +36,7 @@ namespace DC365_WebNR.CORE.Aplication.Services
         /// <param name="_PageNumber">Parametro _PageNumber.</param>
         /// <param name="PageSize">Parametro PageSize.</param>
         /// <returns>Resultado de la operacion.</returns>
-        public async Task<IEnumerable<ProjCategory>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=20)
+        public async Task<IEnumerable<ProjCategory>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=1500)
         {
             List<ProjCategory> _model = new List<ProjCategory>();
 

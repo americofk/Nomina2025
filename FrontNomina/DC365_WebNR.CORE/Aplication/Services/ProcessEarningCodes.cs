@@ -37,7 +37,7 @@ namespace DC365_WebNR.CORE.Aplication.Services
         /// <param name="PropertyValue">Parametro PropertyValue.</param>
         /// <param name="PageSize">Parametro PageSize.</param>
         /// <returns>Resultado de la operacion.</returns>
-        public async Task<IEnumerable<EarningCode>> GetAllDataAsync(int _PageNumber = 1, bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "",int PageSize=20)
+        public async Task<IEnumerable<EarningCode>> GetAllDataAsync(int _PageNumber = 1, bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "",int PageSize=1500)
         {
             List<EarningCode> _model = new List<EarningCode>();
 

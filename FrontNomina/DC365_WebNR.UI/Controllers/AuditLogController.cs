@@ -37,7 +37,7 @@ namespace DC365_WebNR.UI.Controllers
             await GetLayoutDefauld();
 
             processAuditLog = new ProcessAuditLog(dataUser[0]);
-            var model = await processAuditLog.GetAllDataAsync();
+            var _model = await processAuditLog.GetAllDataAsync();
             ViewBag.Filter = FilterHelper<AuditLog>.GetPropertyToSearch();
 
             // Datos para el sistema de vistas de usuario
@@ -45,7 +45,7 @@ namespace DC365_WebNR.UI.Controllers
             ViewBag.UserRecId = GetUserRecIdFromSession();
             ViewBag.DataAreaId = dataUser[3];
 
-            return View(model);
+            return View(_model);
         }
 
         /// <summary>
@@ -87,22 +87,21 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
-        /// Filtra y pagina los registros de auditoría.
+        /// Filtra los registros de auditoría.
         /// </summary>
         /// <param name="PropertyName">Nombre de la propiedad para filtrar.</param>
         /// <param name="PropertyValue">Valor de la propiedad para filtrar.</param>
-        /// <param name="_PageNumber">Número de página.</param>
         /// <returns>Vista parcial con los registros filtrados.</returns>
         [HttpGet("FilterOrMoreData")]
-        public async Task<IActionResult> AuditLogFilterOrMoreData(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
+        public async Task<IActionResult> AuditLogFilterOrMoreData(string PropertyName = "", string PropertyValue = "")
         {
             GetdataUser();
             processAuditLog = new ProcessAuditLog(dataUser[0]);
             await GetLayoutDefauld();
-            ViewBag.CountPageNumber = _PageNumber - 1;
-            var model = await processAuditLog.GetAllDataAsync(PropertyName, PropertyValue, _PageNumber);
 
-            return PartialView("AuditLogFilterOrMoreData", model);
+            var _model = await processAuditLog.GetAllDataAsync(PropertyName, PropertyValue);
+
+            return PartialView("AuditLogFilterOrMoreData", _model);
         }
 
         /// <summary>

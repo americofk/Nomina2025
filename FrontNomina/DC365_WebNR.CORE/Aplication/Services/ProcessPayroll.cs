@@ -38,7 +38,7 @@ namespace DC365_WebNR.CORE.Aplication.Services
         {
             List<Payroll> courseType = new List<Payroll>();
 
-            string urlData = $"{urlsServices.GetUrl("Payroll")}?PageNumber={_PageNumber}&PageSize=20&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+            string urlData = $"{urlsServices.GetUrl("Payroll")}?PageNumber={_PageNumber}&PageSize=1500&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
             var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
 

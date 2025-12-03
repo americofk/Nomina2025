@@ -42,24 +42,24 @@ namespace DC365_WebNR.CORE.Aplication.Services
         /// <param name="_PageNumber">Parametro _PageNumber.</param>
         /// <param name="PageSize">Parametro PageSize.</param>
         /// <returns>Resultado de la operacion.</returns>
-        public async Task<IEnumerable<Employee>> GetAllDataAsync(string type = "", string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=20)
+        public async Task<IEnumerable<Employee>> GetAllDataAsync(string type = "", string PropertyName = "", string PropertyValue = "", int _PageNumber = 1,int PageSize=1500)
         {
             List<Employee> _model = new List<Employee>();
 
-            //string urlData = $"{urlsServices.GetUrl("Candidate")}?PageNumber={_PageNumber}&PageSize=20";
+            //string urlData = $"{urlsServices.GetUrl("Candidate")}?PageNumber={_PageNumber}&PageSize=1500";
             string urlData = $"{urlsServices.GetUrl("Candidate")}?PageNumber={_PageNumber}&PageSize={PageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
             if (type == "Dismissed")
-                //urlData = $"{urlsServices.GetUrl("Dissmis")}?PageNumber={_PageNumber}&PageSize=20";
-                urlData = $"{urlsServices.GetUrl("Dissmis")}?PageNumber={_PageNumber}&PageSize=20&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+                //urlData = $"{urlsServices.GetUrl("Dissmis")}?PageNumber={_PageNumber}&PageSize=1500";
+                urlData = $"{urlsServices.GetUrl("Dissmis")}?PageNumber={_PageNumber}&PageSize=1500&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
             if (type == "Employ")
-                //urlData = $"{urlsServices.GetUrl("EmployeesEnabled")}?PageNumber={_PageNumber}&PageSize=20";
-                urlData = $"{urlsServices.GetUrl("EmployeesEnabled")}?PageNumber={_PageNumber}&PageSize=20&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+                //urlData = $"{urlsServices.GetUrl("EmployeesEnabled")}?PageNumber={_PageNumber}&PageSize=1500";
+                urlData = $"{urlsServices.GetUrl("EmployeesEnabled")}?PageNumber={_PageNumber}&PageSize=1500&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
             if (type == "inactivos")
-                //urlData = $"{urlsServices.GetUrl("EmployeesDisabled")}?PageNumber={_PageNumber}&PageSize=20";
-                urlData = $"{urlsServices.GetUrl("EmployeesDisabled")}?PageNumber={_PageNumber}&PageSize=20&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+                //urlData = $"{urlsServices.GetUrl("EmployeesDisabled")}?PageNumber={_PageNumber}&PageSize=1500";
+                urlData = $"{urlsServices.GetUrl("EmployeesDisabled")}?PageNumber={_PageNumber}&PageSize=1500&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
 
             var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);

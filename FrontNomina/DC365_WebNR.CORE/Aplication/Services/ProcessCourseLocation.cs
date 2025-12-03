@@ -40,8 +40,8 @@ namespace DC365_WebNR.CORE.Aplication.Services
             List<CourseLocation> courseType = new List<CourseLocation>();
 
 
-            //string urlData = $"{urlsServices.GetUrl("CourseLocation")}?PageNumber={_PageNumber}&PageSize=20";
-            string urlData = $"{urlsServices.GetUrl("CourseLocation")}?PageNumber={_PageNumber}&PageSize=20&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+            //string urlData = $"{urlsServices.GetUrl("CourseLocation")}?PageNumber={_PageNumber}&PageSize=1500";
+            string urlData = $"{urlsServices.GetUrl("CourseLocation")}?PageNumber={_PageNumber}&PageSize=1500&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
 
 
             var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);

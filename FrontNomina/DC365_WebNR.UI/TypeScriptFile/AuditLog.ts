@@ -135,15 +135,3 @@ $(document).on('keyup', '#auditlog-page .textFilterMask', function (e) {
         Datafilter(".tbody-Table-AuditLog", "/auditoria/FilterOrMoreData");
     }
 });
-
-// Scroll infinito para paginación
-$(document).on('scroll', '#auditlog-page #content-scroll', function () {
-    let currentscroll = $("#content-scroll").scrollTop();
-    let maxscroll = $(".tblAuditLog").outerHeight(true) - $("#content-scroll").outerHeight(true);
-
-    if (currentscroll == Math.round(maxscroll)) {
-        if (!isBusy) {
-            moredata(maxscroll, "auditoria", ".tbody-Table-AuditLog");
-        }
-    }
-});

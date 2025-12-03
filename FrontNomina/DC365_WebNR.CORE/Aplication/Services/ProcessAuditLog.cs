@@ -34,7 +34,7 @@ namespace DC365_WebNR.CORE.Aplication.Services
         /// <param name="_PageNumber">Número de página.</param>
         /// <param name="PageSize">Tamaño de página.</param>
         /// <returns>Lista de registros de auditoría.</returns>
-        public async Task<IEnumerable<AuditLog>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1, int PageSize = 20)
+        public async Task<IEnumerable<AuditLog>> GetAllDataAsync(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1, int PageSize = 1500)
         {
             List<AuditLog> auditLogs = new List<AuditLog>();
 
@@ -56,6 +56,43 @@ namespace DC365_WebNR.CORE.Aplication.Services
             }
 
             return auditLogs;
+        }
+
+        /// <summary>
+        /// Obtiene todos los registros de auditoría paginados con el total de registros.
+        /// </summary>
+        /// <param name="PropertyName">Nombre de la propiedad para filtrar.</param>
+        /// <param name="PropertyValue">Valor de la propiedad para filtrar.</param>
+        /// <param name="pageNumber">Número de página.</param>
+        /// <param name="pageSize">Tamaño de página.</param>
+        /// <returns>Resultado paginado con datos y total de registros.</returns>
+        public async Task<PaginatedResult<AuditLog>> GetAllDataWithTotalAsync(string PropertyName = "", string PropertyValue = "", int pageNumber = 1, int pageSize = 50)
+        {
+            var result = new PaginatedResult<AuditLog>();
+
+            string urlData = $"{urlsServices.GetUrl("AuditLogs")}?PageNumber={pageNumber}&PageSize={pageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<Pagination<List<AuditLog>>>(Api.Content.ReadAsStringAsync().Result);
+                result.Data = response.Data;
+                result.TotalRecords = response.TotalRecords;
+                result.PageNumber = response.PageNumber;
+                result.PageSize = response.PageSize;
+            }
+            else
+            {
+                if (Api.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new Exception("Key-error");
+                }
+                result.Data = new List<AuditLog>();
+                result.TotalRecords = 0;
+            }
+
+            return result;
         }
 
         /// <summary>

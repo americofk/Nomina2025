@@ -1,35 +1,32 @@
 @model IEnumerable<DC365_WebNR.CORE.Domain.Models.AuditLog>
 @{
-    int idCheckCont = ViewBag.CountPageNumber * 20;
+    int idCheckCont = 1;
 }
 @foreach (var item in Model)
 {
     var idCheck = $"checkAuditLog_{idCheckCont}";
-    <tr class="row-app">
+    <tr class="row-app" data-recid="@item.RecId">
         <td class="cell-app check-cell-app">
             <input id="@idCheck" type="checkbox" class="check-table-app selectAuditLog">
             <label for="@idCheck" class="label-cell"></label>
         </td>
-        <td class="cell-app cell-principal AuditLogRecIdtbl collapse" data-title="RecId">
-            @item.RecId
-        </td>
-        <td class="cell-app EntityNametbl" data-title="Entidad">
+        <td class="cell-app cell-principal EntityNametbl" data-title="Entidad">
             @item.EntityName
         </td>
-        <td class="cell-app" data-title="Campo">
+        <td class="cell-app FieldNametbl" data-title="Campo">
             @item.FieldName
         </td>
-        <td class="cell-app" data-title="Valor Anterior">
-            @(item.OldValue?.Length > 30 ? item.OldValue.Substring(0, 30) + "..." : item.OldValue)
-        </td>
-        <td class="cell-app" data-title="Nuevo Valor">
+        <td class="cell-app NewValuetbl" data-title="Nuevo Valor">
             @(item.NewValue?.Length > 30 ? item.NewValue.Substring(0, 30) + "..." : item.NewValue)
         </td>
-        <td class="cell-app" data-title="Modificado Por">
-            @item.ChangedBy
+        <td class="cell-app OldValuetbl" data-title="Valor Anterior">
+            @(item.OldValue?.Length > 30 ? item.OldValue.Substring(0, 30) + "..." : item.OldValue)
         </td>
-        <td class="cell-app" data-title="Fecha Cambio">
+        <td class="cell-app ChangedAttbl" data-title="Fecha Cambio">
             @item.ChangedAt.ToString("dd/MM/yyyy HH:mm:ss")
+        </td>
+        <td class="cell-app ChangedBytbl" data-title="Modificado Por">
+            @item.ChangedBy
         </td>
     </tr>
     idCheckCont++;
