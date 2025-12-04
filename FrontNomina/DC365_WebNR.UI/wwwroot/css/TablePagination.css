@@ -2,7 +2,7 @@
 
 /* Reducir altura de tabla para dejar espacio a paginacion */
 .ContenedorListEntity .scrollbar-TablePrimari {
-    height: calc(100% - 115px);
+    height: calc(100% - 50px) !important;
     overflow: auto !important;
 }
 
@@ -23,7 +23,15 @@
     height: 25px;
 }
 
+.ContenedorListEntity .row-header-app {
+    height: 25px;
+}
+
 .ContenedorListEntity .cell-app {
+    padding: 1px 8px;
+}
+
+.ContenedorListEntity .cell-header-app {
     padding: 1px 8px;
 }
 
@@ -31,13 +39,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 5px 15px;
     background: #f5f5f5;
     border-top: 1px solid #ddd;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 5px;
     flex-shrink: 0;
-    min-height: 50px;
+    min-height: 40px;
 }
 
 .pagination-info {

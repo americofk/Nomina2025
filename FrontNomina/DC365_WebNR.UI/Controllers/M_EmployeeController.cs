@@ -152,6 +152,37 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Endpoint AJAX para paginacion de empleados.
+        /// Busca en EmployeeId, Name y LastName.
+        /// </summary>
+        [HttpGet("GetEmployeesPaged")]
+        public async Task<JsonResult> GetEmployeesPaged(string workStatus = "Employ", string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processEmployee = new ProcessEmployee(dataUser[0]);
+
+            // Buscar en EmployeeId, Name y LastName
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "EmployeeId,Name,LastName";
+            }
+
+            var pagedResult = await processEmployee.GetAllDataPagedAsync(workStatus, propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
+        /// <summary>
 
         /// Obtiene.
 

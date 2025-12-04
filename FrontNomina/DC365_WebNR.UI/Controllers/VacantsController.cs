@@ -115,6 +115,35 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Endpoint AJAX para paginacion de vacantes.
+        /// </summary>
+        [HttpGet("GetVacantsPaged")]
+        public async Task<JsonResult> GetVacantsPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processVacants = new ProcessVacants(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "PositionId,PositionName";
+            }
+
+            var pagedResult = await processVacants.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
+        /// <summary>
 
         /// Guarda los cambios.
 

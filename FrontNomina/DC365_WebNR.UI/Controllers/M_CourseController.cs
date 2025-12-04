@@ -116,7 +116,7 @@ namespace DC365_WebNR.UI.Controllers
         [HttpGet("FilterOrMoreData")]
         public async Task<IActionResult> Course_Filter_OrMore_Data(string PropertyName = "", string PropertyValue = "", int _PageNumber = 1)
         {
-            
+
             GetdataUser();
             processCourse = new ProcessCourse(dataUser[0]);
             await GetLayoutDefauld();
@@ -125,6 +125,35 @@ namespace DC365_WebNR.UI.Controllers
             var model = await processCourse.GetAllDataAsync(PropertyName, PropertyValue, _PageNumber);
 
             return PartialView("Course_Filter_OrMore_Data", model);
+        }
+
+        /// <summary>
+        /// Endpoint AJAX para paginacion de cursos.
+        /// </summary>
+        [HttpGet("GetCoursesPaged")]
+        public async Task<JsonResult> GetCoursesPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processCourse = new ProcessCourse(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "CourseId,CourseName";
+            }
+
+            var pagedResult = await processCourse.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
         }
 
         /// <summary>

@@ -152,5 +152,34 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("CalendarHolidayFilterOrMoreData", model);
         }
 
+        /// <summary>
+        /// Endpoint AJAX para paginacion de dias feriados.
+        /// </summary>
+        [HttpGet("GetCalendarHolidaysPaged")]
+        public async Task<JsonResult> GetCalendarHolidaysPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            process = new ProcessCalendarHoliday(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "Description";
+            }
+
+            var pagedResult = await process.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
     }
 }

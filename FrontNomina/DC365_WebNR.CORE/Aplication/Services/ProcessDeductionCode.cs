@@ -62,6 +62,45 @@ namespace DC365_WebNR.CORE.Aplication.Services
             return courseType;
         }
 
+        /// <summary>
+        /// Obtiene codigos de deduccion paginados con total de registros.
+        /// </summary>
+        public async Task<PagedResult<DeductionCode>> GetAllDataPagedAsync(bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            var result = new PagedResult<DeductionCode>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = new List<DeductionCode>()
+            };
+
+            string urlData = $"{urlsServices.GetUrl("Deductioncodes")}?PageNumber={pageNumber}&PageSize={pageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}&versions={_IsVersion}&id={id}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<PagedResponse<List<DeductionCode>>>(Api.Content.ReadAsStringAsync().Result);
+                if (response != null)
+                {
+                    result.Data = response.Data ?? new List<DeductionCode>();
+                    result.PageNumber = response.PageNumber;
+                    result.PageSize = response.PageSize;
+                    result.TotalRecords = response.TotalRecords;
+                    result.TotalPages = response.TotalPages;
+                }
+            }
+            else
+            {
+                if (Api.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new Exception("Key-error");
+                }
+            }
+
+            return result;
+        }
+
         //guardar
         /// <summary>
         /// Crea o procesa.

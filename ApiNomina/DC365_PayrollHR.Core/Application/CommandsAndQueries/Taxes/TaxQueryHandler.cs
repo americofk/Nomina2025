@@ -50,17 +50,35 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Taxes
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
 
             var tempResponse = _dbContext.Taxes
+                .OrderBy(x => x.TaxId)
                 .Where(x => x.TaxStatus == (bool)queryfilter)
                 .AsQueryable();
 
-            SearchFilter<Tax> validSearch = new SearchFilter<Tax>(searchFilter.PropertyName, searchFilter.PropertyValue);
-            if (validSearch.IsValid())
+            // Verificar si es busqueda en multiples campos (separados por coma)
+            if (!string.IsNullOrWhiteSpace(searchFilter.PropertyName) &&
+                !string.IsNullOrWhiteSpace(searchFilter.PropertyValue) &&
+                searchFilter.PropertyName.Contains(","))
             {
-                var lambda = GenericSearchHelper<Tax>.GetLambdaExpession(validSearch);
-
-                tempResponse = tempResponse.Where(lambda)
-                                           .AsQueryable();
+                var searchValue = searchFilter.PropertyValue.ToLower();
+                tempResponse = tempResponse.Where(x =>
+                    (x.TaxId != null && x.TaxId.ToLower().Contains(searchValue)) ||
+                    (x.Name != null && x.Name.ToLower().Contains(searchValue))
+                ).AsQueryable();
             }
+            else
+            {
+                SearchFilter<Tax> validSearch = new SearchFilter<Tax>(searchFilter.PropertyName, searchFilter.PropertyValue);
+                if (validSearch.IsValid())
+                {
+                    var lambda = GenericSearchHelper<Tax>.GetLambdaExpession(validSearch);
+
+                    tempResponse = tempResponse.Where(lambda)
+                                               .AsQueryable();
+                }
+            }
+
+            // Obtener total de registros antes de paginar
+            var totalRecords = await tempResponse.CountAsync();
 
             var response = await tempResponse
                             .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
@@ -68,7 +86,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Taxes
                             .Select(x => BuildDtoHelper<TaxResponse>.OnBuild(x, new TaxResponse()))
                             .ToListAsync();
 
-            return new PagedResponse<IEnumerable<TaxResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
+            var pagedResponse = new PagedResponse<IEnumerable<TaxResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
+            pagedResponse.TotalRecords = totalRecords;
+            pagedResponse.TotalPages = (int)Math.Ceiling(totalRecords / (double)validFilter.PageSize);
+
+            return pagedResponse;
         }
 
         /// <summary>

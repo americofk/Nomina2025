@@ -92,6 +92,35 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Endpoint AJAX para paginacion de tipos de cursos.
+        /// </summary>
+        [HttpGet("GetCourseTypesPaged")]
+        public async Task<JsonResult> GetCourseTypesPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processCourseType = new ProcessCourseType(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "CourseTypeId,Name";
+            }
+
+            var pagedResult = await processCourseType.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
+        /// <summary>
 
         /// Guarda los cambios.
 

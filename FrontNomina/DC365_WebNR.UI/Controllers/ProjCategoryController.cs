@@ -245,6 +245,35 @@ namespace DC365_WebNR.UI.Controllers
         }
 
         /// <summary>
+        /// Endpoint AJAX para paginacion de categorias de proyectos.
+        /// </summary>
+        [HttpGet("GetProjCategoriesPaged")]
+        public async Task<JsonResult> GetProjCategoriesPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            process = new ProcessProjCategory(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "ProjCategoryId,CategoryName";
+            }
+
+            var pagedResult = await process.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
+        /// <summary>
         /// Obtiene las categorías de proyecto filtradas por proyecto.
         /// </summary>
         /// <param name="projId">Identificador del proyecto.</param>

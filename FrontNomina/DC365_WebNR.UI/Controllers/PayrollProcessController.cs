@@ -99,6 +99,35 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("PayrollProcess_Filter_OrMore_Data", model);
         }
 
+        /// <summary>
+        /// Endpoint AJAX para paginacion de procesos de nomina.
+        /// </summary>
+        [HttpGet("GetPayrollProcessPaged")]
+        public async Task<JsonResult> GetPayrollProcessPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            process = new ProcessPayrollProcess(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "PayrollProcessId,Description";
+            }
+
+            var pagedResult = await process.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
 
         /// <summary>
 

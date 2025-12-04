@@ -96,6 +96,38 @@ namespace DC365_WebNR.CORE.Aplication.Services
         }
 
         /// <summary>
+        /// Obtiene datos paginados para la tabla AJAX.
+        /// </summary>
+        public async Task<PagedResult<AuditLog>> GetAllDataPagedAsync(string PropertyName = "", string PropertyValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            var result = new PagedResult<AuditLog>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = new List<AuditLog>()
+            };
+
+            string urlData = $"{urlsServices.GetUrl("AuditLogs")}?PageNumber={pageNumber}&PageSize={pageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<PagedResponse<List<AuditLog>>>(Api.Content.ReadAsStringAsync().Result);
+                if (response != null)
+                {
+                    result.Data = response.Data ?? new List<AuditLog>();
+                    result.PageNumber = response.PageNumber;
+                    result.PageSize = response.PageSize;
+                    result.TotalRecords = response.TotalRecords;
+                    result.TotalPages = response.TotalPages;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Obtiene un registro de auditoría por su RecId.
         /// </summary>
         /// <param name="recId">Identificador único del registro.</param>

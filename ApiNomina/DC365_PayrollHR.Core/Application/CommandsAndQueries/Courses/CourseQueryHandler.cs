@@ -53,14 +53,29 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
                 .OrderBy(x => x.CourseId)
                 .AsQueryable();
 
-            SearchFilter<Course> validSearch = new SearchFilter<Course>(searchFilter.PropertyName, searchFilter.PropertyValue);
-            if (validSearch.IsValid())
+            // Verificar si es busqueda en multiples campos (separados por coma)
+            if (!string.IsNullOrWhiteSpace(searchFilter.PropertyName) &&
+                !string.IsNullOrWhiteSpace(searchFilter.PropertyValue) &&
+                searchFilter.PropertyName.Contains(","))
             {
-                var lambda = GenericSearchHelper<Course>.GetLambdaExpession(validSearch);
-
-                tempResponse = tempResponse.Where(lambda)
-                                           .AsQueryable();
+                var searchValue = searchFilter.PropertyValue.ToLower();
+                tempResponse = tempResponse.Where(x =>
+                    (x.CourseId != null && x.CourseId.ToLower().Contains(searchValue)) ||
+                    (x.CourseName != null && x.CourseName.ToLower().Contains(searchValue))
+                ).AsQueryable();
             }
+            else
+            {
+                SearchFilter<Course> validSearch = new SearchFilter<Course>(searchFilter.PropertyName, searchFilter.PropertyValue);
+                if (validSearch.IsValid())
+                {
+                    var lambda = GenericSearchHelper<Course>.GetLambdaExpession(validSearch);
+                    tempResponse = tempResponse.Where(lambda).AsQueryable();
+                }
+            }
+
+            // Obtener total de registros antes de paginar
+            var totalRecords = await tempResponse.CountAsync();
 
             var response = await tempResponse
                             .Join(_dbContext.CourseTypes,
@@ -76,7 +91,11 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.Courses
                             .Take(validFilter.PageSize)
                             .ToListAsync();
 
-            return new PagedResponse<IEnumerable<CourseResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
+            var pagedResponse = new PagedResponse<IEnumerable<CourseResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
+            pagedResponse.TotalRecords = totalRecords;
+            pagedResponse.TotalPages = (int)Math.Ceiling(totalRecords / (double)validFilter.PageSize);
+
+            return pagedResponse;
         }
 
         private static CourseResponse SetObjectResponse(Course course, ClassRoom classRoom, CourseType courseType)

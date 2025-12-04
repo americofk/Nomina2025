@@ -12,6 +12,11 @@
 <link href="~/css/Nomina.css" rel="stylesheet" />
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
+<link href="~/css/TablePagination.css" rel="stylesheet" />
+<style>
+    #payroll-page .scrollbar-TablePrimari { height: calc(100vh - 270px) !important; }
+    #payroll-page .pagination-wrapper { padding: 8px 15px; }
+</style>
 <div class="contDasboard" id="payroll-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     <!--Opciones del Formulario-->
@@ -260,13 +265,11 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/Payroll-views.js?@version"></script>
+<script src="~/js/TablePagination.js?@version"></script>
+<script src="~/js/PayrollPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableFeatures({
-            filterInput: '.textFilterMask',
-            table: '#MainTable',
-            tbody: '.tbody-Table-Payroll'
-        });
+        initTableSort('#MainTable');
     });
 </script>
 <script src="~/js/Payroll.js" type="module"></script>

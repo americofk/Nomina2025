@@ -451,5 +451,34 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("User_Filte_Or_MoreData", model);
         }
 
+        /// <summary>
+        /// Endpoint AJAX para paginacion de usuarios.
+        /// </summary>
+        [HttpGet("GetUsersPaged")]
+        public async Task<JsonResult> GetUsersPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processUser = new ProcessUser(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "Alias,Name";
+            }
+
+            var pagedResult = await processUser.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
+
     }
 }

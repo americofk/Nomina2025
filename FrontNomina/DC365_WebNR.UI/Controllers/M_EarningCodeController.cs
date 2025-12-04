@@ -260,6 +260,34 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("EarningCodes_CodeFilter_Or_MoreData", model);
         }
 
+        /// <summary>
+        /// Endpoint AJAX para paginacion de codigos de ganancia.
+        /// </summary>
+        [HttpGet("GetEarningCodesPaged")]
+        public async Task<JsonResult> GetEarningCodesPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            earningCode = new ProcessEarningCodes(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "EarningCodeId,Name";
+            }
+
+            var pagedResult = await earningCode.GetAllDataPagedAsync(pageNumber, false, "", propertyName, searchValue, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
 
         /// <summary>
 

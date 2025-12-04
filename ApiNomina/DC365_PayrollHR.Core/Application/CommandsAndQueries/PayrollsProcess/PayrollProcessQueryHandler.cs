@@ -70,24 +70,44 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
 
             var tempResponse = _dbContext.PayrollsProcess
-                .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                .OrderByDescending(x => x.PayrollProcessId)
                 .AsQueryable();
 
-            SearchFilter<PayrollProcess> validSearch = new SearchFilter<PayrollProcess>(searchFilter.PropertyName, searchFilter.PropertyValue);
-            if (validSearch.IsValid())
+            // Verificar si es busqueda en multiples campos (separados por coma)
+            if (!string.IsNullOrWhiteSpace(searchFilter.PropertyName) &&
+                !string.IsNullOrWhiteSpace(searchFilter.PropertyValue) &&
+                searchFilter.PropertyName.Contains(","))
             {
-                var lambda = GenericSearchHelper<PayrollProcess>.GetLambdaExpession(validSearch);
-
-                tempResponse = tempResponse.Where(lambda)
-                                           .AsQueryable();
+                var searchValue = searchFilter.PropertyValue.ToLower();
+                tempResponse = tempResponse.Where(x =>
+                    (x.PayrollProcessId != null && x.PayrollProcessId.ToLower().Contains(searchValue)) ||
+                    (x.Description != null && x.Description.ToLower().Contains(searchValue))
+                ).AsQueryable();
+            }
+            else
+            {
+                SearchFilter<PayrollProcess> validSearch = new SearchFilter<PayrollProcess>(searchFilter.PropertyName, searchFilter.PropertyValue);
+                if (validSearch.IsValid())
+                {
+                    var lambda = GenericSearchHelper<PayrollProcess>.GetLambdaExpession(validSearch);
+                    tempResponse = tempResponse.Where(lambda).AsQueryable();
+                }
             }
 
+            // Obtener total de registros antes de paginar
+            var totalRecords = await tempResponse.CountAsync();
+
             var response = await tempResponse
+                            .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                             .Take(validFilter.PageSize)
                             .Select(x => BuildDtoHelper<PayrollProcessResponse>.OnBuild(x, new PayrollProcessResponse()))
                             .ToListAsync();
 
-            return new PagedResponse<IEnumerable<PayrollProcessResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
+            var pagedResponse = new PagedResponse<IEnumerable<PayrollProcessResponse>>(response, validFilter.PageNumber, validFilter.PageSize);
+            pagedResponse.TotalRecords = totalRecords;
+            pagedResponse.TotalPages = (int)Math.Ceiling(totalRecords / (double)validFilter.PageSize);
+
+            return pagedResponse;
         }
 
 

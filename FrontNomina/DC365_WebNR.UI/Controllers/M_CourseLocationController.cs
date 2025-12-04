@@ -114,6 +114,34 @@ namespace DC365_WebNR.UI.Controllers
             return PartialView("CourseLocation_Filter_OrMore_Data", model);
         }
 
+        /// <summary>
+        /// Endpoint AJAX para paginacion de ubicaciones de cursos.
+        /// </summary>
+        [HttpGet("GetCourseLocationsPaged")]
+        public async Task<JsonResult> GetCourseLocationsPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processCourseLocation = new ProcessCourseLocation(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "CourseLocationId,Name";
+            }
+
+            var pagedResult = await processCourseLocation.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
 
         /// <summary>
 

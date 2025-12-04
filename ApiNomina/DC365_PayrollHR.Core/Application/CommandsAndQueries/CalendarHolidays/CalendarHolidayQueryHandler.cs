@@ -48,13 +48,32 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CalendarHolidays
         {
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
 
-            var response = await _dbContext.CalendarHolidays
+            var tempResponse = _dbContext.CalendarHolidays
                                         .OrderByDescending(x => x.CalendarDate)
+                                        .AsQueryable();
+
+            // Busqueda por descripcion
+            if (!string.IsNullOrWhiteSpace(searchFilter.PropertyValue))
+            {
+                var searchValue = searchFilter.PropertyValue.ToLower();
+                tempResponse = tempResponse.Where(x =>
+                    x.Description != null && x.Description.ToLower().Contains(searchValue)
+                ).AsQueryable();
+            }
+
+            // Obtener total de registros antes de paginar
+            var totalRecords = await tempResponse.CountAsync();
+
+            var response = await tempResponse
                                         .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                                         .Take(validFilter.PageSize)
-                                        .ToListAsync();                            
+                                        .ToListAsync();
 
-            return new PagedResponse<IEnumerable<CalendarHoliday>>(response, validFilter.PageNumber, validFilter.PageSize);
+            var pagedResponse = new PagedResponse<IEnumerable<CalendarHoliday>>(response, validFilter.PageNumber, validFilter.PageSize);
+            pagedResponse.TotalRecords = totalRecords;
+            pagedResponse.TotalPages = (int)Math.Ceiling(totalRecords / (double)validFilter.PageSize);
+
+            return pagedResponse;
         }
     }
 }

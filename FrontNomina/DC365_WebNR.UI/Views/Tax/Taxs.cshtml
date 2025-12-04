@@ -12,6 +12,16 @@
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/Employees.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
+<link href="~/css/TablePagination.css" rel="stylesheet" />
+<style>
+    #tax-page .ContenedorListEntity .scrollbar-TablePrimari {
+        height: calc(100% - 5px) !important;
+    }
+    #tax-page .pagination-wrapper {
+        padding: 2px 15px !important;
+        min-height: 28px !important;
+    }
+</style>
 <div class="contDasboard" id="tax-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     <!--Opciones del Formulario-->
@@ -250,13 +260,11 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/Tax-views.js?@version"></script>
+<script src="~/js/TablePagination.js?@version"></script>
+<script src="~/js/TaxPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableFeatures({
-            filterInput: '.textFilterMask',
-            table: '#MainTable',
-            tbody: '.tbody-Table-Tax'
-        });
+        initTableSort('#MainTable');
     });
 </script>
 @section Scripts {

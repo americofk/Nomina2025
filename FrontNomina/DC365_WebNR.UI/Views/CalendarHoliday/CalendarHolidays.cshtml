@@ -9,8 +9,18 @@
 
 
 <link href="~/css/Department.css" rel="stylesheet" />
+<link href="~/css/TablePagination.css" rel="stylesheet" />
+<style>
+    #calendarholiday-page .ContenedorListEntity .scrollbar-TablePrimari {
+        height: calc(100% - 5px) !important;
+    }
+    #calendarholiday-page .pagination-wrapper {
+        padding: 2px 15px !important;
+        min-height: 28px !important;
+    }
+</style>
 
-<div class="contDasboard">
+<div class="contDasboard" id="calendarholiday-page">
 
     <!--Opciones del Formulario-->
     <div class="opcioneslistpage">
@@ -130,13 +140,11 @@
 <script src="~/js/M_Department.js?@version" type="module"></script>
 <script src="~/js/CalendarHolidays.js?@version" type="module"></script>
 <script src="~/js/table-features.js?@version"></script>
+<script src="~/js/TablePagination.js?@version"></script>
+<script src="~/js/CalendarHolidayPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableFeatures({
-            filterInput: '.textFilterMask',
-            table: '#MainTable',
-            tbody: '.tbody-Table-CalendarHoliday'
-        });
+        initTableSort('#MainTable');
     });
 </script>
 

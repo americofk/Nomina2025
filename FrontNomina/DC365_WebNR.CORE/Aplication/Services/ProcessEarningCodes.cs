@@ -62,6 +62,45 @@ namespace DC365_WebNR.CORE.Aplication.Services
             return _model;
         }
 
+        /// <summary>
+        /// Obtiene codigos de ganancia paginados con total de registros.
+        /// </summary>
+        public async Task<PagedResult<EarningCode>> GetAllDataPagedAsync(int pageNumber = 1, bool _IsVersion = false, string id = "", string PropertyName = "", string PropertyValue = "", int pageSize = 20)
+        {
+            var result = new PagedResult<EarningCode>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = new List<EarningCode>()
+            };
+
+            string urlData = $"{urlsServices.GetUrl("Earningcodes")}?PageNumber={pageNumber}&PageSize={pageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}&versions={_IsVersion}&id={id}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<PagedResponse<List<EarningCode>>>(Api.Content.ReadAsStringAsync().Result);
+                if (response != null)
+                {
+                    result.Data = response.Data ?? new List<EarningCode>();
+                    result.PageNumber = response.PageNumber;
+                    result.PageSize = response.PageSize;
+                    result.TotalRecords = response.TotalRecords;
+                    result.TotalPages = response.TotalPages;
+                }
+            }
+            else
+            {
+                if (Api.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new Exception("Key-error");
+                }
+            }
+
+            return result;
+        }
+
         //Seleccionar horas extras
         /// <summary>
         /// Obtiene.

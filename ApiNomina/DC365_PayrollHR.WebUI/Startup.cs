@@ -36,7 +36,7 @@ namespace DC365_PayrollHR.WebUI
             services.AddScoped<ICurrentUserInformation, CurrentUserInformation>();
             services.AddHttpContextAccessor();
 
-            //Función que evalua los modelos y envia los mensajes de error customizados
+            //Funciï¿½n que evalua los modelos y envia los mensajes de error customizados
             //Se sustituye el valor de BadRequestObjectResult con un objeto personalizado
             services.PostConfigure<ApiBehaviorOptions>(o =>
             {
@@ -71,7 +71,7 @@ namespace DC365_PayrollHR.WebUI
             });
             //End section jwt
             
-            //Ver método de CQRS
+            //Ver mï¿½todo de CQRS
             services.AddApplication();
 
             //Add attribute validation
@@ -79,9 +79,11 @@ namespace DC365_PayrollHR.WebUI
 
             
             services.AddControllers(o => o.Conventions.Add(new GroupForVersioningConvention()))
-                .AddJsonOptions(
-                    o => o.JsonSerializerOptions.Converters.Add(new TimeSpanConverter())
-                );
+                .AddJsonOptions(o =>
+                {
+                    o.JsonSerializerOptions.Converters.Add(new TimeSpanConverter());
+                    o.JsonSerializerOptions.PropertyNamingPolicy = null; // Preservar PascalCase
+                });
 
             ////Cors
             //services.AddCors(options => 

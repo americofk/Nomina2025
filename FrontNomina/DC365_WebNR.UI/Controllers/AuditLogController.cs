@@ -119,5 +119,34 @@ namespace DC365_WebNR.UI.Controllers
 
             return (Json(_model));
         }
+
+        /// <summary>
+        /// Endpoint AJAX para paginacion de registros de auditoria.
+        /// </summary>
+        [HttpGet("GetAuditLogsPaged")]
+        public async Task<JsonResult> GetAuditLogsPaged(string searchValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            GetdataUser();
+            processAuditLog = new ProcessAuditLog(dataUser[0]);
+
+            string propertyName = "";
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                propertyName = "EntityName,FieldName,ChangedBy";
+            }
+
+            var pagedResult = await processAuditLog.GetAllDataPagedAsync(propertyName, searchValue, pageNumber, pageSize);
+
+            return Json(new
+            {
+                data = pagedResult.Data,
+                pageNumber = pagedResult.PageNumber,
+                pageSize = pagedResult.PageSize,
+                totalRecords = pagedResult.TotalRecords,
+                totalPages = pagedResult.TotalPages,
+                hasPreviousPage = pagedResult.HasPreviousPage,
+                hasNextPage = pagedResult.HasNextPage
+            });
+        }
     }
 }

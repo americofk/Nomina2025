@@ -63,6 +63,45 @@ namespace DC365_WebNR.CORE.Aplication.Services
             return courseType;
         }
 
+        /// <summary>
+        /// Obtiene ubicaciones de cursos paginadas con total de registros.
+        /// </summary>
+        public async Task<PagedResult<CourseLocation>> GetAllDataPagedAsync(string PropertyName = "", string PropertyValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            var result = new PagedResult<CourseLocation>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = new List<CourseLocation>()
+            };
+
+            string urlData = $"{urlsServices.GetUrl("CourseLocation")}?PageNumber={pageNumber}&PageSize={pageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<PagedResponse<List<CourseLocation>>>(Api.Content.ReadAsStringAsync().Result);
+                if (response != null)
+                {
+                    result.Data = response.Data ?? new List<CourseLocation>();
+                    result.PageNumber = response.PageNumber;
+                    result.PageSize = response.PageSize;
+                    result.TotalRecords = response.TotalRecords;
+                    result.TotalPages = response.TotalPages;
+                }
+            }
+            else
+            {
+                if (Api.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    throw new Exception("Key-error");
+                }
+            }
+
+            return result;
+        }
+
         //guardar
         /// <summary>
         /// Crea o procesa.

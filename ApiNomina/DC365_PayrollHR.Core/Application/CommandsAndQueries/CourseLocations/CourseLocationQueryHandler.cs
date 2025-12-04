@@ -49,23 +49,45 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.CourseLocations
             var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
 
             var tempResponse = _dbContext.CourseLocations
+                                .OrderBy(x => x.CourseLocationId)
                                 .AsQueryable();
 
-            SearchFilter<CourseLocation> validSearch = new SearchFilter<CourseLocation>(searchFilter.PropertyName, searchFilter.PropertyValue);
-            if (validSearch.IsValid())
+            // Verificar si es busqueda en multiples campos (separados por coma)
+            if (!string.IsNullOrWhiteSpace(searchFilter.PropertyName) &&
+                !string.IsNullOrWhiteSpace(searchFilter.PropertyValue) &&
+                searchFilter.PropertyName.Contains(","))
             {
-                var lambda = GenericSearchHelper<CourseLocation>.GetLambdaExpession(validSearch);
-
-                tempResponse = tempResponse.Where(lambda)
-                                           .AsQueryable();
+                var searchValue = searchFilter.PropertyValue.ToLower();
+                tempResponse = tempResponse.Where(x =>
+                    (x.CourseLocationId != null && x.CourseLocationId.ToLower().Contains(searchValue)) ||
+                    (x.Name != null && x.Name.ToLower().Contains(searchValue))
+                ).AsQueryable();
             }
+            else
+            {
+                SearchFilter<CourseLocation> validSearch = new SearchFilter<CourseLocation>(searchFilter.PropertyName, searchFilter.PropertyValue);
+                if (validSearch.IsValid())
+                {
+                    var lambda = GenericSearchHelper<CourseLocation>.GetLambdaExpession(validSearch);
+
+                    tempResponse = tempResponse.Where(lambda)
+                                               .AsQueryable();
+                }
+            }
+
+            // Obtener total de registros antes de paginar
+            var totalRecords = await tempResponse.CountAsync();
 
             var response = await tempResponse
                             .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
                             .Take(validFilter.PageSize)
                             .ToListAsync();
 
-            return new PagedResponse<IEnumerable<CourseLocation>>(response, validFilter.PageNumber, validFilter.PageSize);
+            var pagedResponse = new PagedResponse<IEnumerable<CourseLocation>>(response, validFilter.PageNumber, validFilter.PageSize);
+            pagedResponse.TotalRecords = totalRecords;
+            pagedResponse.TotalPages = (int)Math.Ceiling(totalRecords / (double)validFilter.PageSize);
+
+            return pagedResponse;
         }
 
         /// <summary>

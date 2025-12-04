@@ -189,6 +189,38 @@ namespace DC365_WebNR.CORE.Aplication.Services
             return _model;
         }
 
+        /// <summary>
+        /// Obtiene datos paginados para la tabla AJAX.
+        /// </summary>
+        public async Task<PagedResult<Payroll>> GetAllDataPagedAsync(string PropertyName = "", string PropertyValue = "", int pageNumber = 1, int pageSize = 20)
+        {
+            var result = new PagedResult<Payroll>
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Data = new List<Payroll>()
+            };
+
+            string urlData = $"{urlsServices.GetUrl("Payroll")}?PageNumber={pageNumber}&PageSize={pageSize}&PropertyName={PropertyName}&PropertyValue={PropertyValue}";
+
+            var Api = await ServiceConnect.connectservice(Token, urlData, null, HttpMethod.Get);
+
+            if (Api.IsSuccessStatusCode)
+            {
+                var response = JsonConvert.DeserializeObject<PagedResponse<List<Payroll>>>(Api.Content.ReadAsStringAsync().Result);
+                if (response != null)
+                {
+                    result.Data = response.Data ?? new List<Payroll>();
+                    result.PageNumber = response.PageNumber;
+                    result.PageSize = response.PageSize;
+                    result.TotalRecords = response.TotalRecords;
+                    result.TotalPages = response.TotalPages;
+                }
+            }
+
+            return result;
+        }
+
         //Inhabilitar
         /// <summary>
         /// Actualiza un registro existente.

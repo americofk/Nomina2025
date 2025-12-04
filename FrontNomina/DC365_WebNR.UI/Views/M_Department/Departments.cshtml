@@ -13,6 +13,16 @@
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
 <link href="~/css/TablePagination.css" rel="stylesheet" />
+<style>
+    /* Ajuste de altura para paginacion - debe estar al final para sobrescribir */
+    #department-page .ContenedorListEntity .scrollbar-TablePrimari {
+        height: calc(100% - 5px) !important;
+    }
+    #department-page .pagination-wrapper {
+        padding: 2px 15px !important;
+        min-height: 28px !important;
+    }
+</style>
 <div class="contDasboard" id="department-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     @*Opciones del Formulario*@
