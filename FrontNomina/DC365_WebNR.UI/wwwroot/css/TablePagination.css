@@ -1,40 +1,5 @@
 /* TablePagination.css - Estilos para paginacion de tablas */
-
-/* Reducir altura de tabla para dejar espacio a paginacion */
-.ContenedorListEntity .scrollbar-TablePrimari {
-    height: calc(100% - 50px) !important;
-    overflow: auto !important;
-}
-
-/* Asegurar que la tabla no se desborde */
-.ContenedorListEntity .container-table-app {
-    overflow: visible;
-}
-
-/* Asegurar que el contenedor principal tenga espacio para la paginacion */
-.ContenedorListEntity {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-/* Compactar filas de la tabla */
-.ContenedorListEntity .row-app {
-    height: 28px;
-}
-
-.ContenedorListEntity .row-header-app {
-    height: 32px;
-}
-
-.ContenedorListEntity .cell-app {
-    padding: 4px 8px;
-}
-
-.ContenedorListEntity .cell-header-app {
-    padding: 6px 8px;
-    font-weight: 600;
-}
+/* NOTA: Paginacion deshabilitada temporalmente */
 
 .pagination-wrapper {
     display: flex;

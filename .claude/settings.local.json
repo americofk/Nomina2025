@@ -23,7 +23,9 @@
       "Bash(del \"F:\\Nomina2025\\ApiNomina\\DC365_PayrollHR.Infrastructure\\obj\\DC365_PayrollHR.Infrastructure.csproj.EntityFrameworkCore.targets\")",
       "Bash(dotnet restore:*)",
       "Bash(dotnet ef migrations add:*)",
-      "Bash(dotnet ef migrations script:*)"
+      "Bash(dotnet ef migrations script:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

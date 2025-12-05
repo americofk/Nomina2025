@@ -21,12 +21,12 @@ namespace DC365_PayrollHR.Core.Application.Common.Filter
         public PaginationFilter()
         {
             this.PageNumber = 1;
-            this.PageSize = 60;
+            this.PageSize = 10000;
         }
         public PaginationFilter(int pageNumber, int pageSize)
         {
             this.PageNumber = pageNumber < 1 ? 1 : pageNumber;
-            this.PageSize = pageSize > 60 ? 60 : pageSize;
+            this.PageSize = pageSize < 1 ? 10000 : pageSize;
         }
     }
 }
