@@ -20,19 +20,20 @@
 
 /* Compactar filas de la tabla */
 .ContenedorListEntity .row-app {
-    height: 25px;
+    height: 28px;
 }
 
 .ContenedorListEntity .row-header-app {
-    height: 25px;
+    height: 32px;
 }
 
 .ContenedorListEntity .cell-app {
-    padding: 1px 8px;
+    padding: 4px 8px;
 }
 
 .ContenedorListEntity .cell-header-app {
-    padding: 1px 8px;
+    padding: 6px 8px;
+    font-weight: 600;
 }
 
 .pagination-wrapper {
