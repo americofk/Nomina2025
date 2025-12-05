@@ -10,16 +10,6 @@
 }
 <link href="~/css/User.css" rel="stylesheet" />
 <link href="~/css/Department.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #user-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #user-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 
 <div class="contDasboard" id="user-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
     <input type="hidden" class="Image" />
@@ -257,11 +247,9 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_User-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/UserPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 @section Scripts {

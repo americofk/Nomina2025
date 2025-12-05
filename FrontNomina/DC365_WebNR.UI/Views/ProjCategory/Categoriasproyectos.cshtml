@@ -9,16 +9,6 @@
 }
 
 <link href="~/css/Department.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #projcategory-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #projcategory-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 <div class="contDasboard" id="projcategory-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     <!--Opciones del Formulario-->
@@ -247,11 +237,9 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/ProjCategory-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/ProjCategoryPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 <script src="~/js/M_Department.js?@version" type="module"></script>

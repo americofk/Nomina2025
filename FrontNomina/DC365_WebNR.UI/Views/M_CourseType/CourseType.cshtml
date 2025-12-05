@@ -10,16 +10,6 @@
 }
 
 <link href="~/css/Department.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #coursetype-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #coursetype-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 <div class="contDasboard" id="coursetype-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
     <!--Opciones del Formulario-->
     <div class="opcioneslistpage">
@@ -222,11 +212,9 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_CourseType-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/CourseTypePagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 <script src="~/js/CourseType.js?@version" type="module"></script>

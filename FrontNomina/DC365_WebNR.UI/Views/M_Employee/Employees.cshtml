@@ -17,12 +17,7 @@
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/Helps/Helps.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
 <style>
-    /* Ajuste de altura para paginacion */
-    #employee-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 50px) !important;
-    }
     #employee-page .contenedor-uno-contratar,
     #employee-page .contenedor-desvinculados-contratar {
         z-index: 1000 !important;
@@ -152,7 +147,7 @@
 
     <!-- tabla empleados activos -->
     <div class="ContenedorListEntity custonContainer">
-        <h3 class="TituloEstandar title-for-pagination">@ViewBag.typeEmployee</h3>
+        <h3 class="TituloEstandar">@ViewBag.typeEmployee</h3>
 
         <div class="contenPretabla">
             <div class="form-group-BuscadorDepartment" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
@@ -525,12 +520,10 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Employee-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/EmployeePagination.js?@version"></script>
 <script>
-    // Inicializar solo ordenamiento de columnas (el filtro lo maneja la paginacion)
+    // Inicializar funciones de tabla
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 @section Scripts {

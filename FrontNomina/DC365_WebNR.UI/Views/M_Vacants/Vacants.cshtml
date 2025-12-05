@@ -13,16 +13,6 @@
 <link href="~/css/Modals/SubModalStyles.css" rel="stylesheet" />
 <link href="~/css/Employees.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #vacants-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #vacants-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 <div class="contDasboard" id="vacants-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
     <input type="hidden" class="Image" />
     <!--Opciones del Formulario-->
@@ -297,11 +287,9 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Vacants-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/VacantsPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 @section Scripts {

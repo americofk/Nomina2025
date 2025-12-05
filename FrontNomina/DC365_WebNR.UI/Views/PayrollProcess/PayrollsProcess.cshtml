@@ -12,16 +12,6 @@
 <link href="~/css/PayrollProcess.css" rel="stylesheet" />
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #payrollprocess-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #payrollprocess-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 <div class="contDasboard" id="payrollprocess-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     <!--Opciones del Formulario-->
@@ -266,11 +256,9 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_PayrollProcess-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/PayrollProcessPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 @section Scripts {

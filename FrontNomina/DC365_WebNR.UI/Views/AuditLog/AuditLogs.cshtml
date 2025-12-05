@@ -10,11 +10,6 @@
 }
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #auditlog-page .scrollbar-TablePrimari { height: calc(100vh - 270px) !important; }
-    #auditlog-page .pagination-wrapper { padding: 8px 15px; }
-</style>
 <div class="contDasboard" id="auditlog-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     @*Opciones del Formulario*@
@@ -208,11 +203,9 @@
     <script src="~/js/grid-views-manager.js?@version"></script>
     <script src="~/js/table-features.js?@version"></script>
     <script src="~/js/AuditLog-views.js?@version"></script>
-    <script src="~/js/TablePagination.js?@version"></script>
-    <script src="~/js/AuditLogPagination.js?@version"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            initTableSort('#MainTable');
+            initTableFeatures('#MainTable');
         });
     </script>
 }

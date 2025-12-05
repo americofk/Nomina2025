@@ -10,16 +10,6 @@
     var dataAreaId = ViewBag.DataAreaId ?? "";
 }
 <link href="~/css/Department.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    #instructor-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #instructor-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 <div class="contDasboard" id="instructor-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
     <input type="hidden" class="Image" />
     <!--Opciones del Formulario-->
@@ -242,11 +232,9 @@
 <script src="~/js/grid-views-manager.js?@version"></script>
 <script src="~/js/table-features.js?@version"></script>
 <script src="~/js/M_Instructor-views.js?@version"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/InstructorPagination.js?@version"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 @section Scripts {

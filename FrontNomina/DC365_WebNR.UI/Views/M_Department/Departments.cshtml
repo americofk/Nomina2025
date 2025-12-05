@@ -12,17 +12,6 @@
 }
 <link href="~/css/Department.css" rel="stylesheet" />
 <link href="~/css/AppInputDate.css" rel="stylesheet" />
-<link href="~/css/TablePagination.css" rel="stylesheet" />
-<style>
-    /* Ajuste de altura para paginacion - debe estar al final para sobrescribir */
-    #department-page .ContenedorListEntity .scrollbar-TablePrimari {
-        height: calc(100% - 5px) !important;
-    }
-    #department-page .pagination-wrapper {
-        padding: 2px 15px !important;
-        min-height: 28px !important;
-    }
-</style>
 <div class="contDasboard" id="department-page" data-token="@token" data-user="@userRecId" data-dataarea="@dataAreaId">
 
     @*Opciones del Formulario*@
@@ -284,13 +273,10 @@
 <script src="~/js/M_Department.js?@version" type="module"></script>
 <script src="~/js/M_Department-views.js?@version"></script>
 <script src="~/js/AppInputDate.js"></script>
-<script src="~/js/TablePagination.js?@version"></script>
-<script src="~/js/DepartmentPagination.js?@version"></script>
 <script>
-    // Inicializar solo ordenamiento de columnas (el filtro lo maneja la paginacion)
+    // Inicializar funciones de tabla
     document.addEventListener('DOMContentLoaded', function() {
-        // Solo inicializar ordenamiento, NO el filtro (lo maneja TablePagination)
-        initTableSort('#MainTable');
+        initTableFeatures('#MainTable');
     });
 </script>
 @section Scripts {
