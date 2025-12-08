@@ -12,26 +12,51 @@
  * @param tbodySelector Selector del tbody
  */
 function initTableFilter(inputSelector: string, tableSelector: string, tbodySelector: string): void {
-    const input = document.querySelector(inputSelector) as HTMLInputElement;
+    // Buscar el input - puede ser un selector múltiple separado por comas
+    let input: HTMLInputElement | null = null;
+    const selectors = inputSelector.split(',').map(s => s.trim());
+
+    for (const selector of selectors) {
+        input = document.querySelector(selector) as HTMLInputElement;
+        if (input) break;
+    }
+
     if (!input) return;
+
+    // Remover listener previo si existe (para evitar duplicados)
+    const newInput = input.cloneNode(true) as HTMLInputElement;
+    input.parentNode?.replaceChild(newInput, input);
+    input = newInput;
 
     input.addEventListener('keyup', function () {
         const searchText = this.value.toLowerCase().trim();
         const rows = document.querySelectorAll(`${tbodySelector} tr.row-app`);
 
         rows.forEach((row) => {
+            // Buscar en TODAS las celdas (excepto checkbox)
             const cells = row.querySelectorAll('td:not(.check-cell-app)');
             let found = false;
 
-            cells.forEach((cell) => {
-                const cellText = (cell.textContent || '').toLowerCase();
-                if (cellText.includes(searchText)) {
-                    found = true;
-                }
-            });
+            // Si no hay texto de búsqueda, mostrar todas las filas
+            if (searchText === '') {
+                found = true;
+            } else {
+                cells.forEach((cell) => {
+                    const cellText = (cell.textContent || '').toLowerCase();
+                    if (cellText.includes(searchText)) {
+                        found = true;
+                    }
+                });
+            }
 
             (row as HTMLElement).style.display = found ? '' : 'none';
         });
+    });
+
+    // También ejecutar en el evento 'input' para mayor responsividad
+    input.addEventListener('input', function () {
+        const event = new Event('keyup');
+        this.dispatchEvent(event);
     });
 }
 
@@ -191,22 +216,39 @@ function parseDate(dateStr: string): Date | null {
 
 /**
  * Inicializa todas las funcionalidades de tabla.
- * @param config Configuración de la tabla
+ * @param config Configuración de la tabla o selector de la tabla
  */
-function initTableFeatures(config: {
+function initTableFeatures(config: string | {
     filterInput: string;
     table: string;
     tbody: string;
 }): void {
+    // Si es un string, crear configuración automática
+    let tableSelector: string;
+    let filterInputSelector: string;
+    let tbodySelector: string;
+
+    if (typeof config === 'string') {
+        tableSelector = config;
+        // Buscar el input de filtro más común (ViewFilter.cshtml usa .textFilterMask)
+        filterInputSelector = '.textFilterMask, .form-control-text-filtre, .form-control-filtro, .form-control-FiltroDepartment, input[placeholder*="Buscar"], input[placeholder*="columnas"]';
+        tbodySelector = `${config} tbody`;
+    } else {
+        tableSelector = config.table;
+        filterInputSelector = config.filterInput;
+        tbodySelector = config.tbody;
+    }
+
+    const doInit = () => {
+        initTableFilter(filterInputSelector, tableSelector, tbodySelector);
+        initTableSort(tableSelector);
+    };
+
     // Esperar a que el DOM esté listo
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            initTableFilter(config.filterInput, config.table, config.tbody);
-            initTableSort(config.table);
-        });
+        document.addEventListener('DOMContentLoaded', doInit);
     } else {
-        initTableFilter(config.filterInput, config.table, config.tbody);
-        initTableSort(config.table);
+        doInit();
     }
 }
 

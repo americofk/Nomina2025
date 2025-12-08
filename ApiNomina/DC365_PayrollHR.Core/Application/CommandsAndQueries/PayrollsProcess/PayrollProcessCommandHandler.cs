@@ -1,9 +1,3 @@
-/// <summary>
-/// Manejador de comandos para operaciones CRUD de PayrollProcess.
-/// Gestiona creaciÃ³n, actualizaciÃ³n y eliminaciÃ³n de registros.
-/// </summary>
-/// <author>Equipo de Desarrollo</author>
-/// <date>2025</date>
 using DC365_PayrollHR.Core.Application.Common.Helper;
 using DC365_PayrollHR.Core.Application.Common.Interface;
 using DC365_PayrollHR.Core.Application.Common.Model;
@@ -31,12 +25,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         public Task<Response<object>> CancelPayroll(string payrollprocessid);
     }
 
-    /// <summary>
-
-    /// Manejador para operaciones de PayrollProcessCommand.
-
-    /// </summary>
-
     public class PayrollProcessCommandHandler : IPayrollProcessCommandHandler
     {
         private int cont;
@@ -52,21 +40,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         {
             _dbContext = applicationDbContext;
         }
-
-
-        /// <summary>
-
-
-        /// Crea un nuevo registro.
-
-
-        /// </summary>
-
-
-        /// <param name="model">Parametro model.</param>
-
-
-        /// <returns>Resultado de la operacion.</returns>
 
 
         public async Task<Response<object>> Create(PayrollProcessRequest model)
@@ -124,7 +97,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             //Actualización para los cálculos de deducciones
             entity.IsPayCycleTss = paycycle.IsForTss;
             //Actualización para los cálculos de deducciones
-            
+
             //Actualización para los cálculos de salario por hora
             entity.IsForHourPayroll = payroll.IsForHourPayroll;
             //Actualización para los cálculos de salario por hora
@@ -137,16 +110,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 Message = "Registro creado correctamente"
             };
         }
-
-        /// <summary>
-
-        /// Elimina un registro.
-
-        /// </summary>
-
-        /// <param name="ids">Parametro ids.</param>
-
-        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<bool>> Delete(List<string> ids)
         {
@@ -185,18 +148,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
                 };
             }
         }
-
-        /// <summary>
-
-        /// Actualiza un registro existente.
-
-        /// </summary>
-
-        /// <param name="id">Parametro id.</param>
-
-        /// <param name="model">Parametro model.</param>
-
-        /// <returns>Resultado de la operacion.</returns>
 
         public async Task<Response<object>> Update(string id, PayrollProcessRequest model)
         {
@@ -256,22 +207,18 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             entity.IsPayCycleTss = paycycle.IsForTss;
             //Actualización para los cálculos de deducciones
 
+            _dbContext.PayrollsProcess.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
         }
 
-        //Sección de procesos 
-        /// <summary>
-        /// Procesa.
-        /// </summary>
-        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
-        /// <returns>Resultado de la operacion.</returns>
+        //Sección de procesos
         public async Task<Response<object>> ProcessPayroll(string payrollprocessid)
         {
             var a = await ClearProcessDetails(payrollprocessid);
             if (a != null)
-                return a;            
+                return a;
 
             string payrollid;
             var payrollprocess = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == payrollprocessid)
@@ -424,21 +371,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         }
 
 
-        /// <summary>
-
-
-        /// Ejecuta CalcProcessPayroll de forma asincrona.
-
-
-        /// </summary>
-
-
-        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
-
-
-        /// <returns>Resultado de la operacion.</returns>
-
-
         public async Task<Response<object>> CalcProcessPayroll(string payrollprocessid)
         {
             var a = await ClearProcessActions(payrollprocessid);
@@ -582,21 +514,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         }
 
 
-        /// <summary>
-
-
-        /// Ejecuta PayPayroll de forma asincrona.
-
-
-        /// </summary>
-
-
-        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
-
-
-        /// <returns>Resultado de la operacion.</returns>
-
-
         public async Task<Response<object>> PayPayroll(string payrollprocessid)
         {
             var response = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == payrollprocessid
@@ -623,7 +540,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             {
                 await UpdateUsedForTss(response.PayrollId, response.PayrollProcessId);
             }
-            
+
             //Se marcan como usados para calculo por hora
             if (response.IsForHourPayroll)
             {
@@ -635,6 +552,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var entity = response;
             entity.PayrollProcessStatus = PayrollProcessStatus.Paid;
 
+            _dbContext.PayrollsProcess.Update(entity);
             await _dbContext.SaveChangesAsync();
 
 
@@ -743,21 +661,6 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
         }
 
 
-        /// <summary>
-
-
-        /// Verifica si puede.
-
-
-        /// </summary>
-
-
-        /// <param name="payrollprocessid">Parametro payrollprocessid.</param>
-
-
-        /// <returns>Resultado de la operacion.</returns>
-
-
         public async Task<Response<object>> CancelPayroll(string payrollprocessid)
         {
             var response = await _dbContext.PayrollsProcess.Where(x => x.PayrollProcessId == payrollprocessid
@@ -778,6 +681,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             var entity = response;
             entity.PayrollProcessStatus = PayrollProcessStatus.Canceled;
 
+            _dbContext.PayrollsProcess.Update(entity);
             await _dbContext.SaveChangesAsync();
 
             return new Response<object>(true) { Message = "Registro actualizado con éxito" };
@@ -1178,8 +1082,8 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             //informacion de la nómina
             var payrollinfo = await _dbContext.Payrolls.Where(x => x.PayrollId == payrollid).FirstOrDefaultAsync();
 
-            //Se busca el monto del código de ganancia que corresponde al salario, 
-            //aplica para calculo de horas extras 
+            //Se busca el monto del código de ganancia que corresponde al salario,
+            //aplica para calculo de horas extras
             var localSalaryAmount = await _dbContext.EmployeeEarningCodes
                 .Join(_dbContext.EarningCodes,
                     eec => eec.EarningCodeId,
@@ -1480,7 +1384,7 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
             }
         }
 
-        //Validar números enteros 
+        //Validar números enteros
         private bool ValidateIntValue(decimal y, decimal i, decimal r)
         {
             string total = ((y - i) / r).ToString();
@@ -1498,21 +1402,12 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             try
             {
-                var responsedetails = await _dbContext.PayrollProcessDetails.Where(x => x.PayrollProcessId == payrollprocessid).ToListAsync();
+                // Usar SQL directo para hard delete (evita el soft delete del DbContext)
+                await _dbContext.Database.ExecuteSqlInterpolatedAsync(
+                    $"DELETE FROM PayrollProcessDetails WHERE PayrollProcessId = {payrollprocessid}");
 
-                if (responsedetails != null)
-                {
-                    _dbContext.PayrollProcessDetails.RemoveRange(responsedetails);
-                    await _dbContext.SaveChangesAsync();
-                }
-
-                var responseactions = await _dbContext.PayrollProcessActions.Where(x => x.PayrollProcessId == payrollprocessid).ToListAsync();
-
-                if (responseactions != null)
-                {
-                    _dbContext.PayrollProcessActions.RemoveRange(responseactions);
-                    await _dbContext.SaveChangesAsync();
-                }
+                await _dbContext.Database.ExecuteSqlInterpolatedAsync(
+                    $"DELETE FROM PayrollProcessActions WHERE PayrollProcessId = {payrollprocessid}");
 
                 transaction.Commit();
                 return null;
@@ -1536,13 +1431,9 @@ namespace DC365_PayrollHR.Core.Application.CommandsAndQueries.PayrollsProcess
 
             try
             {
-                var response = await _dbContext.PayrollProcessActions.Where(x => x.PayrollProcessId == payrollprocessid).ToListAsync();
-
-                if (response != null)
-                {
-                    _dbContext.PayrollProcessActions.RemoveRange(response);
-                    await _dbContext.SaveChangesAsync();
-                }
+                // Usar SQL directo para hard delete (evita soft delete del DbContext)
+                await _dbContext.Database.ExecuteSqlInterpolatedAsync(
+                    $"DELETE FROM PayrollProcessActions WHERE PayrollProcessId = {payrollprocessid}");
 
                 transaction.Commit();
                 return null;

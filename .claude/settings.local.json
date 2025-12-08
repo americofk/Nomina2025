@@ -25,7 +25,8 @@
       "Bash(dotnet ef migrations add:*)",
       "Bash(dotnet ef migrations script:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(powershell:*)"
     ],
     "deny": [],
     "ask": []

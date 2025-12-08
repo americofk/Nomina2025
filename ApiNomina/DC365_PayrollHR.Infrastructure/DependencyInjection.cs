@@ -26,15 +26,8 @@ namespace DC365_PayrollHR.Infrastructure
         /// <returns>Resultado de la operacion.</returns>
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            // Register audit interceptor for ISO 27001 compliance
-            services.AddScoped<AuditInterceptor>();
-
-            services.AddDbContext<ApplicationDBContext>((serviceProvider, options) =>
-            {
-                var auditInterceptor = serviceProvider.GetRequiredService<AuditInterceptor>();
-                options.UseSqlServer(configuration["ConnectionStrings:Localhost"])
-                       .AddInterceptors(auditInterceptor);
-            });
+            services.AddDbContext<ApplicationDBContext>(options =>
+                options.UseSqlServer(configuration["ConnectionStrings:Localhost"]));
 
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDBContext>());
 
